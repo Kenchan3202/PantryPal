@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+
+    <style>
+        body { font-family: "微软雅黑", Arial, sans-serif; }
+        .header, .footer { background-color: #f6f6f6; padding: 10px; text-align: center; }
+        .login-button { position: absolute; right: 10px; top: 10px; }
+        .register-button { position: absolute; right: 100px; top: 10px; }
+        .content { margin: 20px; }
+        .box { border: 1px solid #dcdcdc; margin-bottom: 20px; padding: 10px; }
+        h1 { color: #333; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>CSC2033 PROJECT</h1>
+                <button class="login-button" onclick="location.href='/login'">login</button>
+                <button class="register-button" onclick="location.href='/register'">register</button>
+
+        <input type="text" placeholder="somting input">
+    </div>
+        <div class="box">
+            <button class="Food item" onclick="location.href='/main/Items'">Food items</button>
+        </div>
+        <div class="box">
+            <h2>Food APP</h2>
+            <p>description</p>
+        </div>
+    </div>
+    <div class="footer">
+        <p>版权所有 © 2024 习近平</p>
+    </div>
+</body>
+</html>

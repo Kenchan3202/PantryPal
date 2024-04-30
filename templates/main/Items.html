@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Items List</title>
+</head>
+<body>
+    <h1>Items List</h1>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Expiry Date</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.expiry_date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

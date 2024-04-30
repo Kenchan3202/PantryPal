@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+    <style>
+        body { font-family: "微软雅黑", Arial, sans-serif; }
+        .container { width: 300px; margin: 100px auto; padding: 20px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form action="/login" method="post">
+        user name：<input type="text" name="username"><br>
+        password：<input type="password" name="password"><br>
+        <button type="submit">login</button>
+    </form>
+    <a href="/register">register</a>
+    </div>
+</body>
+</html>

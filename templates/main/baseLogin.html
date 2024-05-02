@@ -8,8 +8,7 @@
     <style>
         body { font-family: "微软雅黑", Arial, sans-serif; }
         .header, .footer { background-color: #f6f6f6; padding: 10px; text-align: center; }
-        .login-button { position: absolute; right: 10px; top: 10px; }
-        .register-button { position: absolute; right: 100px; top: 10px; }
+        .information{ position: absolute; right: 10px; top: 10px; }
         .content { margin: 20px; }
         .box { border: 1px solid #dcdcdc; margin-bottom: 20px; padding: 10px; }
         h1 { color: #333; }
@@ -17,19 +16,27 @@
 </head>
 <body>
     <div class="header">
-        <h1>CSC2033 PROJECT</h1>
-                <button class="login-button" onclick="location.href='/login'">login</button>
-                <button class="register-button" onclick="location.href='/register'">register</button>
-
-        <input type="text" placeholder="somting input">
+        <h1>welcome {{ username }}</h1>
+                <button class="information" onclick="location.href='/main/information'">information</button>
     </div>
         <div class="box">
-            <h2>Introduction</h2>
-            <p>description</p>
+            <button class="Food item" onclick="location.href='/main/Items'">Food items</button>
         </div>
         <div class="box">
-            <h2>Food APP</h2>
-            <p>description</p>
+            <h2>Food that about to expired</h2>
+            <p>{{Foodaboutexpired}}</p>
+        </div>
+    <div class="box">
+            <h2>Food expired</h2>
+            <p>{{Foodexpired}}</p>
+        </div>
+    <div class="box">
+            <h2>add new food to your items</h2>
+            <p></p>
+        </div>
+    <div class="box">
+            <h2>Search the foods</h2>
+            <p></p>
         </div>
     </div>
     <div class="footer">

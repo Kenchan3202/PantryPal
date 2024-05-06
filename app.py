@@ -49,15 +49,15 @@ for item in items:
 
 @app.route('/')
 def home():
-    return render_template('base.html')
+    return render_template('user/base.html')
 
 
 @app.route('/base')
 def base():
-    return render_template('base.html')
+    return render_template('user/base.html')
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/user/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -68,10 +68,10 @@ def login():
         else:
             flash('Login failed. Please check your username and password.', 'error')  # 添加错误消息
             return redirect(url_for('login'))
-    return render_template('login.html')
+    return render_template('user/login.html')
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/user/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
@@ -85,7 +85,7 @@ def register():
         p.username = username
         p.password = password
         return redirect(url_for('base'))
-    return render_template('register.html')
+    return render_template('user/register.html')
 
 
 @app.route('/main/Items', methods=['GET', 'POST'])
@@ -97,7 +97,8 @@ def Items():
 def baseLogin():
     flash('welcome user  ' + p.username)
 
-    return render_template('main/baseLogin.html', username=p.username, Foodaboutexpired=soon_to_expire, Foodexpired=expired)
+    return render_template('main/baseLogin.html', username=p.username, Foodaboutexpired=soon_to_expire,
+                           Foodexpired=expired)
 
 
 @app.route('/main/information')
@@ -111,9 +112,28 @@ def reset_password():
         new_password = request.form['new_password']
         p.password = new_password  # 更新密码
         # flash('Your password has been reset successfully.', 'success')
-        return redirect(url_for('base'))  # 可以重定向到登录页面或其他页面
+        return redirect(url_for('/user/base'))  # 可以重定向到登录页面或其他页面
     return render_template('main/resetpassword.html')
 
 
+@app.route('/main/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        itemtemp=None
+        itemname = request.form['itemname'].strip()  # Get the item name from form input and strip any extra whitespace
+        for item in items:
+            if item['name'].lower() == itemname.lower():  # Case insensitive comparison
+                itemtemp=itemname
+                # Found the item, do something with it, e.g., show its expiry date
+                flash(f"Expiry date of {item['name']} is {item['expiry_date']}")
+                return redirect(url_for('search'))  # Assuming you want to stay on the search page, or handle as needed
+
+        # If no item is found, send a message about it
+        flash("Item not found")
+        return redirect(url_for('search'))
+
+    return render_template('main/search.html', items=items)
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=9000, debug=True)

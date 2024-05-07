@@ -9,7 +9,7 @@ app.secret_key = 'your_secret_key'
 p = user()
 items = [
     {"name": "Milk", "expiry_date": "2024-05-01"},
-    {"name": "Bread", "expiry_date": "2024-05-03"},
+    {"name": "Bread", "expiry_date": "2024-05-12"},
     {"name": "Apple", "expiry_date": "2024-04-28"},
     {"name": "Beef", "expiry_date": "2024-06-30"},
     {"name": "Lamb", "expiry_date": "2024-09-28"},
@@ -90,7 +90,8 @@ def register():
 
 @app.route('/main/Items', methods=['GET', 'POST'])
 def Items():
-    return render_template('main/Items.html', items=items)
+    return render_template('main/Items.html', items=items, Foodaboutexpired=soon_to_expire,
+                           Foodexpired=expired)
 
 
 @app.route('/main/baseLogin')
@@ -118,21 +119,19 @@ def reset_password():
 
 @app.route('/main/search', methods=['GET', 'POST'])
 def search():
+    itemtemp = ""  # Initialize the variable to hold the result
+    iteminfo = ""
     if request.method == 'POST':
-        itemtemp=None
-        itemname = request.form['itemname'].strip()  # Get the item name from form input and strip any extra whitespace
+        itemname = request.form['itemname'].strip()  # Get the item name from form input
         for item in items:
             if item['name'].lower() == itemname.lower():  # Case insensitive comparison
-                itemtemp=itemname
-                # Found the item, do something with it, e.g., show its expiry date
-                flash(f"Expiry date of {item['name']} is {item['expiry_date']}")
-                return redirect(url_for('search'))  # Assuming you want to stay on the search page, or handle as needed
+                itemtemp = f"item name is {item['name']} expired date is {item['expiry_date']}"
+                iteminfo = item['name']
+                break
+        else:
+            itemtemp = "Item not found"  # Set itemtemp to a not found message if the loop completes with no match
 
-        # If no item is found, send a message about it
-        flash("Item not found")
-        return redirect(url_for('search'))
-
-    return render_template('main/search.html', items=items)
+    return render_template('main/search.html', itemtemp=itemtemp, iteminfo=iteminfo)  # Pass the result directly to the template
 
 
 if __name__ == '__main__':

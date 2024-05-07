@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping List</title>
+    <title>Recipe Details</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <button onclick="location.href='kitchen.html'">Kitchen</button>
-        <button>Shopping</button>
+        <button onclick="location.href='shopping.html'">Shopping</button>
         <button onclick="location.href='recipes.html'">Recipes</button>
     </header>
     <div class="container">
-        <!-- Items list -->
-        <div class="shopping-item">
-            <span>Food item Image</span>
-            <span>Quantity</span>
-            <span>Calories</span>
-            <button>X</button>
-        </div>
-        <!-- Repeat for each item -->
+        <h1>Recipe Name</h1>
+        <div>Recipe details (Calories, Prep time, Dietary information)</div>
+        <div>Description of Recipe</div>
+        <div>List of ingredients</div>
+        <div>Step by step guide.</div>
+        <button onclick="rateRecipe()">Rate recipe (x/5)</button>
     </div>
-    <button onclick="completeShopping()">Shopping complete</button>
-    <button onclick="addItem()">+</button>
     <script src="scripts.js"></script>
-</body>
-</html>
+</body

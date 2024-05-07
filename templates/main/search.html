@@ -2,15 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Search Items</title>
 </head>
 <body>
 <div class="container">
-        <h2>register</h2>
-        <form action="/main/serch" method="post">
-            item name：<input type="text" name="itemname"><br>
-            <button type="submit">search</button>
-        </form>
+    <h2>Search Item</h2>
+    <form action="/main/search" method="post">
+        Item name: <input type="text" name="itemname"><br>
+        <button type="submit">Search</button>
+    </form>
+    <div class="box">
+        <h2>Result</h2>
+        <p>{{ itemtemp }}</p>
     </div>
+    <div class="box">
+        <h2>information of item</h2>
+        <p>{{ iteminfo }}</p>
+    </div>
+</div>
 </body>
 </html>

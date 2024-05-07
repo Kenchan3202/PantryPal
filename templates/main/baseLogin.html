@@ -6,30 +6,94 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
 
     <style>
+        .box {
+            border: 1px solid #dcdcdc;
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 100%; /* 确保宽度自适应 */
+            box-sizing: border-box; /* 包括边距和填充在内的宽度计算 */
+        }
+        /* 使用媒体查询对大屏幕进行特殊处理 */
+        @media (min-width: 1024px) {
+            #mainContent {
+                margin-left: 250px; /* 当侧边栏显示时，为主内容区域添加左边距 */
+                transition: margin-left 0.3s; /* 平滑过渡 */
+                width: calc(100% - 250px); /* 计算宽度，减去侧边栏宽度 */
+            }
+
+            .sidebar {
+               width: 250px; /* 为侧边栏设置固定宽度 */
+            }
+        }
+
+        /* 调整侧边栏的样式 */
+        .sidebar {
+            height: 100%;
+            width: 0; /* 默认隐藏 */
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: width 0.3s;
+            padding-top: 60px;
+        }
+
+        .sidebar a {
+        padding: 10px 15px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+        color: #f1f1f1;
+        }
+
+        .sidebar .closebtn
+        {position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+        }
+
+        .openbtn {
+        font-size: 20px;
+        cursor: pointer;
+        color: white;
+        border: none;
+        background-color: #111;
+        margin: 10px;
+
+        }
+
+
         body { font-family: "微软雅黑", Arial, sans-serif; }
         .header, .footer { background-color: #f6f6f6; padding: 10px; text-align: center; }
         .information{ position: absolute; right: 10px; top: 10px; }
         .content { margin: 20px; }
-        .box { border: 1px solid #dcdcdc; margin-bottom: 20px; padding: 10px; }
         h1 { color: #333; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>welcome {{ username }}</h1>
+    <div class="navbar">
+        <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
+        <a href="/main/Items">Food items</a>
+        <a href="/main/createitem">Add new item</a>
+        <a href="/main/search">Search your food</a>
+        <a href="/shoopinglist/shoppinglist">Shopping list</a>
+    </div>
+
+    <div id="mainContent" style="margin-left:250px;">
                 <button class="information" onclick="location.href='/main/information'">information</button>
     </div>
-        <div class="box">
-            <button class="Food item" onclick="location.href='/main/Items'">Food items</button>
-        </div>
-        <div class="box">
-            <h2>Food that about to expired</h2>
-            <p>{{Foodaboutexpired}}</p>
-        </div>
-    <div class="box">
-            <h2>Food expired</h2>
-            <p>{{Foodexpired}}</p>
-        </div>
+    </div>
     <div class="box">
             <h2><button class="add" onclick="location.href='/main/createitem'">Add new item</button></h2>
             <p></p>
@@ -45,8 +109,19 @@
             <p><button class="shopping list" onclick="location.href='/shoppinglist/shoppinglist'">Shopping list</button></p>
         </div>
     </div>
-    <div class="footer">
-        <p>版权所有 © 2024 </p>
-    </div>
+ <script>
+   function toggleNav() {
+    var sidebar = document.getElementById("mySidebar");
+    var mainContent = document.getElementById("mainContent");
+
+    if (sidebar.style.width === "250px") {
+        sidebar.style.width = "0";
+        mainContent.style.marginLeft = "0";
+    } else {
+        sidebar.style.width = "250px";
+        mainContent.style.marginLeft = "250px";
+    }
+}
+    </script>
 </body>
 </html>

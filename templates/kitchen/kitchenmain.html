@@ -2,9 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen Inventory</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+    <header>
+        <button>Kitchen</button>
+        <button onclick="location.href='shopping.html'">Shopping</button>
+        <button onclick="location.href='recipes.html'">Recipes</button>
+    </header>
+    <h1>Applied filters go here</h1>
+    <div class="container">
+        <!-- Dynamically generate or update this part with actual product data -->
+        <div class="food-item">
+            <span>Food item Image</span>
+            <span>Quantity</span>
+            <span>Calories</span>
+            <span>Exp</span>
+            <button>X</button>
+        </div>
+        <!-- Repeat the div for each item -->
+    </div>
+    <button onclick="addFilter()">+ Filter</button>
+    <script src="scripts.js"></script>
 </body>
 </html>

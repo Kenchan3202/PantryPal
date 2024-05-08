@@ -7,8 +7,13 @@ from user import user
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 p = user()
+#p.username = 'admin'
+#p.password = '12345'
+
+
+
 items = [
-    {"name": "Milk", "expiry_date": "2024-05-01"},
+    {"name": "Milk", "expiry_date": "2024-05-10"},
     {"name": "Bread", "expiry_date": "2024-05-12"},
     {"name": "Apple", "expiry_date": "2024-04-28"},
     {"name": "Beef", "expiry_date": "2024-06-30"},
@@ -78,12 +83,21 @@ def register():
         password = request.form['password']
         confirm_password = request.form['confirm_password']
 
+        # Validation conditions
+        if len(username) < 3:
+            flash('Username must be at least 3 characters long')
+            return redirect(url_for('register'))
+        if len(password) < 8 or not any(char.isdigit() for char in password) or not any(
+                char.isupper() for char in password) or not any(char.islower() for char in password):
+            flash(
+                'Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, and a number')
+            return redirect(url_for('register'))
         if password != confirm_password:
             flash('Passwords do not match')
             return redirect(url_for('register'))
 
-        p.username = username
-        p.password = password
+        # If validation is successful, here you might save data to a database or perform other actions
+        # Redirect to a new page or confirm registration
         return redirect(url_for('base'))
     return render_template('user/register.html')
 
@@ -131,7 +145,42 @@ def search():
         else:
             itemtemp = "Item not found"  # Set itemtemp to a not found message if the loop completes with no match
 
-    return render_template('main/search.html', itemtemp=itemtemp, iteminfo=iteminfo)  # Pass the result directly to the template
+    return render_template('main/search.html', itemtemp=itemtemp,
+                           iteminfo=iteminfo)  # Pass the result directly to the template
+
+
+@app.route('/shoppinglist/shoppinglist')
+def shopping_list():
+    return render_template('shoppinglist/shoppinglist.html')  # Adjust the template name as necessary
+
+
+@app.route('/kitchen/recipes')
+def recipe_detail():
+    return render_template('kitchen/recipes.html')  # Adjust the template name as necessary
+
+
+@app.route('/kitchen/kitchenmain')
+def kitchen_main():
+    return render_template('kitchen/kitchenmain.html')  # Adjust the template name as necessary
+
+
+@app.route('/main/createitem', methods=['GET', 'POST'])
+def create_item():
+    if request.method == 'POST':
+        # Here, you can process the form data, but since there's no database,
+        # we'll just print it to the console or do nothing with it.
+        item_name = request.form['name']
+        expiry_date = request.form['expiry_date']
+        description = request.form['description']
+
+        # Print to console (server logs)
+        print(f"Received item: {item_name}, Expiry: {expiry_date}, Description: {description}")
+
+        # Redirect to a new page or back to the form, or display a success message
+        return redirect('/main/createitem')  # Redirects back to the form page
+    else:
+        # Display the form page
+        return render_template('main/createitem.html')
 
 
 if __name__ == '__main__':

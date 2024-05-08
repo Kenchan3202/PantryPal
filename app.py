@@ -7,8 +7,8 @@ from user import user
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 p = user()
-#p.username = 'admin'
-#p.password = '12345'
+p.username = 'admin'
+p.password = '12345'
 
 
 

@@ -60,24 +60,27 @@
     </style>
 </head>
 <body>
+    <body>
     <header>
         <button onclick="location.href='/kitchen/kitchenmain'">Kitchen</button>
         <button onclick="location.href='/shoppinglist/shoppinglist'">Shopping</button>
         <button onclick="location.href='/kitchen/recipes'">Recipes</button>
     </header>
-    <h1>Applied filters go here</h1>
+    <h1>Kitchen Inventory</h1>
     <div class="container">
+        {% for item in notyetexpire %}
         <div class="food-item">
-            <span>Food item Image</span>
-            <span>Quantity</span>
-            <span>Calories</span>
-            <span>Exp</span>
+            <span>{{ item.name }}</span>
+            <span>{{ item.quantity }}</span>
+            <span>{{ item.calories }} calories</span>
+            <span>Exp: {{ item.expiry_date }}</span>
             <button>X</button>
         </div>
-        <!-- Repeat the div for each item -->
+        {% endfor %}
     </div>
     <button onclick="addFilter()">+ Filter</button>
     <script src="scripts.js"></script>
 </body>
+
 </html>
 

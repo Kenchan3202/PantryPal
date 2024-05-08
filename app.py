@@ -13,14 +13,15 @@ p.password = '12345'
 
 
 items = [
-    {"name": "Milk", "expiry_date": "2024-05-10"},
-    {"name": "Bread", "expiry_date": "2024-05-12"},
-    {"name": "Apple", "expiry_date": "2024-04-28"},
-    {"name": "Beef", "expiry_date": "2024-06-30"},
-    {"name": "Lamb", "expiry_date": "2024-09-28"},
-    {"name": "Apple juice", "expiry_date": "2024-05-04"},
+    {"name": "Milk", "expiry_date": "2024-05-10",  'quantity': '2', 'calories': 200},
+    {"name": "Bread", "expiry_date": "2024-05-12", 'quantity': '2', 'calories': 100},
+    {"name": "Apple", "expiry_date": "2024-04-28", 'quantity': '5', 'calories': 60},
+    {"name": "Beef", "expiry_date": "2024-06-30", 'quantity': '5', 'calories': 500},
+    {"name": "Lamb", "expiry_date": "2024-09-28", 'quantity': '3', 'calories': 450},
+    {"name": "Apple juice", "expiry_date": "2024-05-04", 'quantity': '1', 'calories': 150},
 ]
 expiry_dates = set()
+
 
 for item in items:
     expiry_dates.add(item['expiry_date'])
@@ -33,6 +34,8 @@ soon_to_expire = set()
 
 expired = set()
 
+#not_yet_expire = set()
+
 for item in items:
     # 将字符串日期转换为datetime.date对象
     expiry_date = datetime.datetime.strptime(item['expiry_date'], "%Y-%m-%d").date()
@@ -41,6 +44,14 @@ for item in items:
     if expiry_date <= today:
         # 如果是，将物品名称添加到集合中
         expired.add(item['name'])
+
+    #if expiry_date > today:
+        # 如果是，将物品名称添加到集合中
+        #not_yet_expire.add(item['name'])
+
+
+not_yet_expire = [item for item in items if
+                  datetime.datetime.strptime(item['expiry_date'], "%Y-%m-%d").date() > today]
 
 for item in items:
     # 将字符串日期转换为datetime.date对象
@@ -90,7 +101,8 @@ def register():
         if len(password) < 8 or not any(char.isdigit() for char in password) or not any(
                 char.isupper() for char in password) or not any(char.islower() for char in password):
             flash(
-                'Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, and a number')
+                'Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, '
+                'and a number')
             return redirect(url_for('register'))
         if password != confirm_password:
             flash('Passwords do not match')
@@ -161,7 +173,7 @@ def recipe_detail():
 
 @app.route('/kitchen/kitchenmain')
 def kitchen_main():
-    return render_template('kitchen/kitchenmain.html')  # Adjust the template name as necessary
+    return render_template('kitchen/kitchenmain.html', notyetexpire=not_yet_expire)
 
 
 @app.route('/main/createitem', methods=['GET', 'POST'])

@@ -24,6 +24,10 @@ for item in used_items:
     used_calories.add(item['calories'])
 items = [
     {"name": "Milk", "expiry_date": "2024-05-10", 'quantity': '2', 'calories': 200},
+    {"name": "jelly", "expiry_date": "2024-05-11", 'quantity': '5', 'calories': 250},
+    {"name": "pork", "expiry_date": "2024-05-12", 'quantity': '4', 'calories': 350},
+    {"name": "chocolate", "expiry_date": "2024-05-12", 'quantity': '4', 'calories': 360},
+    {"name": "Goat Milk", "expiry_date": "2024-05-13", 'quantity': '2', 'calories': 200},
     {"name": "Bread", "expiry_date": "2024-05-12", 'quantity': '2', 'calories': 100},
     {"name": "Apple", "expiry_date": "2024-04-28", 'quantity': '5', 'calories': 60},
     {"name": "Beef", "expiry_date": "2024-06-30", 'quantity': '5', 'calories': 500},

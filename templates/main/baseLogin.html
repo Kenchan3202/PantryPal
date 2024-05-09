@@ -150,6 +150,24 @@
             font-size: 36px;
             margin-left: 50px;
         }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* 确保容器中内容居中显示 */
+            padding: 20px 0; /* 设置顶部和底部的内边距，左右为0，确保与外部元素对齐 */
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+            border-radius: 15px; /* 圆角边框 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+            text-align: center; /* 文本居中 */
+            box-sizing: border-box; /* 边框和内边距包含在宽度内 */
+        }
+
     </style>
 </head>
 <body>
@@ -169,7 +187,7 @@
         <button class="register-button" onclick="location.href='/user/register'">Register</button>
         <button class="logout-button" onclick="location.href='/base'">Logout</button>
     </div>
-    <section class="hero is-white is-fullheight">
+    <section class="hero is-white is-halfheight">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">Welcome to PantryPal <i class="fas fa-box-open"></i></h1>
@@ -177,21 +195,14 @@
             </div>
         </div>
         </section>
-
-         <div class="table-container">
-        <h3>These foods will expire in 7 days!</h3>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>expire date</th>
-            </tr>
-            {% for item in soon_to_expire_seven %}
-            <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.expiry_date }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+    These food will expire soon
+    <div class="card-container">
+        {% for item in soon_to_expire_seven %}
+        <div class="card">
+            <h3>{{ item.name }}</h3>
+            <p>expire date: {{ item.expiry_date }}</p>
+        </div>
+        {% endfor %}
     </div>
         <div class="table-container">
         <h3>You use these foods today!</h3>

@@ -18,17 +18,6 @@
             padding: 20px;
             text-align: center;
         }
-        .information {
-            background-image: url('/static/img/user.png');
-            background-size: cover;
-            background-position: center;
-            width: 60px;
-            height: 40px;
-            cursor: pointer;
-            position: absolute;
-            right: 10px;
-            top: 10px;
-        }
         .box {
             background-color: #fff;
             padding: 20px;
@@ -38,7 +27,7 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 8px;
         }
-        button {
+        .actbutton {
             width: 100%;
             padding: 10px;
             background-color: #0056b3;
@@ -47,7 +36,7 @@
             border-radius: 4px;
             cursor: pointer;
         }
-        button:hover {
+        .actbutton:hover {
             background-color: #004494;
         }
         .sidebar {
@@ -107,7 +96,7 @@
     <h1>Information Page</h1>
     <p>User Name: {{ username }}</p>
     <div class="box">
-        <button class="resetpassword" onclick="location.href='/main/resetpassword'">Reset Password</button>
+        <button class="actbutton" onclick="location.href='/main/resetpassword'">Reset Password</button>
     </div>
     <script>
     function toggleNav() {

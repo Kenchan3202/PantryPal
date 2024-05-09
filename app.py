@@ -10,6 +10,8 @@ p = user()
 p.username = 'admin'
 p.password = '12345'
 
+login = False
+
 used_items = [
     {"name": "Milk", 'calories': 200},
     {"name": "Bread", 'calories': 100},
@@ -38,6 +40,7 @@ today = datetime.date.today()
 seven_days_later = today + datetime.timedelta(days=7)
 
 soon_to_expire = set()
+soon_to_expire_seven = []
 
 expired = set()
 
@@ -68,15 +71,23 @@ for item in items:
         # 如果是，将物品名称添加到集合中
         soon_to_expire.add(item['name'])
 
+for item in items:
+    # 将字符串日期转换为datetime.date对象
+    expiry_date = datetime.datetime.strptime(item['expiry_date'], "%Y-%m-%d").date()
 
+    # 检查该日期是否在今天和7天后之间
+    if today <= expiry_date <= seven_days_later:
+        soon_to_expire_seven.append({"name": item['name'], "expiry_date": item['expiry_date']})
+
+print(soon_to_expire_seven)
 @app.route('/')
 def home():
-    return render_template('user/base.html')
+    return render_template('base.html')
 
 
 @app.route('/base')
 def base():
-    return render_template('user/base.html')
+    return render_template('base.html')
 
 
 @app.route('/user/login', methods=['GET', 'POST'])
@@ -86,6 +97,7 @@ def login():
         password = request.form['password']
         if username == p.username and password == p.password:
             session['logged_in'] = True
+            login = True
             return redirect(url_for('baseLogin'))
         else:
             flash('Login failed. Please check your username and password.', 'error')  # 添加错误消息
@@ -128,11 +140,10 @@ def Items():
 
 @app.route('/main/baseLogin')
 def baseLogin():
-
     flash('welcome user  ' + p.username)
     return render_template('main/baseLogin.html', username=p.username, Foodaboutexpired=soon_to_expire,
                            Foodexpired=expired, expiry_date=expiry_date, used_calories=used_calories,
-                           used_items=used_items)
+                           used_items=used_items, soon_to_expire_seven=soon_to_expire_seven, today=today)
 
 
 @app.route('/main/information')
@@ -195,8 +206,6 @@ def kitchen_main():
                                                                              "%Y-%m-%d").date() <= datetime.datetime.strptime(
                               expiry_date, "%Y-%m-%d").date())]
     return render_template('kitchen/kitchenmain.html', filtered_items=filtered_items, not_yet_expire=not_yet_expire)
-
-
 
 
 @app.route('/main/createitem', methods=['GET', 'POST'])

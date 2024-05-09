@@ -8,17 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
     <style>
-        .table-container {
-            margin: auto;
-            width: 50%; /* Smaller width */
-            background-color: #f0f4f8; /* Semi-transparent */
-            border-radius: 15px; /* Rounded corners */
-            padding: 10px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
         table {
             width: 100%;
             margin-top: 20px;
@@ -30,17 +19,17 @@
         }
         th {
             background-color: #0056b3;
-            border-radius: 4px;
             color: white;
         }
         tr:hover {background-color: #f5f5f5;}
         .content {
             margin: 0;
+            background-color: #0056b3;
             text-align: center; /* 全局文本居中 */
         }
         body {
             font-family: 'Roboto', sans-serif;
-            background: #FFFFFF;
+            background: #f0f4f8; /* 背景色调整为浅灰蓝色 */
             margin: 0;
             text-align: center; /* 全局文本居中 */
         }
@@ -48,17 +37,6 @@
             background-color: #f6f6f6;
             padding: 20px;
             text-align: center;
-        }
-        .information {
-            background-image: url('/static/img/user.png');
-            background-size: cover;
-            background-position: center;
-            width: 60px;
-            height: 40px;
-            cursor: pointer;
-            position: absolute;
-            right: 10px;
-            top: 10px;
         }
         .login-button {
             background-color: #0056b3;
@@ -68,7 +46,7 @@
             border-radius: 4px;
             cursor: pointer;
             position: absolute;
-            right: 265px;
+            right: 10px;
             top: 10px;}
 
         .register-button {
@@ -79,37 +57,13 @@
             border-radius: 4px;
             cursor: pointer;
             position: absolute;
-            right: 170px;
+            right: 85px;
             top: 10px;
         }
-        .logout-button {
-            background-color: #0056b3;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            position: absolute;
-            right: 80px;
-            top: 10px;}
-        .login-button:hover, .register-button:hover, .logout-button:hover {
+        .login-button:hover, .register-button:hover {
             background-color: #004494;
         }
-        .box {
-            border: 1px solid #dcdcdc;
-            margin-bottom: 20px;
-            padding: 20px;
-            background: #ffffff; /* 白色背景 */
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            text-align: left; /* 文本对齐调整为左对齐 */
-        }
-        .content {
-            margin: 20px;
-            background-color: #f7f9fa; /* 内容区背景色调整 */
-            padding: 20px;
-            border-radius: 8px;
-        }
+
         h1 { color: #333; }
         .openbtn {
             font-size: 20px;
@@ -157,60 +111,45 @@
         <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
         <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
-            <a href="/main/Items">Food items</a>
-            <a href="/main/baseLogin">Main</a>
-            <a href="/main/search">Search your food</a>
-            <a href="/shoppinglist/shoppinglist">Shopping list</a>
-            <a href="/kitchen/recipes">recipe</a>
-            <a href="/kitchen/kitchenmain">Kitchen main</a>
+            <a href="/user/login">Food items</a>
+            <a href="/user/login">Main</a>
+            <a href="/user/login">Search your food</a>
+            <a href="/user/login">Shopping list</a>
+            <a href="/user/login">recipe</a>
+            <a href="/user/login">Kitchen main</a>
         </div>
-        <div class="information" onclick="location.href='/main/information'"></div>
         <button class="login-button" onclick="location.href='/user/login'">Login</button>
         <button class="register-button" onclick="location.href='/user/register'">Register</button>
-        <button class="logout-button" onclick="location.href='/base'">Logout</button>
     </div>
+
     <section class="hero is-white is-fullheight">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">Welcome to PantryPal <i class="fas fa-box-open"></i></h1>
-                <h2 class="subtitle">today is {{today}}</h2>
+                <h2 class="subtitle">Organize your pantry with ease!</h2>
+                <h2 class="subtitle">We're aiming at reducing food waste and protecting the environment, giving acknowledgement on the
+        expiring date of the foods and providing recipes for you! :)</h2>
             </div>
         </div>
-        </section>
-
-         <div class="table-container">
-        <h3>These foods will expire in 7 days!</h3>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>expire date</th>
-            </tr>
-            {% for item in soon_to_expire_seven %}
-            <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.expiry_date }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-        <div class="table-container">
-        <h3>You use these foods today!</h3>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Calories</th>
-            </tr>
-            {% for item in used_items %}
-            <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.calories }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-    <div class="footer">
-        <p>版权所有 © 2024</p>
-    </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns is-multiline">
+                <div class="column is-4">
+                    <p class="title"><i class="fas fa-archive"></i> Inventory Management</p>
+                    <p>Keep track of your ingredients, expiry dates, and quantities.</p>
+                </div>
+                <div class="column is-4">
+                    <p class="title"><i class="fas fa-shopping-cart"></i> Shopping Lists</p>
+                    <p>Create and manage shopping lists directly from your pantry items.</p>
+                </div>
+                <div class="column is-4">
+                    <p class="title"><i class="fas fa-chart-line"></i> Analytics</p>
+                    <p>Gain insights into usage patterns and optimize your pantry organization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
        <script>
     function toggleNav() {
         var sidebar = document.getElementById("mySidebar");

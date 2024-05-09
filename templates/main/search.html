@@ -29,19 +29,7 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #0056b3;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #004494;
-        }
+
         .box {
             margin-top: 20px;
             padding: 10px;
@@ -63,8 +51,22 @@
             cursor: pointer;
             color: white;
             border: none;
+            border-radius: 4px;
             background-color: #111;
             padding: 10px;
+        }
+        .actionbtn {
+        width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .actionbtn:hover {
+            background-color: #004494;
         }
         .sidebar {
             height: 100%;
@@ -115,7 +117,7 @@
         <h2>Search Item</h2>
         <form action="/main/search" method="post">
             Item name: <input type="text" name="itemname"><br>
-            <button type="submit">Search</button>
+            <button type="submit" class="actionbtn">Search</button>
         </form>
         <div class="box">
             <h2>Result</h2>

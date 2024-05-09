@@ -157,7 +157,17 @@
             padding: 20px 0; /* 设置顶部和底部的内边距，左右为0，确保与外部元素对齐 */
         }
 
-        .card {
+        .not_expire_card {
+            background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+            border-radius: 15px; /* 圆角边框 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+            text-align: center; /* 文本居中 */
+            box-sizing: border-box; /* 边框和内边距包含在宽度内 */
+        }
+        .used_card {
             background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
             border-radius: 15px; /* 圆角边框 */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
@@ -198,12 +208,22 @@
     These food will expire soon
     <div class="card-container">
         {% for item in soon_to_expire_seven %}
-        <div class="card">
+        <div class="not_expire_card">
             <h3>{{ item.name }}</h3>
             <p>expire date: {{ item.expiry_date }}</p>
         </div>
         {% endfor %}
     </div>
+    you used these food today!
+    <div class="card-container">
+        {% for item in used_items %}
+        <div class="used_card">
+            <h3>{{ item.name }}</h3>
+            <p>expire date: {{ item.calories }}</p>
+        </div>
+        {% endfor %}
+        </div>
+    <!--</div>
         <div class="table-container">
         <h3>You use these foods today!</h3>
         <table>
@@ -218,7 +238,7 @@
             </tr>
             {% endfor %}
         </table>
-    </div>
+    </div>-->
     <div class="footer">
         <p>版权所有 © 2024</p>
     </div>

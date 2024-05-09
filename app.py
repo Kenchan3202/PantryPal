@@ -10,6 +10,16 @@ p = user()
 p.username = 'admin'
 p.password = '12345'
 
+used_items = [
+    {"name": "Milk", 'calories': 200},
+    {"name": "Bread", 'calories': 100},
+    {"name": "Apple", 'calories': 60},
+    {"name": "Beef", 'calories': 500},
+]
+used_calories = set()
+
+for item in used_items:
+    used_calories.add(item['calories'])
 items = [
     {"name": "Milk", "expiry_date": "2024-05-10", 'quantity': '2', 'calories': 200},
     {"name": "Bread", "expiry_date": "2024-05-12", 'quantity': '2', 'calories': 100},
@@ -118,10 +128,11 @@ def Items():
 
 @app.route('/main/baseLogin')
 def baseLogin():
-    flash('welcome user  ' + p.username)
 
+    flash('welcome user  ' + p.username)
     return render_template('main/baseLogin.html', username=p.username, Foodaboutexpired=soon_to_expire,
-                           Foodexpired=expired)
+                           Foodexpired=expired, expiry_date=expiry_date, used_calories=used_calories,
+                           used_items=used_items)
 
 
 @app.route('/main/information')

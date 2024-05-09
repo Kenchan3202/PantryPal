@@ -7,6 +7,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;}
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #0056b3;
+            color: white;
+        }
+        tr:hover {background-color: #f5f5f5;}
+        .content {
+            margin: 0;
+            text-align: center; /* 全局文本居中 */
+        }
         body {
             font-family: 'Roboto', sans-serif;
             background: #f0f4f8; /* 背景色调整为浅灰蓝色 */
@@ -107,6 +125,19 @@
         <p>We're aiming at reducing food waste and protecting the environment, giving acknowledgement on the
         expiring date of the foods and providing recipes for you! :)</p>
     </div>
+     <table border="1">
+         you used these foods today!
+        <tr>
+            <th>Name</th>
+            <th>Calories</th>
+        </tr>
+        {% for item in used_items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.calories }}</td>
+        </tr>
+        {% endfor %}
+    </table>
     <div class="footer">
         <p>版权所有 © 2024</p>
     </div>

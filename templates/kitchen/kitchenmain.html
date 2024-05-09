@@ -117,7 +117,8 @@
     </header>
     <h1>Kitchen Inventory</h1>
     <div class="container">
-        {% for item in notyetexpire %}
+        items not yet expired
+        {% for item in not_yet_expire %}
         <div class="food-item">
             <span>{{ item.name }}</span>
             <span>{{ item.quantity }}</span>
@@ -126,8 +127,31 @@
             <button>X</button>
         </div>
         {% endfor %}
-    </div>
-    <button onclick="addFilter()">+ Filter</button>
+    <div class="container">
+    <form method="get" action="/kitchen/kitchenmain">
+        <input type="text" name="min_calories" placeholder="Min Calories">
+        <input type="text" name="max_calories" placeholder="Max Calories">
+        <input type="checkbox" name="not_expired" value="on"> Not Expired Only
+        <button type="submit">Filter</button>
+    </form>
+</div>
+
+<div class="container">
+    {% if filtered_items %}
+        {% for item in filtered_items %}
+            <div class="food-item">
+                <span>{{ item.name }}</span>
+                <span>{{ item.quantity }}</span>
+                <span>{{ item.calories }} calories</span>
+                <span>Exp: {{ item.expiry_date }}</span>
+                <button>X</button>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No items to display. Use the filter options above to find items.</p>
+    {% endif %}
+</div>
+</div>
     <script src="scripts.js"></script>
     <script>
         function toggleNav() {

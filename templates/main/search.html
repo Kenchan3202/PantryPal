@@ -50,27 +50,91 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             border-radius: 8px;
         }
-        h2 {
-            color: #333;
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #f6f6f6;
+            z-index: 1000;
+        }
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            color: white;
+            border: none;
+            background-color: #111;
+            padding: 10px;
+        }
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: width 0.3s;
+            padding-top: 60px;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+        .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h2>Search Item</h2>
-    <form action="/main/search" method="post">
-        Item name: <input type="text" name="itemname"><br>
-        <button type="submit">Search</button>
-    </form>
-    <div class="box">
-        <h2>Result</h2>
-        <p>{{ itemtemp }}</p>
+    <div class="navbar">
+        <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
+            <a href="/main/Items">Food items</a>
+            <a href="/main/baseLogin">Main</a>
+            <a href="/main/search">Search your food</a>
+            <a href="/shoppinglist/shoppinglist">Shopping list</a>
+            <a href="/kitchen/recipes">Recipes</a>
+            <a href="/kitchen/kitchenmain">Kitchen main</a>
+        </div>
     </div>
-    <div class="box">
-        <h2>Information of Item</h2>
-        <p>{{ iteminfo }}</p>
+    <div class="container">
+        <h2>Search Item</h2>
+        <form action="/main/search" method="post">
+            Item name: <input type="text" name="itemname"><br>
+            <button type="submit">Search</button>
+        </form>
+        <div class="box">
+            <h2>Result</h2>
+            <p>{{ itemtemp }}</p>
+        </div>
+        <div class="box">
+            <h2>Information of Item</h2<p>{{ iteminfo }}</p>
+        </div>
     </div>
-</div>
+    <script>
+        function toggleNav() {
+            var sidebar = document.getElementById("mySidebar");
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+            } else {
+                sidebar.style.width = "250px";
+            }
+        }
+    </script>
 </body>
 </html>
 

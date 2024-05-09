@@ -10,10 +10,8 @@ p = user()
 p.username = 'admin'
 p.password = '12345'
 
-
-
 items = [
-    {"name": "Milk", "expiry_date": "2024-05-10",  'quantity': '2', 'calories': 200},
+    {"name": "Milk", "expiry_date": "2024-05-10", 'quantity': '2', 'calories': 200},
     {"name": "Bread", "expiry_date": "2024-05-12", 'quantity': '2', 'calories': 100},
     {"name": "Apple", "expiry_date": "2024-04-28", 'quantity': '5', 'calories': 60},
     {"name": "Beef", "expiry_date": "2024-06-30", 'quantity': '5', 'calories': 500},
@@ -21,7 +19,6 @@ items = [
     {"name": "Apple juice", "expiry_date": "2024-05-04", 'quantity': '1', 'calories': 150},
 ]
 expiry_dates = set()
-
 
 for item in items:
     expiry_dates.add(item['expiry_date'])
@@ -34,7 +31,7 @@ soon_to_expire = set()
 
 expired = set()
 
-#not_yet_expire = set()
+# not_yet_expire = set()
 
 for item in items:
     # 将字符串日期转换为datetime.date对象
@@ -45,10 +42,9 @@ for item in items:
         # 如果是，将物品名称添加到集合中
         expired.add(item['name'])
 
-    #if expiry_date > today:
-        # 如果是，将物品名称添加到集合中
-        #not_yet_expire.add(item['name'])
-
+    # if expiry_date > today:
+    # 如果是，将物品名称添加到集合中
+    # not_yet_expire.add(item['name'])
 
 not_yet_expire = [item for item in items if
                   datetime.datetime.strptime(item['expiry_date'], "%Y-%m-%d").date() > today]
@@ -171,9 +167,25 @@ def recipe_detail():
     return render_template('kitchen/recipes.html')  # Adjust the template name as necessary
 
 
-@app.route('/kitchen/kitchenmain')
+@app.route('/kitchen/kitchenmain', methods=['GET'])
 def kitchen_main():
-    return render_template('kitchen/kitchenmain.html', notyetexpire=not_yet_expire)
+    min_calories = request.args.get('min_calories')
+    max_calories = request.args.get('max_calories')
+    expiry_date = request.args.get('expiry_date')
+    not_expired_only = request.args.get('not_expired') == 'on'
+
+    filtered_items = []
+    if min_calories or max_calories or expiry_date or not_expired_only:
+        filtered_items = [item for item in items if (min_calories is None or item['calories'] >= int(min_calories)) and
+                          (max_calories is None or item['calories'] <= int(max_calories)) and
+                          (not not_expired_only or (not_expired_only and datetime.datetime.strptime(item['expiry_date'],
+                                                                                                    "%Y-%m-%d").date() >= today)) and
+                          (expiry_date is None or datetime.datetime.strptime(item['expiry_date'],
+                                                                             "%Y-%m-%d").date() <= datetime.datetime.strptime(
+                              expiry_date, "%Y-%m-%d").date())]
+    return render_template('kitchen/kitchenmain.html', filtered_items=filtered_items, not_yet_expire=not_yet_expire)
+
+
 
 
 @app.route('/main/createitem', methods=['GET', 'POST'])

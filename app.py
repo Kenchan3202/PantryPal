@@ -10,6 +10,17 @@ p = user()
 p.username = 'admin'
 p.password = '12345'
 
+
+from users.views import users_blueprint
+from pantry.views import pantry_blueprint
+
+
+
+app.register_blueprint(users_blueprint, url_prefix='/user')
+app.register_blueprint(pantry_blueprint, url_prefix='/pantry')
+
+
+
 login = False
 
 used_items = [
@@ -94,52 +105,32 @@ def base():
     return render_template('base.html')
 
 
-@app.route('/user/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        if username == p.username and password == p.password:
-            session['logged_in'] = True
-            login = True
-            return redirect(url_for('baseLogin'))
-        else:
-            flash('Login failed. Please check your username and password.', 'error')  # 添加错误消息
-            return redirect(url_for('login'))
-    return render_template('user/login.html')
 
-
-@app.route('/user/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        confirm_password = request.form['confirm_password']
-
-        # Validation conditions
-        if len(username) < 3:
-            flash('Username must be at least 3 characters long')
-            return redirect(url_for('register'))
-        if len(password) < 8 or not any(char.isdigit() for char in password) or not any(
-                char.isupper() for char in password) or not any(char.islower() for char in password):
-            flash(
-                'Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, '
-                'and a number')
-            return redirect(url_for('register'))
-        if password != confirm_password:
-            flash('Passwords do not match')
-            return redirect(url_for('register'))
-
-        # If validation is successful, here you might save data to a database or perform other actions
-        # Redirect to a new page or confirm registration
-        return redirect(url_for('base'))
-    return render_template('user/register.html')
 
 
 @app.route('/main/Items', methods=['GET', 'POST'])
 def Items():
-    return render_template('main/Items.html', items=items, Foodaboutexpired=soon_to_expire,
+    return render_template('main/items.html', items=items, Foodaboutexpired=soon_to_expire,
                            Foodexpired=expired)
+
+
+@app.route('/main/create_item', methods=['GET', 'POST'])
+def create_item():
+    if request.method == 'POST':
+        # Here, you can process the form data, but since there's no database,
+        # we'll just print it to the console or do nothing with it.
+        item_name = request.form['name']
+        expiry_date = request.form['expiry_date']
+        description = request.form['description']
+
+        # Print to console (server logs)
+        print(f"Received item: {item_name}, Expiry: {expiry_date}, Description: {description}")
+
+        # Redirect to a new page or back to the form, or display a success message
+        return redirect('/main/create_item')  # Redirects back to the form page
+    else:
+        # Display the form page
+        return render_template('main/create_item.html')
 
 
 @app.route('/main/baseLogin')
@@ -155,14 +146,7 @@ def information():
     return render_template('main/information.html', username=p.username)
 
 
-@app.route('/main/resetpassword', methods=['GET', 'POST'])
-def reset_password():
-    if request.method == 'POST':
-        new_password = request.form['new_password']
-        p.password = new_password  # 更新密码
-        # flash('Your password has been reset successfully.', 'success')
-        return redirect(url_for('/user/base'))  # 可以重定向到登录页面或其他页面
-    return render_template('main/resetpassword.html')
+
 
 
 @app.route('/main/search', methods=['GET', 'POST'])
@@ -212,23 +196,7 @@ def kitchen_main():
     return render_template('kitchen/kitchenmain.html', filtered_items=filtered_items, not_yet_expire=not_yet_expire)
 
 
-@app.route('/main/createitem', methods=['GET', 'POST'])
-def create_item():
-    if request.method == 'POST':
-        # Here, you can process the form data, but since there's no database,
-        # we'll just print it to the console or do nothing with it.
-        item_name = request.form['name']
-        expiry_date = request.form['expiry_date']
-        description = request.form['description']
 
-        # Print to console (server logs)
-        print(f"Received item: {item_name}, Expiry: {expiry_date}, Description: {description}")
-
-        # Redirect to a new page or back to the form, or display a success message
-        return redirect('/main/createitem')  # Redirects back to the form page
-    else:
-        # Display the form page
-        return render_template('main/createitem.html')
 
 
 if __name__ == '__main__':

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Create Item</title>
+    <title>Items List</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -10,31 +9,30 @@
             margin: 0;
             padding: 20px;
         }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #0056b3;
+            color: white;
+        }
+        tr:hover {background-color: #f5f5f5;}
         .box {
             background-color: white;
             padding: 20px;
             margin-top: 20px;
             border: 1px solid #ccc;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        input[type="text"], input[type="date"], textarea {
-            width: 100%;
-            padding: 8px;
-            margin-top: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .actionbtn {
-            width: 100%;
-            padding: 10px;
-            background-color: #0056b3;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            margin-top: 20px;
-        }
-        .actionbtn:hover {
-            background-color: #004494;
         }
         .sidebar {
         height: 100%;
@@ -73,8 +71,7 @@
             border: none;
             border-radius: 4px;
             background-color: #111;
-            margin: 10px;
-        }
+            margin: 10px;}
     </style>
 </head>
 <body>
@@ -82,7 +79,7 @@
         <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
         <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
-            <a href="/main/Items">Food items</a>
+            <a href="/main/items">Food items</a>
             <a href="/main/baseLogin">Main</a>
             <a href="/main/search">Search your food</a>
             <a href="/shoppinglist/shoppinglist">Shopping list</a>
@@ -90,20 +87,33 @@
             <a href="/kitchen/kitchenmain">Kitchen main</a>
         </div>
     </div>
-    <h1>Create Item</h1>
+    <h1>Items List</h1>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Expiry Date</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.expiry_date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
     <div class="box">
-        <form action="/main/createitem" method="post">
-            <label for="name">Item Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="expiry_date">Expiry Date:</label>
-            <input type="date" id="expiry_date" name="expiry_date" required>
-
-            <label for="description">Description:</label>
-            <textarea id="description" name="description"></textarea>
-
-            <button type="submit" class="actionbtn" >Create Item</button>
-        </form>
+        <h2>Delete Items</h2>
+        <p>Choose items to delete.</p>
+    </div>
+    <div class="box">
+        <h2><button onclick="location.href='/main/create_item'">Create item</button></h2>
+    </div>
+    <div class="box">
+        <h2>Food that about to expire</h2>
+        <p>{{Foodaboutexpired}}</p>
+    </div>
+    <div class="box">
+        <h2>Expired Food</h2>
+        <p>{{Foodexpired}}</p>
     </div>
 <script>
         function toggleNav() {
@@ -121,3 +131,4 @@
     </script>
 </body>
 </html>
+

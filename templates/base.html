@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns:C="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +8,112 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
     <style>
+        a{
+
+            list-style: none;
+        }
+        li{
+            list-style: none;
+        }
+        .lunbo{
+
+            width: 100%;
+        }
+        .content{
+            background-color: #FFFFFF;
+            left: 50px;
+            width: 1430px;
+            height: 300px;
+            margin: 0;
+            position: relative;
+            text-align: center;
+        }
+
+        #item{
+            background-color: #FFFFFF;
+            width: 100%;
+            height: 100%;
+
+        }
+        .item{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+
+        }
+        .item.active{
+            opacity:1;
+        }
+        img{
+            background-color:rgba(0,0,0,0.4);
+            width: 100%;
+            height: 100%; /* 图片高度自动调整以填充容器 */
+            object-fit: cover; /* 确保图片覆盖整个区域而不失真 */
+        }
+        #btn-left{
+            width: 30px;
+            height: 69px;
+            font-size: 30px;
+            color: white;
+            background-color:rgba(0,0,0,0.4);
+            line-height: 69px;
+            padding-left:5px;
+            z-index: 10;/*始终显示在图片的上层*/
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-60%);/*使按钮向上偏移居中对齐*/
+            cursor: pointer;
+            opacity: 0;/*平时隐藏*/
+        }
+        .lunbo:hover #btn-left{
+            /*鼠标滑入，显示图标*/
+            opacity: 1;
+        }
+
+        #btn-right{
+            width: 26px;
+            height: 69px;
+            font-size: 30px;
+            color: white;
+            background-color:rgba(0,0,0,0.4);
+            line-height: 69px;
+            padding-left: 5px;
+            z-index: 10;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(-60%);
+        }
+        .lunbo:hover #btn-right{
+            opacity: 1;
+        }
+        #circle{
+            height: 20px;
+            display: flex;
+            position: absolute;
+            bottom: 35px;
+            right: 25px;
+        }
+        .circle{
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            border: 2px solid white;
+            background: rgba(0,0,0,0.4);
+            cursor: pointer;
+            margin: 5px;
+        }
+        .white{
+            background-color: #FFFFFF;
+        }
+
         table {
             width: 100%;
             margin-top: 20px;
@@ -22,22 +128,17 @@
             color: white;
         }
         tr:hover {background-color: #f5f5f5;}
-        .content {
-            margin: 0;
-            background-color: #0056b3;
-            text-align: center; /* 全局文本居中 */
-        }
         body {
             font-family: 'Roboto', sans-serif;
             background: #f0f4f8; /* 背景色调整为浅灰蓝色 */
             margin: 0;
             text-align: center; /* 全局文本居中 */
         }
-        .header, .footer {
+        /*.header, .footer {
             background-color: #f6f6f6;
             padding: 20px;
             text-align: center;
-        }
+        }*/
         .login-button {
             background-color: #0056b3;
             color: white;
@@ -121,7 +222,39 @@
         <button class="login-button" onclick="location.href='/user/login'">Login</button>
         <button class="register-button" onclick="location.href='/user/register'">Register</button>
     </div>
+    <section class="hero is-white is-quaterheight">
+        <div class="lunbo">
+                <div class="content">
+                <ul id="item">
+                    <li class="item active">
+                        <a href="#"><img src="/static/img/01.jpg" ></a>
+                    </li>
+                    <li class="item">
+                        <a href="#"><img src="/static/img/02.png" ></a>
+                    </li>
+                    <li class="item">
+                        <a href="#"><img src="/static/img/01.jpg" ></a>
+                    </li>
+                    <li class="item">
+                        <a href="#"><img src="/static/img/02.png" ></a>
+                    </li>
+                    <li class="item">
+                        <a href="#"><img src="/static/img/01.jpg" ></a>
+                    </li>
+                </ul>
+                <div id="btn-left"><</div>
+                <div id="btn-right">></div>
+                <ul id="circle">
 
+                    <li class="circle"></li>
+                    <li class="circle"></li>
+                    <li class="circle"></li>
+                    <li class="circle"></li>
+                    <li class="circle"></li>
+                </ul>
+                </div>
+            </div>
+        </section>
     <section class="hero is-white is-fullheight">
         <div class="hero-body">
             <div class="container">
@@ -163,6 +296,83 @@
             mainContent.style.marginLeft = "250px";
         }
     }
+
     </script>
+    <script>
+
+        window.onload=function(){
+        var items=document.getElementsByClassName("item");
+        var circles=document.getElementsByClassName("circle");
+        var leftBtn=document.getElementById("btn-left");
+        var rightBtn=document.getElementById("btn-right");
+        var content=document.querySelector('.content');
+        var index=0;
+        var timer=null;
+
+        //清除class
+        var clearclass=function(){
+            for(let i=0;i<items.length;i++){
+                items[i].className="item";
+                circles[i].className="circle";
+                circles[i].setAttribute("num",i);
+            }
+        }
+        /*只显示一个class*/
+        function move(){
+            clearclass();
+            items[index].className="item active";
+            circles[index].className="circle white";
+        }
+        //点击右边按钮切换下一张图片
+        rightBtn.onclick=function(){
+            if(index<items.length-1){
+                index++;
+            }
+            else{
+                index=0;
+            }
+            move();
+        }
+        //点击左边按钮切换上一张图片
+        leftBtn.onclick=function(){
+            if(index<items.length){
+                index--;
+            }
+            else{
+                index=items.length-1;
+            }
+            move();
+        }
+        //开始定时器，点击右边按钮，实现轮播
+        timer=setInterval(function(){
+            rightBtn.onclick();
+        },1500)
+        //点击圆点时，跳转到对应图片
+        for(var i=0;i<circles.length;i++){
+            circles[i].addEventListener("click",function(){
+                var point_index=this.getAttribute("num");
+                index=point_index;
+                move();
+            })
+
+        }
+        //鼠标移入清除定时器，并开启一个三秒的定时器，使慢慢转动
+        content.onmouseover=function(){
+            clearInterval(timer);
+                timer=setInterval(function(){
+                    rightBtn.onclick();
+                },5000)
+        }
+        //鼠标移出又开启定时器
+        content.onmouseleave=function(){
+            clearInterval(timer);
+            timer=setInterval(function(){
+                rightBtn.onclick();
+            },1500)
+        }
+
+}
+</script>
+
 </body>
 </html>

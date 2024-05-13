@@ -11,3 +11,6 @@ c2065153: create sql code, team44.sqlite, create tables
 
 2024.5.13
 c2065153: upgrade base.html
+
+2024.5.13
+c206153: upgrade baseLogin.html, upgrade items.html, finished pantry file and shopping file

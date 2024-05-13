@@ -6,15 +6,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from user import user
+# from user import user
 
 import testingdata
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
-p = user()
-p.username = 'admin'
-p.password = '12345'
+# p = user()
+# p.username = 'admin'
+# p.password = '12345'
 
 from users.views import users_blueprint
 from pantry.views import pantry_blueprint
@@ -91,10 +91,13 @@ def base():
 
 @app.route('/main-menu')
 def baseLogin():
-    flash('welcome user  ' + p.username)
-    return render_template('main/baseLogin.html', username=p.username, Foodaboutexpired=soon_to_expire,
+    #flash('welcome user  ' + p.username)
+    return render_template('main/baseLogin.html', Foodaboutexpired=soon_to_expire,
                            Foodexpired=expired, expiry_date=expiry_date, used_calories=used_calories,
                            used_items=testingdata.used_items, soon_to_expire_seven=soon_to_expire_seven, today=today)
+#username=p.username,
+
+
 
 @app.route('/kitchen/recipes')
 def recipe_detail():

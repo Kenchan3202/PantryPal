@@ -13,6 +13,7 @@ p.password = '12345'
 
 from users.views import users_blueprint
 from pantry.views import pantry_blueprint
+from shopping.views import shopping_blueprint
 
 
 

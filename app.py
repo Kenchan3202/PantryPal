@@ -108,8 +108,8 @@ def base():
 
 
 
-@app.route('/main/Items', methods=['GET', 'POST'])
-def Items():
+@app.route('/main/items', methods=['GET', 'POST'])
+def items_view():
     return render_template('main/items.html', items=items, Foodaboutexpired=soon_to_expire,
                            Foodexpired=expired)
 

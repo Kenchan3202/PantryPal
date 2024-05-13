@@ -6,3 +6,5 @@ pantry_blueprint = Blueprint('pantry', __name__, template_folder='templates')
 
 
 
+
+

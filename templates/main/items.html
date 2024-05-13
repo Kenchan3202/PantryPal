@@ -9,24 +9,51 @@
             margin: 0;
             padding: 20px;
         }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .food-item {
+            background: #eee;
+            padding: 10px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .food-item span {
+            margin-right: 10px;
+        }
+        delbutton {
+            background-color: #f44336; /* Red for delete */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        delbutton:hover {
+            background-color: #d32f2f;
+        }
         h1 {
             color: #333;
         }
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #0056b3;
-            color: white;
-        }
-        tr:hover {background-color: #f5f5f5;}
+        /*table {*/
+        /*    width: 100%;*/
+        /*    margin-top: 20px;*/
+        /*    border-collapse: collapse;*/
+        /*}*/
+        /*th, td {*/
+        /*    padding: 8px;*/
+        /*    text-align: left;*/
+        /*    border-bottom: 1px solid #ddd;*/
+        /*}*/
+        /*th {*/
+        /*    background-color: #0056b3;*/
+        /*    color: white;*/
+        /*}*/
+        /*tr:hover {background-color: #f5f5f5;}*/
         .box {
             background-color: white;
             padding: 20px;
@@ -88,18 +115,18 @@
         </div>
     </div>
     <h1>Items List</h1>
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Expiry Date</th>
-        </tr>
+    <div class="container">
+        items not yet expired
         {% for item in items %}
-        <tr>
-            <td>{{ item.name }}</td>
-            <td>{{ item.expiry_date }}</td>
-        </tr>
+        <div class="food-item">
+            <span>{{ item.name }}</span>
+            <span>{{ item.quantity }}</span>
+            <span>Exp: {{ item.expiry_date }}</span>
+
+            <delbutton>X</delbutton>
+        </div>
         {% endfor %}
-    </table>
+    </div>
     <div class="box">
         <h2>Delete Items</h2>
         <p>Choose items to delete.</p>

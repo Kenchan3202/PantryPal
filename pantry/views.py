@@ -9,7 +9,7 @@ pantry_blueprint = Blueprint('pantry', __name__, template_folder='templates')
 print("Template folder:", pantry_blueprint.template_folder)
 
 
-@pantry_blueprint.route('/main/items', methods=['GET', 'POST'])
+@pantry_blueprint.route('/items', methods=['GET', 'POST'])
 def items_view():
     expiry_dates = set()
 
@@ -43,7 +43,7 @@ def items_view():
                            Foodexpired=expired)
 
 
-@pantry_blueprint.route('/main/create_item', methods=['GET', 'POST'])
+@pantry_blueprint.route('/create_item', methods=['GET', 'POST'])
 def create_item():
     if request.method == 'POST':
         # Here, you can process the form data, but since there's no database,
@@ -62,7 +62,7 @@ def create_item():
         return render_template('main/create_item.html')
 
 
-@pantry_blueprint.route('/main/search', methods=['GET', 'POST'])
+@pantry_blueprint.route('/search', methods=['GET', 'POST'])
 def search():
     itemtemp = ""  # Initialize the variable to hold the result
     iteminfo = ""

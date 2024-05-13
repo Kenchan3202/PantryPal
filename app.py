@@ -20,7 +20,7 @@ from users.views import users_blueprint
 from pantry.views import pantry_blueprint
 
 app.register_blueprint(users_blueprint, url_prefix='/user')
-app.register_blueprint(pantry_blueprint, url_prefix='/pantry')
+app.register_blueprint(pantry_blueprint, url_prefix='/main')
 
 login = False
 
@@ -89,7 +89,7 @@ def base():
     return render_template('base.html')
 
 
-@app.route('/main/baseLogin')
+@app.route('/main-menu')
 def baseLogin():
     flash('welcome user  ' + p.username)
     return render_template('main/baseLogin.html', username=p.username, Foodaboutexpired=soon_to_expire,

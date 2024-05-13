@@ -55,5 +55,5 @@ def reset_password():
         new_password = request.form['new_password']
         p.password = new_password
         # flash('Your password has been reset successfully.', 'success')
-        return redirect(url_for('/user/base'))
+        return redirect(url_for('base'))
     return render_template('user/update_password.html')

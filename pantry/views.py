@@ -64,17 +64,17 @@ def create_item():
 
 @pantry_blueprint.route('/search', methods=['GET', 'POST'])
 def search():
-    itemtemp = ""  # Initialize the variable to hold the result
-    iteminfo = ""
+    item_temp = ""  # Initialize the variable to hold the result
+    item_info = ""
     if request.method == 'POST':
-        itemname = request.form['itemname'].strip()  # Get the item name from form input
+        item_name = request.form['item_name'].strip()  # Get the item name from form input
         for item in testingdata.items:
-            if item['name'].lower() == itemname.lower():  # Case insensitive comparison
-                itemtemp = f"item name is {item['name']} expired date is {item['expiry_date']}"
-                iteminfo = item['name']
+            if item['name'].lower() == item_name.lower():  # Case insensitive comparison
+                item_temp = f"item name is {item['name']} expired date is {item['expiry_date']}"
+                item_info = item['name']
                 break
         else:
-            itemtemp = "Item not found"  # Set itemtemp to a not found message if the loop completes with no match
+            item_temp = "Item not found"  # Set itemtemp to a not found message if the loop completes with no match
 
-    return render_template('main/search.html', itemtemp=itemtemp,
-                           iteminfo=iteminfo)  # Pass the result directly to the template
+    return render_template('main/search.html', itemtemp=item_temp,
+                           iteminfo=item_info)  # Pass the result directly to the template

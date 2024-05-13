@@ -37,6 +37,7 @@ def register():
         # Here you would normally save the username and hashed_password to a database
         # Assuming user object has an attribute for password storage
         p.password = hashed_password  # Saving hashed password instead of plain one
+        print(p.password)
         flash('Registration successful.')
         return redirect(url_for('users.login'))
     return render_template('user/register.html')

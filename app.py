@@ -96,13 +96,6 @@ def baseLogin():
                            Foodexpired=expired, expiry_date=expiry_date, used_calories=used_calories,
                            used_items=testingdata.used_items, soon_to_expire_seven=soon_to_expire_seven, today=today)
 
-
-@app.route('/main/information')
-def information():
-    return render_template('main/information.html', username=p.username)
-
-
-
 @app.route('/kitchen/recipes')
 def recipe_detail():
     return render_template('kitchen/recipes.html')  # Adjust the template name as necessary

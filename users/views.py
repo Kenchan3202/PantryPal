@@ -57,3 +57,7 @@ def reset_password():
         # flash('Your password has been reset successfully.', 'success')
         return redirect(url_for('base'))
     return render_template('user/update_password.html')
+
+@users_blueprint.route('/information')
+def information():
+    return render_template('user/information.html', username=p.username)

@@ -1,5 +1,5 @@
 import datetime
-
+from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 
 from user import user
@@ -13,8 +13,10 @@ p.password = '12345'
 
 from users.views import users_blueprint
 from pantry.views import pantry_blueprint
+from shopping.views import shopping_blueprint
 
 
+db = SQLAlchemy(app)
 
 app.register_blueprint(users_blueprint, url_prefix='/user')
 app.register_blueprint(pantry_blueprint, url_prefix='/pantry')
@@ -200,4 +202,4 @@ def kitchen_main():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=9000, debug=True)
+    app.run(debug=True)

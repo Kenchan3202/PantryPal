@@ -18,11 +18,11 @@ p.password = '12345'
 
 from users.views import users_blueprint
 from pantry.views import pantry_blueprint
+from shopping.views import shopping_blueprint
 
 app.register_blueprint(users_blueprint, url_prefix='/user')
 app.register_blueprint(pantry_blueprint, url_prefix='/main')
-
-login = False
+app.register_blueprint(shopping_blueprint, url_prefix='/shopping')
 
 used_calories = set()
 
@@ -101,10 +101,6 @@ def baseLogin():
 def information():
     return render_template('main/information.html', username=p.username)
 
-
-@app.route('/shopping/shopping_list')
-def shopping_list():
-    return render_template('shopping/shopping_list.html')  # Adjust the template name as necessary
 
 
 @app.route('/kitchen/recipes')

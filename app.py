@@ -167,9 +167,9 @@ def search():
                            iteminfo=iteminfo)  # Pass the result directly to the template
 
 
-@app.route('/shoppinglist/shoppinglist')
+@app.route('/shopping/shopping_list')
 def shopping_list():
-    return render_template('shoppinglist/shoppinglist.html')  # Adjust the template name as necessary
+    return render_template('shopping/shopping_list.html')  # Adjust the template name as necessary
 
 
 @app.route('/kitchen/recipes')
@@ -177,7 +177,7 @@ def recipe_detail():
     return render_template('kitchen/recipes.html')  # Adjust the template name as necessary
 
 
-@app.route('/kitchen/kitchenmain', methods=['GET'])
+@app.route('/kitchen/kitchen_main', methods=['GET'])
 def kitchen_main():
     min_calories = request.args.get('min_calories')
     max_calories = request.args.get('max_calories')
@@ -193,7 +193,7 @@ def kitchen_main():
                           (expiry_date is None or datetime.datetime.strptime(item['expiry_date'],
                                                                              "%Y-%m-%d").date() <= datetime.datetime.strptime(
                               expiry_date, "%Y-%m-%d").date())]
-    return render_template('kitchen/kitchenmain.html', filtered_items=filtered_items, not_yet_expire=not_yet_expire)
+    return render_template('kitchen/kitchen_main.html', filtered_items=filtered_items, not_yet_expire=not_yet_expire)
 
 
 

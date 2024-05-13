@@ -122,26 +122,30 @@
             <span>{{ item.name }}</span>
             <span>{{ item.quantity }}</span>
             <span>Exp: {{ item.expiry_date }}</span>
-
+        <!--this one is for delete items -->
             <delbutton>X</delbutton>
         </div>
         {% endfor %}
     </div>
     <div class="box">
-        <h2>Delete Items</h2>
-        <p>Choose items to delete.</p>
-    </div>
-    <div class="box">
         <h2><button onclick="location.href='/main/create_item'">Create item</button></h2>
     </div>
-    <div class="box">
-        <h2>Food that about to expire</h2>
-        <p>{{Foodaboutexpired}}</p>
-    </div>
-    <div class="box">
-        <h2>Expired Food</h2>
-        <p>{{Foodexpired}}</p>
-    </div>
+    <div class="container">
+            Food that about to expire
+            {% for item in Foodaboutexpired %}
+            <div class="food-item">
+                <span>{{ item }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    <div class="container">
+            Expired Food
+            {% for item in Foodexpired %}
+            <div class="food-item">
+                <span>{{ item }}</span>
+            </div>
+            {% endfor %}
+        </div>
 <script>
         function toggleNav() {
             var sidebar = document.getElementById("mySidebar");

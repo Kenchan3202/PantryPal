@@ -1,5 +1,5 @@
 from flask_login import UserMixin
-from app import db
+from app import db, app
 import bcrypt
 
 
@@ -143,3 +143,9 @@ class CompatibleDiet(db.Model):
     diet_id = db.Column(db.Integer, db.ForeignKey(Diet.id), nullable=False)
 
     pass
+
+
+def init_db():
+    with app.app_context():
+        db.drop_all()
+        db.create_all()

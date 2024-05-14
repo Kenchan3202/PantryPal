@@ -18,16 +18,16 @@
             text-align: center;
             margin-bottom: 20px;
         }
-        header button {
+        button {
             background: #0056b3;
             border: none;
             color: white;
             padding: 10px 20px;
-            margin: 0 10px;
             border-radius: 4px;
             cursor: pointer;
+            margin: 0 10px;
         }
-        header button:hover {
+        button:hover {
             background: #004494;
         }
         .container {
@@ -44,7 +44,7 @@
             margin-bottom: 10px;
             border-bottom: 1px solid #ccc;
         }
-        button {
+        .delete-button {
             background-color: #f44336;
             color: white;
             border: none;
@@ -52,61 +52,59 @@
             padding: 5px 10px;
             cursor: pointer;
         }
-        button:hover {
+        .delete-button:hover {
             background-color: #d32f2f;
         }
         .sidebar {
-        height: 100%;
-        width: 0; /* 默认隐藏 */
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #111;
-        overflow-x: hidden;
-        transition: width 0.3s;
-        padding-top: 60px;
-    }
-    .sidebar a {
-        padding: 10px 15px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-        transition: 0.3s;
-    }
-    .sidebar a:hover {
-        color: #f1f1f1;
-    }
-    .sidebar .closebtn {
-        position: absolute;
-        top: 0;
-        right: 25px;
-        font-size: 36px;
-        margin-left: 50px;
-    }
-    .openbtn {
-        font-size: 20px;
-        cursor: pointer;
-        color: white;
-        border: none;
-        background-color: #111;
-        margin: 10px;
-    }
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: width 0.3s;
+            padding-top: 60px;
+        }
+        .sidebar a {
+            padding: 10px 0px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+        .closebtn, .openbtn {
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+            border: none;
+            background-color: #111;
+            margin: 10px;
+        }
+        .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+        }
     </style>
 </head>
 <body>
-<div class="navbar">
+    <div class="navbar">
         <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
         <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
             <a href="/main-menu">Main</a>
-            <a href="/pantry/items">Food items</a>
-
-            <a href="/pantry/search">Search your food</a>
-            <a href="/shopping/shopping_list">Shopping list</a>
+            <a href="/pantry/items">My Pantry</a>
+            <a href="/pantry/search">Food Browser</a>
+            <a href="/shopping/shopping_list">Shopping List</a>
             <a href="/kitchen/recipes">Recipes</a>
-            <a href="/kitchen/kitchenmain">Kitchen main</a>
+            <a href="/kitchen/kitchen_main">Kitchen Main</a>
         </div>
     </div>
     <header>
@@ -119,29 +117,20 @@
             <span>Food item Image</span>
             <span>Quantity</span>
             <span>Calories</span>
-            <button>X</button>
+            <button class="delete-button">X</button>
         </div>
         <!-- Repeat for each item -->
     </div>
-    <form action = "{{url_for('shopping.complete_shopping')}}">
-        <button class = "button is-info is-centered" >Shopping complete</button>
+    <form action="{{url_for('shopping.complete_shopping')}}" method="post">
+        <button class="button is-info">Shopping complete</button>
     </form>
-    <form action = "{{url_for('shopping.add_item')}}">
-        <button onclick="addItem()">+</button>
+    <form action="{{url_for('shopping.add_item')}}" method="post">
+        <button type="button" onclick="addItem()">+</button>
     </form>
-    <script src="scripts.js"></script>
-<script>
+    <script>
         function toggleNav() {
             var sidebar = document.getElementById("mySidebar");
-            var mainContent = document.getElementById("mainContent");
-
-            if (sidebar.style.width === "250px") {
-                sidebar.style.width = "0";
-                mainContent.style.marginLeft = "0";
-            } else {
-                sidebar.style.width = "250px";
-                mainContent.style.marginLeft = "250px";
-            }
+            sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
         }
     </script>
 </body>

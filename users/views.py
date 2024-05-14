@@ -46,6 +46,7 @@ def register():
             return redirect(url_for('users.register'))
 
 
+
         # Hash the password
 
         print(p.password)

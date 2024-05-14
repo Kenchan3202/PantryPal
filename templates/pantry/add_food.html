@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Item</title>
+    <title>Add Food</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,10 +17,14 @@
             border: 1px solid #ccc;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        input[type="text"], input[type="date"], textarea {
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="date"], input[type="number"], textarea {
             width: 100%;
             padding: 8px;
-            margin-top: 8px;
+            margin-top: 5px;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
@@ -37,23 +41,24 @@
             background-color: #004494;
         }
         .sidebar {
-        height: 100%;
-        width: 0; /* 默认隐藏 */
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #111;
-        overflow-x: hidden;
-        transition: width 0.3s;
-        padding-top: 60px;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: width 0.3s;
+            padding-top: 60px;
         }
-        .sidebar a {
-            padding: 10px 15px;
+         .sidebar a {
+            padding: 10px 0;
             text-decoration: none;
             font-size: 25px;
             color: #818181;
             display: block;
+            text-align: center;
             transition: 0.3s;
         }
         .sidebar a:hover {
@@ -78,45 +83,46 @@
     </style>
 </head>
 <body>
-<div class="navbar">
+    <div class="navbar">
         <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
         <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
             <a href="/main-menu">Main</a>
-            <a href="/pantry/items">Food items</a>
-
-            <a href="/pantry/search">Search your food</a>
-            <a href="/shopping/shopping_list">Shopping list</a>
+            <a href="/pantry/items">My Pantry</a>
+            <a href="/pantry/search">Food Browser</a>
+            <a href="/shopping/shopping_list">Shopping List</a>
             <a href="/kitchen/recipes">Recipes</a>
-            <a href="/kitchen/kitchen_main">Kitchen main</a>
+            <a href="/kitchen/kitchen_main">Kitchen Main</a>
         </div>
     </div>
-    <h1>Create Item</h1>
+    <p>Please fill in the form below to add food into your pantry:</p>
     <div class="box">
         <form action="/pantry/create_item" method="post">
-            <label for="name">Item Name:</label>
+            <label for="name">Food:</label>
             <input type="text" id="name" name="name" required>
 
             <label for="expiry_date">Expiry Date:</label>
             <input type="date" id="expiry_date" name="expiry_date" required>
 
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" required>
+
+            <label for="calories">Calories:</label>
+            <input type="number" id="calories" name="calories" required>
+
             <label for="description">Description:</label>
             <textarea id="description" name="description"></textarea>
 
-            <button type="submit" class="actionbtn" >Create Item</button>
+            <button type="submit" class="actionbtn">Add Food to Pantry List</button>
         </form>
     </div>
-<script>
+    <script>
         function toggleNav() {
             var sidebar = document.getElementById("mySidebar");
-            var mainContent = document.getElementById("mainContent");
-
             if (sidebar.style.width === "250px") {
                 sidebar.style.width = "0";
-                mainContent.style.marginLeft = "0";
             } else {
                 sidebar.style.width = "250px";
-                mainContent.style.marginLeft = "250px";
             }
         }
     </script>

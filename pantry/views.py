@@ -59,7 +59,7 @@ def create_item():
         return redirect('/main/create_item')  # Redirects back to the form page
     else:
         # Display the form page
-        return render_template('pantry/create_item.html')
+        return render_template('pantry/add_food.html')
 
 
 @pantry_blueprint.route('/search', methods=['GET', 'POST'])

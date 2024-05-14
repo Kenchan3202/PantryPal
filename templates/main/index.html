@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,13 +36,13 @@
         tr:hover {background-color: #f5f5f5;}
         .content {
             margin: 0;
-            text-align: center; /* 全局文本居中 */
+            text-align: center;
         }
         body {
             font-family: 'Roboto', sans-serif;
             background: #FFFFFF;
             margin: 0;
-            text-align: center; /* 全局文本居中 */
+            text-align: center;
         }
         .header, .footer {
             background-color: #f6f6f6;
@@ -99,14 +99,14 @@
             border: 1px solid #dcdcdc;
             margin-bottom: 20px;
             padding: 20px;
-            background: #ffffff; /* 白色背景 */
+            background: #ffffff;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 8px;
-            text-align: left; /* 文本对齐调整为左对齐 */
+            text-align: left;
         }
         .content {
             margin: 20px;
-            background-color: #f7f9fa; /* 内容区背景色调整 */
+            background-color: #f7f9fa;
             padding: 20px;
             border-radius: 8px;
         }
@@ -122,7 +122,7 @@
         }
         .sidebar {
             height: 100%;
-            width: 0; /* 默认隐藏 */
+            width: 0;
             position: fixed;
             z-index: 1;
             top: 0;
@@ -153,30 +153,31 @@
         .card-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* 确保容器中内容居中显示 */
-            padding: 20px 0; /* 设置顶部和底部的内边距，左右为0，确保与外部元素对齐 */
+            justify-content: center;
+            padding: 20px 0;
         }
 
         .not_expire_card {
-            background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
-            border-radius: 15px; /* 圆角边框 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 10px;
             padding: 20px;
             width: 300px;
-            text-align: center; /* 文本居中 */
-            box-sizing: border-box; /* 边框和内边距包含在宽度内 */
+            text-align: center;
+            box-sizing: border-box;
         }
         .used_card {
-            background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
-            border-radius: 15px; /* 圆角边框 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 10px;
             padding: 20px;
             width: 300px;
-            text-align: center; /* 文本居中 */
-            box-sizing: border-box; /* 边框和内边距包含在宽度内 */
+            text-align: center;
+            box-sizing: border-box;
         }
+
 
     </style>
 </head>
@@ -186,24 +187,24 @@
         <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
             <a href="/main-menu">Main</a>
-            <a href="/pantry/items">Food items</a>
-            <a href="/pantry/search">Search your food</a>
-            <a href="/shopping/shopping_list">Shopping list</a>
-            <a href="/kitchen/recipes">recipe</a>
-            <a href="/kitchen/kitchen_main">Kitchen main</a>
+            <a href="/pantry/items">My Pantry</a>
+            <a href="/pantry/search">Food Browser</a>
+            <a href="/shopping/shopping_list">Shopping List</a>
+            <a href="/kitchen/recipes">Recipes</a>
+            <a href="/kitchen/kitchen_main">Kitchen Main</a>
         </div>
         <div class="information" onclick="location.href='/user/information'"></div>
-        <button class="logout-button" onclick="location.href='/base'">Logout</button>
+        <button class="logout-button button" onclick="location.href='/base'">Logout</button>
     </div>
     <section class="hero is-white is-halfheight">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">Welcome to PantryPal <i class="fas fa-box-open"></i></h1>
-                <h2 class="subtitle">today is {{today}}</h2>
+                <h2 class="subtitle">Today's Date: {{today}}</h2>
             </div>
         </div>
-        </section>
-    These food will expire soon
+    </section>
+    Items Expiring Soon:
     <div class="card-container">
         {% for item in soon_to_expire_seven %}
         <div class="not_expire_card">
@@ -212,12 +213,12 @@
         </div>
         {% endfor %}
     </div>
-    you used these food today!
+    Use these food today!
     <div class="card-container">
         {% for item in used_items %}
         <div class="used_card">
             <h3>{{ item.name }}</h3>
-            <p>expire date: {{ item.calories }}</p>
+            <p>Calories: {{ item.calories }}</p>
         </div>
         {% endfor %}
         </div>
@@ -238,22 +239,16 @@
         </table>
     </div>-->
     <div class="footer">
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">copyright © 2024</a>
+        <p>Copyright © 2024</p>
     </div>
 
-       <script>
-    function toggleNav() {
-        var sidebar = document.getElementById("mySidebar");
-        var mainContent = document.getElementById("mainContent");
-
-        if (sidebar.style.width === "250px") {
-            sidebar.style.width = "0";
-            mainContent.style.marginLeft = "0";
-        } else {
-            sidebar.style.width = "250px";
-            mainContent.style.marginLeft = "250px";
+      <script>
+        function toggleNav() {
+            var sidebar = document.getElementById("mySidebar");
+            var mainContent = document.getElementById("mainContent");
+            sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+            mainContent.style.marginLeft = mainContent.style.marginLeft === "250px" ? "0" : "250px";
         }
-    }
     </script>
 </body>
 </html>

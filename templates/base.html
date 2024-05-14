@@ -214,12 +214,12 @@
         <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
         <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
-            <a href="/user/login">Food items</a>
             <a href="/user/login">Main</a>
-            <a href="/user/login">Search your food</a>
-            <a href="/user/login">Shopping list</a>
-            <a href="/user/login">recipe</a>
-            <a href="/user/login">Kitchen main</a>
+            <a href="/user/login">My Pantry</a>
+            <a href="/user/login">Food Browser</a>
+            <a href="/user/login">Shopping List</a>
+            <a href="/user/login">Recipes</a>
+            <a href="/user/login">Kitchen Main</a>
         </div>
         <button class="login-button" onclick="location.href='/user/login'">Login</button>
         <button class="register-button" onclick="location.href='/user/register'">Register</button>
@@ -318,13 +318,13 @@
                 circles[i].setAttribute("num",i);
             }
         }
-        /*只显示一个class*/
+
         function move(){
             clearclass();
             items[index].className="item active";
             circles[index].className="circle white";
         }
-        //点击右边按钮切换下一张图片
+
         rightBtn.onclick=function(){
             if(index<items.length-1){
                 index++;
@@ -334,7 +334,7 @@
             }
             move();
         }
-        //点击左边按钮切换上一张图片
+
         leftBtn.onclick=function(){
             if(index<items.length){
                 index--;
@@ -344,11 +344,11 @@
             }
             move();
         }
-        //开始定时器，点击右边按钮，实现轮播
+
         timer=setInterval(function(){
             rightBtn.onclick();
         },1500)
-        //点击圆点时，跳转到对应图片
+
         for(var i=0;i<circles.length;i++){
             circles[i].addEventListener("click",function(){
                 var point_index=this.getAttribute("num");
@@ -357,14 +357,12 @@
             })
 
         }
-        //鼠标移入清除定时器，并开启一个三秒的定时器，使慢慢转动
         content.onmouseover=function(){
             clearInterval(timer);
                 timer=setInterval(function(){
                     rightBtn.onclick();
                 },5000)
         }
-        //鼠标移出又开启定时器
         content.onmouseleave=function(){
             clearInterval(timer);
             timer=setInterval(function(){

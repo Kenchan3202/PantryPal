@@ -1,17 +1,11 @@
 # users/views.py
+from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
-from flask_login import LoginManager
-from werkzeug.security import generate_password_hash, check_password_hash
-
-from app import app, db
 from user import user
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
-
-login_manager = LoginManager()
-login_manager.init_app(app)
-
-login_manager.login_view = 'users.login'
 
 p = user()
 #p.username = 'admin'

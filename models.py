@@ -23,7 +23,6 @@ class User(db.Model, UserMixin):
     role = db.Column(db.String(100), nullable=False, default='user')
     registered_on = db.Column(db.DateTime, nullable=False)
 
-
     # declaring relationships to other tables
     recipes = db.relationship('Recipe')
     shopping_lists = db.relationship('ShoppingList')
@@ -134,7 +133,7 @@ class Ingredient(db.Model):
     qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id), nullable=False)
 
     def __init__(self, recipe_id, qfood_id):
-        self.list_id = recipe_id
+        self.recipe_id = recipe_id
         self.qfood_id = qfood_id
 
 
@@ -203,14 +202,14 @@ class CompatibleDiet(db.Model):
 
 
 def init_db():
-    with app.app_context():
-        db.drop_all()
-        db.create_all()
-        admin = User(email='admin@email.com',
-                     password='Admin1!',
-                     first_name='Alice',
-                     last_name='Jones',
-                     dob='12/09/2001',
-                     role='admin')
-        db.session.add(admin)
-        db.session.commit()
+    # with app.app_context():
+    db.drop_all()
+    db.create_all()
+    admin = User(email='admin@email.com',
+                 password='Admin1!',
+                 first_name='Alice',
+                 last_name='Jones',
+                 dob='12/09/2001',
+                 role='admin')
+    db.session.add(admin)
+    db.session.commit()

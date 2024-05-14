@@ -1,3 +1,6 @@
+# Authored by: Joe Hare & Keirav Shah
+# latest edition: 14/05/2024
+
 from flask_login import UserMixin
 from app import db, app
 from datetime import datetime

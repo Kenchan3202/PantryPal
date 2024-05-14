@@ -6,10 +6,15 @@ from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv()
 
+# from user import user
+
 import testingdata
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
+# p = user()
+# p.username = 'admin'
+# p.password = '12345'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['ENCRYPTION_KEY'] = os.getenv('ENCRYPTION_KEY')
@@ -33,6 +38,7 @@ app.register_blueprint(pantry_blueprint, url_prefix='/pantry')
 app.register_blueprint(shopping_blueprint, url_prefix='/shopping')
 app.register_blueprint(kitchen_blueprint, url_prefix='/kitchen')
 
+
 @app.route('/')
 def home():
     return render_template('base.html')
@@ -44,7 +50,7 @@ def base():
 
 
 @app.route('/main-menu')
-def index():
+def baseLogin():
     # flash('welcome user  ' + p.username)
     return render_template('main/index.html', Foodaboutexpired=testingdata.soon_to_expire,
                            Foodexpired=testingdata.expired, expiry_date=testingdata.expiry_date,

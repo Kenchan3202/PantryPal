@@ -6,7 +6,7 @@ admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
 
 @admin_blueprint.route('/admin')
 def admin():
-    return render_template('admin/admin.html')
+    return render_template('admin/admin.html', name=current_user.firstname)
 
 # view all registered users
 @admin_blueprint.route('/view_all_users', methods=['POST'])

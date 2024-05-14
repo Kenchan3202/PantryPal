@@ -1,7 +1,11 @@
 # users/views.py
 from datetime import datetime
+
+from cryptography.fernet import Fernet
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from user import user
+# from models import User
+# from app import app, db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager
 
@@ -10,6 +14,15 @@ users_blueprint = Blueprint('users', __name__, template_folder='templates')
 p = user()
 #p.username = 'admin'
 #p.password = '12345'
+
+# def encrypt(data):
+#     cipher_suite = Fernet(app.config['ENCRYPTION_KEY'])
+#     return cipher_suite.encrypt(data.encode()).decode()
+#
+# def decrypt(data):
+#     cipher_suite = Fernet(app.config['ENCRYPTION_KEY'])
+#     return cipher_suite.decrypt(data.encode()).decode()
+
 
 @users_blueprint.route('/register', methods=['GET', 'POST'])
 def register():

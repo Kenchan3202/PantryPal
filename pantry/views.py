@@ -39,7 +39,7 @@ def items_view():
         if today <= expiry_date <= seven_days_later:
             # 如果是，将物品名称添加到集合中
             soon_to_expire.add(item['name'])
-    return render_template('main/items.html', items=testingdata.items, Foodaboutexpired=soon_to_expire,
+    return render_template('pantry/items.html', items=testingdata.items, Foodaboutexpired=soon_to_expire,
                            Foodexpired=expired)
 
 
@@ -59,7 +59,7 @@ def create_item():
         return redirect('/main/create_item')  # Redirects back to the form page
     else:
         # Display the form page
-        return render_template('main/create_item.html')
+        return render_template('pantry/create_item.html')
 
 
 @pantry_blueprint.route('/search', methods=['GET', 'POST'])
@@ -76,5 +76,5 @@ def search():
         else:
             item_temp = "Item not found"  # Set itemtemp to a not found message if the loop completes with no match
 
-    return render_template('main/search.html', itemtemp=item_temp,
+    return render_template('pantry/search.html', itemtemp=item_temp,
                            iteminfo=item_info)  # Pass the result directly to the template

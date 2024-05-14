@@ -4,7 +4,8 @@ from datetime import datetime
 from cryptography.fernet import Fernet
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from user import user
-# from app import app
+# from app import app, db
+# from models import User, UserMixin
 from flask_login import LoginManager
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
@@ -93,7 +94,7 @@ def login():
         if p.password == password:
             session['logged_in'] = True
             flash('Login successful.')
-            return redirect(url_for('baseLogin'))
+            return redirect(url_for('index'))
         else:
             flash('Login failed. Please check your username and password.', 'error')
             return redirect(url_for('users.login'))

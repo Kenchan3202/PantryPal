@@ -1,8 +1,9 @@
 import datetime
-
+import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 
 from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv()
 
@@ -15,6 +16,17 @@ app.secret_key = 'your_secret_key'
 # p = user()
 # p.username = 'admin'
 # p.password = '12345'
+
+
+app.config['ENCRYPTION_KEY'] = os.getenv('ENCRYPTION_KEY')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+app.config['RECAPTCHA_PUBLIC_KEY'] = os.getenv('RECAPTCHA_PUBLIC_KEY')
+app.config['RECAPTCHA_PRIVATE_KEY'] = os.getenv('RECAPTCHA_PRIVATE_KEY')
+app.config['SQLALCHEMY_ECHO'] = True
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
 
 from users.views import users_blueprint
 from pantry.views import pantry_blueprint

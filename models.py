@@ -2,7 +2,8 @@ from flask_login import UserMixin
 from app import db
 import bcrypt
 
-class User(db.Model ,UserMixin):
+
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -80,7 +81,6 @@ class FoodItem(db.Model):
         self.name = food_name
 
 
-
 class Barcode(db.Model):
     __tablename__ = 'barcodes'
 
@@ -121,12 +121,25 @@ class WastedFood(db.Model):
     pass
 
 
-
 class Ingredient(db.Model):
     pass
 
-class CompatibleDiet(db.Model):
-    pass
 
 class Diet(db.Model):
+    __tablename__ = 'diet'
+
+    id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(30), nullable=False, unique=True)
+
+    compatibleDiet = db.relationship('CompatibleDiet')
+
+    def __init__(self, description):
+        self.description = description
+
+
+class CompatibleDiet(db.Model):
+    __tablename__ = 'compatible_diet'
+    id = db.Column(db.Integer, primary_key=True)
+    diet_id = db.Column(db.Integer, db.ForeignKey(Diet.id), nullable=False)
+
     pass

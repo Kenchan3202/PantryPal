@@ -46,6 +46,7 @@ def register():
             flash('Passwords do not match')
             return redirect(url_for('users.register'))
 
+
         # Hash the password
 
         print(p.password)

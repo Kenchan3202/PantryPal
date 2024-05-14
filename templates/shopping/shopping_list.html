@@ -122,8 +122,12 @@
         </div>
         <!-- Repeat for each item -->
     </div>
-    <button onclick="completeShopping()">Shopping complete</button>
-    <button onclick="addItem()">+</button>
+    <form action = "{{url_for('shopping.complete_shopping')}}">
+        <button class = "button is-info is-centered" >Shopping complete</button>
+    </form>
+    <form action = "{{url_for('shopping.add_item')}}">
+        <button onclick="addItem()">+</button>
+    </form>
     <script src="scripts.js"></script>
 <script>
         function toggleNav() {

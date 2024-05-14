@@ -94,9 +94,9 @@ class QuantifiedFoodItem(db.Model):
     __tablename__ = 'quantifiedfooditem'
 
     id = db.Column(db.Integer, primary_key=True)
-    food_id = db.Column(db.Integer, db.ForeignKey(FoodItem.id))
+    food_id = db.Column(db.Integer, db.ForeignKey(FoodItem.id), nullable=False)
     quantity = db.Column(db.Float, default=0.0)
-    unit = db.Column(db.String(5), default="g")
+    units = db.Column(db.String(5), default="g")
 
     # References to other tables
     shopping = db.relationship('ShoppingItem')
@@ -108,7 +108,7 @@ class QuantifiedFoodItem(db.Model):
     def __init__(self, food_id, quantity, units):
         self.food_id = food_id
         self.quantity = quantity
-        self.unit = units
+        self.units = units
 
 
 class ShoppingItem(db.Model):
@@ -116,11 +116,11 @@ class ShoppingItem(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     list_id = db.Column(db.Integer, db.ForeignKey(ShoppingList.id), nullable=False)
-    qfood_item_id = db.Column(db.String(50), db.ForeignKey(QuantifiedFoodItem.id), nullable=False)
+    qfood_id = db.Column(db.String(50), db.ForeignKey(QuantifiedFoodItem.id), nullable=False)
 
-    def __init__(self, list_id, qfood_item_id):
+    def __init__(self, list_id, qfood_id):
         self.list_id = list_id
-        self.qfood_item_id = qfood_item_id
+        self.qfood_id = qfood_id
 
 
 class Ingredient(db.Model):
@@ -128,11 +128,11 @@ class Ingredient(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     recipe_id = db.Column(db.Integer, db.ForeignKey(Recipe.id), nullable=False)
-    qfood_item_id = db.Column(db.String(50), db.ForeignKey(QuantifiedFoodItem.id), nullable=False)
+    qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id), nullable=False)
 
-    def __init__(self, recipe_id, qfood_item_id):
+    def __init__(self, recipe_id, qfood_id):
         self.list_id = recipe_id
-        self.qfood_item_id = qfood_item_id
+        self.qfood_id = qfood_id
 
 
 class PantryItem(db.Model):
@@ -181,6 +181,7 @@ class Diet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(30), nullable=False, unique=True)
 
+    # link to other tables
     compatibleDiet = db.relationship('CompatibleDiet')
 
     def __init__(self, description):

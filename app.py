@@ -16,7 +16,7 @@ app.secret_key = 'your_secret_key'
 # p.username = 'admin'
 # p.password = '12345'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////' + os.path.join(app.root_path, 'instance/team44.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['ENCRYPTION_KEY'] = os.getenv('ENCRYPTION_KEY')
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
@@ -136,4 +136,4 @@ def kitchen_main():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=9000, debug=True)
+    app.run(debug=True)

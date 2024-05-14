@@ -4,6 +4,7 @@
 # File to add sample data to database instance for testing.
 
 import models
+import random
 from app import db, app
 
 users = [
@@ -28,38 +29,178 @@ users = [
     {"first_name": "Chrysler", "last_name": "Quemby", "email": "cquemby9@dion.ne.jp", "password": "eB3_Xk\\f",
      "dob": "4/2/2024"}
 ]
+userObjects = []
 
-foodItems = ["tomato", "apple", "banana",
-             "tofu", "spaghetti", "eggs",
-             "butter", "water", "cornstarch",
-             "plain flour", "jasmine rice", "basmati rice",
-             "vegetable oil", "olive oil", "cocoa powder",
-             "oats", "chicken thigh", "chicken breast",
-             "minced beef", "minced pork", "duck breast",
-             "cinnamon", "garlic", "onion",
-             "shallot", "spring onion", "galangal",
-             "ginger", "rendang", "anchovies",
-             "peanuts", "coconut", "salmon fillet",
-             "white miso", "red miso", "parsnip",
-             "pork loin", "peanut oil", "carrot",
-             "dashi", "beef chuck", "pesto"]
+foodItems = ["Apple", "Tofu", "Spaghetti", "Eggs",
+             "Butter", "Water", "Cornstarch",
+             "Flour", "Jasmine Rice", "Basmati Rice",
+             "Vegetable Oil", "Olive Oil", "Cocoa Powder",
+             "Oats", "Chicken Thigh", "Chicken breast",
+             "Minced Beef", "Minced Pork", "Duck breast",
+             "Cinnamon", "Garlic", "Onion",
+             "Shallot", "Spring Onion", "Galangal",
+             "Ginger", "Rendang", "Anchovies",
+             "Peanuts", "Coconut", "Salmon Fillet",
+             "White Miso", "Red Miso", "Parsnip",
+             "Pork Loin", "Peanut Oil", "Carrot",
+             "Dashi", "Beef Chuck", "Pesto", 'Tomatoes',
+             'Fresh Mozzarella', 'Fresh Basil Leaves',
+             'Extra Virgin Olive Oil', 'Balsamic Vinegar',
+             'Salt', 'Pepper', 'Banana', 'Peanut Butter',
+             'Milk', 'Eggs', 'Butter', 'Avocado', 'Lime']
+foodItemObjects = []
 
-
-def add_food_items():
-    with app.app_context():
-        for food in foodItems:
-            new_food = models.FoodItem(food_name=food)
-            db.session.add(new_food)
-        db.session.commit()
+recipes = [
+    {
+        'name': 'Caprese Salad',
+        'ingredients': ['Tomatoes', 'Fresh Mozzarella', 'Fresh Basil Leaves', 'Extra Virgin Olive Oil',
+                        'Balsamic Vinegar', 'Salt', 'Pepper'],
+        'method': 'Slice tomatoes and fresh mozzarella. Arrange them on a plate, '
+                  'alternating slices. Tuck fresh basil leaves in between. Drizzle '
+                  'with extra virgin olive oil and balsamic vinegar. Season with salt '
+                  'and pepper to taste.'
+    },
+    {
+        'name': 'Peanut Butter Banana Smoothie',
+        'ingredients': ['Banana', 'Peanut Butter', 'Milk'],
+        'method': 'Peel and slice banana. Put banana slices, peanut butter, and '
+                  'milk into a blender. Add honey if desired. Blend until smooth.'
+    },
+    {
+        'name': 'Scrambled Eggs',
+        'ingredients': ['Eggs', 'Butter', 'Salt', 'Pepper'],
+        'method': 'Crack eggs into a bowl and beat them until yolks and whites are combined. '
+                  'Melt butter in a non-stick skillet over medium heat. Pour in beaten eggs. '
+                  'Stir occasionally until eggs are set. Season with salt and pepper.'
+    },
+    {
+        'name': 'Guacamole',
+        'ingredients': ['Avocado', 'Lime', 'Salt'],
+        'method': 'Cut avocado in half, remove pit, and scoop out flesh into a bowl. '
+                  'Mash avocado with a fork. Squeeze lime juice over mashed avocado '
+                  'and mix well. Add salt to taste.'
+    }
+]
 
 
 def add_sample_users():
+    for user in users:
+        new_user = models.User(email=user['email'],
+                               password=user['password'],
+                               first_name=user['first_name'],
+                               last_name=user['last_name'],
+                               dob=user['dob'])
+        userObjects.append(new_user)
+        db.session.add(new_user)
+    db.session.commit()
+
+
+def add_food_items():
+    for food in foodItems:
+        new_food = models.FoodItem(food_name=food)
+        foodItemObjects.append(new_food)
+        db.session.add(new_food)
+    db.session.commit()
+
+
+def create_quantified_food_item(food_item_id: int) -> models.QuantifiedFoodItem:
+    units = ('ml', 'g')
+    quantities = (200, 500, 1000, 750, 50, 20)
+    q_fooditem = models.QuantifiedFoodItem(food_id=food_item_id,
+                                           quantity=random.choice(quantities),
+                                           units=random.choice(units))
+    db.session.add(q_fooditem)
+    db.session.commit()
+    return q_fooditem
+
+
+def create_pantry_item(user_id: int) -> models.PantryItem:
+    expiries = ('05/08/2024', '10/11/2024', '18/08/2024', '02/04/2024', '01/01/2025', '28/03/2025', '19/09/2024')
+    qfood_item = create_quantified_food_item(random.choice(foodItemObjects).id)
+    pantry_item = models.PantryItem(user_id=user_id, qfood_id=qfood_item.id, expiry=random.choice(expiries))
+    db.session.add(pantry_item)
+    db.session.commit()
+    return pantry_item
+
+
+def create_pantries() -> None:
+    for user in userObjects:
+        num_items = random.choice((0, 3, 8, 6, 4, 8))
+        for i in range(num_items):
+            create_pantry_item(user_id=user.id)
+
+
+def create_ingredient(recipe_name: str, qfood_id: int) -> models.Ingredient:
+    recipe = models.Recipe.query.filter_by(name=recipe_name).first()
+    ingredient = models.Ingredient(recipe_id=recipe.id, qfood_id=qfood_id)
+    db.session.add(ingredient)
+    db.session.commit()
+    return ingredient
+
+
+def create_recipe_object(user_id: int, recipe) -> models.Recipe:
+    new_recipe = models.Recipe(user_id=user_id,
+                               recipe_name=recipe['name'],
+                               cooking_method=recipe['method'],
+                               serves=random.choice((1, 2, 4)),
+                               calories=random.choice((450, 800, 1200, 1000)))
+
+    db.session.add(new_recipe)
+    db.session.commit()
+
+    for ingredient in recipe['ingredients']:
+        foodItem = models.FoodItem.query.filter_by(name=ingredient).first()
+        qfoodItem = create_quantified_food_item(foodItem.id)
+        create_ingredient(recipe_name=new_recipe.name, qfood_id=qfoodItem.id)
+
+    return new_recipe
+
+
+def create_recipes() -> None:
+    for recipe in recipes:
+        user_id = random.choice(userObjects).id
+        create_recipe_object(user_id=user_id, recipe=recipe)
+
+
+def create_shopping_items(user_id: int) -> models.ShoppingItem:
+    s_list = models.ShoppingList.query.filter_by(user_id=user_id).first()
+    qfood_item = create_quantified_food_item(random.choice(foodItemObjects).id)
+    shopping_item = models.ShoppingItem(list_id=s_list.id, qfood_id=qfood_item.id)
+    db.session.add(shopping_item)
+    db.session.commit()
+    return shopping_item
+
+
+def create_shopping_lists() -> None:
+    chosen_users = userObjects[::2]
+    for user in chosen_users:
+        shopping_list = models.ShoppingList(user.id)
+        db.session.add(shopping_list)
+        db.session.commit()
+        num_items = random.choice((3, 5, 2, 6, 9))
+        for i in range(num_items):
+            create_shopping_items(user_id=user.id)
+
+
+def main():
+    # add sample users
+    add_sample_users()
+
+    # add sample foodItems
+    add_food_items()
+
+    # create pantries
+    create_pantries()
+
+    # create recipes
+    create_recipes()
+
+    # create shopping lists
+    create_shopping_lists()
+
+
+if __name__ == '__main__':
     with app.app_context():
-        for user in users:
-            new_user = models.User(email=user['email'],
-                                   password=user['password'],
-                                   first_name=user['first_name'],
-                                   last_name=user['last_name'],
-                                   dob=user['dob'])
-            db.session.add(new_user)
+        models.init_db()
+        main()
         db.session.commit()

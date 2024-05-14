@@ -14,3 +14,6 @@ c2065153: upgrade base.html
 
 2024.5.13
 c206153: upgrade baseLogin.html, upgrade items.html, finished pantry file and shopping file
+
+2024.5.14
+c206153: html changes

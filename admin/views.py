@@ -13,7 +13,7 @@ def admin():
 @login_required
 def view_all_users():
 
-    return render_template('admin/admin.html')
+    return render_template('admin/admin.html', name=current_user)
 
 
 

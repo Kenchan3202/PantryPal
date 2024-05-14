@@ -1,7 +1,6 @@
 import datetime
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 
@@ -17,7 +16,7 @@ app.secret_key = 'your_secret_key'
 # p.username = 'admin'
 # p.password = '12345'
 
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////' + os.path.join(app.root_path, 'instance/team44.db')
 app.config['ENCRYPTION_KEY'] = os.getenv('ENCRYPTION_KEY')
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
@@ -33,7 +32,7 @@ from pantry.views import pantry_blueprint
 from shopping.views import shopping_blueprint
 
 app.register_blueprint(users_blueprint, url_prefix='/user')
-app.register_blueprint(pantry_blueprint, url_prefix='/main')
+app.register_blueprint(pantry_blueprint, url_prefix='/pantry')
 app.register_blueprint(shopping_blueprint, url_prefix='/shopping')
 
 used_calories = set()
@@ -104,7 +103,7 @@ def base():
 @app.route('/main-menu')
 def baseLogin():
     #flash('welcome user  ' + p.username)
-    return render_template('main/baseLogin.html', Foodaboutexpired=soon_to_expire,
+    return render_template('main/index.html', Foodaboutexpired=soon_to_expire,
                            Foodexpired=expired, expiry_date=expiry_date, used_calories=used_calories,
                            used_items=testingdata.used_items, soon_to_expire_seven=soon_to_expire_seven, today=today)
 #username=p.username,

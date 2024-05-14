@@ -4,7 +4,7 @@ from datetime import datetime
 from cryptography.fernet import Fernet
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from user import user
-# from app import db
+# from app import app
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager
 

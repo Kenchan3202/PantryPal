@@ -8,12 +8,13 @@ from user import user
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager
 
-
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
 p = user()
-# p.username = 'admin'
-# p.password = '12345'
+
+
+p.username = 'admin'
+p.password = '12345'
 
 # def encrypt(data):
 #     cipher_suite = Fernet(app.config['ENCRYPTION_KEY'])
@@ -46,15 +47,14 @@ def register():
             return redirect(url_for('users.register'))
 
         # Hash the password
-        hashed_password = generate_password_hash(password)
+
         print(p.password)
         # Here you would normally save the username and hashed_password to a database
         # Assuming user object has an attribute for password storage
-        p.password = hashed_password  # Saving hashed password instead of plain one
-        print(p.password)
         flash('Registration successful.')
         return redirect(url_for('users.login'))
     return render_template('user/register.html')
+
 
 # def register():
 #     if request.method == 'POST':
@@ -91,7 +91,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        if user and check_password_hash(p.password, password):
+        if p.password == password:
             session['logged_in'] = True
             flash('Login successful.')
             return redirect(url_for('baseLogin'))
@@ -99,6 +99,8 @@ def login():
             flash('Login failed. Please check your username and password.', 'error')
             return redirect(url_for('users.login'))
     return render_template('user/login.html')
+
+
 # @users_blueprint.route('/login', methods=['GET', 'POST'])
 # def login():
 #     if request.method == 'POST':
@@ -116,8 +118,6 @@ def login():
 #             return redirect(url_for('users.login'))
 #
 #     return render_template('user/login.html')
-
-
 
 
 @users_blueprint.route('/update_password', methods=['GET', 'POST'])

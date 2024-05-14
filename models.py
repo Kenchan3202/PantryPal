@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 from app import db, app
+from datetime import datetime
 import bcrypt
 
 
@@ -17,10 +18,14 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(50), nullable=False, unique=False)
     dob = db.Column(db.String(10), nullable=False)
     role = db.Column(db.String(100), nullable=False, default='user')
+    registered_on = db.Column(db.DateTime, nullable=False)
+
 
     # declaring relationships to other tables
     recipes = db.relationship('Recipe')
     shopping_lists = db.relationship('ShoppingList')
+    pantry = db.relationship("PantryItem")
+    wasted = db.relationship('WastedFood')
 
     def __init__(self, email, password, first_name, last_name, dob, role='user'):
         self.email = email
@@ -29,6 +34,7 @@ class User(db.Model, UserMixin):
         self.first_name = first_name
         self.last_name = last_name
         self.dob = dob
+        self.registered_on = datetime.now()
         self.role = role
 
     def verify_password(self, password) -> bool:
@@ -43,8 +49,12 @@ class Recipe(db.Model):
     name = db.Column(db.String(50), nullable=False)
     method = db.Column(db.Text, nullable=False)
     serves = db.Column(db.Integer, nullable=False)
-    calories = db.Column(db.Float, nullable=False)
+    calories = db.Column(db.Float, nullable=True)
     rating = db.Column(db.Float, nullable=True)
+
+    # Links to other tables
+    ingredients = db.relationship("Ingredient")
+    compatible_diets = db.relationship("CompatibleDiet")
 
     def __init__(self, user_id, recipe_name, cooking_method, serves, calories):
         self.user_id = user_id
@@ -74,23 +84,29 @@ class FoodItem(db.Model):
     name = db.Column(db.String(50), nullable=False)
 
     # Declaring relationships to other tables
-    barcodes = db.relationship('Barcode')
-    shopping_items = db.relationship('ShoppingItem')
+    quantified_food_item = db.relationship('QuantifiedFoodItem')
 
     def __init__(self, food_name):
         self.name = food_name
 
 
-class Barcode(db.Model):
-    __tablename__ = 'barcodes'
+class QuantifiedFoodItem(db.Model):
+    __tablename__ = 'quantifiedfooditem'
 
     id = db.Column(db.Integer, primary_key=True)
-    food_item = db.Column(db.String(50), db.ForeignKey(FoodItem.name), nullable=False)  # Establish link to food table
-    quantity = db.Column(db.Float)
-    units = db.Column(db.String(10))
+    food_id = db.Column(db.Integer, db.ForeignKey(FoodItem.id), nullable=False)
+    quantity = db.Column(db.Float, default=0.0)
+    units = db.Column(db.String(5), default="g")
 
-    def __init__(self, food_item, quantity, units):
-        self.food_item = food_item
+    # References to other tables
+    shopping = db.relationship('ShoppingItem')
+    ingredients = db.relationship('Ingredient')
+    pantries = db.relationship('PantryItem')
+    wasted = db.relationship('WastedFood')
+    barcodes = db.relationship('Barcode')
+
+    def __init__(self, food_id, quantity, units):
+        self.food_id = food_id
         self.quantity = quantity
         self.units = units
 
@@ -100,29 +116,63 @@ class ShoppingItem(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     list_id = db.Column(db.Integer, db.ForeignKey(ShoppingList.id), nullable=False)
-    food_item = db.Column(db.String(50), db.ForeignKey(FoodItem.name), nullable=False)
+    qfood_id = db.Column(db.String(50), db.ForeignKey(QuantifiedFoodItem.id), nullable=False)
 
-    quantity = db.Column(db.Float)
-    units = db.Column(db.String(10))
-
-    def __init__(self, list_id, food_item, quantity, units):
+    def __init__(self, list_id, qfood_id):
         self.list_id = list_id
-        self.food_item = food_item
-        self.quantity = quantity
-        self.units = units
+        self.qfood_id = qfood_id
+
+
+class Ingredient(db.Model):
+    __tablename__ = 'ingredients'
+
+    id = db.Column(db.Integer, primary_key=True)
+    recipe_id = db.Column(db.Integer, db.ForeignKey(Recipe.id), nullable=False)
+    qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id), nullable=False)
+
+    def __init__(self, recipe_id, qfood_id):
+        self.list_id = recipe_id
+        self.qfood_id = qfood_id
 
 
 class PantryItem(db.Model):
     __tablename__ = 'pantryitems'
-    pass
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
+    qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id), nullable=False)
+    expiry = db.Column(db.String(10), nullable=True)
+
+    def __init__(self, user_id, qfood_id, expiry):
+        self.user_id = user_id
+        self.qfood_id = qfood_id
+        self.expiry = expiry
 
 
 class WastedFood(db.Model):
-    pass
+    __tablename__ = 'wastedfood'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
+    qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id), nullable=False)
+    expired = db.Column(db.String(10), nullable=True)
+
+    def __init__(self, user_id, qfood_id, expired):
+        self.user_id = user_id
+        self.qfood_id = qfood_id
+        self.expired = expired
 
 
-class Ingredient(db.Model):
-    pass
+class Barcode(db.Model):
+    __tablename__ = 'barcodes'
+
+    id = db.Column(db.Integer, primary_key=True)
+    qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id), nullable=False)  # Establish link to food table
+    barcode = db.Column(db.String(15), nullable=False)
+
+    def __init__(self, qfood_id, barcode):
+        self.qfood_id = qfood_id
+        self.barcode = barcode
 
 
 class Diet(db.Model):
@@ -131,6 +181,7 @@ class Diet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(30), nullable=False, unique=True)
 
+    # link to other tables
     compatibleDiet = db.relationship('CompatibleDiet')
 
     def __init__(self, description):
@@ -138,14 +189,25 @@ class Diet(db.Model):
 
 
 class CompatibleDiet(db.Model):
-    __tablename__ = 'compatible_diet'
+    __tablename__ = 'compatiblediet'
     id = db.Column(db.Integer, primary_key=True)
     diet_id = db.Column(db.Integer, db.ForeignKey(Diet.id), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey(Recipe.id), nullable=False)
 
-    pass
+    def __init__(self, diet_id, recipe_id):
+        self.diet_id = diet_id
+        self.recipe_id = recipe_id
 
 
 def init_db():
     with app.app_context():
         db.drop_all()
         db.create_all()
+        admin = User(email='admin@email.com',
+                     password='Admin1!',
+                     first_name='Alice',
+                     last_name='Jones',
+                     dob='12/09/2001',
+                     role='admin')
+        db.session.add(admin)
+        db.session.commit()

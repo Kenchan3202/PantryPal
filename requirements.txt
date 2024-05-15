@@ -13,3 +13,4 @@ cryptography
 bcrypt
 rsa
 Flask-Talisman
+requests

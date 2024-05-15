@@ -3,9 +3,9 @@
 
 # File to add sample data to database instance for testing.
 
-import models
 import random
 from app import db, app
+import models
 
 users = [
     {"first_name": "Gillan", "last_name": "Athelstan", "email": "gathelstan0@npr.org", "password": "pO6>#*9hV",

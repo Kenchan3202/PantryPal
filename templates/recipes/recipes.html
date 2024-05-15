@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Details</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -31,24 +31,44 @@
         }
         .container {
             background: white;
-            padding: 20px;
+            padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e1e1e1; /* 添加边框 */
+            margin: 20px auto; /* 水平居中且添加上下外边距 */
+            width: 80%; /* 宽度控制为80% */
+            max-width: 800px; /* 最大宽度限制 */
         }
-        h1 {
-            color: #333;
+
+
+        .ratebutton {
+            background: #16a085; /* 绿宝石色 */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px; /* 圆角 */
+            cursor: pointer;
+            font-size: 18px; /* 字体大小 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* 添加阴影 */
+            transition: background 0.3s ease-in-out; /* 过渡效果 */
         }
+
+        .ratebutton:hover {
+            background: #149174; /* 鼠标悬停时的颜色变深 */
+        }
+
+
         .sidebar {
-        height: 100%;
-        width: 0; /* 默认隐藏 */
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #111;
-        overflow-x: hidden;
-        transition: width 0.3s;
-        padding-top: 60px;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: width 0.3s;
+            padding-top: 60px;
         }
         .sidebar a {
             padding: 10px 0px;
@@ -62,12 +82,13 @@
         .sidebar a:hover {
             color: #f1f1f1;
         }
-        .sidebar .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
+        .closebtn, .openbtn {
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+            border: none;
+            background-color: #111;
+            margin: 10px;
         }
         .openbtn {
             font-size: 20px;
@@ -104,9 +125,8 @@
         <div>Description of Recipe</div>
         <div>List of ingredients</div>
         <div>Step by step guide.</div>
-        <button onclick="rateRecipe()">Rate recipe (x/5)</button>
+        <button class="ratebutton" onclick="rateRecipe()">Rate recipe (x/5)</button>
     </div>
-    <script src="scripts.js"></script>
 <script>
         function toggleNav() {
             var sidebar = document.getElementById("mySidebar");

@@ -18,7 +18,19 @@
             text-align: center;
             margin-bottom: 20px;
         }
-        button {
+        header button {
+            background: #0056b3;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        header button:hover {
+            background: #004494;
+        }
+        .combutton {
             background: #0056b3;
             border: none;
             color: white;
@@ -27,7 +39,7 @@
             cursor: pointer;
             margin: 0 10px;
         }
-        button:hover {
+        .combutton:hover {
             background: #004494;
         }
         .container {
@@ -92,6 +104,15 @@
             top: 0;
             right: 25px;
         }
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            background-color: #111;
+            margin: 10px;
+        }
     </style>
 </head>
 <body>
@@ -149,7 +170,7 @@
 
     <form method = "GET" action="{{url_for('shopping.complete_shopping')}}">
         <div>
-            <button class="button is-info">Shopping complete</button>
+            <button class="combutton">Shopping complete</button>
         </div>
     </form>
     <!--

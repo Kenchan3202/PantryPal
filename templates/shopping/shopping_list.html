@@ -121,12 +121,31 @@
         </div>
         <!-- Repeat for each item -->
     </div>
+
+
+    {% if form %}
+    <form method = "POST">
+        <div class="field">
+            <div class = "control">
+                {{ form.newItem(class = "input", placeholder = "Add new item to list")}}
+            </div>
+            <div>
+                {{ form.submit(class="button is-info is-centered") }}
+            </div>
+        </div>
+    </form>
+    {% endif %}
+
+<div class = "button">
     <form action="{{url_for('shopping.complete_shopping')}}" method="post">
         <button class="button is-info">Shopping complete</button>
     </form>
+</div>
+    <!--
     <form action="{{url_for('shopping.add_item')}}" method="post">
         <button type="button" onclick="addItem()">+</button>
     </form>
+    -->
     <script>
         function toggleNav() {
             var sidebar = document.getElementById("mySidebar");

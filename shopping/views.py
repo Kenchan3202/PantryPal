@@ -1,9 +1,10 @@
 from flask import Blueprint, Flask, render_template, request, redirect, url_for, session, flash
-from models import FoodItem
-from app import db
 from shopping.forms import AddItemForm
 
 shopping_blueprint = Blueprint('shopping', __name__, template_folder='templates')
+from app import db
+from models import FoodItem
+
 
 
 @shopping_blueprint.route('/shopping_list', methods=['GET', 'POST'])

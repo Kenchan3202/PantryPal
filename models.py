@@ -21,7 +21,13 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(50), nullable=False, unique=False)
     dob = db.Column(db.String(10), nullable=False)
     role = db.Column(db.String(100), nullable=False, default='user')
-    registered_on = db.Column(db.DateTime, nullable=False)
+    registered_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    # current_login_at = db.Column(db.DateTime)
+    # last_login_at = db.Column(db.DateTime)
+    # current_login_ip = db.Column(db.String(100))
+    # last_login_ip = db.Column(db.String(100))
+    # login_count = db.Column(db.Integer, default=0)
 
     # declaring relationships to other tables
     recipes = db.relationship('Recipe')

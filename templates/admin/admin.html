@@ -92,49 +92,49 @@
 {#        </form>#}
 {#        </div>#}
 {#    </div>#}
-{#<div class="column is-8 is-offset-2">#}
-{#    <h4 class="title is-4">User Activity Logs</h4>#}
-{#    <div class="box">#}
-{#        {% if user_activities %}#}
-{#<!-- Inside your admin/user_activity.html template -->#}
-{#<table class="table">#}
-{#    <!-- Table headers -->#}
-{#    <thead>#}
-{#        <tr>#}
-{#            <th>ID</th>#}
-{#            <th>Email</th>#}
-{#            <th>Registration Date</th>#}
+<div class="column is-8 is-offset-2">
+    <h4 class="title is-4">User Activity Logs</h4>
+    <div class="box">
+        {% if user_activities %}
+<!-- Inside your admin/user_activity.html template -->
+<table class="table">
+    <!-- Table headers -->
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Registration Date</th>
 {#            <th>Last Login</th>#}
 {#            <th>Current Login</th>#}
 {#            <th>Last Login IP</th>#}
 {#            <th>Current Login IP</th>#}
 {#            <th>Login Count</th>#}
-{#        </tr>#}
-{#    </thead>#}
-{#    <!-- Table body -->#}
-{#    <tbody>#}
-{#        {% for activity in user_activities %}#}
-{#            <tr>#}
-{#                <td>{{ activity.id }}</td>#}
-{#                <td>{{ activity.email }}</td>#}
-{#                <td>{{ activity.registered_on }}</td>#}
+        </tr>
+    </thead>
+    <!-- Table body -->
+    <tbody>
+        {% for activity in user_activities %}
+            <tr>
+                <td>{{ activity.id }}</td>
+                <td>{{ activity.email }}</td>
+                <td>{{ activity.registration_date }}</td>
 {#                <td>{{ activity.last_login }}</td>#}
 {#                <td>{{ activity.current_login }}</td>#}
 {#                <td>{{ activity.last_login_ip }}</td>#}
 {#                <td>{{ activity.current_login_ip }}</td>#}
 {#                <td>{{ activity.login_count }}</td>#}
-{#            </tr>#}
-{#        {% endfor %}#}
-{#    </tbody>#}
-{#</table>#}
-{##}
-{#        {% else %}#}
-{#            <p>No user activities found.</p>#}
-{#        {% endif %}#}
-{#        <form action="{{ url_for('admin.view_user_activity') }}">#}
-{#            <button class="button is-info is-centered" type="submit">View User Activity</button>#}
-{#        </form>#}
-{#    </div>#}
-{#</div>#}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+        {% else %}
+            <p>No user activities found.</p>
+        {% endif %}
+        <form action="{{ url_for('admin.view_user_activity') }}">
+            <button class="button is-info is-centered" type="submit">View User Activity</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

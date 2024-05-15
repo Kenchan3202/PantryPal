@@ -1,7 +1,6 @@
 from flask import Blueprint, Flask, render_template, request, redirect, url_for, session, flash
 from models import FoodItem
 from app import db
-from user import user
 from shopping.forms import AddItemForm
 
 shopping_blueprint = Blueprint('shopping', __name__, template_folder='templates')

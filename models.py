@@ -42,6 +42,9 @@ class User(db.Model, UserMixin):
     def verify_password(self, password) -> bool:
         return bcrypt.checkpw(password.encode('utf-8'), self.password)
 
+    def set_password(self, password):
+        """Create hashed password."""
+        self.password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
 class Recipe(db.Model):
     __tablename__ = 'recipes'

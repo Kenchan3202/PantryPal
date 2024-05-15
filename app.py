@@ -7,15 +7,10 @@ from flask_login import login_user, logout_user, login_required, current_user, L
 
 load_dotenv()
 
-# from user import user
-
 import testingdata
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
-# p = user()
-# p.username = 'admin'
-# p.password = '12345'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['ENCRYPTION_KEY'] = os.getenv('ENCRYPTION_KEY')

@@ -55,6 +55,8 @@ def login():
             session['logged_in'] = True
             session['user_id'] = user.id
             flash('You have been logged in.', 'success')
+            if user.role == 'admin':
+                return redirect(url_for('admin.admin'))
             return redirect(url_for('baseLogin'))
         else:
             flash('Invalid email or password.', 'danger')

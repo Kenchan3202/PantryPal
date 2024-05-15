@@ -1,10 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" xmlns:C="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Admin Page</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f0f4f8; /* 背景色调整为浅灰蓝色 */
+            margin: 0;
+            text-align: center; /* 全局文本居中 */
+        }
+            </style>
 </head>
-<body>
 
-</body>
-</html>
+{% block content %}
+<h3 class="title is-3">Admin</h3>
+<h4 class="subtitle is-4">
+    Welcome, {{ name }}
+</h4>
+
+
+<div class="column is-4 is-offset-4">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+</div>
+<div class="column is-10 is-offset-1">
+
+
+    <h4 class="title is-4">Current Users</h4>
+    <div class="box">
+        {% if current_users %}
+            <div class="field">
+                <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Role</th>
+                        <th>Date of Birth</th>
+                    </tr>
+                    {% for user in current_users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ user.role }}</td>
+                            <td>{{ user.dob }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+        <form action="{{ url_for('admin.view_all_users') }}">
+            <div>
+                <button class="button is-info is-centered">View All Users</button>
+            </div>
+        </form>
+    </div>
+</div>
+{#<div class="column is-8 is-offset-2" id="test">#}
+{#    <h4 class="title is-4">Security Logs</h4>#}
+{#    <div class="box">#}
+{#        {% if logs %}#}
+{#            <div class="field">#}
+{#            <table class="table">#}
+{#                <tr>#}
+{#                    <th>Last 10 Security Log Entries</th>#}
+{#                </tr>#}
+{#                {% for entry in logs %}#}
+{#                    <tr>#}
+{#                        <td>{{ entry }}</td>#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+{#            </table>#}
+{#        {% endif %}#}
+{#        <form action="/logs">#}
+{#            <div>#}
+{#                <button class="button is-info is-centered">View Logs</button>#}
+{#            </div>#}
+{#        </form>#}
+{#        </div>#}
+{#    </div>#}
+{#<div class="column is-8 is-offset-2">#}
+{#    <h4 class="title is-4">User Activity Logs</h4>#}
+{#    <div class="box">#}
+{#        {% if user_activities %}#}
+{#<!-- Inside your admin/user_activity.html template -->#}
+{#<table class="table">#}
+{#    <!-- Table headers -->#}
+{#    <thead>#}
+{#        <tr>#}
+{#            <th>ID</th>#}
+{#            <th>Email</th>#}
+{#            <th>Registration Date</th>#}
+{#            <th>Last Login</th>#}
+{#            <th>Current Login</th>#}
+{#            <th>Last Login IP</th>#}
+{#            <th>Current Login IP</th>#}
+{#            <th>Login Count</th>#}
+{#        </tr>#}
+{#    </thead>#}
+{#    <!-- Table body -->#}
+{#    <tbody>#}
+{#        {% for activity in user_activities %}#}
+{#            <tr>#}
+{#                <td>{{ activity.id }}</td>#}
+{#                <td>{{ activity.email }}</td>#}
+{#                <td>{{ activity.registered_on }}</td>#}
+{#                <td>{{ activity.last_login }}</td>#}
+{#                <td>{{ activity.current_login }}</td>#}
+{#                <td>{{ activity.last_login_ip }}</td>#}
+{#                <td>{{ activity.current_login_ip }}</td>#}
+{#                <td>{{ activity.login_count }}</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#    </tbody>#}
+{#</table>#}
+{##}
+{#        {% else %}#}
+{#            <p>No user activities found.</p>#}
+{#        {% endif %}#}
+{#        <form action="{{ url_for('admin.view_user_activity') }}">#}
+{#            <button class="button is-info is-centered" type="submit">View User Activity</button>#}
+{#        </form>#}
+{#    </div>#}
+{#</div>#}
+
+{% endblock %}

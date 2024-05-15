@@ -15,7 +15,7 @@ def shopping_list():
     return render_template('shopping/shopping_list.html', form = form)  # Adjust the template name as necessary
 
 
-@shopping_blueprint.route('/complete_shopping')
+@shopping_blueprint.route('/complete_shopping', methods=['GET'])
 def complete_shopping():
     # Move all items in shopping list field to pantry field then clear shopping list
     print(f"Complete shopping")

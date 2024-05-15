@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -23,7 +23,7 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 8px;
         }
-        input[type="text"], input[type="password"] {
+        input{
             width: calc(100% - 20px);
             padding: 10px;
             margin-top: 8px;
@@ -56,22 +56,46 @@
     </style>
 </head>
 <body>
-<div class="container">
-    {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class="flashes">
-            {% for message in messages %}
-              <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
-    <form action="/user/login" method="post">
-        your email address：<input type="text" name="email"><br>
-        Password：<input type="password" name="password"><br>
-        <button type="submit">login</button>
-    </form>
-    <a href="/user/register">register</a>
-</div>
+{#<div class="container">#}
+{#    {% with messages = get_flashed_messages() %}#}
+{#          {% if messages %}#}
+{#            <ul class="flashes">#}
+{#            {% for message in messages %}#}
+{#              <li>{{ message }}</li>#}
+{#            {% endfor %}#}
+{#            </ul>#}
+{#          {% endif %}#}
+{#        {% endwith %}#}
+{#    <form action="/user/login" method="post">#}
+{#        your email address：<input type="text" name="email"><br>#}
+{#        Password：<input type="password" name="password"><br>#}
+{#        <button type="submit">login</button>#}
+{#    </form>#}
+{#    <a href="/user/register">register</a>#}
+
+{% block content %}
+    <div class="container">
+        <h3 class="title is-3">Login</h3>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="field">
+                {{ form.email.label(class="label") }}
+                <div class="control">
+                    {{ form.email(class="input") }}
+                </div>
+            </div>
+            <div class="field">
+                {{ form.password.label(class="label") }}
+                <div class="control">
+                    {{ form.password(class="input") }}
+                </div>
+            </div>
+            <div class="field">
+                {{ form.submit(class="button is-info") }}
+            </div>
+        </form>
+        </div>
+
 </body>
+{% endblock %}
 </html>

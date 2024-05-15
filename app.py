@@ -58,6 +58,7 @@ def base():
 
 
 @app.route('/main-menu')
+@login_required
 def baseLogin():
     # flash('welcome user  ' + p.username)
     return render_template('main/index.html', Foodaboutexpired=testingdata.soon_to_expire,

@@ -190,11 +190,11 @@
             <a href="/pantry/items">My Pantry</a>
             <a href="/pantry/search">Food Browser</a>
             <a href="/shopping/shopping_list">Shopping List</a>
-            <a href="/kitchen/recipes">Recipes</a>
+            <a href="/recipes/recipes">Recipes</a>
             <a href="/kitchen/kitchen_main">Kitchen Main</a>
         </div>
         <div class="information" onclick="location.href='/user/my_account'"></div>
-        <button class="logout-button button" onclick="location.href='/base'">Logout</button>
+        <a href="{{ url_for('users.logout') }}" class="logout-button">Logout</a>
     </div>
     <section class="hero is-white is-halfheight">
         <div class="hero-body">

@@ -5,10 +5,10 @@ from cryptography.fernet import Fernet
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from user import user
 # from app import app
-from flask_login import LoginManager
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
-
+from app import app, db
+from models import User
 p = user()
 
 
@@ -26,15 +26,30 @@ p.password = '12345'
 
 @users_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
+    # pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
         confirm_password = request.form['confirm_password']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        dob = request.form['dob']
+
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            flash('Email already registered.')
+            return redirect(url_for('users.register'))
 
         # Validation conditions
-        if len(username) < 3:
-            flash('Username must be at least 3 characters long')
+        if len(first_name) < 2:
+            flash('firstname must be at least 2 characters long')
             return redirect(url_for('user.register'))
+        if len(last_name) < 2:
+            flash('firstname must be at least 2 characters long')
+            return redirect(url_for('user.register'))
+        # if re.match(pattern, email):
+        #     flash('your email address is wrong')
+        #     return redirect(url_for('user.register'))
         if len(password) < 8 or not any(char.isdigit() for char in password) or not any(
                 char.isupper() for char in password) or not any(char.islower() for char in password):
             flash(
@@ -44,17 +59,17 @@ def register():
         if password != confirm_password:
             flash('Passwords do not match')
             return redirect(url_for('users.register'))
+        with app.app_context():
+            new_user = User(email=email, password=password, first_name=first_name, last_name=last_name, dob=dob)
+
+            db.session.add(new_user)
+            db.session.commit()
 
 
-
-        # Hash the password
-
-        print(p.password)
-        # Here you would normally save the username and hashed_password to a database
-        # Assuming user object has an attribute for password storage
         flash('Registration successful.')
         return redirect(url_for('users.login'))
     return render_template('user/register.html')
+
 
 
 # def register():
@@ -85,40 +100,41 @@ def register():
 #             return redirect(url_for('users.register'))
 #
 #     return render_template('user/register.html')
-
 @users_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
 
-        if p.password == password:
+        # 从数据库中查找用户
+        u1 = User.query.filter_by(email=email).first()
+
+        # 如果找到用户，并且密码匹配
+        if u1 and u1.verify_password(password):
             session['logged_in'] = True
             flash('Login successful.')
-            return redirect(url_for('baseLogin'))
+            return redirect(url_for('baseLogin'))  # 确保这是正确的重定向目标
         else:
-            flash('Login failed. Please check your username and password.', 'error')
+            flash('Login failed. Please check your email and password.', 'error')
             return redirect(url_for('users.login'))
+
     return render_template('user/login.html')
-
-
 # @users_blueprint.route('/login', methods=['GET', 'POST'])
 # def login():
 #     if request.method == 'POST':
 #         email = request.form['email']
 #         password = request.form['password']
 #
-#         user = User.query.filter_by(email=email).first()
-#
-#         if user and bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
+#         if p.password == password:
 #             session['logged_in'] = True
 #             flash('Login successful.')
-#             return redirect(url_for('main.dashboard'))  # 修改为适合的视图函数
+#             return redirect(url_for('baseLogin'))
 #         else:
-#             flash('Invalid username or password.')
+#             flash('Login failed. Please check your username and password.', 'error')
 #             return redirect(url_for('users.login'))
-#
 #     return render_template('user/login.html')
+
+
 
 
 @users_blueprint.route('/update_password', methods=['GET', 'POST'])

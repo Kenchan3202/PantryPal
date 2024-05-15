@@ -1,11 +1,9 @@
 # users/views.py
 from datetime import datetime
-
-import requests
-from cryptography.fernet import Fernet
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from user import user
 from users.forms import RegisterForm, LoginForm
+from flask_login import login_user, logout_user, login_required, current_user
 
 # from app import app
 
@@ -105,6 +103,7 @@ def login():
     if request.method == 'POST' and form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.verify_password(form.password.data):
+            login_user(user)
             session['logged_in'] = True
             session['user_id'] = user.id
             flash('You have been logged in.', 'success')
@@ -148,4 +147,4 @@ def reset_password():
 
 @users_blueprint.route('/information')
 def information():
-    return render_template('user/information.html', username=p.username)
+    return render_template('user/information.html', user=current_user)

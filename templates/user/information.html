@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Information Page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -93,11 +93,42 @@
             <a href="/kitchen/kitchen_main">Kitchen Main</a>
         </div>
     </div>
-    <h1>Information Page</h1>
-    <p>User Name: {{ username }}</p>
+    {% block content %}
+<div class="column is-6 is-offset-3">
+    <h3 class="title">Your Account</h3>
     <div class="box">
-        <button class="actbutton" onclick="location.href='/main/resetpassword'">Reset Password</button>
+        <table class="table">
+        <tbody>
+            <tr>
+                <th>Account No.</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+            <th>First Name</th>
+            <th>{{ user.first_name }}</th>
+            </tr>
+            <tr>
+            <th>Last Name</th>
+            <th>{{ user.last_name }}</th>
+            </tr>
+            <tr>
+            <th>Role</th>
+            <th>{{ user.role }}</th>
+            </tr>
+            <tr>
+            <th>Date of Birth</th>
+            <th>{{ user.dob }}</th>
+            </tr>
+        </tbody>
+        </table>
+        <a href="{{ url_for('users.reset_password') }}" class="button is-info">Change Password</a>
     </div>
+</div>
+{% endblock %}
     <script>
     function toggleNav() {
         var sidebar = document.getElementById("mySidebar");

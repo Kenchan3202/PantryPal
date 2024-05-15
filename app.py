@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import login_user, logout_user, login_required, current_user, LoginManager
 
 load_dotenv()
 
@@ -37,6 +38,16 @@ app.register_blueprint(users_blueprint, url_prefix='/user')
 app.register_blueprint(pantry_blueprint, url_prefix='/pantry')
 app.register_blueprint(shopping_blueprint, url_prefix='/shopping')
 app.register_blueprint(kitchen_blueprint, url_prefix='/kitchen')
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+login_manager.login_view = 'users.login'
+
+@login_manager.user_loader
+def load_user(user_id):
+    from models import User
+    return User.query.get(int(user_id))
 
 
 @app.route('/')

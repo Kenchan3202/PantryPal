@@ -1,20 +1,14 @@
 # users/views.py
 from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
-from user import user
-from users.forms import RegisterForm, LoginForm
+from users.forms import RegisterForm, LoginForm, ChangePasswordForm
 from flask_login import login_user, logout_user, login_required, current_user
 
-# from app import app
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
 from app import app, db
 from models import User
-p = user()
 
-
-p.username = 'admin'
-p.password = '12345'
 
 @users_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
@@ -134,17 +128,33 @@ def login():
 #     return render_template('user/login.html')
 
 
-
 @users_blueprint.route('/update_password', methods=['GET', 'POST'])
-def reset_password():
-    if request.method == 'POST':
-        new_password = request.form['new_password']
-        p.password = new_password
-        # flash('Your password has been reset successfully.', 'success')
-        return redirect(url_for('base'))
-    return render_template('user/update_password.html')
+@login_required
+def update_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        user = current_user
+        if user.verify_password(form.current_password.data):
+            if form.new_password.data != form.current_password.data:
+                user.set_password(form.new_password.data)
+                db.session.commit()
+                flash('Your password has been updated.', 'success')
+                return redirect(url_for('users.login'))
+            else:
+                flash('New password cannot be the same as the current password.', 'error')
+        else:
+            flash('Current password is incorrect.', 'error')
+    return render_template('user/update_password.html', form=form)
+# @users_blueprint.route('/update_password', methods=['GET', 'POST'])
+# def reset_password():
+#     if request.method == 'POST':
+#         new_password = request.form['new_password']
+#         p.password = new_password
+#         # flash('Your password has been reset successfully.', 'success')
+#         return redirect(url_for('base'))
+#     return render_template('user/update_password.html')
 
 
-@users_blueprint.route('/information')
+@users_blueprint.route('/my_account')
 def information():
-    return render_template('user/information.html', user=current_user)
+    return render_template('user/my_account.html', user=current_user)

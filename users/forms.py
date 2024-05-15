@@ -43,17 +43,17 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 
-# from flask_wtf import FlaskForm
-# from wtforms import PasswordField, SubmitField, BooleanField
-# from wtforms.validators import DataRequired, EqualTo
-#
-#
-# class ChangePasswordForm(FlaskForm):
-#     current_password = PasswordField('Current Password', validators=[DataRequired()])
-#     new_password = PasswordField('New Password', validators=[DataRequired()])
-#     confirm_password = PasswordField('Confirm New Password', validators=[DataRequired(), EqualTo('new_password')])
-#     show_password = BooleanField('Show Password')
-#     submit = SubmitField('Change Password')
+from flask_wtf import FlaskForm
+from wtforms import PasswordField, SubmitField, BooleanField
+from wtforms.validators import DataRequired, EqualTo
+
+
+class ChangePasswordForm(FlaskForm):
+    current_password = PasswordField('Current Password', validators=[DataRequired()])
+    new_password = PasswordField('New Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm New Password', validators=[DataRequired(), EqualTo('new_password')])
+    show_password = BooleanField('Show Password')
+    submit = SubmitField('Change Password')
 
 # import re
 # from flask_wtf import FlaskForm, RecaptchaField

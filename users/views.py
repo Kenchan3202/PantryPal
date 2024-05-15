@@ -63,6 +63,10 @@ def login():
 
     return render_template('user/login.html', form=form)
 
+@users_blueprint.route('/my_account')
+def information():
+    return render_template('user/my_account.html', user=current_user)
+
 
 @users_blueprint.route('/update_password', methods=['GET', 'POST'])
 @login_required

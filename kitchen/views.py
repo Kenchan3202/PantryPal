@@ -10,7 +10,7 @@ print("Template folder:", kitchen_blueprint.template_folder)
 
 @kitchen_blueprint.route('/recipes')
 def recipe_detail():
-    return render_template('kitchen/recipes.html')  # Adjust the template name as necessary
+    return render_template('kitchen/../templates/recipes/recipes.html')  # Adjust the template name as necessary
 
 
 @kitchen_blueprint.route('/kitchen_main', methods=['GET'])

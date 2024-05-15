@@ -28,11 +28,13 @@ from users.views import users_blueprint
 from pantry.views import pantry_blueprint
 from shopping.views import shopping_blueprint
 from kitchen.views import kitchen_blueprint
+from recipes.views import recipes_blueprint
 
 app.register_blueprint(users_blueprint, url_prefix='/user')
 app.register_blueprint(pantry_blueprint, url_prefix='/pantry')
 app.register_blueprint(shopping_blueprint, url_prefix='/shopping')
 app.register_blueprint(kitchen_blueprint, url_prefix='/kitchen')
+app.register_blueprint(recipes_blueprint, url_prefix='/recipes')
 
 login_manager = LoginManager()
 login_manager.init_app(app)

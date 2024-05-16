@@ -39,6 +39,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
+        app.logger.info(f"User registered: {form1.email.data}, IP: {request.remote_addr}")
         # sends user to login page
         return redirect(url_for('users.login'))
     # if request method is GET or form not valid re-render signup page
@@ -61,6 +62,8 @@ def login():
             db.session.commit()
             session['logged_in'] = True
             session['user_id'] = user.id
+            app.logger.info(
+                f"User logged in: {form.email.data}, IP: {request.remote_addr}")
             flash('You have been logged in.', 'success')
             if user.role == 'admin':
                 return redirect(url_for('admin.admin'))

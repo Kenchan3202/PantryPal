@@ -31,7 +31,7 @@
             background: #004494;
         }
         .recipebox {
-            margin: 20px auto; /* 水平居中且添加上下外边距 */
+            margin: 20px auto;
             background-color: #fff;
             padding: 20px;
             width: 80%;
@@ -56,24 +56,20 @@
         td {
             border-bottom: 1px solid #eee;
         }
-
         .ratebutton {
-            background: #16a085; /* 绿宝石色 */
+            background: #16a085;
             color: white;
-            padding: 10px 20px;
+            padding: 5px 20px;
             border: none;
-            border-radius: 5px; /* 圆角 */
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 18px; /* 字体大小 */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* 添加阴影 */
-            transition: background 0.3s ease-in-out; /* 过渡效果 */
+            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            transition: background 0.3s ease-in-out;
         }
-
         .ratebutton:hover {
-            background: #149174; /* 鼠标悬停时的颜色变深 */
+            background: #149174;
         }
-
-
         .sidebar {
             height: 100%;
             width: 0;
@@ -128,71 +124,69 @@
             color: white;
             font-size: 20px;
             border-radius: 4px;
-            {#transition: background-color 0.3s ease-in-out; /* 过渡效果 */#}
             text-decoration: none;
         }
-
         .your-button:hover {
-            background-color: #2980b9; /* 鼠标悬停时的背景颜色 */
-            {#box-shadow: 0 4px 8px rgba(0,0,0,0.2); /#}
+            background-color: #2980b9;
         }
     </style>
 </head>
 <body>
 <div class="navbar">
-        <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
-        <div id="mySidebar" class="sidebar">
-            <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
-            <a href="/main-menu">Main</a>
-            <a href="/pantry/items">My Pantry</a>
-            <a href="/pantry/search">Food Browser</a>
-            <a href="/shopping/shopping_list">Shopping List</a>
-            <a href="/recipes/recipes">Recipes</a>
-            <a href="/kitchen/kitchen_main">Kitchen Main</a>
-        </div>
-    <a href="{{ url_for('recipes.your_recipes') }}" class="your-button">your recipes</a>
-    <a href="{{ url_for('recipes.add_recipes') }}" class="your-button">create your recipes</a>
+    <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
+        <a href="/main-menu">Main</a>
+        <a href="/pantry/items">My Pantry</a>
+        <a href="/pantry/search">Food Browser</a>
+        <a href="/shopping/shopping_list">Shopping List</a>
+        <a href="/recipes/recipes">Recipes</a>
+        <a href="/kitchen/kitchen_main">Kitchen Main</a>
     </div>
-    <header>
-        <button onclick="location.href='/kitchen/kitchen_main'">Kitchen</button>
-        <button onclick="location.href='/shopping/shopping_list'">Shopping</button>
-        <button onclick="location.href='/recipes/recipes'">Recipes</button>
-    </header>
- {% for recipe in recipes %}
-    <div class="recipebox">
-        <table>
-            <tr>
-                <a href="{{ url_for('recipes.recipes_detail', recipe_id=recipe.id) }}">{{ recipe.name }}</a>
-            </tr>
-            <tr>
-                <th>Serves for</th>
-                <td>{{ recipe.serves }}</td>
-            </tr>
-            <tr>
-                <th>Calories:</th>
-                <td>{{ recipe.calories }} kcal</td>
-            </tr>
-            <tr>
-                <th>Rating:</th>
-                <td>{{ recipe.rating }} / 5</td>
-            </tr>
-        </table>
-    <button class="ratebutton" onclick="rateRecipe()">Rate recipe (x/5)</button>
-    </div>
+    <a href="{{ url_for('recipes.your_recipes') }}" class="your-button">My Recipes</a>
+    <a href="{{ url_for('recipes.add_recipes') }}" class="your-button">Create Recipe</a>
+</div>
+<header>
+    <button onclick="location.href='/kitchen/kitchen_main'">Kitchen</button>
+    <button onclick="location.href='/shopping/shopping_list'">Shopping</button>
+    <button onclick="location.href='/recipes/recipes'">Recipes</button>
+</header>
+{% for recipe in recipes %}
+<div class="recipebox">
+    <h2 class="recipe-name">
+        <a href="{{ url_for('recipes.recipes_detail', recipe_id=recipe.id) }}" style="text-decoration: none; color: inherit;">
+            {{ recipe.name }}
+        </a>
+    </h2>
+    <table>
+        <tr>
+            <th>Serves:</th>
+            <td>{{ recipe.serves }}</td>
+        </tr>
+        <tr>
+            <th>Calories:</th>
+            <td>{{ recipe.calories }} kcal</td>
+        </tr>
+        <tr>
+            <th>Rating:</th>
+            <td>{{ recipe.rating }} / 5</td>
+        </tr>
+    </table>
+    <button class="ratebutton" onclick="rateRecipe()">Rate Recipe</button>
+</div>
 {% endfor %}
 <script>
-        function toggleNav() {
-            var sidebar = document.getElementById("mySidebar");
-            var mainContent = document.getElementById("mainContent");
-
-            if (sidebar.style.width === "250px") {
-                sidebar.style.width = "0";
-                mainContent.style.marginLeft = "0";
-            } else {
-                sidebar.style.width = "250px";
-                mainContent.style.marginLeft = "250px";
-            }
+    function toggleNav() {
+        var sidebar = document.getElementById("mySidebar");
+        var mainContent = document.getElementById("mainContent");
+        if (sidebar.style.width === "250px") {
+            sidebar.style.width = "0";
+            mainContent.style.marginLeft = "0";
+        } else {
+            sidebar.style.width = "250px";
+            mainContent.style.marginLeft = "250px";
         }
-    </script>
+    }
+</script>
 </body>
 </html>

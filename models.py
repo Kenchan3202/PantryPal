@@ -29,10 +29,17 @@ class User(db.Model, UserMixin):
     # last_login_ip = db.Column(db.String(100))
     # login_count = db.Column(db.Integer, default=0)
 
+    # security details
+    current_login = db.Column(db.DateTime)
+    last_login = db.Column(db.DateTime)
+    current_login_ip = db.Column(db.String(30))
+    last_login_ip = db.Column(db.String(30))
+    login_count = db.Column(db.Integer, default=0)
+
     # declaring relationships to other tables
     recipes = db.relationship('Recipe')
-    shopping_lists = db.relationship('ShoppingList')
-    pantry = db.relationship("PantryItem")
+    shopping_lists = db.relationship('ShoppingList', backref='user')
+    pantry = db.relationship("PantryItem", backref="user")
     wasted = db.relationship('WastedFood')
 
     def __init__(self, email, password, first_name, last_name, dob, role='user'):
@@ -64,7 +71,7 @@ class Recipe(db.Model):
     rating = db.Column(db.Float, nullable=True)
 
     # Links to other tables
-    ingredients = db.relationship("Ingredient")
+    ingredients = db.relationship("Ingredient", backref='recipe')
     compatible_diets = db.relationship("CompatibleDiet")
 
     def __init__(self, user_id, recipe_name, cooking_method, serves, calories):
@@ -74,6 +81,20 @@ class Recipe(db.Model):
         self.serves = serves
         self.calories = calories
         self.rating = 0
+
+    def __str__(self):
+        ingredient_block = 'Ingredients: \n' + '\n'.join([ingredient.__str__() for ingredient in self.ingredients])
+        output = f'{self.name}\n{ingredient_block}Serves: {self.serves}\nCalories: {self.calories}\n{self.method}\n'
+        return output
+
+    def change_password(self, password: str) -> None:
+        self.password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        db.session.commit()
+
+    def get_shopping_lists_str(self):
+        numlists = len(self.shopping_lists)
+        output = f'Number of lists {numlists}\n' + '\n'.join([f'list ({i+1}/{numlists})\n{slist.__str__()}' for i, slist in enumerate(self.shopping_lists)])
+        return output
 
 
 class ShoppingList(db.Model):
@@ -87,6 +108,12 @@ class ShoppingList(db.Model):
     def __init__(self, user_id):
         self.user_id = user_id
 
+    def __str__(self):
+        items = self.shopping_items
+        # f"user{self.user_id}'s list\n" +
+        output = f'\n'.join([f'{i+1}: {item.qfooditem.__str__()}' for i, item in enumerate(items)])
+        return output
+
 
 class FoodItem(db.Model):
     __tablename__ = 'fooditems'
@@ -95,10 +122,13 @@ class FoodItem(db.Model):
     name = db.Column(db.String(50), nullable=False)
 
     # Declaring relationships to other tables
-    quantified_food_item = db.relationship('QuantifiedFoodItem')
+    quantified_food_item = db.relationship('QuantifiedFoodItem', backref='fooditem')
 
     def __init__(self, food_name):
         self.name = food_name
+
+    def get_name(self) -> str:
+        return self.name
 
 
 class QuantifiedFoodItem(db.Model):
@@ -110,16 +140,36 @@ class QuantifiedFoodItem(db.Model):
     units = db.Column(db.String(5), default="g")
 
     # References to other tables
-    shopping = db.relationship('ShoppingItem')
-    ingredients = db.relationship('Ingredient')
-    pantries = db.relationship('PantryItem')
-    wasted = db.relationship('WastedFood')
-    barcodes = db.relationship('Barcode')
+    shopping = db.relationship('ShoppingItem', backref="qfooditem")
+    ingredients = db.relationship('Ingredient', backref="qfooditem")
+    pantries = db.relationship('PantryItem', backref="qfooditem")
+    wasted = db.relationship('WastedFood', backref="qfooditem")
+    barcodes = db.relationship('Barcode', backref="qfooditem")
 
     def __init__(self, food_id, quantity, units):
         self.food_id = food_id
         self.quantity = quantity
         self.units = units
+
+    def __str__(self):
+        return f'{self.fooditem.get_name()}, {self.quantity}{self.units}'
+
+    def change_quantity(self, quantity: float):
+        self.quantity = quantity
+        db.session.commit()
+
+    def change_units(self, units: str):
+        self.units = units
+        db.session.commit()
+
+    def get_name(self):
+        return self.fooditem.get_name()
+
+    def get_quantity(self):
+        return self.quantity
+
+    def get_units(self):
+        return self.units
 
 
 class ShoppingItem(db.Model):
@@ -133,6 +183,15 @@ class ShoppingItem(db.Model):
         self.list_id = list_id
         self.qfood_id = qfood_id
 
+    def change_quantity(self, quantity, units):
+        qfood = QuantifiedFoodItem.query.filter_by(id=self.qfood_id).first()
+        qfood.change_qauntity(quantity)
+        qfood.change_units(units)
+        db.session.commit()
+
+    def get_name(self):
+        self.qfooditem.get_name()
+
 
 class Ingredient(db.Model):
     __tablename__ = 'ingredients'
@@ -144,6 +203,12 @@ class Ingredient(db.Model):
     def __init__(self, recipe_id, qfood_id):
         self.recipe_id = recipe_id
         self.qfood_id = qfood_id
+
+    def __str__(self):
+        return f'{self.qfooditem.__str__()}'
+
+    def __repr__(self):
+        return f'<Ingredient(id: {self.id}<Qfooditem({self.qfooditem.__str__()}>>'
 
 
 class PantryItem(db.Model):
@@ -159,6 +224,16 @@ class PantryItem(db.Model):
         self.qfood_id = qfood_id
         self.expiry = expiry
 
+    def __repr__(self):
+        return f'<{self.qfooditem.fooditem.name}, {self.qfooditem.quantity}{self.qfooditem.units}, {self.expiry}>'
+
+    def get_expiry(self) -> str:
+        return self.expiry
+
+    def change_expiry(self, expiry: str):
+        self.expiry = expiry
+        db.session.commit()
+
 
 class WastedFood(db.Model):
     __tablename__ = 'wastedfood'
@@ -172,6 +247,9 @@ class WastedFood(db.Model):
         self.user_id = user_id
         self.qfood_id = qfood_id
         self.expired = expired
+
+    def get_expired(self) -> str:
+        return self.expired
 
 
 class Barcode(db.Model):

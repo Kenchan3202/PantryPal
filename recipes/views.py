@@ -34,7 +34,8 @@ def your_recipes():
 @login_required
 def recipes_detail(recipe_id):
     recipe = Recipe.query.get(recipe_id)
-    return render_template('recipes/recipes_detail.html', recipe=recipe)
+    ingredients = Ingredient.query.filter_by(recipe_id=recipe_id).all()
+    return render_template('recipes/recipes_detail.html', recipe=recipe, ingredients=ingredients)
 
 
 @recipes_blueprint.route('/add_recipes', methods=['GET', 'POST'])
@@ -60,6 +61,7 @@ def add_recipes():
     else:
         return render_template('recipes/add_recipes.html')
 
+
 @recipes_blueprint.route('/edit_recipes')
 @login_required
 def edit_detail():
@@ -71,6 +73,7 @@ def edit_detail():
 @login_required
 def recipe_list():
     return render_template('recipes/recipes.html')  # Adjust the template name as necessary
+
 
 # delete recipes function
 @recipes_blueprint.route('/delete_recipe/<int:recipe_id>')
@@ -87,6 +90,7 @@ def delete_recipe(recipe_id):
     db.session.commit()
     flash('Recipe deleted successfully!', 'success')
     return redirect(url_for('recipes.recipes'))
+
 
 # rate recipes function
 @recipes_blueprint.route('/rate_recipe', methods=['POST'])

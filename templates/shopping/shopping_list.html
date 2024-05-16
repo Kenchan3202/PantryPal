@@ -123,8 +123,17 @@
     </div>
 
 
-    {% if form %}
-    <form method = "POST">
+
+
+
+    <form method = "GET" action="{{url_for('shopping.complete_shopping')}}">
+        <div>
+            <button class="button is-info">Shopping complete</button>
+        </div>
+    </form>
+
+    <form method = "POST" action={{url_for('shopping.add_item')}}>
+        {% if form %}
         <div class="field">
             <div class = "control">
                 {{ form.newItem(class = "input", placeholder = "Add new item to list")}}
@@ -143,20 +152,9 @@
         <div>
             {{ form.submit(class="button is-info is-centered") }}
         </div>
-    </form>
     {% endif %}
-
-
-    <form method = "GET" action="{{url_for('shopping.complete_shopping')}}">
-        <div>
-            <button class="button is-info">Shopping complete</button>
-        </div>
     </form>
-    <!--
-    <form action="{{url_for('shopping.add_item')}}" method="post">
-        <button type="button" onclick="addItem()">+</button>
-    </form>
-    -->
+
     <script>
         function toggleNav() {
             var sidebar = document.getElementById("mySidebar");

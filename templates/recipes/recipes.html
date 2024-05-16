@@ -16,6 +16,7 @@
             background-color: #f6f6f6;
             padding: 10px;
             text-align: center;
+            margin-bottom: 20px;
         }
         header button {
             background: #0056b3;
@@ -29,17 +30,32 @@
         header button:hover {
             background: #004494;
         }
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border: 1px solid #e1e1e1; /* 添加边框 */
+        .recipebox {
             margin: 20px auto; /* 水平居中且添加上下外边距 */
-            width: 80%; /* 宽度控制为80% */
-            max-width: 800px; /* 最大宽度限制 */
+            background-color: #fff;
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #dcdcdc;
         }
-
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            font-size: 16px;
+        }
+        th {
+            color: #555;
+        }
+        td {
+            border-bottom: 1px solid #eee;
+        }
 
         .ratebutton {
             background: #16a085; /* 绿宝石色 */
@@ -90,6 +106,11 @@
             background-color: #111;
             margin: 10px;
         }
+        .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+        }
         .openbtn {
             font-size: 20px;
             cursor: pointer;
@@ -98,6 +119,22 @@
             border-radius: 4px;
             background-color: #111;
             margin: 10px;
+        }
+        .your-button {
+            width: 200px;
+            text-align: center;
+            padding: 4px 8px;
+            background-color: #3498db;
+            color: white;
+            font-size: 20px;
+            border-radius: 4px;
+            {#transition: background-color 0.3s ease-in-out; /* 过渡效果 */#}
+            text-decoration: none;
+        }
+
+        .your-button:hover {
+            background-color: #2980b9; /* 鼠标悬停时的背景颜色 */
+            {#box-shadow: 0 4px 8px rgba(0,0,0,0.2); /#}
         }
     </style>
 </head>
@@ -113,20 +150,35 @@
             <a href="/recipes/recipes">Recipes</a>
             <a href="/kitchen/kitchen_main">Kitchen Main</a>
         </div>
+    <a href="{{ url_for('recipes.your_recipes') }}" class="your-button">your recipes</a>
     </div>
     <header>
         <button onclick="location.href='/kitchen/kitchen_main'">Kitchen</button>
         <button onclick="location.href='/shopping/shopping_list'">Shopping</button>
         <button onclick="location.href='/recipes/recipes'">Recipes</button>
     </header>
-    <div class="container">
-        <h1>Recipe Name</h1>
-        <div>Recipe details (Calories, Prep time, Dietary information)</div>
-        <div>Description of Recipe</div>
-        <div>List of ingredients</div>
-        <div>Step by step guide.</div>
-        <button class="ratebutton" onclick="rateRecipe()">Rate recipe (x/5)</button>
+ {% for recipe in recipes %}
+    <div class="recipebox">
+        <table>
+            <tr>
+                <a href="{{ url_for('recipes.recipes_detail', recipe_id=recipe.id) }}">{{ recipe.name }}</a>
+            </tr>
+            <tr>
+                <th>Serves for</th>
+                <td>{{ recipe.serves }}</td>
+            </tr>
+            <tr>
+                <th>Calories:</th>
+                <td>{{ recipe.calories }} kcal</td>
+            </tr>
+            <tr>
+                <th>Rating:</th>
+                <td>{{ recipe.rating }} / 5</td>
+            </tr>
+        </table>
+    <button class="ratebutton" onclick="rateRecipe()">Rate recipe (x/5)</button>
     </div>
+{% endfor %}
 <script>
         function toggleNav() {
             var sidebar = document.getElementById("mySidebar");

@@ -2,9 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe</title>
 </head>
 <body>
+    <h1>Add a New Recipe</h1>
+    <form action="{{ url_for('recipes_blueprint.add_recipes') }}" method="POST">
+        <label for="name">Recipe Name:</label>
+        <input type="text" id="name" name="name" required><br>
 
+        <label for="method">Cooking Method:</label>
+        <textarea id="method" name="method" required></textarea><br>
+
+        <label for="serves">Serves:</label>
+        <input type="number" id="serves" name="serves" required><br>
+
+        <label for="calories">Calories:</label>
+        <input type="number" id="calories" name="calories"><br>
+
+        <button type="submit">Add Recipe</button>
+    </form>
 </body>
 </html>

@@ -1,5 +1,5 @@
 # Authored by: Joe Hare & Keirav Shah
-# latest edition: 14/05/2024
+# latest edition: 16/05/2024
 
 from flask_login import UserMixin
 from app import db, app
@@ -31,10 +31,10 @@ class User(db.Model, UserMixin):
     total_logins = db.Column(db.Integer, default=0)
 
     # declaring relationships to other tables
-    recipes = db.relationship('Recipe')
+    recipes = db.relationship('Recipe', backref='user')
     shopping_lists = db.relationship('ShoppingList', backref='user')
     pantry = db.relationship("PantryItem", backref="user")
-    wasted = db.relationship('WastedFood')
+    wasted = db.relationship('WastedFood', backref='user')
 
     def __init__(self, email, password, first_name, last_name, dob, role='user'):
         self.email = email
@@ -63,9 +63,9 @@ class User(db.Model, UserMixin):
 
     def get_shopping_lists_str(self):
         numlists = len(self.shopping_lists)
-        output = f'Number of lists {numlists}\n' + '\n'.join([f'list ({i+1}/{numlists})\n{slist.__str__()}' for i, slist in enumerate(self.shopping_lists)])
+        output = f'Number of lists {numlists}\n' + '\n'.join([f'list ({i+1}/{numlists})\n{slist.__str__()}' for i, slist
+                                                              in enumerate(self.shopping_lists)])
         return output
-
 
 
 class Recipe(db.Model):
@@ -81,7 +81,7 @@ class Recipe(db.Model):
 
     # Links to other tables
     ingredients = db.relationship("Ingredient", backref='recipe')
-    compatible_diets = db.relationship("CompatibleDiet")
+    compatible_diets = db.relationship("CompatibleDiet", backref='recipe')
 
     def __init__(self, user_id, recipe_name, cooking_method, serves, calories):
         self.user_id = user_id
@@ -117,9 +117,15 @@ class ShoppingList(db.Model):
 
     def __str__(self):
         items = self.shopping_items
-        # f"user{self.user_id}'s list\n" +
         output = f'{self.list_name}\n' + f'\n'.join([f'{i+1}: {item.qfooditem.__str__()}' for i, item in enumerate(items)])
         return output
+
+    def get_name(self) -> str:
+        return self.list_name
+
+    def set_name(self, list_name: str) -> None:
+        self.list_name = list_name
+        db.session.commit()
 
 
 class FoodItem(db.Model):
@@ -161,21 +167,21 @@ class QuantifiedFoodItem(db.Model):
     def __str__(self):
         return f'{self.fooditem.get_name()}, {self.quantity}{self.units}'
 
-    def set_quantity(self, quantity: float):
+    def set_quantity(self, quantity: float) -> None:
         self.quantity = quantity
         db.session.commit()
 
-    def set_units(self, units: str):
+    def set_units(self, units: str) -> None:
         self.units = units
         db.session.commit()
 
-    def get_name(self):
+    def get_name(self) -> str:
         return self.fooditem.get_name()
 
-    def get_quantity(self):
+    def get_quantity(self) -> float:
         return self.quantity
 
-    def get_units(self):
+    def get_units(self) -> str:
         return self.units
 
 
@@ -190,13 +196,20 @@ class ShoppingItem(db.Model):
         self.list_id = list_id
         self.qfood_id = qfood_id
 
-    def set_quantity(self, quantity, units):
-        self.qfooditem.qfood.set_qauntity(quantity)
-        self.qfooditem.set_units(units)
-        db.session.commit()
+    def get_quantity(self) -> float:
+        return self.qfooditem.get_quantity()
 
-    def get_name(self):
-        self.qfooditem.get_name()
+    def get_units(self) -> str:
+        return self.qfooditem.get_units()
+
+    def set_quantity(self, quantity: float) -> None:
+        self.qfooditem.qfood.set_qauntity(quantity)
+
+    def set_units(self, units: str) -> None:
+        self.qfooditem.set_units(units)
+
+    def get_name(self) -> str:
+        return self.qfooditem.get_name()
 
 
 class Ingredient(db.Model):
@@ -210,16 +223,26 @@ class Ingredient(db.Model):
         self.recipe_id = recipe_id
         self.qfood_id = qfood_id
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.qfooditem.__str__()}'
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'<Ingredient(id: {self.id}<Qfooditem({self.qfooditem.__str__()}>>'
 
-    def set_quantity(self, quantity, units):
+    def get_quantity(self) -> float:
+        return self.qfooditem.get_quantity()
+
+    def get_units(self) -> str:
+        return self.qfooditem.get_units()
+
+    def set_quantity(self, quantity: float) -> None:
         self.qfooditem.qfood.set_qauntity(quantity)
+
+    def set_units(self, units: str) -> None:
         self.qfooditem.set_units(units)
-        db.session.commit()
+
+    def get_name(self) -> str:
+        return self.qfooditem.get_name()
 
 
 class PantryItem(db.Model):
@@ -235,20 +258,30 @@ class PantryItem(db.Model):
         self.qfood_id = qfood_id
         self.expiry = expiry
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'<{self.qfooditem.fooditem.name}, {self.qfooditem.quantity}{self.qfooditem.units}, {self.expiry}>'
 
     def get_expiry(self) -> str:
         return self.expiry
 
-    def set_expiry(self, expiry: str):
+    def set_expiry(self, expiry: str) -> None:
         self.expiry = expiry
         db.session.commit()
 
-    def set_quantity(self, quantity, units):
+    def get_quantity(self) -> float:
+        return self.qfooditem.get_quantity()
+
+    def get_units(self) -> str:
+        return self.qfooditem.get_units()
+
+    def set_quantity(self, quantity: float) -> None:
         self.qfooditem.qfood.set_qauntity(quantity)
+
+    def set_units(self, units: str) -> None:
         self.qfooditem.set_units(units)
-        db.session.commit()
+
+    def get_name(self) -> str:
+        return self.qfooditem.get_name()
 
 
 class WastedFood(db.Model):
@@ -266,6 +299,15 @@ class WastedFood(db.Model):
 
     def get_expired(self) -> str:
         return self.expired
+
+    def get_name(self) -> str:
+        return self.qfooditem.get_name()
+
+    def get_quantity(self) -> float:
+        return self.qfooditem.get_quantity()
+
+    def get_units(self) -> str:
+        return self.qfooditem.get_units()
 
 
 class Barcode(db.Model):

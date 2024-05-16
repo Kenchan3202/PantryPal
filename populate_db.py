@@ -1,5 +1,5 @@
 # Authored by: Joe Hare & Keirav Shah
-# latest edition: 14/05/2024
+# latest edition: 16/05/2024
 
 # File to add sample data to database instance for testing.
 
@@ -105,16 +105,20 @@ def add_sample_users():
                                first_name=user['first_name'],
                                last_name=user['last_name'],
                                dob=user['dob'])
-        userObjects.append(new_user)
         db.session.add(new_user)
+        db.session.flush()
+        db.session.refresh(new_user)
+        userObjects.append(new_user)
     db.session.commit()
 
 
 def add_food_items():
     for food in foodItems:
         new_food = models.FoodItem(food_name=food)
-        foodItemObjects.append(new_food)
         db.session.add(new_food)
+        db.session.flush()
+        db.session.refresh(new_food)
+        foodItemObjects.append(new_food)
     db.session.commit()
 
 
@@ -147,7 +151,6 @@ def create_pantries() -> None:
 
 
 def create_ingredient(recipe_id: int, qfood_id: int) -> models.Ingredient:
-    # recipe = models.Recipe.query.filter_by(name=recipe_name).first()
     ingredient = models.Ingredient(recipe_id=recipe_id, qfood_id=qfood_id)
     db.session.add(ingredient)
     db.session.commit()
@@ -162,8 +165,8 @@ def create_recipe_object(user_id: int, recipe) -> models.Recipe:
                                calories=random.choice((450, 800, 1200, 1000)))
 
     db.session.add(new_recipe)
-    db.session.flush()
-    db.session.refresh(new_recipe)
+    db.session.flush()                          # flush current objects in session to db
+    db.session.refresh(new_recipe)              # refresh new_recipe object to now contain id field
     recipeObjects.append(new_recipe)
 
     for ingredient in recipe['ingredients']:
@@ -180,8 +183,7 @@ def create_recipes() -> None:
         create_recipe_object(user_id=user_id, recipe=recipe)
 
 
-def create_shopping_items(list_id: int, user_id: int) -> models.ShoppingItem:
-    # s_list = models.ShoppingList.query.filter_by(user_id=user_id).first()
+def create_shopping_items(list_id: int) -> models.ShoppingItem:
     qfood_item = create_quantified_food_item(random.choice(foodItemObjects).id)
     shopping_item = models.ShoppingItem(list_id=list_id, qfood_id=qfood_item.id)
     db.session.add(shopping_item)
@@ -191,16 +193,16 @@ def create_shopping_items(list_id: int, user_id: int) -> models.ShoppingItem:
 
 def create_shopping_lists() -> None:
     chosen_users = userObjects[::2]
-    example_names = ('Monday Shop', 'Asian Grocery Shop', 'Butchery', 'Bakery', 'Green Gorcers')
+    example_names = ('Monday Shop', 'Asian Grocery Shop', 'Butchery', 'Bakery', 'Green Grocers', 'Farmers Market')
     for user in chosen_users:
         for x in range(2):
             shopping_list = models.ShoppingList(user_id=user.id, list_name=random.choice(example_names))
             db.session.add(shopping_list)
-            db.session.flush()
-            db.session.refresh(shopping_list)
+            db.session.flush()                              # flush current objects in session to db
+            db.session.refresh(shopping_list)               # refresh shopping_list object to now contain the id field
             num_items = random.choice((3, 5, 2, 6, 9))
             for i in range(num_items):
-                create_shopping_items(list_id=shopping_list.id, user_id=user.id)
+                create_shopping_items(list_id=shopping_list.id)
 
 
 def main():

@@ -93,6 +93,7 @@ recipes = [
                   'and mix well. Add salt to taste.'
     }
 ]
+recipeObjects = []
 
 
 def add_sample_users():
@@ -115,11 +116,12 @@ def add_food_items():
     db.session.commit()
 
 
-def create_quantified_food_item(food_item_id: int) -> models.QuantifiedFoodItem:
+def create_quantified_food_item(food_item_id: int, quantity=0) -> models.QuantifiedFoodItem:
     units = ('ml', 'g')
     quantities = (200, 500, 1000, 750, 50, 20)
+    quant = quantity if quantity else random.choice(quantities)
     q_fooditem = models.QuantifiedFoodItem(food_id=food_item_id,
-                                           quantity=random.choice(quantities),
+                                           quantity=quant,
                                            units=random.choice(units))
     db.session.add(q_fooditem)
     db.session.commit()
@@ -142,9 +144,9 @@ def create_pantries() -> None:
             create_pantry_item(user_id=user.id)
 
 
-def create_ingredient(recipe_name: str, qfood_id: int) -> models.Ingredient:
-    recipe = models.Recipe.query.filter_by(name=recipe_name).first()
-    ingredient = models.Ingredient(recipe_id=recipe.id, qfood_id=qfood_id)
+def create_ingredient(recipe_id: int, qfood_id: int) -> models.Ingredient:
+    # recipe = models.Recipe.query.filter_by(name=recipe_name).first()
+    ingredient = models.Ingredient(recipe_id=recipe_id, qfood_id=qfood_id)
     db.session.add(ingredient)
     db.session.commit()
     return ingredient
@@ -158,13 +160,15 @@ def create_recipe_object(user_id: int, recipe) -> models.Recipe:
                                calories=random.choice((450, 800, 1200, 1000)))
 
     db.session.add(new_recipe)
-    db.session.commit()
+    db.session.flush()
+    db.session.refresh(new_recipe)
+    recipeObjects.append(new_recipe)
 
     for ingredient in recipe['ingredients']:
         foodItem = models.FoodItem.query.filter_by(name=ingredient).first()
         qfoodItem = create_quantified_food_item(foodItem.id)
-        create_ingredient(recipe_name=new_recipe.name, qfood_id=qfoodItem.id)
-
+        create_ingredient(recipe_id=new_recipe.id, qfood_id=qfoodItem.id)
+    db.session.commit()
     return new_recipe
 
 
@@ -174,10 +178,10 @@ def create_recipes() -> None:
         create_recipe_object(user_id=user_id, recipe=recipe)
 
 
-def create_shopping_items(user_id: int) -> models.ShoppingItem:
-    s_list = models.ShoppingList.query.filter_by(user_id=user_id).first()
+def create_shopping_items(list_id: int, user_id: int) -> models.ShoppingItem:
+    # s_list = models.ShoppingList.query.filter_by(user_id=user_id).first()
     qfood_item = create_quantified_food_item(random.choice(foodItemObjects).id)
-    shopping_item = models.ShoppingItem(list_id=s_list.id, qfood_id=qfood_item.id)
+    shopping_item = models.ShoppingItem(list_id=list_id, qfood_id=qfood_item.id)
     db.session.add(shopping_item)
     db.session.commit()
     return shopping_item
@@ -186,12 +190,14 @@ def create_shopping_items(user_id: int) -> models.ShoppingItem:
 def create_shopping_lists() -> None:
     chosen_users = userObjects[::2]
     for user in chosen_users:
-        shopping_list = models.ShoppingList(user.id)
-        db.session.add(shopping_list)
-        db.session.commit()
-        num_items = random.choice((3, 5, 2, 6, 9))
-        for i in range(num_items):
-            create_shopping_items(user_id=user.id)
+        for x in range(2):
+            shopping_list = models.ShoppingList(user.id)
+            db.session.add(shopping_list)
+            db.session.flush()
+            db.session.refresh(shopping_list)
+            num_items = random.choice((3, 5, 2, 6, 9))
+            for i in range(num_items):
+                create_shopping_items(list_id=shopping_list.id, user_id=user.id)
 
 
 def main():

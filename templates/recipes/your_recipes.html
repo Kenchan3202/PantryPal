@@ -49,16 +49,29 @@
             border-bottom: 1px solid #eee;
         }
         .del-button {
-            text-decoration: none; /* 去除下划线 */
-            color: white; /* 设置文本颜色为白色，或根据您的设计需求更改 */
-            background-color: #f44336; /* 设置背景色为红色 */
-            padding: 10px 20px; /* 添加一些内边距使其看起来像按钮 */
-            border-radius: 4px; /* 给按钮添加圆角 */
-            border: none; /* 去除边框 */
-            display: inline-block; /* 使其表现得像块级元素，允许设置宽度和高度 */
-            cursor: pointer; /* 当鼠标悬停时显示指针 */
+            text-decoration: none;
+            color: white;
+            background-color: #f44336;
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: none;
+            display: inline-block;
+            cursor: pointer;
         }
         .del-button:hover {
+            background-color: #d32f2f;
+        }
+        .edit-button {
+            text-decoration: none;
+            color: white;
+            background-color: #f44336;
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: none;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .edit-button:hover {
             background-color: #d32f2f;
         }
         .back-button {
@@ -99,6 +112,7 @@
                 </tr>
             </table>
             <a href="{{ url_for('recipes.delete_recipe', recipe_id=recipe.id) }}" class="del-button" onclick="return confirm('Are you sure you want to delete this recipe?');">Delete</a>
+             <a href="{{ url_for('recipes.edit_recipes', recipe_id=recipe.id) }}" class="edit-button" onclick="return confirm('Are you sure you want to edit this recipe?');">Edit</a>
         </div>
     {% endfor %}
 </body>

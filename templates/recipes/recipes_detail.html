@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: #ffffff; /* 背景色调整为浅灰蓝色 */
+            background: #ffffff;
             margin: 0;
             text-align: center; /* 全局文本居中 */
         }
@@ -29,6 +29,10 @@
             width: 100%;
             margin-top: 20px;
             border-collapse: collapse;}
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd; /* 添加底边框线 */
+        }
 
 </style>
 </head>
@@ -45,6 +49,15 @@
                 <th>How to make it</th>
                 <td>{{ recipe.method }}</td>
             </tr>
+            <tr>
+                    <th>Ingredients:</th>
+                    <td>
+                         {% for ingredient in ingredients %}
+                             <li>{{ ingredient.qfooditem.fooditem.name }}: {{ ingredient.qfooditem.quantity }}{{ ingredient.qfooditem.units }}</li>
+                         {% endfor %}
+{#                        {{ingredients }}#}
+                    </td>
+                </tr>
         </tbody>
         </table>
     </div>

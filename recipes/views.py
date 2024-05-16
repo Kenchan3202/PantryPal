@@ -6,7 +6,7 @@ from flask_login import login_required, current_user
 import testingdata
 from recipes import recipe_util
 from recipes.forms import RecipeForm
-from recipes.recipe_util import create_recipe
+from recipes.recipe_util import create_recipe, create_or_get_food_item, create_and_get_qfid
 
 recipes_blueprint = Blueprint('recipes', __name__, template_folder='templates')
 
@@ -34,7 +34,8 @@ def your_recipes():
 @login_required
 def recipes_detail(recipe_id):
     recipe = Recipe.query.get(recipe_id)
-    return render_template('recipes/recipes_detail.html', recipe=recipe)
+    ingredients = Ingredient.query.filter_by(recipe_id=recipe_id).all()
+    return render_template('recipes/recipes_detail.html', recipe=recipe, ingredients=ingredients)
 
 
 @recipes_blueprint.route('/add_recipes', methods=['GET', 'POST'])
@@ -60,17 +61,37 @@ def add_recipes():
     else:
         return render_template('recipes/add_recipes.html')
 
-@recipes_blueprint.route('/edit_recipes')
-@login_required
-def edit_detail():
-    return render_template('recipes/edit_recipes.html')
 
-
-# sorting recipes from highest to lowest ratings
-@recipes_blueprint.route('/recipes')
+@recipes_blueprint.route('/edit_recipes/<int:recipe_id>', methods=['GET', 'POST'])
 @login_required
-def recipe_list():
-    return render_template('recipes/recipes.html')  # Adjust the template name as necessary
+def edit_recipes(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)  # 从数据库获取特定食谱
+    if request.method == 'POST':
+        recipe.name = request.form['name']
+        recipe.method = request.form['method']
+        recipe.serves = request.form['serves']
+        recipe.calories = request.form['calories']
+
+        # 清除现有的配料
+        Ingredient.query.filter_by(recipe_id=recipe_id).delete()
+
+        # 添加新的配料
+        ingredients = zip(request.form.getlist('ingredient[]'),
+                          request.form.getlist('quantity[]'),
+                          request.form.getlist('unit[]'))
+        for food, quantity, unit in ingredients:
+            food_item = create_or_get_food_item(food)
+            qfi = create_and_get_qfid(food_item.id, quantity, unit)
+            new_ingredient = Ingredient(recipe_id=recipe_id, qfood_id=qfi)
+            db.session.add(new_ingredient)
+
+        db.session.commit()
+        flash('Recipe updated successfully!', 'success')
+        return redirect(url_for('recipes.recipes'))
+    else:
+        ingredients = [(i.qfooditem.fooditem.name, i.qfooditem.quantity, i.qfooditem.units) for i in recipe.ingredients]
+        return render_template('recipes/edit_recipes.html', recipe=recipe, ingredients=ingredients)
+
 
 # delete recipes function
 @recipes_blueprint.route('/delete_recipe/<int:recipe_id>')
@@ -87,6 +108,7 @@ def delete_recipe(recipe_id):
     db.session.commit()
     flash('Recipe deleted successfully!', 'success')
     return redirect(url_for('recipes.recipes'))
+
 
 # rate recipes function
 @recipes_blueprint.route('/rate_recipe', methods=['POST'])

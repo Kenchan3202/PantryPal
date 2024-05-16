@@ -67,7 +67,7 @@ def login():
 def information():
     return render_template('user/my_account.html', user=current_user)
 
-
+# update password functionality
 @users_blueprint.route('/update_password', methods=['GET', 'POST'])
 @login_required
 def update_password():

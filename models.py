@@ -47,6 +47,7 @@ class User(db.Model, UserMixin):
         self.registered_on = datetime.now()
         self.role = role
 
+    # Method to update last and current logins and ips. Takes current request's ip address.
     def update_security_fields_on_login(self, ip_addr: str) -> None:
         self.last_login = self.current_login
         self.current_login = datetime.now()
@@ -62,6 +63,11 @@ class User(db.Model, UserMixin):
         self.password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         db.session.commit()
 
+    # Method to get user's shoppings lists. Returns a list of ShoppingList objects i.e. List[ShoppingList]
+    def get_shopping_lists(self):
+        return self.shopping_lists
+
+    # Method to get a string representation of all the uesr's shopping lists
     def get_shopping_lists_str(self):
         numlists = len(self.shopping_lists)
         output = f'Number of lists {numlists}\n' + '\n'.join([f'list ({i+1}/{numlists})\n{slist.__str__()}' for i, slist
@@ -72,6 +78,7 @@ class User(db.Model, UserMixin):
 class Recipe(db.Model):
     __tablename__ = 'recipes'
 
+    # Recipe details
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     name = db.Column(db.String(50), nullable=False)
@@ -104,27 +111,33 @@ class Recipe(db.Model):
                                                            enumerate(self.ingredients)])
         return ingredient_block
 
+    # Method to get the recipe's name
     def get_name(self) -> str:
         return self.name
 
+    # Method to get the recipe's cooking method
     def get_method(self) -> str:
         return self.method
 
+    # Method to get the number of people the recipe serves
     def get_serves(self) -> int:
         return self.serves
 
+    # Method to get the number of calories the recipe contains
     def get_calories(self) -> int:
         return self.calories
 
+    # Method to get the recipe's rating
+    def get_rating(self) -> float:
+        self.update_rating()
+        return self.rating
+
+    # Method to update recipe's rating attribute. Made for internal use (shouldn't need to be called from front end)
     def update_rating(self):
         ratings = self.ratings
         avg_rating = sum([rating.get_rating() for rating in ratings]) / len(ratings)
         self.rating = round(avg_rating * 2) / 2         # Round to nearest 0.5
         db.session.commit()
-
-    def get_rating(self) -> float:
-        self.update_rating()
-        return self.rating
 
 
 class Rating(db.Model):

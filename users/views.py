@@ -49,9 +49,10 @@ def register():
 def login():
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user: User = User.query.filter_by(email=form.email.data).first()
         if user and user.verify_password(form.password.data):
             login_user(user)
+            user.update_security_fields_on_login(ip_addr=request.remote_addr)   # Update security login fields.
             session['logged_in'] = True
             session['user_id'] = user.id
             flash('You have been logged in.', 'success')

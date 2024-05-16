@@ -21,20 +21,14 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(50), nullable=False, unique=False)
     dob = db.Column(db.String(10), nullable=False)
     role = db.Column(db.String(100), nullable=False, default='user')
-    registered_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-
-    # current_login_at = db.Column(db.DateTime)
-    # last_login_at = db.Column(db.DateTime)
-    # current_login_ip = db.Column(db.String(100))
-    # last_login_ip = db.Column(db.String(100))
-    # login_count = db.Column(db.Integer, default=0)
 
     # security details
-    current_login = db.Column(db.DateTime)
-    last_login = db.Column(db.DateTime)
-    current_login_ip = db.Column(db.String(30))
-    last_login_ip = db.Column(db.String(30))
-    login_count = db.Column(db.Integer, default=0)
+    registered_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    current_login = db.Column(db.DateTime, nullable=True)
+    last_login = db.Column(db.DateTime, nullable=True)
+    current_login_ip = db.Column(db.String(45), nullable=True)
+    last_login_ip = db.Column(db.String(45), nullable=True)
+    total_logins = db.Column(db.Integer, default=0)
 
     # declaring relationships to other tables
     recipes = db.relationship('Recipe')
@@ -52,6 +46,14 @@ class User(db.Model, UserMixin):
         self.registered_on = datetime.now()
         self.role = role
 
+    def update_security_fields_on_login(self, ip_addr: str) -> None:
+        self.last_login = self.current_login
+        self.current_login = datetime.now()
+        self.last_login_ip = self.current_login_ip
+        self.current_login_ip = ip_addr
+        self.total_logins += 1
+        db.session.commit()
+
     def verify_password(self, password) -> bool:
         return bcrypt.checkpw(password.encode('utf-8'), self.password)
 
@@ -63,6 +65,7 @@ class User(db.Model, UserMixin):
         numlists = len(self.shopping_lists)
         output = f'Number of lists {numlists}\n' + '\n'.join([f'list ({i+1}/{numlists})\n{slist.__str__()}' for i, slist in enumerate(self.shopping_lists)])
         return output
+
 
 
 class Recipe(db.Model):

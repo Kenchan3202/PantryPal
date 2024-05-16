@@ -48,3 +48,15 @@ def view_user_activity():
 
     return render_template('admin/admin.html', first_name=current_user.first_name, last_name=current_user.last_name,
                            user_activities=user_activities)
+
+
+@admin_blueprint.route('/logs')
+@login_required
+def logs():
+    if current_user.role != 'admin':
+        abort(403)
+    with open("app.log", "r") as f:
+        content = f.read().splitlines()[-10:]
+        content.reverse()
+
+    return render_template('admin/admin.html', logs=content, name=current_user.first_name)

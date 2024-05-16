@@ -1,3 +1,4 @@
 [2024-05-16 15:24:50,480] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:42} INFO - User registered: ynchan@gmail.com, IP: 127.0.0.1
 [2024-05-16 15:25:07,848] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: ynchan@gmail.com, IP: 127.0.0.1
 [2024-05-16 15:25:28,001] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:105} INFO - User logged out: ynchan@gmail.com, IP: 127.0.0.1
+[2024-05-16 17:36:18,878] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: admin@email.com, IP: 127.0.0.1

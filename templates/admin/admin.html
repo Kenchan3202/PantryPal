@@ -71,29 +71,29 @@
         </form>
     </div>
 </div>
-{#<div class="column is-8 is-offset-2" id="test">#}
-{#    <h4 class="title is-4">Security Logs</h4>#}
-{#    <div class="box">#}
-{#        {% if logs %}#}
-{#            <div class="field">#}
-{#            <table class="table">#}
-{#                <tr>#}
-{#                    <th>Last 10 Security Log Entries</th>#}
-{#                </tr>#}
-{#                {% for entry in logs %}#}
-{#                    <tr>#}
-{#                        <td>{{ entry }}</td>#}
-{#                    </tr>#}
-{#                {% endfor %}#}
-{#            </table>#}
-{#        {% endif %}#}
-{#        <form action="/logs">#}
-{#            <div>#}
-{#                <button class="button is-info is-centered">View Logs</button>#}
-{#            </div>#}
-{#        </form>#}
-{#        </div>#}
-{#    </div>#}
+<div class="column is-8 is-offset-2" id="test">
+    <h4 class="title is-4">Security Logs</h4>
+    <div class="box">
+        {% if logs %}
+            <div class="field">
+            <table class="table">
+                <tr>
+                    <th>Last 10 Security Log Entries</th>
+                </tr>
+                {% for entry in logs %}
+                    <tr>
+                        <td>{{ entry }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        <form action="{{ url_for('admin.logs') }}">
+            <div>
+                <button class="button is-info is-centered">View Logs</button>
+            </div>
+        </form>
+        </div>
+    </div>
 <div class="column is-8 is-offset-2">
     <h4 class="title is-4">User Activity Logs</h4>
     <div class="box">
@@ -139,4 +139,5 @@
     </div>
 </div>
 
+</div>
 {% endblock %}

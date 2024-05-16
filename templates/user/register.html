@@ -54,16 +54,16 @@
 </head>
 <body>
     <div class="container">
-        <!-- 显示 Flash 消息 -->
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class="flashes">
-            {% for message in messages %}
-              <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
+{#        <!-- 显示 Flash 消息 -->#}
+{#        {% with messages = get_flashed_messages() %}#}
+{#          {% if messages %}#}
+{#            <ul class="flashes">#}
+{#            {% for message in messages %}#}
+{#              <li>{{ message }}</li>#}
+{#            {% endfor %}#}
+{#            </ul>#}
+{#          {% endif %}#}
+{#        {% endwith %}#}
 
     {% block content %}
     <div class="column is-5 is-offset-4">
@@ -72,7 +72,7 @@
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     <div class="notification is-danger">
-                        {{ messages[0] }}. Go to <a href="{{ url_for('user.login') }}">login page</a>.
+                        {{ messages[0] }}. Go to <a href="{{ url_for('users.login') }}">login page</a>.
                     </div>
                 {% endif %}
             {% endwith %}

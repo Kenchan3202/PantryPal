@@ -35,13 +35,13 @@ def view_user_activity():
         {
             'id': user.id,
             'email': user.email,
-            # 'current_login_ip': user.current_login_ip,
-            # 'last_login_ip': user.last_login_ip,
-            # 'login_count': user.login_count,
+            'current_login_ip': user.current_login_ip,
+            'last_login_ip': user.last_login_ip,
+            'total_logins': user.total_logins,
             'registration_date': user.registered_on.strftime(
                 "%Y-%m-%d %H:%M:%S") if user.registered_on else 'N/A',
-            # 'last_login': user.last_login_at.strftime("%Y-%m-%d %H:%M:%S") if user.last_login_at else 'N/A',
-            # 'current_login': user.current_login_at.strftime("%Y-%m-%d %H:%M:%S") if user.current_login_at else 'N/A'
+            'last_login': user.last_login.strftime("%Y-%m-%d %H:%M:%S") if user.last_login else 'N/A',
+            'current_login': user.current_login.strftime("%Y-%m-%d %H:%M:%S") if user.current_login else 'N/A'
         }
         for user in users
     ]

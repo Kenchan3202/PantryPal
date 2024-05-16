@@ -39,6 +39,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
+        app.logger.info(f"User registered: {form1.email.data}, IP: {request.remote_addr}")
         # sends user to login page
         return redirect(url_for('users.login'))
     # if request method is GET or form not valid re-render signup page
@@ -52,9 +53,17 @@ def login():
         user: User = User.query.filter_by(email=form.email.data).first()
         if user and user.verify_password(form.password.data):
             login_user(user)
+            user.last_login = user.current_login
+            user.current_login = datetime.utcnow()
+            user.last_login_ip = user.current_login_ip or request.remote_addr
+            user.current_login_ip = request.remote_addr
+            user.total_logins += 1
             user.update_security_fields_on_login(ip_addr=request.remote_addr)   # Update security login fields.
+            db.session.commit()
             session['logged_in'] = True
             session['user_id'] = user.id
+            app.logger.info(
+                f"User logged in: {form.email.data}, IP: {request.remote_addr}")
             flash('You have been logged in.', 'success')
             if user.role == 'admin':
                 return redirect(url_for('admin.admin'))

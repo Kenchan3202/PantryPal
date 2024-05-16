@@ -1,5 +1,7 @@
 import datetime
 import os
+from logging.handlers import RotatingFileHandler
+import logging
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
@@ -10,6 +12,16 @@ import testingdata
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
+
+log_path = 'app.log'
+
+handler = RotatingFileHandler(log_path, maxBytes=500000, backupCount=10)
+handler.setLevel(logging.INFO)
+formatter = logging.Formatter(
+            "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
+handler.setFormatter(formatter)
+app.logger.addHandler(handler)
+app.logger.setLevel(logging.INFO)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['ENCRYPTION_KEY'] = os.getenv('ENCRYPTION_KEY')

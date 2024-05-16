@@ -32,6 +32,7 @@ class User(db.Model, UserMixin):
 
     # declaring relationships to other tables
     recipes = db.relationship('Recipe', backref='user')
+    ratings = db.relationship('Rating', backref='user')
     shopping_lists = db.relationship('ShoppingList', backref='user')
     pantry = db.relationship("PantryItem", backref="user")
     wasted = db.relationship('WastedFood', backref='user')
@@ -76,12 +77,13 @@ class Recipe(db.Model):
     name = db.Column(db.String(50), nullable=False)
     method = db.Column(db.Text, nullable=False)
     serves = db.Column(db.Integer, nullable=False)
-    calories = db.Column(db.Float, nullable=True)
+    calories = db.Column(db.Integer, nullable=True)
     rating = db.Column(db.Float, nullable=True)
 
     # Links to other tables
     ingredients = db.relationship("Ingredient", backref='recipe')
     compatible_diets = db.relationship("CompatibleDiet", backref='recipe')
+    ratings = db.relationship("Rating", backref='recipe')
 
     def __init__(self, user_id, recipe_name, cooking_method, serves, calories):
         self.user_id = user_id
@@ -93,13 +95,55 @@ class Recipe(db.Model):
 
     def __str__(self):
         ingredient_block = 'Ingredients: \n' + '\n'.join([ingredient.__str__() for ingredient in self.ingredients])
-        output = f'{self.name}\n{ingredient_block}Serves: {self.serves}\nCalories: {self.calories}\n{self.method}\n'
+        output = (f'{self.name}\n{ingredient_block}\nServes: {self.serves}\nCalories: {self.calories}\n'
+                  f'Rating: {self.rating}\n{self.method}\n')
         return output
 
     def get_ingredients_str(self):
         ingredient_block = 'Ingredients: \n' + f'\n'.join([f'{i+1}) {ingredient.__str__()}\n' for i, ingredient in
                                                            enumerate(self.ingredients)])
         return ingredient_block
+
+    def get_name(self) -> str:
+        return self.name
+
+    def get_method(self) -> str:
+        return self.method
+
+    def get_serves(self) -> int:
+        return self.serves
+
+    def get_calories(self) -> int:
+        return self.calories
+
+    def update_rating(self):
+        ratings = self.ratings
+        avg_rating = sum([rating.get_rating() for rating in ratings]) / len(ratings)
+        self.rating = round(avg_rating * 2) / 2         # Round to nearest 0.5
+        db.session.commit()
+
+    def get_rating(self) -> float:
+        self.update_rating()
+        return self.rating
+
+
+class Rating(db.Model):
+    __tablename__ = 'ratings'
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id), primary_key=True, nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey(Recipe.id), primary_key=True, nullable=False)
+    rating = db.Column(db.Integer)              # Need to validate that incoming value is between 0 & 5
+
+    def __init__(self, user_id: int, recipe_id: int, rating: int):
+        self.user_id = user_id
+        self.recipe_id = recipe_id
+        self.rating = rating
+
+    def get_rating(self) -> int:
+        return self.rating
+
+    def set_rating(self, rating: int) -> None:
+        self.rating = rating
+        db.session.commit()
 
 
 class ShoppingList(db.Model):

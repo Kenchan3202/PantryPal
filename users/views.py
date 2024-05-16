@@ -52,7 +52,13 @@ def login():
         user: User = User.query.filter_by(email=form.email.data).first()
         if user and user.verify_password(form.password.data):
             login_user(user)
+            user.last_login = user.current_login
+            user.current_login = datetime.utcnow()
+            user.last_login_ip = user.current_login_ip or request.remote_addr
+            user.current_login_ip = request.remote_addr
+            user.total_logins += 1
             user.update_security_fields_on_login(ip_addr=request.remote_addr)   # Update security login fields.
+            db.session.commit()
             session['logged_in'] = True
             session['user_id'] = user.id
             flash('You have been logged in.', 'success')

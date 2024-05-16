@@ -158,11 +158,11 @@ class QuantifiedFoodItem(db.Model):
     def __str__(self):
         return f'{self.fooditem.get_name()}, {self.quantity}{self.units}'
 
-    def change_quantity(self, quantity: float):
+    def set_quantity(self, quantity: float):
         self.quantity = quantity
         db.session.commit()
 
-    def change_units(self, units: str):
+    def set_units(self, units: str):
         self.units = units
         db.session.commit()
 
@@ -187,10 +187,9 @@ class ShoppingItem(db.Model):
         self.list_id = list_id
         self.qfood_id = qfood_id
 
-    def change_quantity(self, quantity, units):
-        qfood = QuantifiedFoodItem.query.filter_by(id=self.qfood_id).first()
-        qfood.change_qauntity(quantity)
-        qfood.change_units(units)
+    def set_quantity(self, quantity, units):
+        self.qfooditem.qfood.set_qauntity(quantity)
+        self.qfooditem.set_units(units)
         db.session.commit()
 
     def get_name(self):
@@ -214,6 +213,11 @@ class Ingredient(db.Model):
     def __repr__(self):
         return f'<Ingredient(id: {self.id}<Qfooditem({self.qfooditem.__str__()}>>'
 
+    def set_quantity(self, quantity, units):
+        self.qfooditem.qfood.set_qauntity(quantity)
+        self.qfooditem.set_units(units)
+        db.session.commit()
+
 
 class PantryItem(db.Model):
     __tablename__ = 'pantryitems'
@@ -234,8 +238,13 @@ class PantryItem(db.Model):
     def get_expiry(self) -> str:
         return self.expiry
 
-    def change_expiry(self, expiry: str):
+    def set_expiry(self, expiry: str):
         self.expiry = expiry
+        db.session.commit()
+
+    def set_quantity(self, quantity, units):
+        self.qfooditem.qfood.set_qauntity(quantity)
+        self.qfooditem.set_units(units)
         db.session.commit()
 
 

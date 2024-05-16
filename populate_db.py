@@ -205,6 +205,23 @@ def create_shopping_lists() -> None:
                 create_shopping_items(list_id=shopping_list.id)
 
 
+def create_ratings() -> None:
+    for recipe in recipeObjects:
+        num_ratings = random.choice((2, 3, 5, 7))
+        chosen_users = []
+        for i in range(num_ratings):
+            chosen_user = random.choice(userObjects)
+            while chosen_user in chosen_users:
+                chosen_user = random.choice(userObjects)
+            chosen_users.append(chosen_user)
+            rating = random.choice((0, 1, 2, 3, 4, 5))
+            new_rating = models.Rating(chosen_user.id, recipe.id, rating)
+            db.session.add(new_rating)
+    db.session.commit()
+    for recipe in recipeObjects:
+        recipe.update_rating()
+
+
 def main():
     # add sample users
     add_sample_users()
@@ -217,6 +234,9 @@ def main():
 
     # create recipes
     create_recipes()
+
+    # create ratings
+    create_ratings()
 
     # create shopping lists
     create_shopping_lists()

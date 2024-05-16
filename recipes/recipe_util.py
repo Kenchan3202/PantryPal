@@ -3,7 +3,7 @@ from flask_login import current_user
 from app import db, app
 import models
 
-user_id = 1
+# user_id = 1
 
 
 # ingredients is a list of dictionaries in the format
@@ -49,6 +49,15 @@ def create_or_get_food_item(food_name):
         db.session.add(food)
         db.session.commit()
     return food
+
+
+# Method to rate a recipe. Takes user, recipe and numeric value of rating as parameters.
+def rate_recipe(user_id: int, recipe_id: int, rating: int) -> None:
+    rating = models.Rating(user_id=user_id, recipe_id=recipe_id, rating=rating)
+    db.session.add(rating)
+    db.session.flush()
+    recipe = models.Recipe.query.filter_by(id=recipe_id).first()
+    recipe.update_rating()
 
 
 def test_create_recipe():

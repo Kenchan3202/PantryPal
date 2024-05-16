@@ -1,3 +1,5 @@
+from flask_login import current_user
+
 from app import db, app
 import models
 
@@ -9,7 +11,7 @@ user_id = 1
 # "quantity": <quantity>
 # "unit": "<unit>"
 def create_recipe(name, method, serving_size, calories, ingredients):
-    new_recipe = models.Recipe(user_id=user_id,
+    new_recipe = models.Recipe(user_id=current_user.id,
                                recipe_name=name,
                                cooking_method=method,
                                serves=serving_size,
@@ -27,6 +29,7 @@ def add_ingredient(ingredient, quantity, unit, recipe_id):
     new_ingredient = models.Ingredient(recipe_id=recipe_id,
                                        qfood_id=qfid)
     db.session.add(new_ingredient)
+    db.session.commit()
 
 
 def create_and_get_qfid(food_id, quantity, units):

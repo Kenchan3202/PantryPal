@@ -65,9 +65,8 @@ def add_recipes():
         method = request.form['method']
         serves = request.form['serves']
         calories = request.form['calories']
-        ingredients = []  # 这里需要处理从表单获取的多个原料数据
+        ingredients = []
 
-        # 假设前端通过某种方式发送了多个原料
         for i in range(len(request.form.getlist('ingredient[]'))):
             ingredients.append({
                 "food": request.form.getlist('ingredient[]')[i],

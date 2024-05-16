@@ -102,12 +102,14 @@ class ShoppingList(db.Model):
     __tablename__ = 'shoppinglists'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
+    list_name = db.Column(db.String(50), nullable=False)
 
     # Declaring relationship shopping item table
     shopping_items = db.relationship('ShoppingItem')
 
-    def __init__(self, user_id):
+    def __init__(self, user_id, list_name):
         self.user_id = user_id
+        self.list_name = list_name
 
     def __str__(self):
         items = self.shopping_items
@@ -290,14 +292,14 @@ class CompatibleDiet(db.Model):
 
 
 def init_db():
-    # with app.app_context():
-    db.drop_all()
-    db.create_all()
-    admin = User(email='admin@email.com',
-                 password='Admin1!',
-                 first_name='Alice',
-                 last_name='Jones',
-                 dob='12/09/2001',
-                 role='admin')
-    db.session.add(admin)
-    db.session.commit()
+    with app.app_context():
+        db.drop_all()
+        db.create_all()
+        admin = User(email='admin@email.com',
+                     password='Admin1!',
+                     first_name='Alice',
+                     last_name='Jones',
+                     dob='12/09/2001',
+                     role='admin')
+        db.session.add(admin)
+        db.session.commit()

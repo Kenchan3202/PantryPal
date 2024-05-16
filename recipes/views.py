@@ -12,14 +12,14 @@ recipes_blueprint = Blueprint('recipes', __name__, template_folder='templates')
 
 print("Template folder:", recipes_blueprint.template_folder)
 from app import db, app
-from models import Recipe
+from models import Recipe, Ingredient
 
 
 @recipes_blueprint.route('/recipes')
 @login_required
 def recipes():
     recipes = Recipe.query.all()
-    return render_template('recipes/recipes.html', recipes=recipes) #same as view recipe, but working on recipe.html
+    return render_template('recipes/recipes.html', recipes=recipes)  # same as view recipe, but working on recipe.html
 
 
 @recipes_blueprint.route('/your_recipes')
@@ -35,25 +35,6 @@ def your_recipes():
 def recipes_detail(recipe_id):
     recipe = Recipe.query.get(recipe_id)
     return render_template('recipes/recipes_detail.html', recipe=recipe)
-
-
-# @recipes_blueprint.route('/add_recipes', methods=['GET', 'POST'])
-# @login_required
-# def add_recipes():
-#     form = RecipeForm()
-#     if form.validate_on_submit():
-#         ingredients = [{
-#             'food': ingredient.food.data,
-#             'quantity': ingredient.quantity.data,
-#             'unit': ingredient.unit.data
-#         } for ingredient in form.ingredients.data]
-#
-#         create_recipe(form.name.data, form.method.data, form.serves.data, form.calories.data, ingredients)
-#
-#         flash('Recipe added successfully!', 'success')
-#         return redirect(url_for('recipes.recipes'))
-#
-#     return render_template('recipes/add_recipes.html', form=form)
 
 
 @recipes_blueprint.route('/add_recipes', methods=['GET', 'POST'])
@@ -79,16 +60,11 @@ def add_recipes():
     else:
         return render_template('recipes/add_recipes.html')
 
-@recipes_blueprint.route('/add_recipes')
-@login_required
-def add_detail():
-    return render_template('recipes/add_recipes.html')
-
-
 @recipes_blueprint.route('/edit_recipes')
 @login_required
 def edit_detail():
     return render_template('recipes/edit_recipes.html')
+
 
 # sorting recipes from highest to lowest ratings
 @recipes_blueprint.route('/recipes')
@@ -96,34 +72,14 @@ def edit_detail():
 def recipe_list():
     return render_template('recipes/recipes.html')  # Adjust the template name as necessary
 
-
-# add recipes function
-# @recipes_blueprint.route('/add_recipes')
-# @login_required
-# def add_recipe():
-#     return render_template('recipes/add_recipes.html')
-
-
-# shows detailed view page of recipe
-# @recipes_blueprint.route('/view_recipe')
-# def view_recipe(recipe_id):
-#     recipe = Recipe.query.get_or_404(recipe_id)
-#     return render_template('recipes/add_recipes.html', recipe=recipe) # to be updated with view recipes html
-
-# edit recipes function
-# @recipes_blueprint.route('/edit_recipes')
-# @login_required
-# def edit_recipe():
-#     return render_template('recipes/edit_recipes.html')
-
 # delete recipes function
-@recipes_blueprint.route('/delete_recipe', methods=['POST'])
+@recipes_blueprint.route('/delete_recipe/<int:recipe_id>')
 @login_required
 def delete_recipe(recipe_id):
+    ingredients = Ingredient.query.filter_by(recipe_id=recipe_id).all()
+    for ingredients in ingredients:
+        db.session.delete(ingredients)
     recipe = Recipe.query.get_or_404(recipe_id)
-    if recipe.user_id != current_user.id: # user can only delete their own recipe
-        abort(403)
-
     db.session.delete(recipe)
     db.session.commit()
     flash('Recipe deleted successfully!', 'success')
@@ -133,5 +89,4 @@ def delete_recipe(recipe_id):
 @recipes_blueprint.route('/rate_recipe', methods=['POST'])
 @login_required
 def rate_recipe():
-        return render_template('recipes/edit_recipes.html')
-
+    return render_template('recipes/edit_recipes.html')

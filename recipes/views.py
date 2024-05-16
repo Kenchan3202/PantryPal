@@ -12,7 +12,7 @@ recipes_blueprint = Blueprint('recipes', __name__, template_folder='templates')
 
 print("Template folder:", recipes_blueprint.template_folder)
 from app import db, app
-from models import Recipe, Ingredient
+from models import Recipe, Ingredient, QuantifiedFoodItem
 
 
 @recipes_blueprint.route('/recipes')
@@ -78,6 +78,9 @@ def recipe_list():
 def delete_recipe(recipe_id):
     ingredients = Ingredient.query.filter_by(recipe_id=recipe_id).all()
     for ingredients in ingredients:
+        qfood_item = QuantifiedFoodItem.query.get(ingredients.qfood_id)
+        if qfood_item:
+            db.session.delete(qfood_item)
         db.session.delete(ingredients)
     recipe = Recipe.query.get_or_404(recipe_id)
     db.session.delete(recipe)

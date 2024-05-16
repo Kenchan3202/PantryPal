@@ -136,6 +136,15 @@
             background-color: #2980b9; /* 鼠标悬停时的背景颜色 */
             {#box-shadow: 0 4px 8px rgba(0,0,0,0.2); /#}
         }
+
+        .rate-form {
+            margin-top: 10px;
+        }
+        select {
+            padding: 10px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -177,7 +186,16 @@
                 <td>{{ recipe.rating }} / 5</td>
             </tr>
         </table>
-    <button class="ratebutton" onclick="rateRecipe()">Rate recipe (x/5)</button>
+        <form class="rate-form" action="{{ url_for('recipes.rate_recipe', recipe_id=recipe.id) }}" method="POST">
+                <select name="rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <button type="submit">Rate</button>
+            </form>
     </div>
 {% endfor %}
 <script>
@@ -194,5 +212,6 @@
             }
         }
     </script>
+
 </body>
 </html>

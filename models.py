@@ -55,9 +55,15 @@ class User(db.Model, UserMixin):
     def verify_password(self, password) -> bool:
         return bcrypt.checkpw(password.encode('utf-8'), self.password)
 
-    def set_password(self, password):
-        """Create hashed password."""
+    def set_password(self, password) -> None:
         self.password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        db.session.commit()
+
+    def get_shopping_lists_str(self):
+        numlists = len(self.shopping_lists)
+        output = f'Number of lists {numlists}\n' + '\n'.join([f'list ({i+1}/{numlists})\n{slist.__str__()}' for i, slist in enumerate(self.shopping_lists)])
+        return output
+
 
 class Recipe(db.Model):
     __tablename__ = 'recipes'
@@ -87,14 +93,9 @@ class Recipe(db.Model):
         output = f'{self.name}\n{ingredient_block}Serves: {self.serves}\nCalories: {self.calories}\n{self.method}\n'
         return output
 
-    def change_password(self, password: str) -> None:
-        self.password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-        db.session.commit()
-
-    def get_shopping_lists_str(self):
-        numlists = len(self.shopping_lists)
-        output = f'Number of lists {numlists}\n' + '\n'.join([f'list ({i+1}/{numlists})\n{slist.__str__()}' for i, slist in enumerate(self.shopping_lists)])
-        return output
+    def get_ingredients_str(self):
+        ingredient_block = 'Ingredients: \n' + f'\n'.join([f'{i+1}) {ingredient.__str__()}\n' for i, ingredient in enumerate(self.ingredients)])
+        return ingredient_block
 
 
 class ShoppingList(db.Model):

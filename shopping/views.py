@@ -13,10 +13,12 @@ from app import db
 def shopping_list():
     form = AddItemForm()
 
+
     if form.validate_on_submit():
         food_item = form.newItem.data
         quantity = form.itemQuantity.data
         units = form.newItem.data
+        list_name = form.listName.data
 
         food_id = FoodItem.query.filter_by(name=food_item)
         if not food_id():
@@ -32,6 +34,13 @@ def shopping_list():
                                                     units=newQFI.units)
             db.session.add(q_food_item)
             db.session.commit()
+
+            list_id = ShoppingList.query.filter_by(list_name=list_name)
+            new_shopping_item = models.ShoppingItem(list_id=list_id,
+                                                    qfood_id=q_food_item.id)
+            db.session.add(new_shopping_item)
+            db.session.commit()
+
 
 
 
@@ -50,9 +59,12 @@ def complete_shopping():
     return redirect(url_for('shopping.shopping_list'))
 
 
-@shopping_blueprint.route('/add_item')
+@shopping_blueprint.route('/add_item',methods = ['POST'])
 def add_item():
     # query food item entered, if it exists, add it to shopping list field.
     # If it doesn't exist, alert user and give option to add it to DB
     print(f"Add items")
+
+
+
     return render_template('shopping/shopping_list.html')

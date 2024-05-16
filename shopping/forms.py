@@ -8,4 +8,5 @@ class AddItemForm(FlaskForm):
     newItem = StringField(validators=[DataRequired()])
     itemQuantity = IntegerField(validators=[DataRequired()])
     itemUnits = StringField(validators=[DataRequired()])
+    listName = StringField(validators=[DataRequired()])
     submit = SubmitField()

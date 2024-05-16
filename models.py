@@ -94,7 +94,8 @@ class Recipe(db.Model):
         return output
 
     def get_ingredients_str(self):
-        ingredient_block = 'Ingredients: \n' + f'\n'.join([f'{i+1}) {ingredient.__str__()}\n' for i, ingredient in enumerate(self.ingredients)])
+        ingredient_block = 'Ingredients: \n' + f'\n'.join([f'{i+1}) {ingredient.__str__()}\n' for i, ingredient in
+                                                           enumerate(self.ingredients)])
         return ingredient_block
 
 
@@ -114,7 +115,7 @@ class ShoppingList(db.Model):
     def __str__(self):
         items = self.shopping_items
         # f"user{self.user_id}'s list\n" +
-        output = f'\n'.join([f'{i+1}: {item.qfooditem.__str__()}' for i, item in enumerate(items)])
+        output = f'{self.list_name}\n' + f'\n'.join([f'{i+1}: {item.qfooditem.__str__()}' for i, item in enumerate(items)])
         return output
 
 

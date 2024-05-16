@@ -6,6 +6,8 @@
 import random
 from app import db, app
 import models
+
+
 pantryitems = [
     {"name": "Milk", "expiry_date": "2024-05-10", 'number': '2', 'quantity': 200, 'units': 'ml', 'calories': 200},
     {"name": "jelly", "expiry_date": "2024-05-11", 'number': '5', 'quantity': 200, 'units': 'g', 'calories': 250},
@@ -189,9 +191,10 @@ def create_shopping_items(list_id: int, user_id: int) -> models.ShoppingItem:
 
 def create_shopping_lists() -> None:
     chosen_users = userObjects[::2]
+    example_names = ('Monday Shop', 'Asian Grocery Shop', 'Butchery', 'Bakery', 'Green Gorcers')
     for user in chosen_users:
         for x in range(2):
-            shopping_list = models.ShoppingList(user.id)
+            shopping_list = models.ShoppingList(user_id=user.id, list_name=random.choice(example_names))
             db.session.add(shopping_list)
             db.session.flush()
             db.session.refresh(shopping_list)

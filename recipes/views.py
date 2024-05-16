@@ -3,9 +3,10 @@ from os import abort
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 
-# import recipe_util
-
 import testingdata
+from recipes import recipe_util
+from recipes.forms import RecipeForm
+from recipes.recipe_util import create_recipe
 
 recipes_blueprint = Blueprint('recipes', __name__, template_folder='templates')
 
@@ -36,12 +37,48 @@ def recipes_detail(recipe_id):
     return render_template('recipes/recipes_detail.html', recipe=recipe)
 
 
-@recipes_blueprint.route('/add_recipes')
+# @recipes_blueprint.route('/add_recipes', methods=['GET', 'POST'])
+# @login_required
+# def add_recipes():
+#     form = RecipeForm()
+#     if form.validate_on_submit():
+#         ingredients = [{
+#             'food': ingredient.food.data,
+#             'quantity': ingredient.quantity.data,
+#             'unit': ingredient.unit.data
+#         } for ingredient in form.ingredients.data]
+#
+#         create_recipe(form.name.data, form.method.data, form.serves.data, form.calories.data, ingredients)
+#
+#         flash('Recipe added successfully!', 'success')
+#         return redirect(url_for('recipes.recipes'))
+#
+#     return render_template('recipes/add_recipes.html', form=form)
+
+
+@recipes_blueprint.route('/add_recipes', methods=['GET', 'POST'])
 @login_required
 def add_recipes():
-    user=current_user
-    return render_template('recipes/add_recipes.html')
+    if request.method == 'POST':
+        # 获取表单数据
+        name = request.form['name']
+        method = request.form['method']
+        serves = request.form['serves']
+        calories = request.form['calories']
+        ingredients = []  # 这里需要处理从表单获取的多个原料数据
 
+        # 假设前端通过某种方式发送了多个原料
+        for i in range(len(request.form.getlist('ingredient[]'))):
+            ingredients.append({
+                "food": request.form.getlist('ingredient[]')[i],
+                "quantity": request.form.getlist('quantity[]')[i],
+                "unit": request.form.getlist('unit[]')[i],
+            })
+
+        create_recipe(name, method, serves, calories, ingredients)
+        return redirect(url_for('recipes.recipes'))  # 确保这个重定向到正确的视图
+    else:
+        return render_template('recipes/add_recipes.html')
 
 @recipes_blueprint.route('/add_recipes')
 @login_required

@@ -4,7 +4,6 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_user, logout_user, login_required, current_user, LoginManager
-
 load_dotenv()
 
 import testingdata
@@ -28,11 +27,15 @@ from users.views import users_blueprint
 from pantry.views import pantry_blueprint
 from shopping.views import shopping_blueprint
 from kitchen.views import kitchen_blueprint
+from recipes.views import recipes_blueprint
+from admin.views import admin_blueprint
 
 app.register_blueprint(users_blueprint, url_prefix='/user')
 app.register_blueprint(pantry_blueprint, url_prefix='/pantry')
 app.register_blueprint(shopping_blueprint, url_prefix='/shopping')
 app.register_blueprint(kitchen_blueprint, url_prefix='/kitchen')
+app.register_blueprint(recipes_blueprint, url_prefix='/recipes')
+app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -56,6 +59,7 @@ def base():
 
 
 @app.route('/main-menu')
+@login_required
 def baseLogin():
     # flash('welcome user  ' + p.username)
     return render_template('main/index.html', Foodaboutexpired=testingdata.soon_to_expire,

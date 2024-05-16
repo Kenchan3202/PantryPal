@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;             /* 文本居中显示 */
+            font-size: 36px;                /* 字体大小 */             /* 字体颜色 */
+            font-weight: bold;              /* 字体加粗 */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* 文字阴影，增加深度感 */
+            margin-top: 20px;               /* 顶部外边距，增加与上面内容的间距 */
+            margin-bottom: 20px;            /* 底部外边距，增加与下面内容的间距 */
+            padding: 10px;                  /* 内边距，确保文字周围有足够空间 */
+        }
+
+        .recipebox {
+            margin: 20px auto; /* 水平居中且添加上下外边距 */
+            background-color: #fff;
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #dcdcdc;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            font-size: 16px;
+        }
+        th {
+            color: #555;
+        }
+        td {
+            border-bottom: 1px solid #eee;
+        }
+        .back-button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+        <button class="back-button" onclick="location.href='/recipes/recipes'">Go back</button>
+    </div>
+    <h1>recipe details</h1>
+     {% for recipe in recipes %}
+        <div class="recipebox">
+            <table>
+                <tr>
+                    <a href="{{ url_for('recipes.recipes_detail', recipe_id=recipe.id) }}">{{ recipe.name }}</a>
+                </tr>
+                <tr>
+                    <th>Serves for</th>
+                    <td>{{ recipe.serves }}</td>
+                </tr>
+                <tr>
+                    <th>Calories:</th>
+                    <td>{{ recipe.calories }} kcal</td>
+                </tr>
+                <tr>
+                    <th>Rating:</th>
+                    <td>{{ recipe.rating }} / 5</td>
+                </tr>
+            </table>
+    {#    <button class="ratebutton" onclick="rateRecipe()">Rate recipe (x/5)</button>#}
+        </div>
+    {% endfor %}
+</body>
+</html>

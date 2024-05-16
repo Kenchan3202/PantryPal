@@ -6,6 +6,18 @@
 import random
 from app import db, app
 import models
+pantryitems = [
+    {"name": "Milk", "expiry_date": "2024-05-10", 'number': '2', 'quantity': 200, 'units': 'ml', 'calories': 200},
+    {"name": "jelly", "expiry_date": "2024-05-11", 'number': '5', 'quantity': 200, 'units': 'g', 'calories': 250},
+    {"name": "pork", "expiry_date": "2024-05-12", 'number': '4', 'quantity': 200,  'units': 'g', 'calories': 350},
+    {"name": "chocolate", "expiry_date": "2024-05-12", 'number': '4', 'quantity': 200, 'units': 'g', 'calories': 360},
+    {"name": "Goat Milk", "expiry_date": "2024-05-13", 'number': '2', 'quantity': 200, 'units': 'g', 'calories': 200},
+    {"name": "Bread", "expiry_date": "2024-05-12", 'number': '2', 'quantity': 200, 'units': 'g', 'calories': 100},
+    {"name": "Apple", "expiry_date": "2024-04-28", 'number': '5', 'quantity': 200, 'units': 'g', 'calories': 60},
+    {"name": "Beef", "expiry_date": "2024-06-30", 'number': '5', 'quantity': 200, 'units': 'g', 'calories': 500},
+    {"name": "Lamb", "expiry_date": "2024-09-28", 'number': '3', 'quantity': 200, 'units': 'g', 'calories': 450},
+    {"name": "Apple juice", "expiry_date": "2024-05-04", 'number': '100', 'quantity': 200, 'units': 'ml', 'calories': 150},
+]
 
 users = [
     {"first_name": "Gillan", "last_name": "Athelstan", "email": "gathelstan0@npr.org", "password": "pO6>#*9hV",

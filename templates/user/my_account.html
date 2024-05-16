@@ -3,40 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Information Page</title>
+    <title>Account Details</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: #f7f7f7;
+            background-color: #f4f4f8;
             margin: 0;
             padding: 20px;
-            text-align: center;
-        }
-        .header, .footer {
-            background-color: #f6f6f6;
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             text-align: center;
         }
         .box {
             background-color: #fff;
-            padding: 20px;
-            margin: 20px auto;
-            width: 300px;
-            border: 1px solid #dcdcdc;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            width: 80%;
+            max-width: 600px;
             border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #dcdcdc;
         }
-        .actbutton {
+        table {
             width: 100%;
-            padding: 10px;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            font-size: 16px;
+        }
+        th {
+            color: #555;
+        }
+        td {
+            border-bottom: 1px solid #eee;
+        }
+        .action-button {
+            padding: 10px 20px;
             background-color: #0056b3;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            width: auto; /* Automatic width based on content */
+            display: block;
+            margin: 20px auto 0; /* Only margin top applied */
         }
-        .actbutton:hover {
+        .action-button:hover {
             background-color: #004494;
         }
         .sidebar {
@@ -48,7 +65,7 @@
             left: 0;
             background-color: #111;
             overflow-x: hidden;
-            transition: width 0.3s;
+            transition: 0.3s;
             padding-top: 60px;
         }
         .sidebar a {
@@ -58,6 +75,7 @@
             color: #818181;
             display: block;
             transition: 0.3s;
+            text-align: center;
         }
         .sidebar a:hover {
             color: #f1f1f1;
@@ -67,16 +85,17 @@
             top: 0;
             right: 25px;
             font-size: 36px;
-            margin-left: 50px;
         }
         .openbtn {
             font-size: 20px;
             cursor: pointer;
             color: white;
             border: none;
-            border-radius: 4px;
             background-color: #111;
             margin: 10px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
         }
     </style>
 </head>
@@ -89,55 +108,45 @@
             <a href="/pantry/items">My Pantry</a>
             <a href="/pantry/search">Food Browser</a>
             <a href="/shopping/shopping_list">Shopping List</a>
-            <a href="/kitchen/recipes">Recipes</a>
+            <a href="/recipes/recipes">Recipes</a>
             <a href="/kitchen/kitchen_main">Kitchen Main</a>
         </div>
     </div>
-    {% block content %}
-<div class="column is-6 is-offset-3">
-    <h3 class="title">Your Account</h3>
     <div class="box">
-        <table class="table">
-        <tbody>
+        <h2>Your Account Details</h2>
+        <table>
             <tr>
-                <th>Account No.</th>
+                <th>Account ID:</th>
                 <td>{{ user.id }}</td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th>Email:</th>
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-            <th>First Name</th>
-            <th>{{ user.first_name }}</th>
+                <th>First Name:</th>
+                <td>{{ user.first_name }}</td>
             </tr>
             <tr>
-            <th>Last Name</th>
-            <th>{{ user.last_name }}</th>
+                <th>Last Name:</th>
+                <td>{{ user.last_name }}</td>
             </tr>
             <tr>
-            <th>Role</th>
-            <th>{{ user.role }}</th>
+                <th>Role:</th>
+                <td>{{ user.role }}</td>
             </tr>
             <tr>
-            <th>Date of Birth</th>
-            <th>{{ user.dob }}</th>
+                <th>Date of Birth:</th>
+                <td>{{ user.dob }}</td>
             </tr>
-        </tbody>
         </table>
-        <a href="{{ url_for('users.update_password') }}" class="button is-info">Change Password</a>
+        <a href="{{ url_for('users.update_password') }}" class="action-button">Change Password</a>
     </div>
-</div>
-{% endblock %}
     <script>
-    function toggleNav() {
-        var sidebar = document.getElementById("mySidebar");
-        if (sidebar.style.width === "250px") {
-            sidebar.style.width = "0";
-        } else {
-            sidebar.style.width = "250px";
+        function toggleNav() {
+            var sidebar = document.getElementById("mySidebar");
+            sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
         }
-    }
     </script>
 </body>
 </html>

@@ -17,3 +17,7 @@ c206153: upgrade baseLogin.html, upgrade items.html, finished pantry file and sh
 
 2024.5.14
 c206153: html changes
+
+
+For the database, number of items, the foreign key from food item >> identify what kind of food(name).
+calories

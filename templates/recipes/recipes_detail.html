@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:C="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #ffffff; /* 背景色调整为浅灰蓝色 */
+            margin: 0;
+            text-align: center; /* 全局文本居中 */
+        }
+        .back-button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;}
+
+</style>
+</head>
+<body>
+<div class="navbar">
+        <button class="back-button" onclick="location.href='/recipes/recipes'">Go back</button>
+    </div>
+<div class="column is-6 is-offset-3">
+    <h3 class="title">recipe details</h3>
+    <div class="box">
+        <table class="table">
+        <tbody>
+            <tr>
+                <th>How to make it</th>
+                <td>{{ recipe.method }}</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

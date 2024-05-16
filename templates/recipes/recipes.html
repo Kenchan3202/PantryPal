@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping List</title>
+    <title>Recipe Details</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
     <style>
         body {
@@ -30,43 +30,50 @@
         header button:hover {
             background: #004494;
         }
-        .combutton {
-            background: #0056b3;
-            border: none;
+        .recipebox {
+            margin: 20px auto; /* 水平居中且添加上下外边距 */
+            background-color: #fff;
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #dcdcdc;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            font-size: 16px;
+        }
+        th {
+            color: #555;
+        }
+        td {
+            border-bottom: 1px solid #eee;
+        }
+
+        .ratebutton {
+            background: #16a085; /* 绿宝石色 */
             color: white;
             padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 0 10px;
-        }
-        .combutton:hover {
-            background: #004494;
-        }
-        .container {
-            padding: 20px;
-            background: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
-        .shopping-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #ccc;
-        }
-        .delete-button {
-            background-color: #f44336;
-            color: white;
             border: none;
-            border-radius: 4px;
-            padding: 5px 10px;
+            border-radius: 5px; /* 圆角 */
             cursor: pointer;
+            font-size: 18px; /* 字体大小 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* 添加阴影 */
+            transition: background 0.3s ease-in-out; /* 过渡效果 */
         }
-        .delete-button:hover {
-            background-color: #d32f2f;
+
+        .ratebutton:hover {
+            background: #149174; /* 鼠标悬停时的颜色变深 */
         }
+
+
         .sidebar {
             height: 100%;
             width: 0;
@@ -113,10 +120,26 @@
             background-color: #111;
             margin: 10px;
         }
+        .your-button {
+            width: 200px;
+            text-align: center;
+            padding: 4px 8px;
+            background-color: #3498db;
+            color: white;
+            font-size: 20px;
+            border-radius: 4px;
+            {#transition: background-color 0.3s ease-in-out; /* 过渡效果 */#}
+            text-decoration: none;
+        }
+
+        .your-button:hover {
+            background-color: #2980b9; /* 鼠标悬停时的背景颜色 */
+            {#box-shadow: 0 4px 8px rgba(0,0,0,0.2); /#}
+        }
     </style>
 </head>
 <body>
-    <div class="navbar">
+<div class="navbar">
         <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
         <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
@@ -127,61 +150,47 @@
             <a href="/recipes/recipes">Recipes</a>
             <a href="/kitchen/kitchen_main">Kitchen Main</a>
         </div>
+    <a href="{{ url_for('recipes.your_recipes') }}" class="your-button">your recipes</a>
     </div>
     <header>
         <button onclick="location.href='/kitchen/kitchen_main'">Kitchen</button>
         <button onclick="location.href='/shopping/shopping_list'">Shopping</button>
         <button onclick="location.href='/recipes/recipes'">Recipes</button>
     </header>
-    <div class="container">
-        <div class="shopping-item">
-            <span>Food item Image</span>
-            <span>Quantity</span>
-            <span>Calories</span>
-            <button class="delete-button">X</button>
-        </div>
-        <!-- Repeat for each item -->
+ {% for recipe in recipes %}
+    <div class="recipebox">
+        <table>
+            <tr>
+                <a href="{{ url_for('recipes.recipes_detail', recipe_id=recipe.id) }}">{{ recipe.name }}</a>
+            </tr>
+            <tr>
+                <th>Serves for</th>
+                <td>{{ recipe.serves }}</td>
+            </tr>
+            <tr>
+                <th>Calories:</th>
+                <td>{{ recipe.calories }} kcal</td>
+            </tr>
+            <tr>
+                <th>Rating:</th>
+                <td>{{ recipe.rating }} / 5</td>
+            </tr>
+        </table>
+    <button class="ratebutton" onclick="rateRecipe()">Rate recipe (x/5)</button>
     </div>
-
-
-    {% if form %}
-    <form method = "POST">
-        <div class="field">
-            <div class = "control">
-                {{ form.newItem(class = "input", placeholder = "Add new item to list")}}
-            </div>
-        </div>
-        <div class = "field">
-            <div class = "control">
-            {{ form.itemQuantity(class = "input",placeholder = "Enter item quantity")}}
-            </div>
-        </div>
-        <div class = "field">
-            <div class = "control">
-                {{ form.itemUnits(class = "input",placeholder = "Enter units of item (g or ml)")}}
-            </div>
-        </div>
-        <div>
-            {{ form.submit(class="button is-info is-centered") }}
-        </div>
-    </form>
-    {% endif %}
-
-
-    <form method = "GET" action="{{url_for('shopping.complete_shopping')}}">
-        <div>
-            <button class="combutton">Shopping complete</button>
-        </div>
-    </form>
-    <!--
-    <form action="{{url_for('shopping.add_item')}}" method="post">
-        <button type="button" onclick="addItem()">+</button>
-    </form>
-    -->
-    <script>
+{% endfor %}
+<script>
         function toggleNav() {
             var sidebar = document.getElementById("mySidebar");
-            sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+            var mainContent = document.getElementById("mainContent");
+
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+                mainContent.style.marginLeft = "0";
+            } else {
+                sidebar.style.width = "250px";
+                mainContent.style.marginLeft = "250px";
+            }
         }
     </script>
 </body>

@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 
 import datetime
 
+from flask_login import login_required
+
 import testingdata
 
 pantry_blueprint = Blueprint('pantry', __name__, template_folder='templates')
@@ -10,6 +12,7 @@ print("Template folder:", pantry_blueprint.template_folder)
 
 
 @pantry_blueprint.route('/items', methods=['GET', 'POST'])
+@login_required
 def items_view():
     expiry_dates = set()
 
@@ -44,6 +47,7 @@ def items_view():
 
 
 @pantry_blueprint.route('/create_item', methods=['GET', 'POST'])
+@login_required
 def create_item():
     if request.method == 'POST':
         # Here, you can process the form data, but since there's no database,
@@ -63,6 +67,7 @@ def create_item():
 
 
 @pantry_blueprint.route('/search', methods=['GET', 'POST'])
+@login_required
 def search():
     item_temp = ""  # Initialize the variable to hold the result
     item_info = ""

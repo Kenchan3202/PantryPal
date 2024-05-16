@@ -3,7 +3,7 @@ from os import abort
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 
-import recipe_util
+import recipes.recipe_util
 
 import testingdata
 

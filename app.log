@@ -1249,3 +1249,48 @@ FROM pantryitems
 WHERE pantryitems.user_id = ?]
 [parameters: (10,)]
 (Background on this error at: https://sqlalche.me/e/20/e3q8)
+[2024-05-17 20:40:50,092] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /pantry/search [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\pantry\views.py", line 102, in search
+    return render_template('pantry/search.html', items=items, pagination=pagination)
+UnboundLocalError: local variable 'pagination' referenced before assignment
+[2024-05-17 20:40:53,094] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /pantry/search [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\pantry\views.py", line 102, in search
+    return render_template('pantry/search.html', items=items, pagination=pagination)
+UnboundLocalError: local variable 'pagination' referenced before assignment
+[2024-05-17 20:41:34,378] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /pantry/search [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\pantry\views.py", line 104, in search
+    return render_template('pantry/search.html', items=items, pagination=pagination)
+UnboundLocalError: local variable 'pagination' referenced before assignment

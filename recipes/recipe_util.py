@@ -78,6 +78,9 @@ def create_recipe_rating(user_id: int, recipe_id: int, rating: int) -> None:
     recipe.update_rating()
 
 
+# Method to delete an instance of a recipe. First all Qfooditems related to the recipe's ingredients are removed.
+# All ingredients and ratings which are related to the given recipe are deleted automatically db cascading.
+# Takes recipe object to be deleted as parameter.
 def delete_recipe_instance(recipe: Recipe) -> None:
     qfoodids = [ingredient.qfood_id for ingredient in recipe.ingredients]
     for qfood_id in qfoodids:

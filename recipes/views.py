@@ -176,7 +176,6 @@ def edit_recipes(recipe_id):
 @recipes_blueprint.route('/delete_recipe/<int:recipe_id>')
 @login_required
 def delete_recipe(recipe_id):
-
     recipe_to_delete = Recipe.query.filter_by(id=recipe_id).first()
     delete_recipe_instance(recipe_to_delete)
     flash('Recipe deleted successfully!', 'success')

@@ -1,4 +1,4 @@
-
+import datetime
 import os
 from logging.handlers import RotatingFileHandler
 import logging
@@ -6,9 +6,9 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_user, logout_user, login_required, current_user, LoginManager
+
 load_dotenv()
 
-import testingdata
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -73,13 +73,31 @@ def base():
 @app.route('/main-menu')
 @login_required
 def baseLogin():
-    # flash('welcome user  ' + p.username)
-    return render_template('main/index.html', Foodaboutexpired=testingdata.soon_to_expire,
-                           Foodexpired=testingdata.expired, expiry_date=testingdata.expiry_date,
-                           used_calories=testingdata.used_calories,
-                           used_items=testingdata.used_items, soon_to_expire_seven=testingdata.soon_to_expire_seven,
-                           today=testingdata.today)
+    from models import PantryItem
 
+    user_id = current_user.id
+
+    today = datetime.date.today()
+    seven_days_later = today + datetime.timedelta(days=7)
+
+    # 获取所有当前用户的 PantryItem
+    pantry_items = PantryItem.query.filter_by(user_id=user_id).all()
+
+    soon_to_expire_seven = []
+    used_items = []
+
+    for item in pantry_items:
+        try:
+            expiry_date = datetime.datetime.strptime(item.get_expiry(), "%Y-%m-%d").date()
+        except ValueError:
+            continue  # 处理错误日期格式
+
+        if today <= expiry_date <= seven_days_later:
+            soon_to_expire_seven.append(item)
+        if expiry_date <= today:
+            used_items.append(item)
+
+    return render_template('main/index.html', soon_to_expire_seven=soon_to_expire_seven, used_items=used_items, today=today)
 
 if __name__ == '__main__':
     app.run(debug=True)

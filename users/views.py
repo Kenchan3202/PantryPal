@@ -104,3 +104,4 @@ def logout():
     session['logged_in'] = False
     app.logger.info(user_info)
     return redirect(url_for('home'))
+

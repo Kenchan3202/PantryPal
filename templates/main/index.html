@@ -200,7 +200,7 @@
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">Welcome to PantryPal <i class="fas fa-box-open"></i></h1>
-                <h2 class="subtitle">Today's Date: {{today}}</h2>
+                <h2 class="subtitle">Today's Date: {{ today }}</h2>
             </div>
         </div>
     </section>
@@ -208,8 +208,8 @@
     <div class="card-container">
         {% for item in soon_to_expire_seven %}
         <div class="not_expire_card">
-            <h3>{{ item.name }}</h3>
-            <p>expire date: {{ item.expiry_date }}</p>
+            <h3>{{ item.qfooditem.fooditem.name }}</h3>
+            <p>Expire date: {{ item.expiry }}</p>
         </div>
         {% endfor %}
     </div>
@@ -217,32 +217,16 @@
     <div class="card-container">
         {% for item in used_items %}
         <div class="used_card">
-            <h3>{{ item.name }}</h3>
+            <h3>{{ item.qfooditem.fooditem.name }}</h3>
             <p>Calories: {{ item.calories }}</p>
         </div>
         {% endfor %}
-        </div>
-    <!--</div>
-        <div class="table-container">
-        <h3>You use these foods today!</h3>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Calories</th>
-            </tr>
-            {% for item in used_items %}
-            <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.calories }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>-->
+    </div>
     <div class="footer">
         <p>Copyright © 2024</p>
     </div>
 
-      <script>
+    <script>
         function toggleNav() {
             var sidebar = document.getElementById("mySidebar");
             var mainContent = document.getElementById("mainContent");

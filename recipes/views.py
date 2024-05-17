@@ -77,7 +77,7 @@ def recipes():
     return render_template('recipes/recipes.html', recipes=recipes)
 
 
-# view own recipe
+# view own recipes
 @recipes_blueprint.route('/your_recipes')
 @login_required
 def your_recipes():
@@ -86,7 +86,7 @@ def your_recipes():
     return render_template('recipes/your_recipes.html', recipes=recipes)
 
 
-# view descriptions of recipe
+# view descriptions of recipes
 @recipes_blueprint.route('/recipes_detail/<int:recipe_id>')
 @login_required
 def recipes_detail(recipe_id):
@@ -115,7 +115,7 @@ def recipes_detail(recipe_id):
                                recipes_with_stock_check=recipes_with_stock_check)
 
 
-# add recipe
+# add recipes
 @recipes_blueprint.route('/add_recipes', methods=['GET', 'POST'])
 @login_required
 def add_recipes():
@@ -140,7 +140,7 @@ def add_recipes():
         return render_template('recipes/add_recipes.html')
 
 
-# edit own recipe
+# edit own recipes
 @recipes_blueprint.route('/edit_recipes/<int:recipe_id>', methods=['GET', 'POST'])
 @login_required
 def edit_recipes(recipe_id):
@@ -172,7 +172,7 @@ def edit_recipes(recipe_id):
         return render_template('recipes/edit_recipes.html', recipe=recipe, ingredients=ingredients)
 
 
-# delete own recipe
+# delete own recipes
 @recipes_blueprint.route('/delete_recipe/<int:recipe_id>')
 @login_required
 def delete_recipe(recipe_id):
@@ -182,7 +182,7 @@ def delete_recipe(recipe_id):
     return redirect(url_for('recipes.recipes'))
 
 
-# rate own recipe
+# rate recipe
 @recipes_blueprint.route('/rate_recipe/<int:recipe_id>', methods=['POST'])
 @login_required
 def rate_recipe(recipe_id):

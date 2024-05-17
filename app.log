@@ -1171,3 +1171,81 @@ sqlalchemy.exc.IntegrityError: (raised as a result of Query-invoked autoflush; c
 [SQL: UPDATE ingredients SET qfood_id=? WHERE ingredients.id = ?]
 [parameters: (None, 20)]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
+[2024-05-17 16:51:32,933] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:42} INFO - User registered: c2065153@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-17 16:51:45,692] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: c2065153@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-17 18:18:50,977] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:105} INFO - User logged out: c2065153@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-17 18:19:54,002] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: ljirek8@addthis.com, IP: 127.0.0.1
+[2024-05-17 18:19:56,202] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /pantry/items [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\pantry\views.py", line 61, in items_view
+    expiry_date = datetime.datetime.strptime(item.get_expiry(), "%Y-%m-%d").date()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data '18/08/2024' does not match format '%Y-%m-%d'
+[2024-05-17 18:45:27,636] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /pantry/items [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\default.py", line 922, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: pantryitems.calories
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\pantry\views.py", line 19, in items_view
+    pantry_items = PantryItem.query.filter_by(user_id=user_id).all()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\query.py", line 2693, in all
+    return self._iter().all()  # type: ignore
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\query.py", line 2847, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 2308, in execute
+    return self._execute_internal(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 2190, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\base.py", line 1639, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\base.py", line 2343, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\default.py", line 922, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: pantryitems.calories
+[SQL: SELECT pantryitems.id AS pantryitems_id, pantryitems.user_id AS pantryitems_user_id, pantryitems.qfood_id AS pantryitems_qfood_id, pantryitems.expiry AS pantryitems_expiry, pantryitems.calories AS pantryitems_calories 
+FROM pantryitems 
+WHERE pantryitems.user_id = ?]
+[parameters: (10,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)

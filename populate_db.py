@@ -3,22 +3,27 @@
 
 # File to add sample data to database instance for testing.
 
+# Authored by: Joe Hare & Keirav Shah
+# latest edition: 16/05/2024
+
+# File to add sample data to database instance for testing.
+
 import random
 from app import db, app
 import models
 
 
 pantryitems = [
-    {"name": "Milk", "expiry_date": "2024-05-10", 'number': '2', 'quantity': 200, 'units': 'ml', 'calories': 200},
-    {"name": "jelly", "expiry_date": "2024-05-11", 'number': '5', 'quantity': 200, 'units': 'g', 'calories': 250},
-    {"name": "pork", "expiry_date": "2024-05-12", 'number': '4', 'quantity': 200,  'units': 'g', 'calories': 350},
-    {"name": "chocolate", "expiry_date": "2024-05-12", 'number': '4', 'quantity': 200, 'units': 'g', 'calories': 360},
-    {"name": "Goat Milk", "expiry_date": "2024-05-13", 'number': '2', 'quantity': 200, 'units': 'g', 'calories': 200},
-    {"name": "Bread", "expiry_date": "2024-05-12", 'number': '2', 'quantity': 200, 'units': 'g', 'calories': 100},
-    {"name": "Apple", "expiry_date": "2024-04-28", 'number': '5', 'quantity': 200, 'units': 'g', 'calories': 60},
-    {"name": "Beef", "expiry_date": "2024-06-30", 'number': '5', 'quantity': 200, 'units': 'g', 'calories': 500},
-    {"name": "Lamb", "expiry_date": "2024-09-28", 'number': '3', 'quantity': 200, 'units': 'g', 'calories': 450},
-    {"name": "Apple juice", "expiry_date": "2024-05-04", 'number': '100', 'quantity': 200, 'units': 'ml', 'calories': 150},
+    {"name": "Milk", "expiry_date": "2024-05-10", 'number': '2', 'quantity': 200, 'units': 'ml', 'calories': 200, 'description': 'Dairy milk'},
+    {"name": "jelly", "expiry_date": "2024-05-11", 'number': '5', 'quantity': 200, 'units': 'g', 'calories': 250, 'description': 'Fruit jelly'},
+    {"name": "pork", "expiry_date": "2024-05-12", 'number': '4', 'quantity': 200,  'units': 'g', 'calories': 350, 'description': 'Pork meat'},
+    {"name": "chocolate", "expiry_date": "2024-05-12", 'number': '4', 'quantity': 200, 'units': 'g', 'calories': 360, 'description': 'Dark chocolate'},
+    {"name": "Goat Milk", "expiry_date": "2024-05-13", 'number': '2', 'quantity': 200, 'units': 'g', 'calories': 200, 'description': 'Goat milk'},
+    {"name": "Bread", "expiry_date": "2024-05-12", 'number': '2', 'quantity': 200, 'units': 'g', 'calories': 100, 'description': 'Whole grain bread'},
+    {"name": "Apple", "expiry_date": "2024-04-28", 'number': '5', 'quantity': 200, 'units': 'g', 'calories': 60, 'description': 'Fresh apple'},
+    {"name": "Beef", "expiry_date": "2024-06-30", 'number': '5', 'quantity': 200, 'units': 'g', 'calories': 500, 'description': 'Beef meat'},
+    {"name": "Lamb", "expiry_date": "2024-09-28", 'number': '3', 'quantity': 200, 'units': 'g', 'calories': 450, 'description': 'Lamb meat'},
+    {"name": "Apple juice", "expiry_date": "2024-05-04", 'number': '100', 'quantity': 200, 'units': 'ml', 'calories': 150, 'description': 'Fresh apple juice'},
 ]
 
 users = [
@@ -45,23 +50,62 @@ users = [
 ]
 userObjects = []
 
-foodItems = ["Apple", "Tofu", "Spaghetti", "Eggs",
-             "Butter", "Water", "Cornstarch",
-             "Flour", "Jasmine Rice", "Basmati Rice",
-             "Vegetable Oil", "Olive Oil", "Cocoa Powder",
-             "Oats", "Chicken Thigh", "Chicken breast",
-             "Minced Beef", "Minced Pork", "Duck breast",
-             "Cinnamon", "Garlic", "Onion",
-             "Shallot", "Spring Onion", "Galangal",
-             "Ginger", "Rendang", "Anchovies",
-             "Peanuts", "Coconut", "Salmon Fillet",
-             "White Miso", "Red Miso", "Parsnip",
-             "Pork Loin", "Peanut Oil", "Carrot",
-             "Dashi", "Beef Chuck", "Pesto", 'Tomatoes',
-             'Fresh Mozzarella', 'Fresh Basil Leaves',
-             'Extra Virgin Olive Oil', 'Balsamic Vinegar',
-             'Salt', 'Pepper', 'Banana', 'Peanut Butter',
-             'Milk', 'Eggs', 'Butter', 'Avocado', 'Lime']
+foodItems = [
+    {"name": "Apple", "description": "Fresh apple"},
+    {"name": "Tofu", "description": "Soft tofu"},
+    {"name": "Spaghetti", "description": "Dry spaghetti pasta"},
+    {"name": "Eggs", "description": "Chicken eggs"},
+    {"name": "Butter", "description": "Salted butter"},
+    {"name": "Water", "description": "Bottled water"},
+    {"name": "Cornstarch", "description": "Corn starch powder"},
+    {"name": "Flour", "description": "All-purpose flour"},
+    {"name": "Jasmine Rice", "description": "Fragrant jasmine rice"},
+    {"name": "Basmati Rice", "description": "Long-grain basmati rice"},
+    {"name": "Vegetable Oil", "description": "Cooking vegetable oil"},
+    {"name": "Olive Oil", "description": "Extra virgin olive oil"},
+    {"name": "Cocoa Powder", "description": "Unsweetened cocoa powder"},
+    {"name": "Oats", "description": "Rolled oats"},
+    {"name": "Chicken Thigh", "description": "Chicken thigh meat"},
+    {"name": "Chicken breast", "description": "Chicken breast meat"},
+    {"name": "Minced Beef", "description": "Ground beef"},
+    {"name": "Minced Pork", "description": "Ground pork"},
+    {"name": "Duck breast", "description": "Duck breast meat"},
+    {"name": "Cinnamon", "description": "Ground cinnamon"},
+    {"name": "Garlic", "description": "Fresh garlic"},
+    {"name": "Onion", "description": "Yellow onion"},
+    {"name": "Shallot", "description": "Fresh shallot"},
+    {"name": "Spring Onion", "description": "Green onions"},
+    {"name": "Galangal", "description": "Fresh galangal"},
+    {"name": "Ginger", "description": "Fresh ginger root"},
+    {"name": "Rendang", "description": "Rendang curry paste"},
+    {"name": "Anchovies", "description": "Salted anchovies"},
+    {"name": "Peanuts", "description": "Roasted peanuts"},
+    {"name": "Coconut", "description": "Grated coconut"},
+    {"name": "Salmon Fillet", "description": "Salmon fish fillet"},
+    {"name": "White Miso", "description": "White miso paste"},
+    {"name": "Red Miso", "description": "Red miso paste"},
+    {"name": "Parsnip", "description": "Fresh parsnip"},
+    {"name": "Pork Loin", "description": "Pork loin meat"},
+    {"name": "Peanut Oil", "description": "Cooking peanut oil"},
+    {"name": "Carrot", "description": "Fresh carrot"},
+    {"name": "Dashi", "description": "Dashi stock"},
+    {"name": "Beef Chuck", "description": "Beef chuck roast"},
+    {"name": "Pesto", "description": "Basil pesto sauce"},
+    {"name": 'Tomatoes', "description": "Fresh tomatoes"},
+    {"name": 'Fresh Mozzarella', "description": "Fresh mozzarella cheese"},
+    {"name": 'Fresh Basil Leaves', "description": "Fresh basil leaves"},
+    {"name": 'Extra Virgin Olive Oil', "description": "High-quality olive oil"},
+    {"name": 'Balsamic Vinegar', "description": "Aged balsamic vinegar"},
+    {"name": 'Salt', "description": "Table salt"},
+    {"name": 'Pepper', "description": "Black pepper"},
+    {"name": 'Banana', "description": "Fresh banana"},
+    {"name": 'Peanut Butter', "description": "Creamy peanut butter"},
+    {"name": 'Milk', "description": "Dairy milk"},
+    {"name": 'Eggs', "description": "Chicken eggs"},
+    {"name": 'Butter', "description": "Salted butter"},
+    {"name": 'Avocado', "description": "Fresh avocado"},
+    {"name": 'Lime', "description": "Fresh lime"}
+]
 foodItemObjects = []
 
 recipes = [
@@ -114,7 +158,7 @@ def add_sample_users():
 
 def add_food_items():
     for food in foodItems:
-        new_food = models.FoodItem(food_name=food)
+        new_food = models.FoodItem(food_name=food['name'], food_description=food['description'])
         db.session.add(new_food)
         db.session.flush()
         db.session.refresh(new_food)
@@ -135,9 +179,10 @@ def create_quantified_food_item(food_item_id: int, quantity=0) -> models.Quantif
 
 
 def create_pantry_item(user_id: int) -> models.PantryItem:
-    expiries = ('05/08/2024', '10/11/2024', '18/08/2024', '02/04/2024', '01/01/2025', '28/03/2025', '19/09/2024')
+    expiries = ('2024-05-08', '2024-10-11', '2024-08-18', '2024-04-02', '2025-01-01', '2025-03-28', '2024-09-19')
     qfood_item = create_quantified_food_item(random.choice(foodItemObjects).id)
-    pantry_item = models.PantryItem(user_id=user_id, qfood_id=qfood_item.id, expiry=random.choice(expiries))
+    calories = random.randint(50, 500)
+    pantry_item = models.PantryItem(user_id=user_id, qfood_id=qfood_item.id, expiry=random.choice(expiries), calories=calories)
     db.session.add(pantry_item)
     db.session.commit()
     return pantry_item
@@ -247,3 +292,4 @@ if __name__ == '__main__':
         models.init_db()
         main()
         db.session.commit()
+

@@ -151,3 +151,43 @@
 </body>
 </html>
 
+
+
+
+class PantryItem(db.Model):
+    __tablename__ = 'pantryitems'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
+    qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id), nullable=False)
+    expiry = db.Column(db.String(10), nullable=True)
+
+    def __init__(self, user_id, qfood_id, expiry):
+        self.user_id = user_id
+        self.qfood_id = qfood_id
+        self.expiry = expiry
+
+    def __repr__(self) -> str:
+        return f'<{self.qfooditem.fooditem.name}, {self.qfooditem.quantity}{self.qfooditem.units}, {self.expiry}>'
+
+    def get_expiry(self) -> str:
+        return self.expiry
+
+    def set_expiry(self, expiry: str) -> None:
+        self.expiry = expiry
+        db.session.commit()
+
+    def get_quantity(self) -> float:
+        return self.qfooditem.get_quantity()
+
+    def get_units(self) -> str:
+        return self.qfooditem.get_units()
+
+    def set_quantity(self, quantity: float) -> None:
+        self.qfooditem.qfood.set_qauntity(quantity)
+
+    def set_units(self, units: str) -> None:
+        self.qfooditem.set_units(units)
+
+    def get_name(self) -> str:
+        return self.qfooditem.get_name()

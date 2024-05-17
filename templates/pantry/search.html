@@ -115,8 +115,8 @@
     </div>
     <div class="container">
         <h2>Search Food</h2>
-        <form action="/main/search" method="post">
-            Food: <input type="text" name="itemname"><br>
+        <form action="/pantry/search" method="post">
+            Food: <input type="text" name="itemname" required><br>
             <button type="submit" class="actionbtn">Search</button>
         </form>
         <div class="box">
@@ -124,7 +124,8 @@
             <p>{{ itemtemp }}</p>
         </div>
         <div class="box">
-            <h2>Food Description</h2><p>{{ iteminfo }}</p>
+            <h2>Food Description</h2>
+            <p>{{ iteminfo }}</p>
         </div>
     </div>
     <script>
@@ -139,4 +140,5 @@
     </script>
 </body>
 </html>
+
 

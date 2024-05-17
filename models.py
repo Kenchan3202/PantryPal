@@ -204,15 +204,20 @@ class FoodItem(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.String, nullable=False)
 
     # Declaring relationships to other tables
     quantified_food_item = db.relationship('QuantifiedFoodItem', backref='fooditem')
 
-    def __init__(self, food_name):
+    def __init__(self, food_name, food_description):
         self.name = food_name
+        self.description = food_description
 
     def get_name(self) -> str:
         return self.name
+
+    def get_description(self) -> str:
+        return self.description
 
 
 class QuantifiedFoodItem(db.Model):
@@ -325,14 +330,16 @@ class PantryItem(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id), nullable=False)
     expiry = db.Column(db.String(10), nullable=True)
+    calories = db.Column(db.Integer, nullable=True)
 
-    def __init__(self, user_id, qfood_id, expiry):
+    def __init__(self, user_id, qfood_id, expiry, calories):
         self.user_id = user_id
         self.qfood_id = qfood_id
         self.expiry = expiry
+        self.calories = calories
 
     def __repr__(self) -> str:
-        return f'<{self.qfooditem.fooditem.name}, {self.qfooditem.quantity}{self.qfooditem.units}, {self.expiry}>'
+        return f'<{self.qfooditem.fooditem.name}, {self.qfooditem.quantity}{self.qfooditem.units}, {self.expiry}, {self.calories} cal>'
 
     def get_expiry(self) -> str:
         return self.expiry
@@ -348,13 +355,16 @@ class PantryItem(db.Model):
         return self.qfooditem.get_units()
 
     def set_quantity(self, quantity: float) -> None:
-        self.qfooditem.qfood.set_qauntity(quantity)
+        self.qfooditem.set_quantity(quantity)
 
     def set_units(self, units: str) -> None:
         self.qfooditem.set_units(units)
 
     def get_name(self) -> str:
         return self.qfooditem.get_name()
+
+    def get_calories(self) -> int:
+        return self.calories
 
 
 class WastedFood(db.Model):

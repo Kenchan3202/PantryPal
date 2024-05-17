@@ -67,7 +67,8 @@ def create_or_get_food_item(food_name):
 
 
 # Method to rate a recipe. Takes user, recipe and numeric value of rating as parameters.
-def rate_recipe(user_id: int, recipe_id: int, rating: int) -> None:
+# Recipe's rating value is updated as well.
+def create_recipe_rating(user_id: int, recipe_id: int, rating: int) -> None:
     rating = models.Rating(user_id=user_id, recipe_id=recipe_id, rating=rating)
     db.session.add(rating)
     db.session.flush()

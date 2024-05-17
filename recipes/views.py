@@ -1,19 +1,16 @@
 from os import abort
-
+from app import db, app
+from models import Recipe, Ingredient, QuantifiedFoodItem, Rating
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
 from sqlalchemy import func
 
-import testingdata
-from recipes import recipe_util
 from recipes.forms import RecipeForm
-from recipes.recipe_util import create_recipe, create_or_get_food_item, create_and_get_qfid
+from recipes.recipe_util import create_recipe, create_or_get_food_item, create_and_get_qfid, create_recipe_rating
 
 recipes_blueprint = Blueprint('recipes', __name__, template_folder='templates')
 
 print("Template folder:", recipes_blueprint.template_folder)
-from app import db, app
-from models import Recipe, Ingredient, QuantifiedFoodItem, Rating
 
 
 # filter system to sort recipes based on name, calories, rating, etc.
@@ -61,6 +58,7 @@ def recipes():
 
     return render_template('recipes/recipes.html', recipes=recipes)
 
+
 # view own recipe
 @recipes_blueprint.route('/your_recipes')
 @login_required
@@ -69,6 +67,7 @@ def your_recipes():
     recipes = Recipe.query.filter_by(user_id=user_id).all()
     return render_template('recipes/your_recipes.html', recipes=recipes)
 
+
 # view descriptions of recipe
 @recipes_blueprint.route('/recipes_detail/<int:recipe_id>')
 @login_required
@@ -76,6 +75,7 @@ def recipes_detail(recipe_id):
     recipe = Recipe.query.get(recipe_id)
     ingredients = Ingredient.query.filter_by(recipe_id=recipe_id).all()
     return render_template('recipes/recipes_detail.html', recipe=recipe, ingredients=ingredients)
+
 
 # add recipe
 @recipes_blueprint.route('/add_recipes', methods=['GET', 'POST'])
@@ -100,6 +100,7 @@ def add_recipes():
         return redirect(url_for('recipes.recipes'))  # 确保这个重定向到正确的视图
     else:
         return render_template('recipes/add_recipes.html')
+
 
 # edit own recipe
 @recipes_blueprint.route('/edit_recipes/<int:recipe_id>', methods=['GET', 'POST'])
@@ -132,6 +133,7 @@ def edit_recipes(recipe_id):
         ingredients = [(i.qfooditem.fooditem.name, i.qfooditem.quantity, i.qfooditem.units) for i in recipe.ingredients]
         return render_template('recipes/edit_recipes.html', recipe=recipe, ingredients=ingredients)
 
+
 # delete own recipe
 @recipes_blueprint.route('/delete_recipe/<int:recipe_id>')
 @login_required
@@ -152,6 +154,7 @@ def delete_recipe(recipe_id):
     flash('Recipe deleted successfully!', 'success')
     return redirect(url_for('recipes.recipes'))
 
+
 # rate own recipe
 @recipes_blueprint.route('/rate_recipe/<int:recipe_id>', methods=['POST'])
 @login_required
@@ -164,24 +167,11 @@ def rate_recipe(recipe_id):
     # Find existing rating or create a new one
     rating = Rating.query.filter_by(user_id=current_user.id, recipe_id=recipe_id).first()
     if rating:
-        rating.rating = int(rating_value)
+        rating.set_rating(int(rating_value))
         flash('Your rating has been updated!', 'info')
     else:
-        rating = Rating(user_id=current_user.id, recipe_id=recipe_id, rating=int(rating_value))
-        db.session.add(rating)
+        create_recipe_rating(user_id=current_user.id, recipe_id=recipe_id, rating=int(rating_value))
         flash('Thank you for rating!', 'success')
-
-    db.session.commit()
-
-    # Calculate the new average rating
-    new_avg_rating = db.session.query(func.avg(Rating.rating)).filter(Rating.recipe_id == recipe_id).scalar()
-    new_avg_rating = round(new_avg_rating, 1) if new_avg_rating else 0
-
-    # Update the recipe's rating
-    recipe = Recipe.query.get(recipe_id)
-    recipe.rating = new_avg_rating
-    db.session.commit()
-
     return redirect(url_for('recipes.recipes', recipe_id=recipe_id))
 
 

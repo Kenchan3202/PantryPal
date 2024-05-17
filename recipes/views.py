@@ -17,15 +17,21 @@ print("Template folder:", recipes_blueprint.template_folder)
 @recipes_blueprint.route('/recipes', methods=['GET'])
 @login_required
 def recipes():
-    # 获取排序和筛选参数
-    sort_by = request.args.get('sort_by', 'name')  # 默认按名称排序
+    can_make_recipe_filter = request.args.get('can_make', type=bool)
+    sort_by = request.args.get('sort_by', 'name')
     min_calories = request.args.get('min_calories', type=int)
     max_calories = request.args.get('max_calories', type=int)
     min_rating = request.args.get('min_rating', type=int)
     ingredient_filter = request.args.get('ingredient')
     serves_filter = request.args.get('serves', type=int)
 
-    # 开始构建查询
+    # 获取用户的食材ID列表
+    user_food_id_list = []
+    user_pantry = PantryItem.query.filter_by(user_id=current_user.id).all()
+    for user_ingredient in user_pantry:
+        qfi = QuantifiedFoodItem.query.filter_by(id=user_ingredient.qfood_id).first()
+        user_food_id_list.append(qfi.food_id)
+
     query = Recipe.query
 
     # 筛选卡路里范围
@@ -56,27 +62,18 @@ def recipes():
     # 执行查询
     recipes = query.all()
 
-    user_food_id_list = []
-    user_pantry = PantryItem.query.filter_by(user_id=current_user.id).all()
-    for user_ingredient in user_pantry:
-        qfi = QuantifiedFoodItem.query.filter_by(id=user_ingredient.qfood_id).first()
-        user_food_id_list.append(qfi.food_id)
+    # 检查哪些食谱用户可以做
+    if can_make_recipe_filter:
+        filtered_recipes = []
+        for recipe in recipes:
+            ingredient_food_id_list = [QuantifiedFoodItem.query.filter_by(id=ingredient.qfood_id).first().food_id
+                                       for ingredient in recipe.ingredients]
+            can_make_recipe = all(id in user_food_id_list for id in ingredient_food_id_list)
+            if can_make_recipe:
+                filtered_recipes.append(recipe)
+        recipes = filtered_recipes
 
-    recipes_with_stock_check = []
-
-    for recipe in recipes:
-        ingredient_food_id_list = []
-        for ingredient in recipe.ingredients:
-            qfi = QuantifiedFoodItem.query.filter_by(id=ingredient.qfood_id).first()
-            ingredient_food_id_list.append(qfi.food_id)
-        can_make_recipe = True
-        for id in ingredient_food_id_list:
-            if id not in user_food_id_list:
-                can_make_recipe = False
-        recipes_with_stock_check.append({"Recipe": recipe,
-                                         "Can be made": can_make_recipe})
-
-    return render_template('recipes/recipes.html', recipes=recipes, recipes_with_stock_check=recipes_with_stock_check)
+    return render_template('recipes/recipes.html', recipes=recipes)
 
 
 # view own recipe
@@ -94,7 +91,27 @@ def your_recipes():
 def recipes_detail(recipe_id):
     recipe = Recipe.query.get(recipe_id)
     ingredients = Ingredient.query.filter_by(recipe_id=recipe_id).all()
-    return render_template('recipes/recipes_detail.html', recipe=recipe, ingredients=ingredients)
+
+    user_food_id_list = []
+    user_pantry = PantryItem.query.filter_by(user_id=current_user.id).all()
+    for user_ingredient in user_pantry:
+        qfi = QuantifiedFoodItem.query.filter_by(id=user_ingredient.qfood_id).first()
+        user_food_id_list.append(qfi.food_id)
+
+    recipes_with_stock_check = []
+
+    ingredient_food_id_list = []
+    for ingredient in recipe.ingredients:
+        qfi = QuantifiedFoodItem.query.filter_by(id=ingredient.qfood_id).first()
+        ingredient_food_id_list.append(qfi.food_id)
+    can_make_recipe = True
+    for id in ingredient_food_id_list:
+        if id not in user_food_id_list:
+            can_make_recipe = False
+    recipes_with_stock_check.append({"Recipe": recipe,
+                                     "Can be made": can_make_recipe})
+    return render_template('recipes/recipes_detail.html', recipe=recipe, ingredients=ingredients,
+                               recipes_with_stock_check=recipes_with_stock_check)
 
 
 # add recipe
@@ -126,7 +143,7 @@ def add_recipes():
 @recipes_blueprint.route('/edit_recipes/<int:recipe_id>', methods=['GET', 'POST'])
 @login_required
 def edit_recipes(recipe_id):
-    recipe = Recipe.query.get_or_404(recipe_id)  # 从数据库获取特定食谱
+    recipe = Recipe.query.get_or_404(recipe_id)
     if request.method == 'POST':
         recipe.name = request.form['name']
         recipe.method = request.form['method']

@@ -73,7 +73,6 @@
             background: #149174; /* 鼠标悬停时的颜色变深 */
         }
 
-
         .sidebar {
             height: 100%;
             width: 0;
@@ -123,18 +122,17 @@
         .your-button {
             width: 200px;
             text-align: center;
-            padding: 4px 8px;
+            padding: 10px 20px;
             background-color: #3498db;
             color: white;
             font-size: 20px;
             border-radius: 4px;
-            {#transition: background-color 0.3s ease-in-out; /* 过渡效果 */#}
             text-decoration: none;
+            transition: background-color 0.3s ease-in-out; /* 过渡效果 */
         }
 
         .your-button:hover {
             background-color: #2980b9; /* 鼠标悬停时的背景颜色 */
-            {#box-shadow: 0 4px 8px rgba(0,0,0,0.2); /#}
         }
 
         .rate-form {
@@ -145,41 +143,47 @@
             border-radius: 4px;
             margin-right: 10px;
         }
-        h3{
-            color:#E1DCDC;
+        h3 {
+            color: #E1DCDC;
         }
     </style>
 </head>
 <body>
 <div class="navbar">
-        <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
-        <div id="mySidebar" class="sidebar">
-            <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
-            <a href="/main-menu">Main</a>
-            <a href="/pantry/items">My Pantry</a>
-            <a href="/pantry/search">Food Browser</a>
-            <a href="/shopping/shopping_list">Shopping List</a>
-            <a href="/recipes/recipes">Recipes</a>
-            <a href="/kitchen/kitchen_main">Kitchen Main</a>
-        </div>
+    <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
+        <a href="/main-menu">Main</a>
+        <a href="/pantry/items">My Pantry</a>
+        <a href="/pantry/search">Food Browser</a>
+        <a href="/shopping/shopping_list">Shopping List</a>
+        <a href="/recipes/recipes">Recipes</a>
+        <a href="/kitchen/kitchen_main">Kitchen Main</a>
+    </div>
     <a href="{{ url_for('recipes.your_recipes') }}" class="your-button">My Recipes</a>
     <a href="{{ url_for('recipes.add_recipes') }}" class="your-button">Create Recipes</a>
-    </div>
-    <header>
-        <button onclick="location.href='/kitchen/kitchen_main'">Kitchen</button>
-        <button onclick="location.href='/shopping/shopping_list'">Shopping</button>
-        <button onclick="location.href='/recipes/recipes'">Recipes</button>
-    </header>
+</div>
+<header>
+    <button onclick="location.href='/kitchen/kitchen_main'">Kitchen</button>
+    <button onclick="location.href='/shopping/shopping_list'">Shopping</button>
+    <button onclick="location.href='/recipes/recipes'">Recipes</button>
+</header>
 <div id="filterSidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeFilterNav()">×</a>
-    <h2>Filter & Sort Recipes</h2>
     <form action="{{ url_for('recipes.recipes') }}" method="get">
+        <h2>Filter & Sort Recipes</h2>
         <h3>Sort by:</h3>
         <select name="sort_by">
             <option value="name">Name</option>
             <option value="calories">Calories</option>
             <option value="rating">Rating</option>
         </select>
+
+        <h3>Filter by Can Make:</h3>
+        <label>
+            <input type="checkbox" name="can_make" value="1" style="margin-bottom: 20px;">
+            Can Make
+        </label>
 
         <h3>Filter by Calories:</h3>
         <input type="number" name="min_calories" placeholder="Min Calories" style="margin-bottom: 10px;">
@@ -200,66 +204,63 @@
 
 <button class="openbtn" onclick="openFilterNav()">☰ Filter & Sort</button>
 
- {% for recipe_with_stock in recipes_with_stock_check %}
+{% for recipe in recipes %}
 <div class="recipebox">
     <h2 class="recipe-name">
-        <a href="{{ url_for('recipes.recipes_detail', recipe_id=recipe_with_stock["Recipe"].id) }}" style="text-decoration: none; color: inherit;">
-            {{ recipe_with_stock["Recipe"].name }}
+        <a href="{{ url_for('recipes.recipes_detail', recipe_id=recipe.id) }}" style="text-decoration: none; color: inherit;">
+            {{ recipe.name }}
         </a>
     </h2>
     <table>
         <tr>
             <th>Serves:</th>
-            <td>{{ recipe_with_stock["Recipe"].serves }}</td>
+            <td>{{ recipe.serves }}</td>
         </tr>
         <tr>
             <th>Calories:</th>
-            <td>{{ recipe_with_stock["Recipe"].calories }} kcal</td>
+            <td>{{ recipe.calories }} kcal</td>
         </tr>
         <tr>
             <th>Rating:</th>
-            <td>{{ recipe_with_stock["Recipe"].rating }} / 5</td>
+            <td>{{ recipe.rating }} / 5</td>
         </tr>
     </table>
-        <form class="rate-form" action="{{ url_for('recipes.rate_recipe', recipe_id=recipe_with_stock["Recipe"].id) }}" method="POST">
-                <select name="rating">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                <button type="submit">Rate</button>
-            </form>
-    {% if recipe_with_stock["Can be made"]%}
-    <p>You have the ingredients to make this recipe</p>
-    {% else %}
-    <p>You do not have the ingredients to make this recipe</p>
-    {% endif %}
-    </div>
+    <form class="rate-form" action="{{ url_for('recipes.rate_recipe', recipe_id=recipe.id) }}" method="POST">
+        <select name="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <button type="submit" class="ratebutton">Rate</button>
+    </form>
+</div>
 {% endfor %}
 <script>
-        function toggleNav() {
-            var sidebar = document.getElementById("mySidebar");
-            var mainContent = document.getElementById("mainContent");
+    function toggleNav() {
+        var sidebar = document.getElementById("mySidebar");
+        var mainContent = document.getElementById("mainContent");
 
-            if (sidebar.style.width === "250px") {
-                sidebar.style.width = "0";
-                mainContent.style.marginLeft = "0";
-            } else {
-                sidebar.style.width = "250px";
-                mainContent.style.marginLeft = "250px";
-            }
+        if (sidebar.style.width === "250px") {
+            sidebar.style.width = "0";
+            mainContent.style.marginLeft = "0";
+        } else {
+            sidebar.style.width = "250px";
+            mainContent.style.marginLeft = "250px";
         }
-    </script>
+    }
+</script>
 <script>
-function openFilterNav() {
-    document.getElementById("filterSidebar").style.width = "250px";
-}
+    function openFilterNav() {
+        document.getElementById("filterSidebar").style.width = "300px"; /* 增加侧边栏宽度 */
+        document.getElementById("filterSidebar").style.padding = "10px 20px"; /* 增加内边距 */
+    }
 
-function closeFilterNav() {
-    document.getElementById("filterSidebar").style.width = "0";
-}
+    function closeFilterNav() {
+        document.getElementById("filterSidebar").style.width = "0";
+        document.getElementById("filterSidebar").style.padding = "0"; /* 关闭时移除内边距 */
+    }
 </script>
 
 </body>

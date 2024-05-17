@@ -869,3 +869,228 @@ sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed
 [2024-05-17 13:02:51,530] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:105} INFO - User logged out: ynchan@gmail.com, IP: 127.0.0.1
 [2024-05-17 13:03:07,718] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: admin@email.com, IP: 127.0.0.1
 [2024-05-17 13:12:36,116] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: admin@email.com, IP: 127.0.0.1
+[2024-05-17 13:24:36,932] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /admin/view_all_users [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\admin\views.py", line 25, in view_all_users
+    query = request.args.get('query', '')
+AttributeError: module 'werkzeug.sansio.request' has no attribute 'args'
+[2024-05-17 13:38:15,360] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: admin@email.com, IP: 127.0.0.1
+[2024-05-17 13:40:04,699] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /admin/view_all_users [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\admin\views.py", line 28, in view_all_users
+    return render_template('admin/admin.html', name=current_user.first_name, current_users=current_users)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1081, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 768, in compile
+    self.handle_exception(source=source_hint)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\templates\admin\admin.html", line 162, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endblock'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'elif' or 'else' or 'endif'. The innermost block that needs to be closed is 'if'.
+[2024-05-17 13:43:24,276] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /admin/view_user_activity [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\admin\views.py", line 55, in view_user_activity
+    return render_template('admin/admin.html', name=current_user.first_name, user_activities=user_activities,
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\templates\admin\admin.html", line 28, in top-level template code
+    {% block content %}
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\templates\admin\admin.html", line 37, in block 'content'
+    {% include '_search_sort_form.html' %}
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: _search_sort_form.html
+[2024-05-17 13:52:43,310] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /admin/view_user_activity [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\admin\views.py", line 52, in view_user_activity
+    return render_template('admin/admin.html', first_name=current_user.first_name, last_name=current_user.last_name,
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1081, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 768, in compile
+    self.handle_exception(source=source_hint)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\templates\admin\admin.html", line 87, in template
+    {% elif view == 'user_activity' %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'elif'. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
+[2024-05-17 14:42:55,963] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: ynchan@gmail.com, IP: 127.0.0.1
+[2024-05-17 14:46:30,224] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:105} INFO - User logged out: ynchan@gmail.com, IP: 127.0.0.1
+[2024-05-17 14:47:02,681] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: admin@email.com, IP: 127.0.0.1
+[2024-05-17 14:47:03,858] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: admin@email.com, IP: 127.0.0.1
+[2024-05-17 15:05:29,932] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: ynchan@gmail.com, IP: 127.0.0.1
+[2024-05-17 15:51:33,290] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/recipes_detail/1 [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\views.py", line 104, in recipes_detail
+    for recipe in recipes:
+TypeError: 'function' object is not iterable
+[2024-05-17 15:52:30,832] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/recipes_detail/1 [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\views.py", line 104, in recipes_detail
+    for recipe in recipe:
+TypeError: 'Recipe' object is not iterable
+[2024-05-17 15:55:27,492] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/recipes_detail/1 [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\views.py", line 114, in recipes_detail
+    return render_template('recipes/recipes_detail.html', recipe=recipe, ingredients=ingredients,
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\templates\recipes\recipes_detail.html", line 62, in top-level template code
+    {% if recipe_with_stock["Can be made"]%}
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 466, in getitem
+    return obj[argument]
+jinja2.exceptions.UndefinedError: 'recipe_with_stock' is undefined
+[2024-05-17 16:18:41,153] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/recipes [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\views.py", line 76, in recipes
+    return render_template('recipes/recipes.html', recipes=recipes)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\templates\recipes\recipes.html", line 210, in top-level template code
+    <a href="{{ url_for('recipes.recipes_detail', recipe_id=recipe["Recipe"].id) }}" style="text-decoration: none; color: inherit;">
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'models.Recipe object' has no attribute 'Recipe'
+[2024-05-17 16:18:44,053] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/recipes [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\views.py", line 76, in recipes
+    return render_template('recipes/recipes.html', recipes=recipes)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\templates\recipes\recipes.html", line 210, in top-level template code
+    <a href="{{ url_for('recipes.recipes_detail', recipe_id=recipe["Recipe"].id) }}" style="text-decoration: none; color: inherit;">
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'models.Recipe object' has no attribute 'Recipe'

@@ -55,9 +55,17 @@
                          {% for ingredient in ingredients %}
                              <li>{{ ingredient.qfooditem.fooditem.name }}: {{ ingredient.qfooditem.quantity }}{{ ingredient.qfooditem.units }}</li>
                          {% endfor %}
-{#                        {{ingredients }}#}
                     </td>
                 </tr>
+            <tr>
+                <td>
+                    {% if recipes_with_stock_check["Can be made"]%}
+                        <p>You have the ingredients to make this recipe</p>
+                        {% else %}
+                        <p>You do not have the ingredients to make this recipe</p>
+                        {% endif %}
+                </td>
+            </tr>
         </tbody>
         </table>
     </div>

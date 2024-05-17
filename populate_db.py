@@ -158,7 +158,7 @@ def add_sample_users():
 
 def add_food_items():
     for food in foodItems:
-        new_food = models.FoodItem(food_name=food['name'], food_description=food['description'])
+        new_food = models.FoodItem(food_name=food['name'])
         db.session.add(new_food)
         db.session.flush()
         db.session.refresh(new_food)

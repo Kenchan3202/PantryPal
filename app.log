@@ -1294,3 +1294,179 @@ Traceback (most recent call last):
   File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\pantry\views.py", line 104, in search
     return render_template('pantry/search.html', items=items, pagination=pagination)
 UnboundLocalError: local variable 'pagination' referenced before assignment
+[2024-05-17 21:39:54,262] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/use_recipe/5 [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\views.py", line 224, in use_recipe
+    return redirect(url_for('recipes.recipe_details', recipe_id=recipe_id))
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
+    return current_app.url_for(
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'recipes.recipe_details' with values ['recipe_id']. Did you mean 'recipes.recipes_detail' instead?
+[2024-05-17 21:41:03,770] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/use_recipe/5 [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\views.py", line 224, in use_recipe
+    return redirect(url_for('recipes.recipe_details', recipe_id=recipe_id))
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
+    return current_app.url_for(
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'recipes.recipe_details' with values ['recipe_id']. Did you mean 'recipes.recipes_detail' instead?
+[2024-05-17 21:43:03,374] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/use_recipe/5 [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\views.py", line 224, in use_recipe
+    return redirect(url_for('recipes.recipe_detail', recipe_id=recipe_id))
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
+    return current_app.url_for(
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'recipes.recipe_detail' with values ['recipe_id']. Did you mean 'recipes.recipes_detail' instead?
+[2024-05-17 21:53:48,690] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/recipes [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\views.py", line 77, in recipes
+    return render_template('recipes/recipes.html', recipes=recipes)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\templates\recipes\recipes.html", line 163, in top-level template code
+    <a href="{{ url_for('recipes.using_recipes') }}" class="your-button">Using Recipes</a>
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'recipes.using_recipes'. Did you mean 'recipes.use_recipe' instead?
+[2024-05-17 22:05:47,400] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/add_recipes [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\views.py", line 137, in add_recipes
+    create_recipe(name, method, serves, calories, ingredients)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\recipe_util.py", line 24, in create_recipe
+    add_ingredient(ingredient["food"], ingredient["quantity"], ingredient["unit"], new_recipe.id)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\recipe_util.py", line 28, in add_ingredient
+    food_id = create_or_get_food_item(ingredient).id
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\recipe_util.py", line 49, in create_or_get_food_item
+    food = FoodItem(food_name=food_name)
+TypeError: __init__() missing 1 required positional argument: 'food_description'
+[2024-05-17 22:22:06,166] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/add_recipes [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\views.py", line 131, in add_recipes
+    description = fetch_wikipedia_description(item_name)
+NameError: name 'item_name' is not defined
+[2024-05-17 22:31:37,613] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/recipes_detail/1 [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\views.py", line 115, in recipes_detail
+    return render_template('recipes/recipes_detail.html', recipe=recipe, ingredients=ingredients,
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\templates\recipes\recipes_detail.html", line 75, in top-level template code
+    window.location.href = "{{ url_for('recipes.use_recipe', recipe_id='') }}" + recipeId;
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\werkzeug\routing\map.py", line 922, in build
+    rv = self._partial_build(endpoint, values, method, append_unknown)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\werkzeug\routing\map.py", line 801, in _partial_build
+    rv = self._partial_build(
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\werkzeug\routing\map.py", line 814, in _partial_build
+    build_rv = rule.build(values, append_unknown)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\werkzeug\routing\rules.py", line 839, in build
+    return self._build_unknown(**values)
+  File "<werkzeug routing>", line 1, in <builder:'/recipes/use_recipe/<int:recipe_id>'>
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\werkzeug\routing\converters.py", line 163, in to_url
+    value_str = str(self.num_convert(value))
+ValueError: invalid literal for int() with base 10: ''
+[2024-05-17 23:06:59,357] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:105} INFO - User logged out: ljirek8@addthis.com, IP: 127.0.0.1
+[2024-05-17 23:09:21,436] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: pferier2@google.it, IP: 127.0.0.1

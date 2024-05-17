@@ -6,7 +6,6 @@ from flask_login import login_required, current_user
 
 from app import db
 from models import PantryItem, QuantifiedFoodItem, FoodItem
-from pantry.pantry_util import fetch_wikipedia_description
 
 pantry_blueprint = Blueprint('pantry', __name__, template_folder='templates')
 
@@ -48,14 +47,11 @@ def create_item():
         quantity = request.form['quantity']
         calories = request.form['calories']
 
-        # 从维基百科获取描述
-        description = fetch_wikipedia_description(item_name)
-
         # 检查食品项是否已存在
         food_item = FoodItem.query.filter_by(name=item_name).first()
         if not food_item:
             # 创建新的食品项
-            food_item = FoodItem(food_name=item_name, food_description=description)
+            food_item = FoodItem(food_name=item_name)
             db.session.add(food_item)
             db.session.flush()  # 获取新创建的food_item的ID
 

@@ -8,6 +8,8 @@ from app import db, app
 from datetime import datetime
 import bcrypt
 
+from crawler import fetch_wikipedia_description
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -209,16 +211,15 @@ class FoodItem(db.Model):
     # Declaring relationships to other tables
     quantified_food_item = db.relationship('QuantifiedFoodItem', backref='fooditem')
 
-    def __init__(self, food_name, food_description):
+    def __init__(self, food_name):
         self.name = food_name
-        self.description = food_description
+        self.description = fetch_wikipedia_description(food_name)
 
     def get_name(self) -> str:
         return self.name
 
     def get_description(self) -> str:
         return self.description
-
 
 class QuantifiedFoodItem(db.Model):
     __tablename__ = 'quantifiedfooditem'
@@ -426,6 +427,21 @@ class CompatibleDiet(db.Model):
 
     def __init__(self, diet_id, recipe_id):
         self.diet_id = diet_id
+        self.recipe_id = recipe_id
+
+
+class InUseRecipe(db.Model):
+    __tablename__ = 'in_use_recipes'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey(Recipe.id), nullable=False)
+
+    user = db.relationship(User, backref=db.backref("in_use_recipes", cascade="all, delete-orphan"))
+    recipe = db.relationship(Recipe, backref=db.backref("in_use_recipes", cascade="all, delete-orphan"))
+
+    def __init__(self, user_id, recipe_id):
+        self.user_id = user_id
         self.recipe_id = recipe_id
 
 

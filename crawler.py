@@ -22,4 +22,3 @@ def fetch_wikipedia_description(food_name):
         description = "No description available."
 
     return description
-

@@ -16,12 +16,49 @@ from app import db, app
 from models import Recipe, Ingredient, QuantifiedFoodItem, Rating
 
 
-@recipes_blueprint.route('/recipes')
+@recipes_blueprint.route('/recipes', methods=['GET'])
 @login_required
 def recipes():
-    recipes = Recipe.query.all()
-    return render_template('recipes/recipes.html', recipes=recipes)  # same as view recipe, but working on recipe.html
+    # 获取排序和筛选参数
+    sort_by = request.args.get('sort_by', 'name')  # 默认按名称排序
+    min_calories = request.args.get('min_calories', type=int)
+    max_calories = request.args.get('max_calories', type=int)
+    min_rating = request.args.get('min_rating', type=int)
+    ingredient_filter = request.args.get('ingredient')
+    serves_filter = request.args.get('serves', type=int)
 
+    # 开始构建查询
+    query = Recipe.query
+
+    # 筛选卡路里范围
+    if min_calories is not None:
+        query = query.filter(Recipe.calories >= min_calories)
+    if max_calories is not None:
+        query = query.filter(Recipe.calories <= max_calories)
+
+    # 筛选评分
+    if min_rating is not None:
+        query = query.filter(Recipe.rating >= min_rating)
+
+    # 筛选食材
+    if ingredient_filter:
+        query = query.join(Recipe.ingredients).join(Ingredient.qfooditem).filter(
+            Ingredient.qfooditem.has(food_name=ingredient_filter))
+
+    # 筛选人数
+    if serves_filter:
+        query = query.filter(Recipe.serves == serves_filter)
+
+    # 排序
+    if sort_by == 'calories':
+        query = query.order_by(Recipe.calories)
+    elif sort_by == 'rating':
+        query = query.order_by(Recipe.rating.desc())
+
+    # 执行查询
+    recipes = query.all()
+
+    return render_template('recipes/recipes.html', recipes=recipes)
 
 @recipes_blueprint.route('/your_recipes')
 @login_required

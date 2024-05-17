@@ -145,6 +145,9 @@
             border-radius: 4px;
             margin-right: 10px;
         }
+        h3{
+            color:#E1DCDC;
+        }
     </style>
 </head>
 <body>
@@ -167,6 +170,36 @@
         <button onclick="location.href='/shopping/shopping_list'">Shopping</button>
         <button onclick="location.href='/recipes/recipes'">Recipes</button>
     </header>
+<div id="filterSidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeFilterNav()">×</a>
+    <h2>Filter & Sort Recipes</h2>
+    <form action="{{ url_for('recipes.recipes') }}" method="get">
+        <h3>Sort by:</h3>
+        <select name="sort_by">
+            <option value="name">Name</option>
+            <option value="calories">Calories</option>
+            <option value="rating">Rating</option>
+        </select>
+
+        <h3>Filter by Calories:</h3>
+        <input type="number" name="min_calories" placeholder="Min Calories" style="margin-bottom: 10px;">
+        <input type="number" name="max_calories" placeholder="Max Calories" style="margin-bottom: 20px;">
+
+        <h3>Filter by Rating:</h3>
+        <input type="number" name="min_rating" placeholder="Min Rating" style="margin-bottom: 20px;">
+
+        <h3>Filter by Ingredients:</h3>
+        <input type="text" name="ingredient" placeholder="Ingredient Name" style="margin-bottom: 20px;">
+
+        <h3>Filter by Serves:</h3>
+        <input type="number" name="serves" placeholder="Serves" style="margin-bottom: 20px;">
+
+        <button type="submit" class="your-button">Apply Filters</button>
+    </form>
+</div>
+
+<button class="openbtn" onclick="openFilterNav()">☰ Filter & Sort</button>
+
  {% for recipe in recipes %}
 <div class="recipebox">
     <h2 class="recipe-name">
@@ -214,6 +247,15 @@
             }
         }
     </script>
+<script>
+function openFilterNav() {
+    document.getElementById("filterSidebar").style.width = "250px";
+}
+
+function closeFilterNav() {
+    document.getElementById("filterSidebar").style.width = "0";
+}
+</script>
 
 </body>
 </html>

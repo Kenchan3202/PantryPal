@@ -24,9 +24,9 @@ def items_view():
     soon_to_expire = set()
 
     for item in pantry_items:
-        # 修改日期格式解析为 'DD/MM/YYYY'
+        # 修改日期格式解析为 'YYYY-MM-DD'
         try:
-            expiry_date = datetime.datetime.strptime(item.get_expiry(), "%d/%m/%Y").date()
+            expiry_date = datetime.datetime.strptime(item.get_expiry(), "%Y-%m-%d").date()
         except ValueError:
             continue  # 处理错误日期格式
 
@@ -35,8 +35,8 @@ def items_view():
         elif today <= expiry_date <= seven_days_later:
             soon_to_expire.add(item.get_name())
 
-    return render_template('pantry/items.html', items=pantry_items, Foodaboutexpired=soon_to_expire,
-                           Foodexpired=expired)
+    return render_template('pantry/items.html', items=pantry_items, Foodaboutexpired=soon_to_expire, Foodexpired=expired)
+
 
 
 @pantry_blueprint.route('/create_item', methods=['GET', 'POST'])
@@ -99,3 +99,17 @@ def search():
 
     return render_template('pantry/search.html', itemtemp=item_temp,
                            iteminfo=item_info)  # Pass the result directly to the template
+
+
+@pantry_blueprint.route('/delete_item/<int:item_id>', methods=['POST'])
+@login_required
+def delete_item(item_id):
+    item = PantryItem.query.get_or_404(item_id)
+    if item.user_id != current_user.id:
+        flash('You do not have permission to delete this item.', 'danger')
+        return redirect(url_for('pantry.items_view'))
+
+    db.session.delete(item)
+    db.session.commit()
+    flash('Item successfully deleted!', 'success')
+    return redirect(url_for('pantry.items_view'))

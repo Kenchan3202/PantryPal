@@ -16,6 +16,7 @@ from app import db, app
 from models import Recipe, Ingredient, QuantifiedFoodItem, Rating
 
 
+# filter system to sort recipes based on name, calories, rating, etc.
 @recipes_blueprint.route('/recipes', methods=['GET'])
 @login_required
 def recipes():
@@ -60,6 +61,7 @@ def recipes():
 
     return render_template('recipes/recipes.html', recipes=recipes)
 
+# view own recipe
 @recipes_blueprint.route('/your_recipes')
 @login_required
 def your_recipes():
@@ -67,7 +69,7 @@ def your_recipes():
     recipes = Recipe.query.filter_by(user_id=user_id).all()
     return render_template('recipes/your_recipes.html', recipes=recipes)
 
-
+# view descriptions of recipe
 @recipes_blueprint.route('/recipes_detail/<int:recipe_id>')
 @login_required
 def recipes_detail(recipe_id):
@@ -75,7 +77,7 @@ def recipes_detail(recipe_id):
     ingredients = Ingredient.query.filter_by(recipe_id=recipe_id).all()
     return render_template('recipes/recipes_detail.html', recipe=recipe, ingredients=ingredients)
 
-
+# add recipe
 @recipes_blueprint.route('/add_recipes', methods=['GET', 'POST'])
 @login_required
 def add_recipes():
@@ -99,7 +101,7 @@ def add_recipes():
     else:
         return render_template('recipes/add_recipes.html')
 
-
+# edit own recipe
 @recipes_blueprint.route('/edit_recipes/<int:recipe_id>', methods=['GET', 'POST'])
 @login_required
 def edit_recipes(recipe_id):
@@ -130,8 +132,7 @@ def edit_recipes(recipe_id):
         ingredients = [(i.qfooditem.fooditem.name, i.qfooditem.quantity, i.qfooditem.units) for i in recipe.ingredients]
         return render_template('recipes/edit_recipes.html', recipe=recipe, ingredients=ingredients)
 
-
-# delete recipes function
+# delete own recipe
 @recipes_blueprint.route('/delete_recipe/<int:recipe_id>')
 @login_required
 def delete_recipe(recipe_id):
@@ -151,7 +152,7 @@ def delete_recipe(recipe_id):
     flash('Recipe deleted successfully!', 'success')
     return redirect(url_for('recipes.recipes'))
 
-
+# rate own recipe
 @recipes_blueprint.route('/rate_recipe/<int:recipe_id>', methods=['POST'])
 @login_required
 def rate_recipe(recipe_id):

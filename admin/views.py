@@ -1,9 +1,12 @@
-from flask import Blueprint, render_template, flash, abort
+from flask import Blueprint, render_template, flash, abort, redirect, url_for
 from flask_login import login_required, current_user
+
+from admin.admin_util import delete_user_related_data
 
 admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
 from app import app, db
-from models import User
+from models import User, Recipe, Rating, ShoppingList, PantryItem, WastedFood, Ingredient, QuantifiedFoodItem, Barcode, \
+    ShoppingItem
 
 
 @admin_blueprint.route('/admin')
@@ -50,6 +53,24 @@ def view_user_activity():
                            user_activities=user_activities)
 
 
+@admin_blueprint.route('/delete_user/<int:user_id>', methods=['POST'])
+@login_required
+def delete_user(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        flash('User not found', 'danger')
+        return redirect(url_for('admin.view_all_users'))
+
+    try:
+        # 删除与用户相关的所有记录
+        delete_user_related_data(user_id)
+        flash('User deleted successfully', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Error deleting user: {e}', 'danger')
+
+    return redirect(url_for('admin.view_all_users'))
+
 @admin_blueprint.route('/logs')
 @login_required
 def logs():
@@ -60,3 +81,5 @@ def logs():
         content.reverse()
 
     return render_template('admin/admin.html', logs=content, name=current_user.first_name)
+
+

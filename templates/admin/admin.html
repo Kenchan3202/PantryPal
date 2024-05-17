@@ -13,6 +13,15 @@
             margin: 0;
             text-align: center; /* 全局文本居中 */
         }
+         .table-container {
+            display: flex;
+            justify-content: center;
+        }
+        .table {
+            margin: 0 auto;
+            width: 100%;
+            max-width: 1000px;
+        }
     </style>
 </head>
 
@@ -33,44 +42,51 @@
     {% endwith %}
 
 </div>
-<div class="column is-8 is-offset-2">
-
-
-    <h4 class="title is-4">Current Users</h4>
-    <div class="box">
-        {% if current_users %}
-            <div class="field">
-                <table class="table">
-                    <tr>
-                        <th>ID</th>
-                        <th>Email</th>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Role</th>
-                        <th>Date of Birth</th>
-                    </tr>
-                <tbody>
-                    {% for user in current_users %}
-                        <tr>
-                            <td>{{ user.id }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.first_name }}</td>
-                            <td>{{ user.last_name }}</td>
-                            <td>{{ user.role }}</td>
-                            <td>{{ user.dob }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-                </table>
-            </div>
-        {% endif %}
-        <form action="{{ url_for('admin.view_all_users') }}">
-            <div>
-                <button class="button is-info is-centered">View All Users</button>
-            </div>
-        </form>
+ <div class="column is-8 is-offset-2">
+        <h4 class="title is-4">Current Users</h4>
+        <div class="box">
+            {% if current_users %}
+                <div class="field table-container">
+                    <table class="table is-striped is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Email</th>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Role</th>
+                                <th>Date of Birth</th>
+                                <th>Deletion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in current_users %}
+                                <tr>
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.first_name }}</td>
+                                    <td>{{ user.last_name }}</td>
+                                    <td>{{ user.role }}</td>
+                                    <td>{{ user.dob }}</td>
+                                    <td>
+                                        <form action="{{ url_for('admin.delete_user', user_id=user.id) }}" method="post" style="display:inline;">
+                                            <button class="button is-danger" type="submit">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+            <form action="{{ url_for('admin.view_all_users') }}">
+                <div>
+                    <button class="button is-info is-centered">View All Users</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+
 <div class="column is-8 is-offset-2" id="test">
     <h4 class="title is-4">Security Logs</h4>
     <div class="box">

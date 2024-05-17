@@ -136,11 +136,15 @@ def edit_recipes(recipe_id):
 @login_required
 def delete_recipe(recipe_id):
     ingredients = Ingredient.query.filter_by(recipe_id=recipe_id).all()
+    ratings = Rating.query.filter_by(recipe_id=recipe_id).all()
     for ingredients in ingredients:
         qfood_item = QuantifiedFoodItem.query.get(ingredients.qfood_id)
         if qfood_item:
             db.session.delete(qfood_item)
         db.session.delete(ingredients)
+
+    for ratings in ratings:
+        db.session.delete(ratings)
     recipe = Recipe.query.get_or_404(recipe_id)
     db.session.delete(recipe)
     db.session.commit()

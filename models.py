@@ -2,6 +2,8 @@
 # latest edition: 16/05/2024
 
 from flask_login import UserMixin
+from sqlalchemy.orm import backref
+
 from app import db, app
 from datetime import datetime
 import bcrypt
@@ -100,9 +102,9 @@ class Recipe(db.Model):
     rating = db.Column(db.Float, nullable=True)
 
     # Links to other tables
-    ingredients = db.relationship("Ingredient", backref='recipe')
+    ingredients = db.relationship("Ingredient", cascade="all, delete", backref='recipe')
     compatible_diets = db.relationship("CompatibleDiet", backref='recipe')
-    ratings = db.relationship("Rating", backref='recipe')
+    ratings = db.relationship("Rating", cascade="all, delete", backref='recipe')
 
     def __init__(self, user_id, recipe_name, cooking_method, serves, calories):
         self.user_id = user_id
@@ -154,7 +156,7 @@ class Recipe(db.Model):
 
 class Rating(db.Model):
     __tablename__ = 'ratings'
-    user_id = db.Column(db.Integer, db.ForeignKey(User.id), primary_key=True, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id, on_delete='CASCADE'), primary_key=True, nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey(Recipe.id), primary_key=True, nullable=False)
     rating = db.Column(db.Integer)              # Need to validate that incoming value is between 0 & 5
 
@@ -285,8 +287,10 @@ class Ingredient(db.Model):
     __tablename__ = 'ingredients'
 
     id = db.Column(db.Integer, primary_key=True)
-    recipe_id = db.Column(db.Integer, db.ForeignKey(Recipe.id), nullable=False)
-    qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey(Recipe.id, ondelete='CASCADE'), nullable=True)
+    qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id), nullable=True)
+
+    # qfooditem = db.relationship(QuantifiedFoodItem.ingredients, backref=backref('qfooditem', cascade="all, delete"))
 
     def __init__(self, recipe_id, qfood_id):
         self.recipe_id = recipe_id

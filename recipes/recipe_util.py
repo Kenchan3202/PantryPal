@@ -1,7 +1,8 @@
 from flask_login import current_user
 
 from app import db, app
-import models
+from models import Recipe, Ingredient, QuantifiedFoodItem, FoodItem, Rating
+
 
 # user_id = 1
 
@@ -11,11 +12,11 @@ import models
 # "quantity": <quantity>
 # "unit": "<unit>"
 def create_recipe(name, method, serving_size, calories, ingredients):
-    new_recipe = models.Recipe(user_id=current_user.id,
-                               recipe_name=name,
-                               cooking_method=method,
-                               serves=serving_size,
-                               calories=calories)
+    new_recipe = Recipe(user_id=current_user.id,
+                        recipe_name=name,
+                        cooking_method=method,
+                        serves=serving_size,
+                        calories=calories)
     db.session.add(new_recipe)
     db.session.commit()
     recipe_id = new_recipe.id
@@ -26,16 +27,16 @@ def create_recipe(name, method, serving_size, calories, ingredients):
 def add_ingredient(ingredient, quantity, unit, recipe_id):
     food_id = create_or_get_food_item(ingredient).id
     qfid = create_and_get_qfid(food_id, quantity, unit)
-    new_ingredient = models.Ingredient(recipe_id=recipe_id,
-                                       qfood_id=qfid)
+    new_ingredient = Ingredient(recipe_id=recipe_id,
+                                qfood_id=qfid)
     db.session.add(new_ingredient)
     db.session.commit()
 
 
 def create_and_get_qfid(food_id, quantity, units):
-    qfi = models.QuantifiedFoodItem(food_id=food_id,
-                                    quantity=quantity,
-                                    units=units)
+    qfi = QuantifiedFoodItem(food_id=food_id,
+                             quantity=quantity,
+                             units=units)
     db.session.add(qfi)
     db.session.commit()
     qfid = qfi.id
@@ -43,12 +44,13 @@ def create_and_get_qfid(food_id, quantity, units):
 
 
 def create_or_get_food_item(food_name):
-    food = models.FoodItem.query.filter_by(name=food_name).first()
+    food = FoodItem.query.filter_by(name=food_name).first()
     if food is None:  # Add a new food_item to the database if queried food doesn't already exist
-        food = models.FoodItem(food_name=food_name)
+        food = FoodItem(food_name=food_name)
         db.session.add(food)
         db.session.commit()
     return food
+
 
 # def update_recipe_rating(recipe_id):
 #     # 获取所有对该食谱的评分
@@ -69,11 +71,20 @@ def create_or_get_food_item(food_name):
 # Method to rate a recipe. Takes user, recipe and numeric value of rating as parameters.
 # Recipe's rating value is updated as well.
 def create_recipe_rating(user_id: int, recipe_id: int, rating: int) -> None:
-    rating = models.Rating(user_id=user_id, recipe_id=recipe_id, rating=rating)
+    rating = Rating(user_id=user_id, recipe_id=recipe_id, rating=rating)
     db.session.add(rating)
     db.session.flush()
-    recipe = models.Recipe.query.filter_by(id=recipe_id).first()
+    recipe = Recipe.query.filter_by(id=recipe_id).first()
     recipe.update_rating()
+
+
+def delete_recipe_instance(recipe: Recipe) -> None:
+    qfoodids = [ingredient.qfood_id for ingredient in recipe.ingredients]
+    for qfood_id in qfoodids:
+        qfood = QuantifiedFoodItem.query.filter_by(id=qfood_id).first()
+        db.session.delete(qfood)
+    db.session.delete(recipe)
+    db.session.commit()
 
 
 def test_create_recipe():

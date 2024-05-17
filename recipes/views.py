@@ -6,7 +6,8 @@ from flask_login import login_required, current_user
 from sqlalchemy import func
 
 from recipes.forms import RecipeForm
-from recipes.recipe_util import create_recipe, create_or_get_food_item, create_and_get_qfid, create_recipe_rating
+from recipes.recipe_util import (create_recipe, create_or_get_food_item, create_and_get_qfid, create_recipe_rating,
+                                 delete_recipe_instance)
 
 recipes_blueprint = Blueprint('recipes', __name__, template_folder='templates')
 
@@ -175,19 +176,8 @@ def edit_recipes(recipe_id):
 @recipes_blueprint.route('/delete_recipe/<int:recipe_id>')
 @login_required
 def delete_recipe(recipe_id):
-    ingredients = Ingredient.query.filter_by(recipe_id=recipe_id).all()
-    ratings = Rating.query.filter_by(recipe_id=recipe_id).all()
-    for ingredients in ingredients:
-        qfood_item = QuantifiedFoodItem.query.get(ingredients.qfood_id)
-        if qfood_item:
-            db.session.delete(qfood_item)
-        db.session.delete(ingredients)
-
-    for ratings in ratings:
-        db.session.delete(ratings)
-    recipe = Recipe.query.get_or_404(recipe_id)
-    db.session.delete(recipe)
-    db.session.commit()
+    recipe_to_delete = Recipe.query.filter_by(id=recipe_id).first()
+    delete_recipe_instance(recipe_to_delete)
     flash('Recipe deleted successfully!', 'success')
     return redirect(url_for('recipes.recipes'))
 

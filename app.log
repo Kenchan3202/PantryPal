@@ -1094,3 +1094,80 @@ Traceback (most recent call last):
   File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 485, in getattr
     return getattr(obj, attribute)
 jinja2.exceptions.UndefinedError: 'models.Recipe object' has no attribute 'Recipe'
+[2024-05-17 16:36:45,280] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: ynchan@gmail.com, IP: 127.0.0.1
+[2024-05-17 16:38:05,403] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/delete_recipe/6 [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\default.py", line 922, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: NOT NULL constraint failed: ingredients.qfood_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\views.py", line 180, in delete_recipe
+    delete_recipe_instance(recipe_to_delete)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\recipe_util.py", line 84, in delete_recipe_instance
+    qfood = QuantifiedFoodItem.query.filter_by(id=qfood_id).first()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\query.py", line 2748, in first
+    return self.limit(1)._iter().first()  # type: ignore
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\query.py", line 2847, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 2308, in execute
+    return self._execute_internal(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 2169, in _execute_internal
+    ) = compile_state_cls.orm_pre_session_exec(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\context.py", line 551, in orm_pre_session_exec
+    session._autoflush()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 3021, in _autoflush
+    raise e.with_traceback(sys.exc_info()[2])
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 3010, in _autoflush
+    self.flush()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4312, in flush
+    self._flush(objects)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4448, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\session.py", line 4408, in _flush
+    flush_context.execute()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\orm\persistence.py", line 909, in _emit_update_statements
+    c = connection.execute(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\base.py", line 1639, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\base.py", line 2343, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\sqlalchemy\engine\default.py", line 922, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(sqlite3.IntegrityError) NOT NULL constraint failed: ingredients.qfood_id
+[SQL: UPDATE ingredients SET qfood_id=? WHERE ingredients.id = ?]
+[parameters: (None, 20)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)

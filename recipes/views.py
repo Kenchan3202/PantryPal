@@ -1,13 +1,14 @@
 from os import abort
 from app import db, app
-from models import Recipe, Ingredient, QuantifiedFoodItem, Rating, PantryItem
+from crawler import fetch_wikipedia_description
+from models import Recipe, Ingredient, QuantifiedFoodItem, Rating, PantryItem, InUseRecipe, FoodItem
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
 from sqlalchemy import func
 
 from recipes.forms import RecipeForm
 from recipes.recipe_util import (create_recipe, create_or_get_food_item, create_and_get_qfid, create_recipe_rating,
-                                 delete_recipe_instance)
+                                 delete_recipe_instance, get_in_use_recipes)
 
 recipes_blueprint = Blueprint('recipes', __name__, template_folder='templates')
 
@@ -26,12 +27,8 @@ def recipes():
     ingredient_filter = request.args.get('ingredient')
     serves_filter = request.args.get('serves', type=int)
 
-    # 获取用户的食材ID列表
-    user_food_id_list = []
     user_pantry = PantryItem.query.filter_by(user_id=current_user.id).all()
-    for user_ingredient in user_pantry:
-        qfi = QuantifiedFoodItem.query.filter_by(id=user_ingredient.qfood_id).first()
-        user_food_id_list.append(qfi.food_id)
+    user_food_id_list = [item.qfood_id for item in user_pantry]
 
     query = Recipe.query
 
@@ -47,8 +44,8 @@ def recipes():
 
     # 筛选食材
     if ingredient_filter:
-        query = query.join(Recipe.ingredients).join(Ingredient.qfooditem).filter(
-            Ingredient.qfooditem.has(food_name=ingredient_filter))
+        query = query.join(Recipe.ingredients).join(Ingredient.qfooditem).join(FoodItem).filter(
+            FoodItem.name.ilike(f"%{ingredient_filter}%"))
 
     # 筛选人数
     if serves_filter:
@@ -67,9 +64,12 @@ def recipes():
     if can_make_recipe_filter:
         filtered_recipes = []
         for recipe in recipes:
-            ingredient_food_id_list = [QuantifiedFoodItem.query.filter_by(id=ingredient.qfood_id).first().food_id
-                                       for ingredient in recipe.ingredients]
-            can_make_recipe = all(id in user_food_id_list for id in ingredient_food_id_list)
+            can_make_recipe = True
+            for ingredient in recipe.ingredients:
+                pantry_item = next((item for item in user_pantry if item.qfood_id == ingredient.qfood_id), None)
+                if not pantry_item or pantry_item.qfooditem.quantity < ingredient.qfooditem.quantity:
+                    can_make_recipe = False
+                    break
             if can_make_recipe:
                 filtered_recipes.append(recipe)
         recipes = filtered_recipes
@@ -77,7 +77,8 @@ def recipes():
     return render_template('recipes/recipes.html', recipes=recipes)
 
 
-# view own recipes
+
+# view own recipe
 @recipes_blueprint.route('/your_recipes')
 @login_required
 def your_recipes():
@@ -86,7 +87,7 @@ def your_recipes():
     return render_template('recipes/your_recipes.html', recipes=recipes)
 
 
-# view descriptions of recipes
+# view descriptions of recipe
 @recipes_blueprint.route('/recipes_detail/<int:recipe_id>')
 @login_required
 def recipes_detail(recipe_id):
@@ -115,7 +116,7 @@ def recipes_detail(recipe_id):
                                recipes_with_stock_check=recipes_with_stock_check)
 
 
-# add recipes
+# add recipe
 @recipes_blueprint.route('/add_recipes', methods=['GET', 'POST'])
 @login_required
 def add_recipes():
@@ -140,7 +141,7 @@ def add_recipes():
         return render_template('recipes/add_recipes.html')
 
 
-# edit own recipes
+# edit own recipe
 @recipes_blueprint.route('/edit_recipes/<int:recipe_id>', methods=['GET', 'POST'])
 @login_required
 def edit_recipes(recipe_id):
@@ -172,7 +173,7 @@ def edit_recipes(recipe_id):
         return render_template('recipes/edit_recipes.html', recipe=recipe, ingredients=ingredients)
 
 
-# delete own recipes
+# delete own recipe
 @recipes_blueprint.route('/delete_recipe/<int:recipe_id>')
 @login_required
 def delete_recipe(recipe_id):
@@ -182,7 +183,7 @@ def delete_recipe(recipe_id):
     return redirect(url_for('recipes.recipes'))
 
 
-# rate recipe
+# rate own recipe
 @recipes_blueprint.route('/rate_recipe/<int:recipe_id>', methods=['POST'])
 @login_required
 def rate_recipe(recipe_id):
@@ -201,5 +202,57 @@ def rate_recipe(recipe_id):
         flash('Thank you for rating!', 'success')
     return redirect(url_for('recipes.recipes', recipe_id=recipe_id))
 
+# @app.route('/use_recipe', methods=['POST'])
+# def use_recipe():
+#     data = request.json
+#     user_id = data.get('user_id')
+#     recipe_id = data.get('recipe_id')
+#
+#     recipe = Recipe.query.get(recipe_id)
+#     if not recipe or not recipe.ingredients:
+#         return jsonify({"message": "Recipe not found or has no ingredients."}), 400
+#
+#     in_use_recipe = InUseRecipe(user_id=user_id, recipe_id=recipe_id)
+#     db.session.add(in_use_recipe)
+#     db.session.commit()
+#
+#     return jsonify({"message": "Recipe marked as in use."}), 200
+#
+#
+#
+# @app.route('/complete_recipe', methods=['POST'])
+# def complete_recipe():
+#     data = request.json
+#     user_id = data.get('user_id')
+#     recipe_id = data.get('recipe_id')
+#
+#     in_use_recipe = InUseRecipe.query.filter_by(user_id=user_id, recipe_id=recipe_id).first()
+#
+#     if in_use_recipe:
+#         # Remove ingredients from pantry
+#         recipe = in_use_recipe.recipe
+#         for ingredient in recipe.ingredients:
+#             pantry_item = PantryItem.query.filter_by(user_id=user_id, qfood_id=ingredient.qfood_id).first()
+#             if pantry_item:
+#                 pantry_item.set_quantity(pantry_item.get_quantity() - ingredient.get_quantity())
+#                 if pantry_item.get_quantity() <= 0:
+#                     db.session.delete(pantry_item)
+#
+#         db.session.delete(in_use_recipe)
+#         db.session.commit()
+#         return jsonify({"message": "Recipe completed and ingredients used."}), 200
+#     else:
+#         return jsonify({"message": "In-use recipe not found."}), 404
+#
+#
+#
+#
+#
+#
+# @recipes_blueprint.route('/in_use_recipes', methods=['GET'])
+# @login_required
+# def in_use_recipes():
+#     in_use_recipes = get_in_use_recipes(current_user.id)
+#     return render_template('recipes/in_use_recipes.html', in_use_recipes=in_use_recipes)
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:C="http://www.w3.org/1999/xhtml">
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,21 +25,30 @@
             left: 10px;
             top: 10px;
         }
+        .use-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
         table {
             width: 100%;
             margin-top: 20px;
-            border-collapse: collapse;}
+            border-collapse: collapse;
+        }
         th, td {
             padding: 8px;
             border-bottom: 1px solid #ddd;
         }
-
-</style>
+    </style>
 </head>
 <body>
 <div class="navbar">
-        <button class="back-button" onclick="location.href='/recipes/recipes'">Go Back</button>
-    </div>
+    <button class="back-button" onclick="location.href='/recipes/recipes'">Go Back</button>
+</div>
 <div class="column is-6 is-offset-3">
     <h3 class="title">Recipe Details</h3>
     <div class="box">
@@ -50,25 +59,45 @@
                 <td>{{ recipe.method }}</td>
             </tr>
             <tr>
-                    <th>Ingredients:</th>
-                    <td>
-                         {% for ingredient in ingredients %}
-                             <li>{{ ingredient.qfooditem.fooditem.name }}: {{ ingredient.qfooditem.quantity }}{{ ingredient.qfooditem.units }}</li>
-                         {% endfor %}
-                    </td>
-                </tr>
+                <th>Ingredients:</th>
+                <td>
+                    {% for ingredient in ingredients %}
+                        <li>{{ ingredient.qfooditem.fooditem.name }}: {{ ingredient.qfooditem.quantity }}{{ ingredient.qfooditem.units }}</li>
+                    {% endfor %}
+                </td>
+            </tr>
             <tr>
                 <td>
-                    {% if recipes_with_stock_check["Can be made"]%}
+                    {% if recipes_with_stock_check["Can be made"] %}
                         <p>You have the ingredients to make this recipe</p>
-                        {% else %}
+                    {% else %}
                         <p>You do not have the ingredients to make this recipe</p>
-                        {% endif %}
+                    {% endif %}
                 </td>
             </tr>
         </tbody>
         </table>
+{#        <button class="use-button" data-recipe-id="{{ recipe.id }}" onclick="useRecipe(this)">Use This Recipe</button>#}
     </div>
 </div>
+    {#function useRecipe(button) {#}
+    {#    const recipe_id = button.getAttribute('data-recipe-id');#}
+    {#    if (confirm("Are you sure you want to use this recipe?")) {#}
+    {#        fetch(`/recipes/use_recipe/${recipe_id}`, {#}
+    {#            method: 'POST',#}
+    {#            headers: {#}
+    {#                'Content-Type': 'application/json',#}
+    {#            },#}
+    {#            body: JSON.stringify({ user_id: {{ user_id }} })#}
+    {#        }).then(response => {#}
+    {#            if (response.ok) {#}
+    {#                alert('Recipe is now in use.');#}
+    {#                window.location.href = "/recipes/in_use_recipes";#}
+    {#            } else {#}
+    {#                alert('Failed to use the recipe.');#}
+    {#            }#}
+    {#        });#}
+    {#    }#}
 </body>
 </html>
+

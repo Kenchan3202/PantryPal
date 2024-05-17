@@ -89,6 +89,20 @@ def delete_recipe_instance(recipe: Recipe) -> None:
     db.session.delete(recipe)
     db.session.commit()
 
+def save_rating(user_id, recipe_id, rating):
+    existing_rating = Rating.query.filter_by(user_id=user_id, recipe_id=recipe_id).first()
+    if existing_rating:
+        existing_rating.set_rating(rating)
+    else:
+        new_rating = Rating(user_id=user_id, recipe_id=recipe_id, rating=rating)
+        db.session.add(new_rating)
+    db.session.commit()
+
+
+def get_in_use_recipes(user_id):
+    # This function should return a list of recipes in use by the user
+    # For demonstration purposes, let's assume we return all recipes
+    return Recipe.query.filter_by(user_id=user_id).all()
 
 def test_create_recipe():
     name = "improved scrambled eggs again 2"

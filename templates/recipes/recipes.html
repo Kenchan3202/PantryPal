@@ -56,7 +56,6 @@
         td {
             border-bottom: 1px solid #eee;
         }
-
         .ratebutton {
             background: #16a085; /* 绿宝石色 */
             color: white;
@@ -68,21 +67,19 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* 添加阴影 */
             transition: background 0.3s ease-in-out; /* 过渡效果 */
         }
-
         .ratebutton:hover {
             background: #149174; /* 鼠标悬停时的颜色变深 */
         }
-
         .sidebar {
             height: 100%;
             width: 0; /* 默认隐藏 */
             position: fixed;
-            z-index: 1;
+            z-index: 2; /* 确保侧边栏在顶层 */
             top: 0;
             left: 0;
             background-color: #111;
             overflow-x: hidden;
-            transition: width 0.3s;
+            transition: width 0.3s, padding 0.3s; /* 添加过渡效果 */
             padding-top: 60px;
         }
         .sidebar a {
@@ -108,7 +105,7 @@
             top: 0;
             width: 100%;
             background: #f6f6f6;
-            z-index: 1000;
+            z-index: 1;
             padding: 10px 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
@@ -133,11 +130,9 @@
             text-decoration: none;
             transition: background-color 0.3s ease-in-out; /* 过渡效果 */
         }
-
         .your-button:hover {
             background-color: #2980b9; /* 鼠标悬停时的背景颜色 */
         }
-
         .rate-form {
             margin-top: 10px;
         }
@@ -165,6 +160,7 @@
     </div>
     <a href="{{ url_for('recipes.your_recipes') }}" class="your-button">My Recipes</a>
     <a href="{{ url_for('recipes.add_recipes') }}" class="your-button">Create Recipes</a>
+{#    <a href="{{ url_for('recipes.in_use_recipes') }}" class="your-button">Using Recipes</a>#}
 </div>
 <header>
     <button onclick="location.href='/kitchen/kitchen_main'">Kitchen</button>
@@ -253,18 +249,21 @@
             mainContent.style.marginLeft = "250px";
         }
     }
-</script>
-<script>
+
     function openFilterNav() {
-        document.getElementById("filterSidebar").style.width = "300px"; /* 增加侧边栏宽度 */
-        document.getElementById("filterSidebar").style.padding = "10px 20px"; /* 增加内边距 */
+        var filterSidebar = document.getElementById("filterSidebar");
+        filterSidebar.style.width = "300px"; /* 增加侧边栏宽度 */
+        filterSidebar.style.padding = "10px 20px"; /* 增加内边距 */
+        filterSidebar.style.zIndex = "1001"; /* 使过滤侧边栏位于顶层 */
     }
 
     function closeFilterNav() {
-        document.getElementById("filterSidebar").style.width = "0";
-        document.getElementById("filterSidebar").style.padding = "0"; /* 关闭时移除内边距 */
+        var filterSidebar = document.getElementById("filterSidebar");
+        filterSidebar.style.width = "0";
+        filterSidebar.style.padding = "0"; /* 关闭时移除内边距 */
     }
 </script>
 
 </body>
 </html>
+

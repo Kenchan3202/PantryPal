@@ -67,6 +67,18 @@ class User(db.Model, UserMixin):
     def get_shopping_lists(self):
         return self.shopping_lists
 
+    # Method to get items in user's pantry. Returns a list of PantryItem objects i.e. List[PantryItem]
+    def get_pantry(self):
+        return self.pantry
+
+    # Method to get all recipes that a user has created. Returns a list of Recipe objects i.e. List[Recipe]
+    def get_recipes(self):
+        return self.recipes
+
+    # Method to get all recipe ratings a user has given. Returns a list of Rating objects i.e. List[Rating]
+    def get_ratings(self):
+        return self.ratings
+
     # Method to get a string representation of all the uesr's shopping lists
     def get_shopping_lists_str(self):
         numlists = len(self.shopping_lists)

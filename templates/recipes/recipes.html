@@ -75,7 +75,7 @@
 
         .sidebar {
             height: 100%;
-            width: 0;
+            width: 0; /* 默认隐藏 */
             position: fixed;
             z-index: 1;
             top: 0;
@@ -97,27 +97,30 @@
         .sidebar a:hover {
             color: #f1f1f1;
         }
-        .closebtn, .openbtn {
-            font-size: 16px;
-            cursor: pointer;
-            color: white;
-            border: none;
-            background-color: #111;
-            margin: 10px;
-        }
-        .closebtn {
+        .sidebar .closebtn {
             position: absolute;
             top: 0;
             right: 25px;
+            font-size: 36px;
         }
-        .openbtn {
+        .navbar {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: #f6f6f6;
+            z-index: 1000;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .navbar .openbtn {
             font-size: 20px;
             cursor: pointer;
             color: white;
             border: none;
             border-radius: 4px;
             background-color: #111;
-            margin: 10px;
+            padding: 10px;
+            margin-left: 20px;
         }
         .your-button {
             width: 200px;

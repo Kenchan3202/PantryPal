@@ -12,7 +12,7 @@
             font-family: 'Roboto', sans-serif;
             background: #ffffff;
             margin: 0;
-            text-align: center; /* 全局文本居中 */
+            text-align: center;
         }
         .back-button {
             background-color: #0056b3;
@@ -31,22 +31,22 @@
             border-collapse: collapse;}
         th, td {
             padding: 8px;
-            border-bottom: 1px solid #ddd; /* 添加底边框线 */
+            border-bottom: 1px solid #ddd;
         }
 
 </style>
 </head>
 <body>
 <div class="navbar">
-        <button class="back-button" onclick="location.href='/recipes/recipes'">Go back</button>
+        <button class="back-button" onclick="location.href='/recipes/recipes'">Go Back</button>
     </div>
 <div class="column is-6 is-offset-3">
-    <h3 class="title">recipe details</h3>
+    <h3 class="title">Recipe Details</h3>
     <div class="box">
         <table class="table">
         <tbody>
             <tr>
-                <th>How to make it</th>
+                <th>Preparation Method:</th>
                 <td>{{ recipe.method }}</td>
             </tr>
             <tr>

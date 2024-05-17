@@ -1,6 +1,6 @@
 from os import abort
 from app import db, app
-from models import Recipe, Ingredient, QuantifiedFoodItem, Rating
+from models import Recipe, Ingredient, QuantifiedFoodItem, Rating, PantryItem
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
 from sqlalchemy import func
@@ -56,7 +56,27 @@ def recipes():
     # 执行查询
     recipes = query.all()
 
-    return render_template('recipes/recipes.html', recipes=recipes)
+    user_food_id_list = []
+    user_pantry = PantryItem.query.filter_by(user_id=current_user.id).all()
+    for user_ingredient in user_pantry:
+        qfi = QuantifiedFoodItem.query.filter_by(id=user_ingredient.qfood_id).first()
+        user_food_id_list.append(qfi.food_id)
+
+    recipes_with_stock_check = []
+
+    for recipe in recipes:
+        ingredient_food_id_list = []
+        for ingredient in recipe.ingredients:
+            qfi = QuantifiedFoodItem.query.filter_by(id=ingredient.qfood_id).first()
+            ingredient_food_id_list.append(qfi.food_id)
+        can_make_recipe = True
+        for id in ingredient_food_id_list:
+            if id not in user_food_id_list:
+                can_make_recipe = False
+        recipes_with_stock_check.append({"Recipe": recipe,
+                                         "Can be made": can_make_recipe})
+
+    return render_template('recipes/recipes.html', recipes=recipes, recipes_with_stock_check=recipes_with_stock_check)
 
 
 # view own recipe

@@ -200,28 +200,28 @@
 
 <button class="openbtn" onclick="openFilterNav()">☰ Filter & Sort</button>
 
- {% for recipe in recipes %}
+ {% for recipe_with_stock in recipes_with_stock_check %}
 <div class="recipebox">
     <h2 class="recipe-name">
-        <a href="{{ url_for('recipes.recipes_detail', recipe_id=recipe.id) }}" style="text-decoration: none; color: inherit;">
-            {{ recipe.name }}
+        <a href="{{ url_for('recipes.recipes_detail', recipe_id=recipe_with_stock["Recipe"].id) }}" style="text-decoration: none; color: inherit;">
+            {{ recipe_with_stock["Recipe"].name }}
         </a>
     </h2>
     <table>
         <tr>
             <th>Serves:</th>
-            <td>{{ recipe.serves }}</td>
+            <td>{{ recipe_with_stock["Recipe"].serves }}</td>
         </tr>
         <tr>
             <th>Calories:</th>
-            <td>{{ recipe.calories }} kcal</td>
+            <td>{{ recipe_with_stock["Recipe"].calories }} kcal</td>
         </tr>
         <tr>
             <th>Rating:</th>
-            <td>{{ recipe.rating }} / 5</td>
+            <td>{{ recipe_with_stock["Recipe"].rating }} / 5</td>
         </tr>
     </table>
-        <form class="rate-form" action="{{ url_for('recipes.rate_recipe', recipe_id=recipe.id) }}" method="POST">
+        <form class="rate-form" action="{{ url_for('recipes.rate_recipe', recipe_id=recipe_with_stock["Recipe"].id) }}" method="POST">
                 <select name="rating">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -231,6 +231,11 @@
                 </select>
                 <button type="submit">Rate</button>
             </form>
+    {% if recipe_with_stock["Can be made"]%}
+    <p>You have the ingredients to make this recipe</p>
+    {% else %}
+    <p>You do not have the ingredients to make this recipe</p>
+    {% endif %}
     </div>
 {% endfor %}
 <script>

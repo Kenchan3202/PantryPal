@@ -7,8 +7,8 @@ from flask_login import login_required, current_user
 from sqlalchemy import func
 
 from recipes.forms import RecipeForm
-from recipes.recipe_util import (create_recipe, create_or_get_food_item, create_and_get_qfid, create_recipe_rating,
-                                 delete_recipe_instance, get_in_use_recipes, update_recipe_rating)
+from recipes.recipe_util import (create_recipe, create_or_get_food_item, create_and_get_qfid,
+                                 delete_recipe_instance, update_recipe_rating)
 
 recipes_blueprint = Blueprint('recipes', __name__, template_folder='templates')
 

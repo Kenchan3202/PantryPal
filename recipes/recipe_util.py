@@ -52,20 +52,20 @@ def create_or_get_food_item(food_name):
     return food
 
 
-# def update_recipe_rating(recipe_id):
-#     # 获取所有对该食谱的评分
-#     ratings = models.Rating.query.filter_by(recipe_id=recipe_id).all()
-#     if ratings:
-#         # 计算平均评分
-#         total_rating = sum([rate.rating for rate in ratings])
-#         average_rating = total_rating / len(ratings)
-#         # 找到对应的食谱并更新其评分
-#         recipe = models.Recipe.query.get(recipe_id)
-#         if recipe:
-#             recipe.rating = average_rating
-#             db.session.commit()
-#             return average_rating
-#     return None
+def update_recipe_rating(recipe_id):
+    # 获取所有对该食谱的评分
+    ratings = Rating.query.filter_by(recipe_id=recipe_id).all()
+    if ratings:
+        # 计算平均评分
+        total_rating = sum([rate.rating for rate in ratings])
+        average_rating = total_rating / len(ratings)
+        # 找到对应的食谱并更新其评分
+        recipe = Recipe.query.get(recipe_id)
+        if recipe:
+            recipe.rating = average_rating
+            db.session.commit()
+            return average_rating
+    return None
 
 
 # Method to rate a recipe. Takes user, recipe and numeric value of rating as parameters.

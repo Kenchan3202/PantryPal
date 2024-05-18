@@ -78,6 +78,15 @@ def create_recipe_rating(user_id: int, recipe_id: int, rating: int) -> None:
     recipe.update_rating()
 
 
+# Method to remove a recipe rating. Takes rating object to delete.
+# Related recipe's rating value is updated as well.
+def remove_recipe_rating(rating: Rating) -> None:
+    recipe = rating.recipe
+    db.session.delete(rating)
+    db.session.commit()
+    recipe.update_rating()
+
+
 # Method to delete an instance of a recipe. First all Qfooditems related to the recipe's ingredients are removed.
 # All ingredients and ratings which are related to the given recipe are deleted automatically db cascading.
 # Takes recipe object to be deleted as parameter.
@@ -88,6 +97,7 @@ def delete_recipe_instance(recipe: Recipe) -> None:
         db.session.delete(qfood)
     db.session.delete(recipe)
     db.session.commit()
+
 
 def save_rating(user_id, recipe_id, rating):
     existing_rating = Rating.query.filter_by(user_id=user_id, recipe_id=recipe_id).first()
@@ -103,6 +113,7 @@ def get_in_use_recipes(user_id):
     # This function should return a list of recipes in use by the user
     # For demonstration purposes, let's assume we return all recipes
     return Recipe.query.filter_by(user_id=user_id).all()
+
 
 def test_create_recipe():
     name = "improved scrambled eggs again 2"

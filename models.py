@@ -4,7 +4,7 @@
 from flask_login import UserMixin
 from sqlalchemy.orm import backref
 
-from app import db, app
+from app import db
 from datetime import datetime
 import bcrypt
 
@@ -449,6 +449,8 @@ class InUseRecipe(db.Model):
 
 
 def init_db():
+    from app import create_app
+    app = create_app()
     with app.app_context():
         db.drop_all()
         db.create_all()

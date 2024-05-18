@@ -10,6 +10,7 @@ from models import PantryItem, QuantifiedFoodItem, FoodItem
 pantry_blueprint = Blueprint('pantry', __name__, template_folder='templates')
 
 print("Template folder:", pantry_blueprint.template_folder)
+from app import app
 
 
 @pantry_blueprint.route('/items', methods=['GET', 'POST'])

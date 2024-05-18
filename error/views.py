@@ -1,7 +1,6 @@
 from flask import render_template
 
-from app import create_app
-app = create_app()
+from app import app
 
 
 @app.errorhandler(400)  # Bad Request

@@ -6,11 +6,10 @@ from models import User, PantryItem
 from app import db
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
+from app import app
 
 @users_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
-    from app import create_app
-    app = create_app()
     form1 = RegisterForm()
     if form1.validate_on_submit():
         u1 = User.query.filter_by(email=form1.email.data).first()
@@ -33,8 +32,6 @@ def register():
 
 @users_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
-    from app import create_app
-    app = create_app()
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -83,8 +80,6 @@ def update_password():
 @users_blueprint.route('/logout')
 @login_required
 def logout():
-    from app import create_app
-    app = create_app()
     user_info = f"User logged out: {current_user.email}, IP: {request.remote_addr}"
     logout_user()
     session['logged_in'] = False

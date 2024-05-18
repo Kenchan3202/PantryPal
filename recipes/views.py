@@ -8,6 +8,7 @@ from recipes.recipe_util import (create_recipe, create_or_get_food_item, create_
 recipes_blueprint = Blueprint('recipes', __name__, template_folder='templates')
 
 print("Template folder:", recipes_blueprint.template_folder)
+from app import app
 
 
 # filter system to sort recipes based on name, calories, rating, etc.

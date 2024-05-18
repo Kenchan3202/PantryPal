@@ -4,12 +4,11 @@
 from flask_login import UserMixin
 from sqlalchemy.orm import backref
 
-from app import db
 from datetime import datetime
 import bcrypt
 
 from crawler import fetch_wikipedia_description
-
+from app import db
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -449,8 +448,7 @@ class InUseRecipe(db.Model):
 
 
 def init_db():
-    from app import create_app
-    app = create_app()
+    from app import app
     with app.app_context():
         db.drop_all()
         db.create_all()

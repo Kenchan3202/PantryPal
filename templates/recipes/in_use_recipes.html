@@ -1,18 +1,27 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Use Recipes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: #ffffff;
+            background: #f7f7f7;
             margin: 0;
-            text-align: center;
+            padding: 20px;
+        }
+        .navbar {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: #f6f6f6;
+            z-index: 1;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .back-button {
             background-color: #0056b3;
@@ -25,61 +34,98 @@
             left: 10px;
             top: 10px;
         }
-        .complete-button {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .box {
+        .recipebox {
+            margin: 20px auto;
+            background-color: #fff;
             padding: 20px;
-            margin: 20px;
-            background-color: #f8f8f8;
+            width: 80%;
+            max-width: 800px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #dcdcdc;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            font-size: 16px;
+        }
+        th {
+            color: #555;
+        }
+        td {
+            border-bottom: 1px solid #eee;
+        }
+        .complete-button {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            transition: background 0.3s ease-in-out;
+        }
+        .complete-button:hover {
+            background: #218838;
+        }
+        .rate-form {
+            margin-top: 10px;
+        }
+        select {
+            padding: 10px;
+            border-radius: 4px;
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
 <div class="navbar">
-    <button class="back-button" onclick="location.href='/recipes/recipes'">Go Back</button>
+    <button class="back-button" onclick="location.href='/recipes/recipes'">Back to Recipes</button>
 </div>
 <div class="column is-6 is-offset-3">
-    <h3 class="title">Recipes In Use</h3>
-    <div class="box">
-        {% if in_use_recipes %}
-            {% for recipe in in_use_recipes %}
-                <div class="box">
-                    <h3>{{ recipe.name }}</h3>
-                    <button class="complete-button" onclick="completeRecipe({{ recipe.id }})">Complete Recipe</button>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>No recipes in use.</p>
-        {% endif %}
+    <h3 class="title">In Use Recipes</h3>
+    {% for recipe in recipes %}
+    <div class="recipebox">
+        <h2 class="recipe-name">
+            <a href="{{ url_for('recipes.recipes_detail', recipe_id=recipe.id) }}" style="text-decoration: none; color: inherit;">
+                {{ recipe.name }}
+            </a>
+        </h2>
+        <table>
+            <tr>
+                <th>Serves:</th>
+                <td>{{ recipe.serves }}</td>
+            </tr>
+            <tr>
+                <th>Calories:</th>
+                <td>{{ recipe.calories }} kcal</td>
+            </tr>
+            <tr>
+                <th>Rating:</th>
+                <td>{{ recipe.rating }} / 5</td>
+            </tr>
+        </table>
+        <form class="rate-form" action="{{ url_for('recipes.complete_recipe', recipe_id=recipe.id) }}" method="POST">
+            <select name="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <button type="submit" class="complete-button">Complete</button>
+        </form>
     </div>
+    {% endfor %}
 </div>
-<script>
-    function completeRecipe(recipe_id) {
-        fetch(`/recipes/complete_recipe/${recipe_id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ user_id: {{ user_id }} })
-        }).then(response => {
-            if (response.ok) {
-                alert('Recipe completed.');
-                window.location.reload();
-            } else {
-                alert('Failed to complete the recipe.');
-            }
-        });
-    }
-</script>
 </body>
 </html>
+
 
 

@@ -1,7 +1,7 @@
 from flask_login import current_user
 
 from app import db, app
-from models import Recipe, Ingredient, QuantifiedFoodItem, FoodItem, Rating
+from models import Recipe, Ingredient, QuantifiedFoodItem, FoodItem, Rating, PantryItem
 
 
 # user_id = 1
@@ -52,20 +52,20 @@ def create_or_get_food_item(food_name):
     return food
 
 
-# def update_recipe_rating(recipe_id):
-#     # 获取所有对该食谱的评分
-#     ratings = models.Rating.query.filter_by(recipe_id=recipe_id).all()
-#     if ratings:
-#         # 计算平均评分
-#         total_rating = sum([rate.rating for rate in ratings])
-#         average_rating = total_rating / len(ratings)
-#         # 找到对应的食谱并更新其评分
-#         recipe = models.Recipe.query.get(recipe_id)
-#         if recipe:
-#             recipe.rating = average_rating
-#             db.session.commit()
-#             return average_rating
-#     return None
+def update_recipe_rating(recipe_id):
+    # 获取所有对该食谱的评分
+    ratings = Rating.query.filter_by(recipe_id=recipe_id).all()
+    if ratings:
+        # 计算平均评分
+        total_rating = sum([rate.rating for rate in ratings])
+        average_rating = total_rating / len(ratings)
+        # 找到对应的食谱并更新其评分
+        recipe = Recipe.query.get(recipe_id)
+        if recipe:
+            recipe.rating = average_rating
+            db.session.commit()
+            return average_rating
+    return None
 
 
 # Method to rate a recipe. Takes user, recipe and numeric value of rating as parameters.
@@ -89,14 +89,6 @@ def delete_recipe_instance(recipe: Recipe) -> None:
     db.session.delete(recipe)
     db.session.commit()
 
-def save_rating(user_id, recipe_id, rating):
-    existing_rating = Rating.query.filter_by(user_id=user_id, recipe_id=recipe_id).first()
-    if existing_rating:
-        existing_rating.set_rating(rating)
-    else:
-        new_rating = Rating(user_id=user_id, recipe_id=recipe_id, rating=rating)
-        db.session.add(new_rating)
-    db.session.commit()
 
 
 def get_in_use_recipes(user_id):
@@ -104,6 +96,21 @@ def get_in_use_recipes(user_id):
     # For demonstration purposes, let's assume we return all recipes
     return Recipe.query.filter_by(user_id=user_id).all()
 
+def create_and_get_qfid(food_id, quantity, units):
+    qfi = QuantifiedFoodItem(food_id=food_id, quantity=quantity, units=units)
+    db.session.add(qfi)
+    db.session.commit()
+    return qfi.id
+
+def create_ingredient(recipe_id, qfood_id):
+    ingredient = Ingredient(recipe_id=recipe_id, qfood_id=qfood_id)
+    db.session.add(ingredient)
+    db.session.commit()
+
+def add_pantry_item(user_id, qfood_id, expiry, calories):
+    pantry_item = PantryItem(user_id=user_id, qfood_id=qfood_id, expiry=expiry, calories=calories)
+    db.session.add(pantry_item)
+    db.session.commit()
 def test_create_recipe():
     name = "improved scrambled eggs again 2"
     method = (

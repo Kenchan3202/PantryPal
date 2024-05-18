@@ -212,14 +212,17 @@ class FoodItem(db.Model):
     quantified_food_item = db.relationship('QuantifiedFoodItem', backref='fooditem')
 
     def __init__(self, food_name):
-        self.name = food_name
-        self.description = fetch_wikipedia_description(food_name)
+        # 转换名称为首字母大写，其余小写，保留单个空格
+        formatted_name = ' '.join(word.capitalize() for word in food_name.strip().split())
+        self.name = formatted_name
+        self.description = fetch_wikipedia_description(formatted_name)
 
     def get_name(self) -> str:
         return self.name
 
     def get_description(self) -> str:
         return self.description
+
 
 class QuantifiedFoodItem(db.Model):
     __tablename__ = 'quantifiedfooditem'

@@ -68,7 +68,7 @@
             </tr>
             <tr>
                 <td>
-                    {% if recipes_with_stock_check["Can be made"] %}
+                    {% if can_make_recipe %}
                         <p>You have the ingredients to make this recipe</p>
                     {% else %}
                         <p>You do not have the ingredients to make this recipe</p>
@@ -77,27 +77,32 @@
             </tr>
         </tbody>
         </table>
-{#        <button class="use-button" data-recipe-id="{{ recipe.id }}" onclick="useRecipe(this)">Use This Recipe</button>#}
+        <button class="use-button" data-recipe-id="{{ recipe.id }}" onclick="useRecipe(this)">Use This Recipe</button>
     </div>
 </div>
-    {#function useRecipe(button) {#}
-    {#    const recipe_id = button.getAttribute('data-recipe-id');#}
-    {#    if (confirm("Are you sure you want to use this recipe?")) {#}
-    {#        fetch(`/recipes/use_recipe/${recipe_id}`, {#}
-    {#            method: 'POST',#}
-    {#            headers: {#}
-    {#                'Content-Type': 'application/json',#}
-    {#            },#}
-    {#            body: JSON.stringify({ user_id: {{ user_id }} })#}
-    {#        }).then(response => {#}
-    {#            if (response.ok) {#}
-    {#                alert('Recipe is now in use.');#}
-    {#                window.location.href = "/recipes/in_use_recipes";#}
-    {#            } else {#}
-    {#                alert('Failed to use the recipe.');#}
-    {#            }#}
-    {#        });#}
-    {#    }#}
+<script>
+    function useRecipe(button) {
+        const recipe_id = button.getAttribute('data-recipe-id');
+        if (confirm("Are you sure you want to use this recipe?")) {
+            fetch(`/recipes/use_recipe/${recipe_id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user_id: {{ current_user.id }} })
+            }).then(response => {
+                if (response.ok) {
+                    alert('Recipe is now in use.');
+                    window.location.href = "/recipes/in_use_recipes";
+                } else {
+                    alert('Failed to use the recipe.');
+                }
+            });
+        }
+    }
+</script>
 </body>
 </html>
+
+
 

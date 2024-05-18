@@ -1470,3 +1470,32 @@ Traceback (most recent call last):
 ValueError: invalid literal for int() with base 10: ''
 [2024-05-17 23:06:59,357] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:105} INFO - User logged out: ljirek8@addthis.com, IP: 127.0.0.1
 [2024-05-17 23:09:21,436] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: pferier2@google.it, IP: 127.0.0.1
+[2024-05-17 23:50:38,093] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: pferier2@google.it, IP: 127.0.0.1
+[2024-05-18 13:42:47,305] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\users\views.py:65} INFO - User logged in: pferier2@google.it, IP: 127.0.0.1
+[2024-05-18 13:59:18,912] {C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/recipes_detail/5 [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\recipes\views.py", line 115, in recipes_detail
+    return render_template('recipes/recipes_detail.html', recipe=recipe, ingredients=ingredients,
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\wenniepedia\templates\recipes\recipes_detail.html", line 71, in top-level template code
+    {% if recipes_with_stock_check["Can be made"] %}
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 466, in getitem
+    return obj[argument]
+jinja2.exceptions.UndefinedError: 'recipes_with_stock_check' is undefined

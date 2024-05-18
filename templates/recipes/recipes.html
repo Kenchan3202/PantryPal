@@ -160,7 +160,7 @@
     </div>
     <a href="{{ url_for('recipes.your_recipes') }}" class="your-button">My Recipes</a>
     <a href="{{ url_for('recipes.add_recipes') }}" class="your-button">Create Recipes</a>
-{#    <a href="{{ url_for('recipes.in_use_recipes') }}" class="your-button">Using Recipes</a>#}
+    <a href="{{ url_for('recipes.in_use_recipes') }}" class="your-button">Using Recipes</a>
 </div>
 <header>
     <button onclick="location.href='/kitchen/kitchen_main'">Kitchen</button>
@@ -221,7 +221,7 @@
         </tr>
         <tr>
             <th>Rating:</th>
-            <td>{{ recipe.rating }} / 5</td>
+            <td>{{ recipe.rating | default(0) }} / 5</td>
         </tr>
     </table>
     <form class="rate-form" action="{{ url_for('recipes.rate_recipe', recipe_id=recipe.id) }}" method="POST">
@@ -236,6 +236,7 @@
     </form>
 </div>
 {% endfor %}
+
 <script>
     function toggleNav() {
         var sidebar = document.getElementById("mySidebar");
@@ -266,4 +267,6 @@
 
 </body>
 </html>
+
+
 

@@ -1,12 +1,7 @@
-from os import abort
-from app import db, app
-from crawler import fetch_wikipedia_description
+from app import db
 from models import Recipe, Ingredient, QuantifiedFoodItem, Rating, PantryItem, InUseRecipe, FoodItem
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
-from sqlalchemy import func
-
-from recipes.forms import RecipeForm
 from recipes.recipe_util import (create_recipe, create_or_get_food_item, create_and_get_qfid,
                                  delete_recipe_instance, update_recipe_rating)
 

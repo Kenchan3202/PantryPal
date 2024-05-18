@@ -1499,3 +1499,139 @@ Traceback (most recent call last):
   File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 466, in getitem
     return obj[argument]
 jinja2.exceptions.UndefinedError: 'recipes_with_stock_check' is undefined
+[2024-05-18 21:03:56,834] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:42} INFO - User registered: c2065153@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-18 21:04:08,621] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:65} INFO - User logged in: c2065153@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-18 21:43:21,319] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:42} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-18 21:43:34,770] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:65} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-18 21:44:13,607] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/recipes_detail/5 [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\recipes\views.py", line 115, in recipes_detail
+    if qfi.fooditem.name not in pantry_dict:
+OSError: [Errno 22] Invalid argument
+[2024-05-18 21:53:22,515] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:52} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-18 21:53:22,515] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:52} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-18 21:53:22,515] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:52} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-18 21:53:22,517] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /user/login [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py", line 56, in login
+    return redirect(url_for('users.baseLogin'))
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
+    return current_app.url_for(
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'users.baseLogin'. Did you mean 'users.login' instead?
+[2024-05-18 21:53:22,517] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /user/login [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py", line 56, in login
+    return redirect(url_for('users.baseLogin'))
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
+    return current_app.url_for(
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'users.baseLogin'. Did you mean 'users.login' instead?
+[2024-05-18 21:53:22,517] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /user/login [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py", line 56, in login
+    return redirect(url_for('users.baseLogin'))
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
+    return current_app.url_for(
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'users.baseLogin'. Did you mean 'users.login' instead?
+[2024-05-18 21:54:32,555] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:52} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-18 21:54:32,555] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:52} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-18 21:54:32,556] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /user/login [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py", line 56, in login
+    return redirect(url_for('main-menu'))
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
+    return current_app.url_for(
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'main-menu'. Did you mean 'admin.admin' instead?
+[2024-05-18 21:54:32,556] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /user/login [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py", line 56, in login
+    return redirect(url_for('main-menu'))
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
+    return current_app.url_for(
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'main-menu'. Did you mean 'admin.admin' instead?
+[2024-05-18 21:55:30,496] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:52} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-18 21:55:30,496] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:52} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-18 21:55:30,496] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:52} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-18 21:56:18,472] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:91} INFO - User logged out: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-18 21:56:18,472] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:91} INFO - User logged out: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-18 21:56:18,472] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:91} INFO - User logged out: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-18 21:56:18,472] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:91} INFO - User logged out: ynchanhk@gmail.com, IP: 127.0.0.1

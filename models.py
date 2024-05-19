@@ -318,7 +318,6 @@ class PantryItem(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id), nullable=False)
     expiry = db.Column(db.String(10), nullable=True)
-    calories = db.Column(db.Integer, nullable=True)
 
     def __init__(self, user_id, qfood_id, expiry, calories):
         self.user_id = user_id

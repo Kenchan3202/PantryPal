@@ -3,10 +3,10 @@ from flask_login import login_required, current_user
 
 from admin.admin_util import delete_user_related_data
 
-admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
 from app import db
-from models import User, Recipe, Rating, ShoppingList, PantryItem, WastedFood, Ingredient, QuantifiedFoodItem, Barcode, \
-    ShoppingItem
+from models import User
+
+admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
 
 
 @admin_blueprint.route('/admin')
@@ -71,6 +71,7 @@ def delete_user(user_id):
 
     return redirect(url_for('admin.view_all_users'))
 
+
 @admin_blueprint.route('/logs')
 @login_required
 def logs():
@@ -81,5 +82,3 @@ def logs():
         content.reverse()
 
     return render_template('admin/admin.html', logs=content, name=current_user.first_name)
-
-

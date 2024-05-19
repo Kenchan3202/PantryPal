@@ -9,7 +9,6 @@
 # File to add sample data to database instance for testing.
 
 import random
-from app import db, app
 import models
 
 
@@ -288,6 +287,9 @@ def main():
 
 
 if __name__ == '__main__':
+    from app import create_app, db
+
+    app = create_app()
     with app.app_context():
         models.init_db()
         main()

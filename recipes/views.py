@@ -1,7 +1,6 @@
-from os import abort
 from app import db
-from crawler import fetch_wikipedia_description
-from models import Recipe, Ingredient, QuantifiedFoodItem, Rating, PantryItem, InUseRecipe, FoodItem
+from models import Recipe, Ingredient, QuantifiedFoodItem, Rating, PantryItem, InUseRecipe, FoodItem, ShoppingItem, \
+    ShoppingList
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
 from sqlalchemy import func
@@ -103,6 +102,45 @@ def your_recipes():
 
 
 # view descriptions of recipe
+# @recipes_blueprint.route('/recipes_detail/<int:recipe_id>')
+# @login_required
+# def recipes_detail(recipe_id):
+#     recipe = Recipe.query.get(recipe_id)
+#     ingredients = Ingredient.query.filter_by(recipe_id=recipe_id).all()
+#
+#     user_pantry = PantryItem.query.filter_by(user_id=current_user.id).all()
+#
+#     # Debugging: Print the contents of user pantry and recipe ingredients
+#     print("User Pantry:")
+#     pantry_dict = {}
+#     for item in user_pantry:
+#         qfi = QuantifiedFoodItem.query.get(item.qfood_id)
+#         print(f"Pantry Item: {qfi.fooditem.name}, Quantity: {qfi.quantity}, ID: {item.qfood_id}")
+#         if qfi.fooditem.name not in pantry_dict:
+#             pantry_dict[qfi.fooditem.name] = 0
+#         pantry_dict[qfi.fooditem.name] += qfi.quantity
+#
+#     print("Recipe Ingredients:")
+#     can_make_recipe = True
+#     for ingredient in ingredients:
+#         qfi_ingredient = QuantifiedFoodItem.query.get(ingredient.qfood_id)
+#         ingredient_name = qfi_ingredient.fooditem.name
+#         ingredient_quantity = qfi_ingredient.quantity
+#         print(f"Ingredient: {ingredient_name}, Quantity: {ingredient_quantity}, ID: {ingredient.qfood_id}")
+#
+#         if ingredient_name not in pantry_dict:
+#             can_make_recipe = False
+#             print(f"Missing ingredient: {ingredient_name}")
+#             break
+#         if pantry_dict[ingredient_name] < ingredient_quantity:
+#             can_make_recipe = False
+#             print(
+#                 f"Not enough quantity for ingredient: {ingredient_name}, required: {ingredient_quantity}, available: {pantry_dict[ingredient_name]}")
+#             break
+#
+#     return render_template('recipes/recipes_detail.html', recipe=recipe, ingredients=ingredients,
+#                            can_make_recipe=can_make_recipe)
+
 @recipes_blueprint.route('/recipes_detail/<int:recipe_id>')
 @login_required
 def recipes_detail(recipe_id):
@@ -110,37 +148,32 @@ def recipes_detail(recipe_id):
     ingredients = Ingredient.query.filter_by(recipe_id=recipe_id).all()
 
     user_pantry = PantryItem.query.filter_by(user_id=current_user.id).all()
-
-    # Debugging: Print the contents of user pantry and recipe ingredients
-    print("User Pantry:")
     pantry_dict = {}
     for item in user_pantry:
         qfi = QuantifiedFoodItem.query.get(item.qfood_id)
-        print(f"Pantry Item: {qfi.fooditem.name}, Quantity: {qfi.quantity}, ID: {item.qfood_id}")
         if qfi.fooditem.name not in pantry_dict:
             pantry_dict[qfi.fooditem.name] = 0
         pantry_dict[qfi.fooditem.name] += qfi.quantity
 
-    print("Recipe Ingredients:")
     can_make_recipe = True
+    missing_ingredients = []
     for ingredient in ingredients:
         qfi_ingredient = QuantifiedFoodItem.query.get(ingredient.qfood_id)
         ingredient_name = qfi_ingredient.fooditem.name
         ingredient_quantity = qfi_ingredient.quantity
-        print(f"Ingredient: {ingredient_name}, Quantity: {ingredient_quantity}, ID: {ingredient.qfood_id}")
 
-        if ingredient_name not in pantry_dict:
+        if ingredient_name not in pantry_dict or pantry_dict[ingredient_name] < ingredient_quantity:
             can_make_recipe = False
-            print(f"Missing ingredient: {ingredient_name}")
-            break
-        if pantry_dict[ingredient_name] < ingredient_quantity:
-            can_make_recipe = False
-            print(
-                f"Not enough quantity for ingredient: {ingredient_name}, required: {ingredient_quantity}, available: {pantry_dict[ingredient_name]}")
-            break
+            missing_quantity = ingredient_quantity - pantry_dict.get(ingredient_name, 0)
+            missing_ingredients.append({
+                'name': ingredient_name,
+                'quantity': missing_quantity,
+                'units': qfi_ingredient.units
+            })
 
     return render_template('recipes/recipes_detail.html', recipe=recipe, ingredients=ingredients,
-                           can_make_recipe=can_make_recipe)
+                           can_make_recipe=can_make_recipe, missing_ingredients=missing_ingredients)
+
 
 
 # add recipe
@@ -337,5 +370,41 @@ def complete_recipe(recipe_id):
 
     flash('Recipe completed and rated successfully!', 'success')
     return redirect(url_for('recipes.in_use_recipes'))
+
+@recipes_blueprint.route('/create_shopping_list/<int:recipe_id>', methods=['POST'])
+@login_required
+def create_shopping_list(recipe_id):
+    recipe = Recipe.query.get(recipe_id)
+    if not recipe:
+        return jsonify({'error': 'Recipe not found'}), 404
+
+    user_pantry = PantryItem.query.filter_by(user_id=current_user.id).all()
+    pantry_dict = {item.qfooditem.fooditem.name: item for item in user_pantry}
+
+    shopping_list = ShoppingList.query.filter_by(user_id=current_user.id, list_name=recipe.name).first()
+    if not shopping_list:
+        shopping_list = ShoppingList(user_id=current_user.id, list_name=recipe.name)
+        db.session.add(shopping_list)
+        db.session.commit()
+
+    for ingredient in recipe.ingredients:
+        qfi_ingredient = QuantifiedFoodItem.query.get(ingredient.qfood_id)
+        if qfi_ingredient:
+            ingredient_name = qfi_ingredient.fooditem.name
+            ingredient_quantity = qfi_ingredient.quantity
+
+            pantry_item = pantry_dict.get(ingredient_name)
+            if not pantry_item or pantry_item.qfooditem.quantity < ingredient_quantity:
+                missing_quantity = ingredient_quantity - pantry_dict.get(ingredient_name, 0)
+                newQFI = QuantifiedFoodItem(food_id=qfi_ingredient.food_id, quantity=missing_quantity, units=qfi_ingredient.units)
+                db.session.add(newQFI)
+                db.session.commit()
+
+                new_shopping_item = ShoppingItem(list_id=shopping_list.id, qfood_id=newQFI.id)
+                db.session.add(new_shopping_item)
+                db.session.commit()
+
+    flash("Shopping list created based on recipe", "success")
+    return jsonify({'success': 'Shopping list created'})
 
 

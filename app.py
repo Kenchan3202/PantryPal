@@ -41,6 +41,9 @@ def create_app():
     # Initialize database
     db.init_app(app)
 
+    with app.app_context():
+        db.create_all()
+
     from users.views import users_blueprint
     from pantry.views import pantry_blueprint
     from shopping.views import shopping_blueprint

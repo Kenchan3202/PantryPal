@@ -1684,3 +1684,805 @@ OSError: [Errno 22] Invalid argument
 [2024-05-19 01:35:44,977] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:118} INFO - User logged out: ynchanhk@gmail.com, IP: 127.0.0.1
 [2024-05-19 01:35:44,977] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:118} INFO - User logged out: ynchanhk@gmail.com, IP: 127.0.0.1
 [2024-05-19 01:35:44,977] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:118} INFO - User logged out: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 02:56:01,673] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:01,673] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:01,673] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:01,673] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:01,673] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:01,673] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:01,673] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:19:29,211] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:19:29,211] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:19:29,211] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:42:42,099] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 14, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 166, in top-level template code
+    'X-CSRFToken': '{{ csrf_token() }}'
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'csrf_token' is undefined
+[2024-05-19 17:42:42,853] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 14, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 166, in top-level template code
+    'X-CSRFToken': '{{ csrf_token() }}'
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'csrf_token' is undefined
+[2024-05-19 17:44:53,876] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:44:53,876] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:44:53,876] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:44:58,470] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 14, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 166, in top-level template code
+    'X-CSRFToken': '{{ csrf_token() }}'
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'csrf_token' is undefined
+[2024-05-19 17:44:58,470] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 14, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 166, in top-level template code
+    'X-CSRFToken': '{{ csrf_token() }}'
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'csrf_token' is undefined
+[2024-05-19 17:44:58,470] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 14, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 166, in top-level template code
+    'X-CSRFToken': '{{ csrf_token() }}'
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'csrf_token' is undefined
+[2024-05-19 17:46:03,142] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 14, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 182, in top-level template code
+    'X-CSRFToken': '{{ csrf_token() }}'
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'csrf_token' is undefined
+[2024-05-19 18:05:31,562] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /pantry/items [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\pantry\views.py", line 29, in items_view
+    expiry_date = datetime.datetime.strptime(item.get_expiry(), "%Y-%m-%d").date()
+TypeError: strptime() argument 1 must be str, not None
+[2024-05-19 18:12:46,504] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 15, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 72, in top-level template code
+    <h1>Shopping List Details: {{ shopping_list.list_name }}</h1>
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'shopping_list' is undefined
+[2024-05-19 18:16:13,578] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 16, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 72, in top-level template code
+    <h1>Shopping List Details: {{ shopping_list.list_name }}</h1>
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'shopping_list' is undefined
+[2024-05-19 18:16:21,244] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 16, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 72, in top-level template code
+    <h1>Shopping List Details: {{ shopping_list.list_name }}</h1>
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'shopping_list' is undefined
+[2024-05-19 18:22:53,826] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list_detail/11 [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 66, in shopping_list_detail
+    return render_template('shopping/shopping_list_detail.html', form=form, shopping_list=shopping_list)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1081, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 768, in compile
+    self.handle_exception(source=source_hint)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list_detail.html", line 99, in template
+    <div class="shopping-item" id="shopping-item-{{ item
+jinja2.exceptions.TemplateSyntaxError: unexpected end of template, expected 'end of print statement'.
+[2024-05-19 02:56:01,673] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:01,673] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:01,673] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:01,673] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:01,673] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:01,673] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:01,673] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 02:56:14,888] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: Y.N.Chan2@newcastle.ac.uk, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:21:58,581] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:22:15,256] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 15:43:35,402] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanuk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:21,992] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:15:37,928] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:19:29,211] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:19:29,211] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:19:29,211] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:42:42,099] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 14, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 166, in top-level template code
+    'X-CSRFToken': '{{ csrf_token() }}'
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'csrf_token' is undefined
+[2024-05-19 17:42:42,853] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 14, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 166, in top-level template code
+    'X-CSRFToken': '{{ csrf_token() }}'
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'csrf_token' is undefined
+[2024-05-19 17:44:53,876] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:44:53,876] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:44:53,876] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 17:44:58,470] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 14, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 166, in top-level template code
+    'X-CSRFToken': '{{ csrf_token() }}'
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'csrf_token' is undefined
+[2024-05-19 17:44:58,470] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 14, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 166, in top-level template code
+    'X-CSRFToken': '{{ csrf_token() }}'
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'csrf_token' is undefined
+[2024-05-19 17:44:58,470] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 14, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 166, in top-level template code
+    'X-CSRFToken': '{{ csrf_token() }}'
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'csrf_token' is undefined
+[2024-05-19 17:46:03,142] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 14, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 182, in top-level template code
+    'X-CSRFToken': '{{ csrf_token() }}'
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'csrf_token' is undefined
+[2024-05-19 18:05:31,562] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /pantry/items [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\pantry\views.py", line 29, in items_view
+    expiry_date = datetime.datetime.strptime(item.get_expiry(), "%Y-%m-%d").date()
+TypeError: strptime() argument 1 must be str, not None
+[2024-05-19 18:12:46,504] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 15, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 72, in top-level template code
+    <h1>Shopping List Details: {{ shopping_list.list_name }}</h1>
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'shopping_list' is undefined
+[2024-05-19 18:16:13,578] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 16, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 72, in top-level template code
+    <h1>Shopping List Details: {{ shopping_list.list_name }}</h1>
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'shopping_list' is undefined
+[2024-05-19 18:16:21,244] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 16, in shopping_list
+    return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list.html", line 72, in top-level template code
+    <h1>Shopping List Details: {{ shopping_list.list_name }}</h1>
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'shopping_list' is undefined
+[2024-05-19 18:22:53,826] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/shopping_list_detail/11 [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 66, in shopping_list_detail
+    return render_template('shopping/shopping_list_detail.html', form=form, shopping_list=shopping_list)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1081, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 768, in compile
+    self.handle_exception(source=source_hint)
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\templates\shopping\shopping_list_detail.html", line 99, in template
+    <div class="shopping-item" id="shopping-item-{{ item
+jinja2.exceptions.TemplateSyntaxError: unexpected end of template, expected 'end of print statement'.

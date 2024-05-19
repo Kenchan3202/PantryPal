@@ -1,6 +1,6 @@
 from flask_login import current_user
 
-from app import db
+from app import db, app
 from models import Recipe, Ingredient, QuantifiedFoodItem, FoodItem, Rating
 
 

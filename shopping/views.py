@@ -42,16 +42,6 @@ def shopping_list():
     return render_template('shopping/shopping_list.html', form=form)
 
 
-
-
-
-
-
-
-
-    return render_template('shopping/shopping_list.html', form=form)  # Adjust the template name as necessary
-
-
 @shopping_blueprint.route('/complete_shopping', methods=['GET'])
 @login_required
 def complete_shopping():

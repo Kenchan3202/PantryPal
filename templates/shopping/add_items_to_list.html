@@ -70,7 +70,7 @@
     <div class="container">
         <h1>Add Items to Shopping List: {{ list_name }}</h1>
         {% if form %}
-        <form method="POST" action="{{ url_for('shopping.add_items_to_list') }}">
+        <form method="POST" action="{{ url_for('shopping.add_items_to_list', list_id=list_id) }}">
             {{ form.hidden_tag() }}
             <div class="field">
                 <div class="control">
@@ -95,12 +95,13 @@
         <h2>Items in this list</h2>
         {% for item in items %}
             <div class="shopping-item">
-                <span>{{ item.food_id }} (Quantity: {{ item.quantity }} {{ item.units }})</span>
+                <span>{{ item.qfooditem.fooditem.name }} (Quantity: {{ item.qfooditem.quantity }} {{ item.qfooditem.units }})</span>
+                <form action="{{ url_for('shopping.delete_item', item_id=item.id) }}" method="POST">
+                    <button class="delete-button" type="submit">X</button>
+                </form>
             </div>
         {% endfor %}
-        <form method="POST" action="{{ url_for('shopping.submit_shopping_list') }}">
-            <button class="button is-info" type="submit">Create Shopping List</button>
-        </form>
     </div>
 </body>
 </html>
+

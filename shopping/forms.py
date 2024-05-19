@@ -15,6 +15,7 @@ class AddItemForm(FlaskForm):
 
 
 
+
 class NewListForm(FlaskForm):
     listName = StringField(validators=[DataRequired()])
     submit = SubmitField()

@@ -1,6 +1,6 @@
 from flask_login import current_user
 
-from app import db, app
+from app import db
 from models import Recipe, Ingredient, QuantifiedFoodItem, FoodItem, Rating
 
 
@@ -104,29 +104,29 @@ def get_in_use_recipes(user_id):
     # For demonstration purposes, let's assume we return all recipes
     return Recipe.query.filter_by(user_id=user_id).all()
 
-def test_create_recipe():
-    name = "improved scrambled eggs again 2"
-    method = (
-        "1. mix egg. and add cornstarch with some water 2. high heat with butter while constant stir 3. take out of "
-        "pan just before done")
-    serving_size = 2
-    calories = 120
-    ingredients = [{
-        "food": "Eggs",
-        "quantity": 4,
-        "unit": "#"
-    },
-        {
-            "food": "Butter",
-            "quantity": 20,
-            "unit": "g"
-        },
-        {
-            "food": "Corn starch",
-            "quantity": 5,
-            "unit": "g"
-        }
-    ]
-    with app.app_context():
-        create_recipe(name, method, serving_size, calories, ingredients)
-        db.session.commit()
+# def test_create_recipe():
+#     name = "improved scrambled eggs again 2"
+#     method = (
+#         "1. mix egg. and add cornstarch with some water 2. high heat with butter while constant stir 3. take out of "
+#         "pan just before done")
+#     serving_size = 2
+#     calories = 120
+#     ingredients = [{
+#         "food": "Eggs",
+#         "quantity": 4,
+#         "unit": "#"
+#     },
+#         {
+#             "food": "Butter",
+#             "quantity": 20,
+#             "unit": "g"
+#         },
+#         {
+#             "food": "Corn starch",
+#             "quantity": 5,
+#             "unit": "g"
+#         }
+#     ]
+#     with app.app_context():
+#         create_recipe(name, method, serving_size, calories, ingredients)
+#         db.session.commit()

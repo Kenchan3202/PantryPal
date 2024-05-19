@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from admin.admin_util import delete_user_related_data
 
 admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
-from app import app, db
+from app import db
 from models import User, Recipe, Rating, ShoppingList, PantryItem, WastedFood, Ingredient, QuantifiedFoodItem, Barcode, \
     ShoppingItem
 

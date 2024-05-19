@@ -1670,3 +1670,17 @@ Traceback (most recent call last):
   File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\recipes\views.py", line 111, in recipes_detail
 OSError: [Errno 22] Invalid argument
 [2024-05-19 01:13:51,567] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:65} INFO - User logged in: ynchan@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:33:56,822] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:33:56,822] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:33:56,822] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:34:13,964] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:34:13,964] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:34:13,964] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:34:13,964] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:34:13,964] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:35:44,977] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:118} INFO - User logged out: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:35:44,977] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:118} INFO - User logged out: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:35:44,977] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:118} INFO - User logged out: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:35:44,977] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:118} INFO - User logged out: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:35:44,977] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:118} INFO - User logged out: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:35:44,977] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:118} INFO - User logged out: ynchanhk@gmail.com, IP: 127.0.0.1

@@ -1,15 +1,9 @@
-# Authored by: Joe Hare & Keirav Shah
-# latest edition: 16/05/2024
-
 from flask_login import UserMixin
 from sqlalchemy.orm import backref
-
 from app import db
 from datetime import datetime
 import bcrypt
-
 from crawler import fetch_wikipedia_description
-
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -90,7 +84,6 @@ class User(db.Model, UserMixin):
                                                               in enumerate(self.shopping_lists)])
         return output
 
-
 class Recipe(db.Model):
     __tablename__ = 'recipes'
 
@@ -155,7 +148,6 @@ class Recipe(db.Model):
         self.rating = round(avg_rating * 2) / 2         # Round to nearest 0.5
         db.session.commit()
 
-
 class Rating(db.Model):
     __tablename__ = 'ratings'
     user_id = db.Column(db.Integer, db.ForeignKey(User.id, on_delete='CASCADE'), primary_key=True, nullable=False)
@@ -173,7 +165,6 @@ class Rating(db.Model):
     def set_rating(self, rating: int) -> None:
         self.rating = rating
         db.session.commit()
-
 
 class ShoppingList(db.Model):
     __tablename__ = 'shoppinglists'
@@ -200,7 +191,6 @@ class ShoppingList(db.Model):
         self.list_name = list_name
         db.session.commit()
 
-
 class FoodItem(db.Model):
     __tablename__ = 'fooditems'
 
@@ -222,7 +212,6 @@ class FoodItem(db.Model):
 
     def get_description(self) -> str:
         return self.description
-
 
 class QuantifiedFoodItem(db.Model):
     __tablename__ = 'quantifiedfooditem'
@@ -264,7 +253,6 @@ class QuantifiedFoodItem(db.Model):
     def get_units(self) -> str:
         return self.units
 
-
 class ShoppingItem(db.Model):
     __tablename__ = 'shoppingitems'
 
@@ -291,15 +279,12 @@ class ShoppingItem(db.Model):
     def get_name(self) -> str:
         return self.qfooditem.get_name()
 
-
 class Ingredient(db.Model):
     __tablename__ = 'ingredients'
 
     id = db.Column(db.Integer, primary_key=True)
     recipe_id = db.Column(db.Integer, db.ForeignKey(Recipe.id, ondelete='CASCADE'), nullable=True)
     qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id), nullable=True)
-
-    # qfooditem = db.relationship(QuantifiedFoodItem.ingredients, backref=backref('qfooditem', cascade="all, delete"))
 
     def __init__(self, recipe_id, qfood_id):
         self.recipe_id = recipe_id
@@ -325,7 +310,6 @@ class Ingredient(db.Model):
 
     def get_name(self) -> str:
         return self.qfooditem.get_name()
-
 
 class PantryItem(db.Model):
     __tablename__ = 'pantryitems'
@@ -370,7 +354,6 @@ class PantryItem(db.Model):
     def get_calories(self) -> int:
         return self.calories
 
-
 class WastedFood(db.Model):
     __tablename__ = 'wastedfood'
 
@@ -396,7 +379,6 @@ class WastedFood(db.Model):
     def get_units(self) -> str:
         return self.qfooditem.get_units()
 
-
 class Barcode(db.Model):
     __tablename__ = 'barcodes'
 
@@ -407,7 +389,6 @@ class Barcode(db.Model):
     def __init__(self, qfood_id, barcode):
         self.qfood_id = qfood_id
         self.barcode = barcode
-
 
 class Diet(db.Model):
     __tablename__ = 'diet'
@@ -421,7 +402,6 @@ class Diet(db.Model):
     def __init__(self, description):
         self.description = description
 
-
 class CompatibleDiet(db.Model):
     __tablename__ = 'compatiblediet'
     id = db.Column(db.Integer, primary_key=True)
@@ -431,7 +411,6 @@ class CompatibleDiet(db.Model):
     def __init__(self, diet_id, recipe_id):
         self.diet_id = diet_id
         self.recipe_id = recipe_id
-
 
 class InUseRecipe(db.Model):
     __tablename__ = 'in_use_recipes'
@@ -447,9 +426,9 @@ class InUseRecipe(db.Model):
         self.user_id = user_id
         self.recipe_id = recipe_id
 
-
 def init_db():
-    from app import app
+    from app import create_app
+    app = create_app()
     with app.app_context():
         db.drop_all()
         db.create_all()

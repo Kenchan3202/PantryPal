@@ -1,5 +1,5 @@
 from os import abort
-from app import db, app
+from app import db
 from crawler import fetch_wikipedia_description
 from models import Recipe, Ingredient, QuantifiedFoodItem, Rating, PantryItem, InUseRecipe, FoodItem
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify

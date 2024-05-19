@@ -3,14 +3,18 @@ from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from users.forms import RegisterForm, LoginForm, ChangePasswordForm
 from flask_login import login_user, logout_user, login_required, current_user
-from app import app, db
+from app import db
 from models import User
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
 
+
 @users_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
+    from app import create_app
+
+    app = create_app()
     # create signup form object
     form1 = RegisterForm()
 
@@ -48,6 +52,9 @@ def register():
 
 @users_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
+    from app import create_app
+
+    app = create_app()
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate_on_submit():
         user: User = User.query.filter_by(email=form.email.data).first()
@@ -58,7 +65,7 @@ def login():
             user.last_login_ip = user.current_login_ip or request.remote_addr
             user.current_login_ip = request.remote_addr
             user.total_logins += 1
-            user.update_security_fields_on_login(ip_addr=request.remote_addr)   # Update security login fields.
+            user.update_security_fields_on_login(ip_addr=request.remote_addr)  # Update security login fields.
             db.session.commit()
             session['logged_in'] = True
             session['user_id'] = user.id
@@ -73,9 +80,11 @@ def login():
 
     return render_template('user/login.html', form=form)
 
+
 @users_blueprint.route('/my_account')
 def information():
     return render_template('user/my_account.html', user=current_user)
+
 
 # update password functionality
 @users_blueprint.route('/update_password', methods=['GET', 'POST'])
@@ -96,12 +105,15 @@ def update_password():
             flash('Current password is incorrect.', 'error')
     return render_template('user/update_password.html', form=form)
 
+
 @users_blueprint.route('/logout')
 @login_required
 def logout():
+    from app import create_app
+
+    app = create_app()
     user_info = f"User logged out: {current_user.email}, IP: {request.remote_addr}"
     logout_user()
     session['logged_in'] = False
     app.logger.info(user_info)
     return redirect(url_for('home'))
-

@@ -1652,3 +1652,21 @@ ImportError: cannot import name 'create_app' from 'app' (C:\Users\yat nam chan\P
 [2024-05-19 00:37:51,405] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:49} INFO - User logged in: ynchan@gmail.com, IP: 127.0.0.1
 [2024-05-19 00:48:17,626] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:29} INFO - User registered: ynchan@gmail.com, IP: 127.0.0.1
 [2024-05-19 00:48:53,966] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:49} INFO - User logged in: ynchan@gmail.com, IP: 127.0.0.1
+[2024-05-19 00:53:51,759] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:49} INFO - User logged in: ynchan@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:10:25,036] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:29} INFO - User registered: ynchan@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:10:39,897] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:49} INFO - User logged in: ynchan@gmail.com, IP: 127.0.0.1
+[2024-05-19 01:11:21,966] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /recipes/recipes_detail/5 [GET]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\recipes\views.py", line 111, in recipes_detail
+OSError: [Errno 22] Invalid argument
+[2024-05-19 01:13:51,567] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:65} INFO - User logged in: ynchan@gmail.com, IP: 127.0.0.1

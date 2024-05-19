@@ -2,11 +2,11 @@ from flask import Blueprint, render_template, flash, abort, redirect, url_for
 from flask_login import login_required, current_user
 
 from admin.admin_util import delete_user_related_data
-from app import db
-from models import User
 
 admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
-
+from app import app, db
+from models import User, Recipe, Rating, ShoppingList, PantryItem, WastedFood, Ingredient, QuantifiedFoodItem, Barcode, \
+    ShoppingItem
 
 
 @admin_blueprint.route('/admin')

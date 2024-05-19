@@ -9,16 +9,20 @@ from flask_login import login_user, logout_user, login_required, current_user, L
 
 load_dotenv()
 
-
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+login_manager.login_view = 'users.login'
 
 log_path = 'app.log'
 
 handler = RotatingFileHandler(log_path, maxBytes=500000, backupCount=10)
 handler.setLevel(logging.INFO)
 formatter = logging.Formatter(
-            "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
+    "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
 handler.setFormatter(formatter)
 app.logger.addHandler(handler)
 app.logger.setLevel(logging.INFO)
@@ -49,10 +53,7 @@ app.register_blueprint(kitchen_blueprint, url_prefix='/kitchen')
 app.register_blueprint(recipes_blueprint, url_prefix='/recipes')
 app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
-login_manager = LoginManager()
-login_manager.init_app(app)
 
-login_manager.login_view = 'users.login'
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -97,7 +98,9 @@ def baseLogin():
         if expiry_date <= today:
             used_items.append(item)
 
-    return render_template('main/index.html', soon_to_expire_seven=soon_to_expire_seven, used_items=used_items, today=today)
+    return render_template('main/index.html', soon_to_expire_seven=soon_to_expire_seven, used_items=used_items,
+                           today=today)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

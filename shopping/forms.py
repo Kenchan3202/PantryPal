@@ -10,3 +10,7 @@ class AddItemForm(FlaskForm):
     itemUnits = StringField(validators=[DataRequired()])
     listName = StringField(validators=[DataRequired()])
     submit = SubmitField()
+
+class NewListForm(FlaskForm):
+    listName = StringField(validators=[DataRequired()])
+    submit = SubmitField()

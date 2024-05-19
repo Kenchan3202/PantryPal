@@ -20,16 +20,16 @@
             margin-bottom: 20px;
             position: relative;
         }
-        button {
+        header button {
             background: #0056b3;
             border: none;
             color: white;
             padding: 10px 20px;
+            margin: 0 10px;
             border-radius: 4px;
             cursor: pointer;
-            margin: 0 10px;
         }
-        button:hover {
+        header button:hover {
             background: #004494;
         }
         .container {
@@ -105,7 +105,7 @@
             top: 0;
             width: 100%;
             background: #f6f6f6;
-            z-index: 1000;
+            z-index: 1;
             padding: 10px 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
@@ -119,50 +119,63 @@
             padding: 10px;
             margin-left: 20px;
         }
+        .your-button {
+            width: 200px;
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            font-size: 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out; /* 过渡效果 */
+        }
+        .your-button:hover {
+            background-color: #2980b9; /* 鼠标悬停时的背景颜色 */
+        }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
-        <div id="mySidebar" class="sidebar">
-            <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
-            <a href="/main-menu">Main</a>
-            <a href="/pantry/items">My Pantry</a>
-            <a href="/pantry/search">Food Browser</a>
-            <a href="/shopping/shopping_list">Shopping List</a>
-            <a href="/recipes/recipes">Recipes</a>
-            <a href="/kitchen/kitchen_main">Kitchen Main</a>
-        </div>
+<div class="navbar">
+    <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
+        <a href="/main-menu">Main</a>
+        <a href="/pantry/items">My Pantry</a>
+        <a href="/pantry/search">Food Browser</a>
+        <a href="/shopping/shopping_list">Shopping List</a>
+        <a href="/recipes/recipes">Recipes</a>
+        <a href="/kitchen/kitchen_main">Kitchen Main</a>
     </div>
-    <header>
-        <button onclick="location.href='/kitchen/kitchen_main'" style="position: absolute; left: 20px;">Kitchen</button>
-        <button onclick="location.href='/shopping/shopping_list'" style="position: absolute; left: 150px;">Shopping</button>
-        <button onclick="location.href='/recipes/recipes'" style="position: absolute; left: 300px;">Recipes</button>
-    </header>
-    <div class="container">
-        <h1>Shopping Lists</h1>
-        {% for shopping_list in shopping_lists %}
-            <div class="shopping-list" id="shopping-list-{{ shopping_list.id }}">
-                <h2 onclick="location.href='{{ url_for('shopping.shopping_list_detail', list_id=shopping_list.id) }}'">{{ shopping_list.list_name }}</h2>
-                <div>
-                    <form action="{{ url_for('shopping.complete_list', list_id=shopping_list.id) }}" method="POST" style="display:inline;">
-                        <button class="complete-button" type="submit">Complete</button>
-                    </form>
-                    <form action="{{ url_for('shopping.delete_list', list_id=shopping_list.id) }}" method="POST" style="display:inline;">
-                        <button class="delete-button" type="submit">X</button>
-                    </form>
-                </div>
+</div>
+<header>
+    <button onclick="location.href='/kitchen/kitchen_main'">Kitchen</button>
+    <button onclick="location.href='/shopping/shopping_list'">Shopping</button>
+    <button onclick="location.href='/recipes/recipes'">Recipes</button>
+</header>
+<div class="container">
+    <h1>Shopping Lists</h1>
+    {% for shopping_list in shopping_lists %}
+        <div class="shopping-list" id="shopping-list-{{ shopping_list.id }}">
+            <h2 onclick="location.href='{{ url_for('shopping.shopping_list_detail', list_id=shopping_list.id) }}'">{{ shopping_list.list_name }}</h2>
+            <div>
+                <form action="{{ url_for('shopping.complete_list', list_id=shopping_list.id) }}" method="POST" style="display:inline;">
+                    <button class="complete-button" type="submit">Complete</button>
+                </form>
+                <form action="{{ url_for('shopping.delete_list', list_id=shopping_list.id) }}" method="POST" style="display:inline;">
+                    <button class="delete-button" type="submit">X</button>
+                </form>
             </div>
-        {% endfor %}
-        <button onclick="location.href='{{ url_for('shopping.create_shopping_list') }}'">Create New Shopping List</button>
-    </div>
+        </div>
+    {% endfor %}
+    <button class="your-button" onclick="location.href='{{ url_for('shopping.create_shopping_list') }}'">Create New Shopping List</button>
+</div>
 
-    <script>
-        function toggleNav() {
-            var sidebar = document.getElementById("mySidebar");
-            sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
-        }
-    </script>
+<script>
+    function toggleNav() {
+        var sidebar = document.getElementById("mySidebar");
+        sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+    }
+</script>
 </body>
 </html>
-

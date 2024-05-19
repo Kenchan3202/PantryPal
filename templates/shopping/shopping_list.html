@@ -18,6 +18,7 @@
             padding: 10px;
             text-align: center;
             margin-bottom: 20px;
+            position: relative;
         }
         button {
             background: #0056b3;
@@ -39,37 +40,31 @@
             margin-bottom: 20px;
         }
         .shopping-list {
+            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
         }
         .shopping-list h2 {
+            display: inline;
             cursor: pointer;
         }
-        .shopping-list-actions {
-            display: flex;
-            align-items: center;
+        .shopping-list form {
+            display: inline;
         }
-        .delete-button {
+        .delete-button, .complete-button {
             background-color: #f44336;
             color: white;
             border: none;
             border-radius: 4px;
             padding: 5px 10px;
             cursor: pointer;
-            margin-left: 10px;
         }
-        .delete-button:hover {
+        .delete-button:hover, .complete-button:hover {
             background-color: #d32f2f;
         }
         .complete-button {
             background-color: #4caf50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 5px 10px;
-            cursor: pointer;
             margin-left: 10px;
         }
         .complete-button:hover {
@@ -140,20 +135,20 @@
         </div>
     </div>
     <header>
-        <button onclick="location.href='/kitchen/kitchen_main'">Kitchen</button>
-        <button onclick="location.href='/shopping/shopping_list'">Shopping</button>
-        <button onclick="location.href='/recipes/recipes'">Recipes</button>
+        <button onclick="location.href='/kitchen/kitchen_main'" style="position: absolute; left: 20px;">Kitchen</button>
+        <button onclick="location.href='/shopping/shopping_list'" style="position: absolute; left: 150px;">Shopping</button>
+        <button onclick="location.href='/recipes/recipes'" style="position: absolute; left: 300px;">Recipes</button>
     </header>
     <div class="container">
         <h1>Shopping Lists</h1>
         {% for shopping_list in shopping_lists %}
             <div class="shopping-list" id="shopping-list-{{ shopping_list.id }}">
                 <h2 onclick="location.href='{{ url_for('shopping.shopping_list_detail', list_id=shopping_list.id) }}'">{{ shopping_list.list_name }}</h2>
-                <div class="shopping-list-actions">
-                    <form action="{{ url_for('shopping.complete_list', list_id=shopping_list.id) }}" method="POST">
+                <div>
+                    <form action="{{ url_for('shopping.complete_list', list_id=shopping_list.id) }}" method="POST" style="display:inline;">
                         <button class="complete-button" type="submit">Complete</button>
                     </form>
-                    <form action="{{ url_for('shopping.delete_list', list_id=shopping_list.id) }}" method="POST">
+                    <form action="{{ url_for('shopping.delete_list', list_id=shopping_list.id) }}" method="POST" style="display:inline;">
                         <button class="delete-button" type="submit">X</button>
                     </form>
                 </div>
@@ -170,8 +165,4 @@
     </script>
 </body>
 </html>
-
-
-
-
 

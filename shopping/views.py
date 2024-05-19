@@ -1,11 +1,13 @@
 from flask import render_template, flash, redirect, url_for, Blueprint, request
 from flask_login import current_user, login_required
+import datetime
 
 from app import db
 from models import ShoppingList, QuantifiedFoodItem, FoodItem, ShoppingItem, PantryItem
 from shopping.forms import AddItemForm, CreateListForm
 
 shopping_blueprint = Blueprint('shopping', __name__, template_folder='templates')
+today = datetime.date.today()
 
 @shopping_blueprint.route('/shopping_list', methods=['GET'])
 @login_required
@@ -108,6 +110,10 @@ def delete_list(list_id):
     if shopping_list.user_id != current_user.id:
         flash('Unauthorized', 'error')
         return redirect(url_for('shopping.shopping_list'))
+
+    for item in shopping_list.shopping_items:
+        db.session.delete(item)
+
     db.session.delete(shopping_list)
     db.session.commit()
     flash('Shopping list deleted', 'success')
@@ -125,6 +131,7 @@ def delete_item(item_id):
     flash('Item deleted from shopping list', 'success')
     return redirect(url_for('shopping.shopping_list_detail', list_id=shopping_item.shoppinglist.id))
 
+
 @shopping_blueprint.route('/complete_list/<int:list_id>', methods=['POST'])
 @login_required
 def complete_list(list_id):
@@ -132,10 +139,18 @@ def complete_list(list_id):
     if shopping_list.user_id != current_user.id:
         flash('Unauthorized', 'error')
         return redirect(url_for('shopping.shopping_list'))
+
     for item in shopping_list.shopping_items:
-        pantry_item = PantryItem(user_id=current_user.id, qfood_id=item.qfood_id, expiry=None, calories=0)
+        # Move items to pantry
+        pantry_item = PantryItem(user_id=current_user.id, qfood_id=item.qfood_id, expiry=today, calories=0)
         db.session.add(pantry_item)
+
+        # Delete ShoppingItem
         db.session.delete(item)
+
+    # Delete the shopping list
+    db.session.delete(shopping_list)
+
     db.session.commit()
     flash('Shopping list completed and items moved to pantry', 'success')
     return redirect(url_for('shopping.shopping_list'))

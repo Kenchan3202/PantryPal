@@ -6,6 +6,7 @@
     <title>Create Shopping List</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        /* 样式定义 */
         body {
             font-family: 'Roboto', sans-serif;
             background: #f7f7f7;
@@ -17,6 +18,7 @@
             padding: 10px;
             text-align: center;
             margin-bottom: 20px;
+            position: relative;
         }
         button {
             background: #0056b3;
@@ -46,7 +48,7 @@
 </head>
 <body>
     <header>
-        <button onclick="location.href='{{ url_for('shopping.shopping_list') }}'">Back to Shopping Lists</button>
+        <button onclick="location.href='/shopping/shopping_list'" style="position: absolute; left: 20px;">Back to Shopping Lists</button>
     </header>
     <div class="container">
         <h1>Create New Shopping List</h1>
@@ -55,7 +57,7 @@
             {{ form.hidden_tag() }}
             <div class="field">
                 <div class="control">
-                    {{ form.listName(class="input") }}
+                    {{ form.listName(class="input", placeholder="New shopping list name") }}
                 </div>
             </div>
             <div>
@@ -66,5 +68,6 @@
     </div>
 </body>
 </html>
+
 
 

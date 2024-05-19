@@ -5,6 +5,7 @@ from datetime import datetime
 import bcrypt
 from crawler import fetch_wikipedia_description
 
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -141,6 +142,10 @@ class Recipe(db.Model):
         self.update_rating()
         return self.rating
 
+    # Method to get recipe's ingredients
+    def get_ingredients(self):
+        return self.ingredients
+
     # Method to update recipe's rating attribute. Made for internal use (shouldn't need to be called from front end)
     def update_rating(self):
         ratings = self.ratings
@@ -148,9 +153,10 @@ class Recipe(db.Model):
         self.rating = round(avg_rating * 2) / 2         # Round to nearest 0.5
         db.session.commit()
 
+
 class Rating(db.Model):
     __tablename__ = 'ratings'
-    user_id = db.Column(db.Integer, db.ForeignKey(User.id, on_delete='CASCADE'), primary_key=True, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id, ondelete='CASCADE'), primary_key=True, nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey(Recipe.id), primary_key=True, nullable=False)
     rating = db.Column(db.Integer)              # Need to validate that incoming value is between 0 & 5
 
@@ -165,6 +171,7 @@ class Rating(db.Model):
     def set_rating(self, rating: int) -> None:
         self.rating = rating
         db.session.commit()
+
 
 class ShoppingList(db.Model):
     __tablename__ = 'shoppinglists'
@@ -191,6 +198,7 @@ class ShoppingList(db.Model):
         self.list_name = list_name
         db.session.commit()
 
+
 class FoodItem(db.Model):
     __tablename__ = 'fooditems'
 
@@ -212,6 +220,7 @@ class FoodItem(db.Model):
 
     def get_description(self) -> str:
         return self.description
+
 
 class QuantifiedFoodItem(db.Model):
     __tablename__ = 'quantifiedfooditem'
@@ -236,6 +245,14 @@ class QuantifiedFoodItem(db.Model):
     def __str__(self):
         return f'{self.fooditem.get_name()}, {self.quantity}{self.units}'
 
+    def __eq__(self, other):
+        return self.food_id == other.food_id
+
+    # Method to return the difference in amounts compared to another qfooditem
+    def compare_amounts(self, other) -> float:
+        difference = self.quantity - other.quantity
+        return difference
+
     def set_quantity(self, quantity: float) -> None:
         self.quantity = quantity
         db.session.commit()
@@ -252,6 +269,7 @@ class QuantifiedFoodItem(db.Model):
 
     def get_units(self) -> str:
         return self.units
+
 
 class ShoppingItem(db.Model):
     __tablename__ = 'shoppingitems'
@@ -278,6 +296,7 @@ class ShoppingItem(db.Model):
 
     def get_name(self) -> str:
         return self.qfooditem.get_name()
+
 
 class Ingredient(db.Model):
     __tablename__ = 'ingredients'
@@ -424,6 +443,25 @@ class InUseRecipe(db.Model):
     def __init__(self, user_id, recipe_id):
         self.user_id = user_id
         self.recipe_id = recipe_id
+
+
+def create_and_get_qfid(food_id, quantity, units):
+    qfi = QuantifiedFoodItem(food_id=food_id,
+                             quantity=quantity,
+                             units=units)
+    db.session.add(qfi)
+    db.session.commit()
+    return qfi.id
+
+
+def create_or_get_food_item(food_name):
+    food = FoodItem.query.filter_by(name=food_name).first()
+    if food is None:  # Add a new food_item to the database if queried food doesn't already exist
+        food = FoodItem(food_name=food_name)
+        db.session.add(food)
+        db.session.commit()
+    return food
+
 
 def init_db():
     from app import create_app

@@ -1,7 +1,7 @@
 from flask_login import current_user
 
 from app import db
-from models import Recipe, Ingredient, QuantifiedFoodItem, FoodItem, Rating
+from models import Recipe, Ingredient, QuantifiedFoodItem, FoodItem, Rating, create_and_get_qfid, create_or_get_food_item
 
 
 # user_id = 1
@@ -31,25 +31,6 @@ def add_ingredient(ingredient, quantity, unit, recipe_id):
                                 qfood_id=qfid)
     db.session.add(new_ingredient)
     db.session.commit()
-
-
-def create_and_get_qfid(food_id, quantity, units):
-    qfi = QuantifiedFoodItem(food_id=food_id,
-                             quantity=quantity,
-                             units=units)
-    db.session.add(qfi)
-    db.session.commit()
-    qfid = qfi.id
-    return qfi.id
-
-
-def create_or_get_food_item(food_name):
-    food = FoodItem.query.filter_by(name=food_name).first()
-    if food is None:  # Add a new food_item to the database if queried food doesn't already exist
-        food = FoodItem(food_name=food_name)
-        db.session.add(food)
-        db.session.commit()
-    return food
 
 
 def update_recipe_rating(recipe_id):
@@ -88,6 +69,7 @@ def delete_recipe_instance(recipe: Recipe) -> None:
         db.session.delete(qfood)
     db.session.delete(recipe)
     db.session.commit()
+
 
 def save_rating(user_id, recipe_id, rating):
     existing_rating = Rating.query.filter_by(user_id=user_id, recipe_id=recipe_id).first()

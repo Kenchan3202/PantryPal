@@ -1,5 +1,5 @@
 from flask import Blueprint, Flask, render_template, request, redirect, url_for, session, flash
-from flask_login import current_user
+from flask_login import current_user,login_required
 from app import db
 
 import models
@@ -11,6 +11,7 @@ shopping_blueprint = Blueprint('shopping', __name__, template_folder='templates'
 
 
 @shopping_blueprint.route('/shopping_list')
+@login_required
 def shopping_list():
     shopping_lists = ShoppingList.query.filter_by(user_id=current_user.id)
     return render_template('shopping/shopping_list.html',
@@ -18,16 +19,19 @@ def shopping_list():
 
 
 @shopping_blueprint.route('/view_list/<int:list_id>')
+@login_required
 def view_list(list_id):
     return render_template('shopping/view_list.html')
 
 
 @shopping_blueprint.route('/delete_list', methods=['POST'])
+@login_required
 def delete_list():
     return redirect(url_for('shopping.shopping_list'))
 
 
 @shopping_blueprint.route('/new_list', methods=['POST'])
+@login_required
 def new_list():
     form = NewListForm()
     return render_template('shopping/shopping_list.html', form=form)

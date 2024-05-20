@@ -123,13 +123,15 @@ def delete_list(list_id):
 @login_required
 def delete_item(item_id):
     shopping_item = ShoppingItem.query.get_or_404(item_id)
-    if shopping_item.shoppinglist.user_id != current_user.id:
+    shopping_list = ShoppingList.query.get_or_404(shopping_item.list_id)
+    if shopping_list.user_id != current_user.id:
         flash('Unauthorized', 'error')
-        return redirect(url_for('shopping.shopping_list_detail', list_id=shopping_item.shoppinglist.id))
+        return redirect(url_for('shopping.shopping_list_detail', list_id=shopping_item.list_id))
     db.session.delete(shopping_item)
     db.session.commit()
     flash('Item deleted from shopping list', 'success')
-    return redirect(url_for('shopping.shopping_list_detail', list_id=shopping_item.shoppinglist.id))
+    print(shopping_item.list_id)
+    return redirect(url_for('shopping.shopping_list_detail', list_id=shopping_item.list_id))
 
 
 @shopping_blueprint.route('/complete_list/<int:list_id>', methods=['POST'])

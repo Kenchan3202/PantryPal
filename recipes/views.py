@@ -135,7 +135,8 @@ def your_recipes():
 #         if pantry_dict[ingredient_name] < ingredient_quantity:
 #             can_make_recipe = False
 #             print(
-#                 f"Not enough quantity for ingredient: {ingredient_name}, required: {ingredient_quantity}, available: {pantry_dict[ingredient_name]}")
+#                 f"Not enough quantity for ingredient: {ingredient_name}, required: {ingredient_quantity}, available:
+#                 {pantry_dict[ingredient_name]}")
 #             break
 #
 #     return render_template('recipes/recipes_detail.html', recipe=recipe, ingredients=ingredients,
@@ -243,7 +244,6 @@ def delete_recipe(recipe_id):
     return redirect(url_for('recipes.recipes'))
 
 
-# rate own recipe
 @recipes_blueprint.route('/rate_recipe/<int:recipe_id>', methods=['POST'])
 @login_required
 def rate_recipe(recipe_id):

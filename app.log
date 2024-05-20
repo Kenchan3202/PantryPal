@@ -2694,3 +2694,164 @@ sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) NOT NULL constraint fail
 [2024-05-19 19:54:51,288] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: zskhzskh@163.com, IP: 127.0.0.1
 [2024-05-19 19:54:51,288] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: zskhzskh@163.com, IP: 127.0.0.1
 [2024-05-19 19:54:51,288] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: zskhzskh@163.com, IP: 127.0.0.1
+[2024-05-20 12:42:45,938] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhh@gmail.com, IP: 127.0.0.1
+[2024-05-20 12:42:45,938] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhh@gmail.com, IP: 127.0.0.1
+[2024-05-20 12:42:45,938] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:46} INFO - User registered: ynchanhh@gmail.com, IP: 127.0.0.1
+[2024-05-20 12:43:03,642] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhh@gmail.com, IP: 127.0.0.1
+[2024-05-20 12:43:03,642] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhh@gmail.com, IP: 127.0.0.1
+[2024-05-20 12:43:03,642] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhh@gmail.com, IP: 127.0.0.1
+[2024-05-20 12:43:03,642] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhh@gmail.com, IP: 127.0.0.1
+[2024-05-20 12:43:03,642] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhh@gmail.com, IP: 127.0.0.1
+[2024-05-20 12:57:30,872] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-20 12:57:30,872] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-20 12:57:30,872] {C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\users\views.py:72} INFO - User logged in: ynchanhk@gmail.com, IP: 127.0.0.1
+[2024-05-20 12:57:49,390] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/delete_item/44 [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 126, in delete_item
+    if shopping_item.shoppinglist.user_id != current_user.id:
+AttributeError: 'ShoppingItem' object has no attribute 'shoppinglist'
+[2024-05-20 12:57:49,390] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/delete_item/44 [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 126, in delete_item
+    if shopping_item.shoppinglist.user_id != current_user.id:
+AttributeError: 'ShoppingItem' object has no attribute 'shoppinglist'
+[2024-05-20 12:57:49,390] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/delete_item/44 [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 126, in delete_item
+    if shopping_item.shoppinglist.user_id != current_user.id:
+AttributeError: 'ShoppingItem' object has no attribute 'shoppinglist'
+[2024-05-20 13:06:56,197] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/delete_item/44 [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 126, in delete_item
+    if shopping_item.shoppinglist.user_id != current_user.id:
+AttributeError: 'ShoppingItem' object has no attribute 'shoppinglist'
+[2024-05-20 13:06:56,197] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/delete_item/44 [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 126, in delete_item
+    if shopping_item.shoppinglist.user_id != current_user.id:
+AttributeError: 'ShoppingItem' object has no attribute 'shoppinglist'
+[2024-05-20 13:06:56,197] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/delete_item/44 [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 126, in delete_item
+    if shopping_item.shoppinglist.user_id != current_user.id:
+AttributeError: 'ShoppingItem' object has no attribute 'shoppinglist'
+[2024-05-20 13:09:25,094] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/delete_item/44 [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 126, in delete_item
+    if shopping_item.shoppinglist.user_id != current_user.id:
+AttributeError: 'ShoppingItem' object has no attribute 'shoppinglist'
+[2024-05-20 13:09:25,094] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/delete_item/44 [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 126, in delete_item
+    if shopping_item.shoppinglist.user_id != current_user.id:
+AttributeError: 'ShoppingItem' object has no attribute 'shoppinglist'
+[2024-05-20 13:09:25,094] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/delete_item/44 [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 126, in delete_item
+    if shopping_item.shoppinglist.user_id != current_user.id:
+AttributeError: 'ShoppingItem' object has no attribute 'shoppinglist'
+[2024-05-20 13:13:40,836] {C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py:838} ERROR - Exception on /shopping/delete_item/44 [POST]
+Traceback (most recent call last):
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\yat nam chan\PycharmProjects\flaskTestTeam44\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\Users\yat nam chan\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\yat nam chan\PycharmProjects\CSC2033-Team44\shopping\views.py", line 133, in delete_item
+    return redirect(url_for('shopping.shopping_list_detail', list_id=shopping_item.shoppinglist.id))
+AttributeError: 'ShoppingItem' object has no attribute 'shoppinglist'

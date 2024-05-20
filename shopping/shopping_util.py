@@ -7,8 +7,9 @@ from models import (ShoppingList, ShoppingItem, QuantifiedFoodItem, FoodItem, Us
 
 # Method to create a new shopping list. Takes associated user_id & list_name as inputs.
 # Returns newly created instance of ShoppingList.
-def create_shopping_list(user_id: int, list_name: str) -> ShoppingList:
+def create_shopping_list_util(user_id: int, list_name: str) -> ShoppingList:
     new_list = ShoppingList(user_id=user_id, list_name=list_name)
+    db.session.add(new_list)
     db.session.commit()
     return new_list
 
@@ -62,7 +63,7 @@ def create_list_from_recipe_and_pantry(user_id: int, recipe_id: int) -> Shopping
     pantry_items: List[QuantifiedFoodItem] = [pantryitem.qfooditem for pantryitem in user.get_pantry()]
 
     slist_name = f"Ingredients needed for {recipe.get_name()}"
-    new_slist = create_shopping_list(user_id=user_id, list_name=slist_name)
+    new_slist = create_shopping_list_util(user_id=user_id, list_name=slist_name)
 
     for ingredient in recipe_ingredients:
         # If ingredient not in pantry then create new shoppingitem with a qfood matching the ingredient's qfood

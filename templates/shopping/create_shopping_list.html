@@ -6,7 +6,6 @@
     <title>Create Shopping List</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* 样式定义 */
         body {
             font-family: 'Roboto', sans-serif;
             background: #f7f7f7;
@@ -32,11 +31,18 @@
         button:hover {
             background: #004494;
         }
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
         .container {
             padding: 20px;
             background: white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             border-radius: 8px;
+            margin-top: 20px; /* Add spacing between button and container */
         }
         .field {
             margin-bottom: 20px;
@@ -48,7 +54,7 @@
 </head>
 <body>
     <header>
-        <button onclick="location.href='/shopping/shopping_list'" style="position: absolute; left: 20px;">Back to Shopping Lists</button>
+        <button onclick="location.href='/shopping/shopping_list'" class="back-button">Back to Shopping Lists</button>
     </header>
     <div class="container">
         <h1>Create New Shopping List</h1>
@@ -68,6 +74,3 @@
     </div>
 </body>
 </html>
-
-
-

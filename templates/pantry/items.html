@@ -116,6 +116,7 @@
     </div>
 </div>
 <h1 class="title">Pantry List</h1>
+
 <div class="container">
     <h2>All Items</h2>
     {% for item in items %}
@@ -130,9 +131,39 @@
     </div>
     {% endfor %}
 </div>
+
+<div class="container">
+    <form method="get" action="/pantry/items">
+        <input type="text" name="min_calories" placeholder="Min Calories">
+        <input type="text" name="max_calories" placeholder="Max Calories">
+        <input type="checkbox" name="not_expired" value="on"> Not Expired Only
+        <button type="submit">Filter</button>
+    </form>
+</div>
+
+<div class="container">
+    <h2>Filtered Items</h2>
+    {% if filtered_items %}
+        {% for item in filtered_items %}
+            <div class="food-item">
+                <span class="food-label">Food: {{ item.qfooditem.fooditem.name }}</span>
+                <span class="food-label">Quantity: {{ item.qfooditem.quantity }} {{ item.qfooditem.units }}</span>
+                <span class="food-label">Exp: {{ item.expiry }}</span>
+                <span class="food-label">Calories: {{ item.calories }}</span>
+                <form action="{{ url_for('pantry.delete_item', item_id=item.id) }}" method="post" style="display:inline;" onsubmit="return confirmDelete()">
+                    <button type="submit" class="delete-button">X</button>
+                </form>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No items to display. Use the filter options above to find items.</p>
+    {% endif %}
+</div>
+
 <div class="container">
     <h2><button onclick="location.href='/pantry/create_item'">Add Item to Pantry List</button></h2>
 </div>
+
 <div class="container">
     <h2>Soon To Expire Food</h2>
     {% for item in Foodaboutexpired %}
@@ -141,6 +172,7 @@
     </div>
     {% endfor %}
 </div>
+
 <div class="container">
     <h2>Expired Food</h2>
     {% for item in Foodexpired %}
@@ -149,6 +181,7 @@
     </div>
     {% endfor %}
 </div>
+
 <script>
     function toggleNav() {
         var sidebar = document.getElementById("mySidebar");
@@ -165,7 +198,3 @@
 </script>
 </body>
 </html>
-
-
-
-

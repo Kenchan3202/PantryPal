@@ -1,7 +1,6 @@
 from flask import render_template, flash, redirect, url_for, Blueprint, request
 from flask_login import current_user, login_required
 from datetime import datetime
-
 from app import db, today
 from crawler import fetch_food_storage_info
 from models import ShoppingList, QuantifiedFoodItem, FoodItem, ShoppingItem, PantryItem

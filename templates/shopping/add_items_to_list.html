@@ -17,6 +17,7 @@
             padding: 10px;
             text-align: center;
             margin-bottom: 20px;
+            position: relative;
         }
         button {
             background: #0056b3;
@@ -35,6 +36,7 @@
             background: white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             border-radius: 8px;
+            margin-top: 40px;
         }
         .shopping-item {
             display: flex;
@@ -65,7 +67,7 @@
 </head>
 <body>
     <header>
-        <button onclick="location.href='{{ url_for('shopping.shopping_list') }}'">Back to Shopping Lists</button>
+        <button onclick="location.href='{{ url_for('shopping.shopping_list') }}'" style="position: absolute; left: 20px;">Back to Shopping Lists</button>
     </header>
     <div class="container">
         <h1>Add Items to Shopping List: {{ list_name }}</h1>
@@ -74,17 +76,17 @@
             {{ form.hidden_tag() }}
             <div class="field">
                 <div class="control">
-                    {{ form.newItem(class="input") }}
+                    {{ form.newItem(class="input", placeholder="Add new item") }}
                 </div>
             </div>
             <div class="field">
                 <div class="control">
-                    {{ form.itemQuantity(class="input") }}
+                    {{ form.itemQuantity(class="input", placeholder="Enter quantity") }}
                 </div>
             </div>
             <div class="field">
                 <div class="control">
-                    {{ form.itemUnits(class="input") }}
+                    {{ form.itemUnits(class="input", placeholder="Enter units (g or ml)") }}
                 </div>
             </div>
             <div>
@@ -92,7 +94,7 @@
             </div>
         </form>
         {% endif %}
-        <h2>Items in this list</h2>
+        <h2>List of Items</h2>
         {% for item in items %}
             <div class="shopping-item">
                 <span>{{ item.qfooditem.fooditem.name }} (Quantity: {{ item.qfooditem.quantity }} {{ item.qfooditem.units }})</span>
@@ -104,4 +106,3 @@
     </div>
 </body>
 </html>
-

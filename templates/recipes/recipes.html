@@ -31,7 +31,7 @@
             background: #004494;
         }
         .recipebox {
-            margin: 20px auto; /* 水平居中且添加上下外边距 */
+            margin: 20px auto;
             background-color: #fff;
             padding: 20px;
             width: 80%;
@@ -57,30 +57,35 @@
             border-bottom: 1px solid #eee;
         }
         .ratebutton {
-            background: #16a085; /* 绿宝石色 */
+            background: #16a085;
             color: white;
             padding: 10px 20px;
             border: none;
-            border-radius: 5px; /* 圆角 */
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 18px; /* 字体大小 */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* 添加阴影 */
-            transition: background 0.3s ease-in-out; /* 过渡效果 */
+            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            transition: background 0.3s ease-in-out;
         }
         .ratebutton:hover {
-            background: #149174; /* 鼠标悬停时的颜色变深 */
+            background: #149174;
         }
         .sidebar {
             height: 100%;
-            width: 0; /* 默认隐藏 */
+            width: 0;
             position: fixed;
-            z-index: 2; /* 确保侧边栏在顶层 */
+            z-index: 1001;
             top: 0;
-            left: 0;
             background-color: #111;
             overflow-x: hidden;
-            transition: width 0.3s, padding 0.3s; /* 添加过渡效果 */
+            transition: width 0.3s, padding 0.3s;
             padding-top: 60px;
+        }
+        .sidebar.left {
+            left: 0;
+        }
+        .sidebar.right {
+            right: 0;
         }
         .sidebar a {
             padding: 10px 0px;
@@ -97,17 +102,33 @@
         .sidebar .closebtn {
             position: absolute;
             top: 0;
-            right: 25px;
             font-size: 36px;
+        }
+        .sidebar .closebtn.left {
+            right: 25px;
+        }
+        .sidebar .closebtn.right {
+            left: 25px;
+        }
+        .sidebar form {
+            color: white;
+        }
+        .sidebar h2, .sidebar h3, .sidebar label {
+            color: white;
+        }
+        .sidebar select, .sidebar input {
+            color: black;
         }
         .navbar {
             position: sticky;
             top: 0;
             width: 100%;
             background: #f6f6f6;
-            z-index: 1;
+            z-index: 1000;
             padding: 10px 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
         }
         .navbar .openbtn {
             font-size: 20px;
@@ -128,10 +149,10 @@
             font-size: 20px;
             border-radius: 4px;
             text-decoration: none;
-            transition: background-color 0.3s ease-in-out; /* 过渡效果 */
+            transition: background-color 0.3s ease-in-out;
         }
         .your-button:hover {
-            background-color: #2980b9; /* 鼠标悬停时的背景颜色 */
+            background-color: #2980b9;
         }
         .rate-form {
             margin-top: 10px;
@@ -148,27 +169,28 @@
 </head>
 <body>
 <div class="navbar">
-    <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
-        <a href="/main-menu">Main</a>
-        <a href="/pantry/items">My Pantry</a>
-        <a href="/pantry/search">Food Browser</a>
-        <a href="/shopping/shopping_list">Shopping List</a>
-        <a href="/recipes/recipes">Recipes</a>
-        <a href="/kitchen/kitchen_main">Kitchen Main</a>
+    <div>
+        <button class="openbtn" onclick="toggleNav('mySidebar')">☰ Menu</button>
     </div>
-    <a href="{{ url_for('recipes.your_recipes') }}" class="your-button">My Recipes</a>
-    <a href="{{ url_for('recipes.add_recipes') }}" class="your-button">Create Recipes</a>
-    <a href="{{ url_for('recipes.in_use_recipes') }}" class="your-button">Using Recipes</a>
+    <div>
+        <a href="{{ url_for('recipes.your_recipes') }}" class="your-button">My Recipes</a>
+        <a href="{{ url_for('recipes.add_recipes') }}" class="your-button">Create Recipes</a>
+        <a href="{{ url_for('recipes.in_use_recipes') }}" class="your-button">Using Recipes</a>
+        <button class="openbtn" onclick="toggleNav('filterSidebar')">☰ Filter & Sort</button>
+    </div>
 </div>
-<header>
-    <button onclick="location.href='/kitchen/kitchen_main'">Kitchen</button>
-    <button onclick="location.href='/shopping/shopping_list'">Shopping</button>
-    <button onclick="location.href='/recipes/recipes'">Recipes</button>
-</header>
-<div id="filterSidebar" class="sidebar">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeFilterNav()">×</a>
+
+<div id="mySidebar" class="sidebar left">
+    <a href="javascript:void(0)" class="closebtn left" onclick="toggleNav('mySidebar')">×</a>
+    <a href="/main-menu">Main</a>
+    <a href="/pantry/items">My Pantry</a>
+    <a href="/pantry/search">Food Browser</a>
+    <a href="/shopping/shopping_list">Shopping List</a>
+    <a href="/recipes/recipes">Recipes</a>
+</div>
+
+<div id="filterSidebar" class="sidebar right">
+    <a href="javascript:void(0)" class="closebtn right" onclick="toggleNav('filterSidebar')">×</a>
     <form action="{{ url_for('recipes.recipes') }}" method="get">
         <h2>Filter & Sort Recipes</h2>
         <h3>Sort by:</h3>
@@ -200,8 +222,6 @@
         <button type="submit" class="your-button">Apply Filters</button>
     </form>
 </div>
-
-<button class="openbtn" onclick="openFilterNav()">☰ Filter & Sort</button>
 
 {% for recipe in recipes %}
 <div class="recipebox">
@@ -238,35 +258,21 @@
 {% endfor %}
 
 <script>
-    function toggleNav() {
-        var sidebar = document.getElementById("mySidebar");
-        var mainContent = document.getElementById("mainContent");
-
-        if (sidebar.style.width === "250px") {
+    function toggleNav(sidebarId) {
+        var sidebar = document.getElementById(sidebarId);
+        if (sidebar.style.width === "250px" || sidebar.style.width === "300px") {
             sidebar.style.width = "0";
-            mainContent.style.marginLeft = "0";
+            sidebar.style.padding = "0";
         } else {
-            sidebar.style.width = "250px";
-            mainContent.style.marginLeft = "250px";
+            if (sidebarId === 'mySidebar') {
+                sidebar.style.width = "250px";
+            } else {
+                sidebar.style.width = "300px";
+                sidebar.style.padding = "10px 20px";
+            }
         }
-    }
-
-    function openFilterNav() {
-        var filterSidebar = document.getElementById("filterSidebar");
-        filterSidebar.style.width = "300px"; /* 增加侧边栏宽度 */
-        filterSidebar.style.padding = "10px 20px"; /* 增加内边距 */
-        filterSidebar.style.zIndex = "1001"; /* 使过滤侧边栏位于顶层 */
-    }
-
-    function closeFilterNav() {
-        var filterSidebar = document.getElementById("filterSidebar");
-        filterSidebar.style.width = "0";
-        filterSidebar.style.padding = "0"; /* 关闭时移除内边距 */
     }
 </script>
 
 </body>
 </html>
-
-
-

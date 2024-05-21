@@ -1,3 +1,4 @@
+from datetime import timedelta
 from typing import List
 
 from app import db
@@ -80,3 +81,25 @@ def create_list_from_recipe_and_pantry(user_id: int, recipe_id: int) -> Shopping
                 create_shopping_item(list_id=new_slist.id, food=ingredient.get_name(), quantity=difference,
                                      units=ingredient.get_units())
     return new_slist
+
+
+def get_storage_duration(food_name, storage_info):
+    default_duration = timedelta(days=1)
+    storage_duration_str = storage_info.get(food_name, "not safe")
+
+    if "not safe" in storage_duration_str.lower():
+        return default_duration
+
+    max_days = 1
+    for part in storage_duration_str.split(','):
+        if 'day' in part:
+            days = int(part.split()[0])
+            max_days = max(max_days, days)
+        elif 'week' in part:
+            weeks = int(part.split()[0])
+            max_days = max(max_days, weeks * 7)
+        elif 'month' in part:
+            months = int(part.split()[0])
+            max_days = max(max_days, months * 30)
+
+    return timedelta(days=max_days)

@@ -36,26 +36,26 @@ def recipes():
 
     query = Recipe.query
 
-    # 筛选卡路里范围
+    # filter calories
     if min_calories is not None:
         query = query.filter(Recipe.calories >= min_calories)
     if max_calories is not None:
         query = query.filter(Recipe.calories <= max_calories)
 
-    # 筛选评分
+    # filter rate
     if min_rating is not None:
         query = query.filter(Recipe.rating >= min_rating)
 
-    # 筛选食材
+    # filter ingredients
     if ingredient_filter:
         query = query.join(Recipe.ingredients).join(Ingredient.qfooditem).join(FoodItem).filter(
             FoodItem.name.ilike(f"%{ingredient_filter}%"))
 
-    # 筛选人数
+    # filter serve for
     if serves_filter:
         query = query.filter(Recipe.serves == serves_filter)
 
-    # 排序
+    # sorting
     if sort_by == 'calories':
         query = query.order_by(Recipe.calories)
     elif sort_by == 'rating':
@@ -63,10 +63,10 @@ def recipes():
     else:
         query = query.order_by(Recipe.name)
 
-    # 执行查询
+    # do the search
     recipes = query.all()
 
-    # 检查哪些食谱用户可以做（考虑数量）
+    # consider which uer can do the recipe
     if can_make_recipe_filter:
         filtered_recipes = []
         for recipe in recipes:
@@ -89,9 +89,6 @@ def recipes():
     return render_template('recipes/recipes.html', recipes=recipes)
 
 
-
-
-
 # view own recipe
 @recipes_blueprint.route('/your_recipes')
 @login_required
@@ -100,47 +97,6 @@ def your_recipes():
     recipes = Recipe.query.filter_by(user_id=user_id).all()
     return render_template('recipes/your_recipes.html', recipes=recipes)
 
-
-# view descriptions of recipe
-# @recipes_blueprint.route('/recipes_detail/<int:recipe_id>')
-# @login_required
-# def recipes_detail(recipe_id):
-#     recipe = Recipe.query.get(recipe_id)
-#     ingredients = Ingredient.query.filter_by(recipe_id=recipe_id).all()
-#
-#     user_pantry = PantryItem.query.filter_by(user_id=current_user.id).all()
-#
-#     # Debugging: Print the contents of user pantry and recipe ingredients
-#     print("User Pantry:")
-#     pantry_dict = {}
-#     for item in user_pantry:
-#         qfi = QuantifiedFoodItem.query.get(item.qfood_id)
-#         print(f"Pantry Item: {qfi.fooditem.name}, Quantity: {qfi.quantity}, ID: {item.qfood_id}")
-#         if qfi.fooditem.name not in pantry_dict:
-#             pantry_dict[qfi.fooditem.name] = 0
-#         pantry_dict[qfi.fooditem.name] += qfi.quantity
-#
-#     print("Recipe Ingredients:")
-#     can_make_recipe = True
-#     for ingredient in ingredients:
-#         qfi_ingredient = QuantifiedFoodItem.query.get(ingredient.qfood_id)
-#         ingredient_name = qfi_ingredient.fooditem.name
-#         ingredient_quantity = qfi_ingredient.quantity
-#         print(f"Ingredient: {ingredient_name}, Quantity: {ingredient_quantity}, ID: {ingredient.qfood_id}")
-#
-#         if ingredient_name not in pantry_dict:
-#             can_make_recipe = False
-#             print(f"Missing ingredient: {ingredient_name}")
-#             break
-#         if pantry_dict[ingredient_name] < ingredient_quantity:
-#             can_make_recipe = False
-#             print(
-#                 f"Not enough quantity for ingredient: {ingredient_name}, required: {ingredient_quantity}, available:
-#                 {pantry_dict[ingredient_name]}")
-#             break
-#
-#     return render_template('recipes/recipes_detail.html', recipe=recipe, ingredients=ingredients,
-#                            can_make_recipe=can_make_recipe)
 
 @recipes_blueprint.route('/recipes_detail/<int:recipe_id>')
 @login_required

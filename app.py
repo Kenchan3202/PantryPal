@@ -11,6 +11,8 @@ from flask_login import login_user, logout_user, login_required, current_user, L
 db = SQLAlchemy()
 login_manager = LoginManager()
 
+today = datetime.date.today()
+
 def create_app():
     load_dotenv()
 
@@ -78,7 +80,6 @@ def create_app():
 
         user_id = current_user.id
 
-        today = datetime.date.today()
         seven_days_later = today + datetime.timedelta(days=7)
 
         # 获取所有当前用户的 PantryItem

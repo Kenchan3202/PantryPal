@@ -136,11 +136,11 @@
     <form method="get" action="/pantry/items">
         <input type="text" name="min_calories" placeholder="Min Calories">
         <input type="text" name="max_calories" placeholder="Max Calories">
-        <input type="checkbox" name="not_expired" value="on"> Not Expired Only
         <button type="submit">Filter</button>
     </form>
 </div>
 
+{% if filtered_items is not none %}
 <div class="container">
     <h2>Filtered Items</h2>
     {% if filtered_items %}
@@ -159,6 +159,7 @@
         <p>No items to display. Use the filter options above to find items.</p>
     {% endif %}
 </div>
+{% endif %}
 
 <div class="container">
     <h2><button onclick="location.href='/pantry/create_item'">Add Item to Pantry List</button></h2>

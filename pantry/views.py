@@ -38,12 +38,12 @@ def items_view():
     max_calories = request.args.get('max_calories')
     not_expired_only = request.args.get('not_expired') == 'on'
 
-    filtered_items = pantry_items
+    filtered_items = None
     if min_calories or max_calories or not_expired_only:
         filtered_items = [item for item in pantry_items if
                           (min_calories is None or item.calories >= int(min_calories)) and
                           (max_calories is None or item.calories <= int(max_calories)) and
-                          (not not_expired_only or (not_expired_only and item.get_expiry() >= today))]
+                          (not not_expired_only or (not_expired_only and datetime.datetime.strptime(item.expiry, "%Y-%m-%d").date() >= today))]
 
     return render_template('pantry/items.html', items=pantry_items, Foodaboutexpired=soon_to_expire, Foodexpired=expired, filtered_items=filtered_items)
 

@@ -24,18 +24,28 @@ def items_view():
     soon_to_expire = set()
 
     for item in pantry_items:
-        # 修改日期格式解析为 'YYYY-MM-DD'
         try:
             expiry_date = datetime.datetime.strptime(item.get_expiry(), "%Y-%m-%d").date()
         except ValueError:
-            continue  # 处理错误日期格式
+            continue
 
         if expiry_date <= today:
             expired.add(item.get_name())
         elif today <= expiry_date <= seven_days_later:
             soon_to_expire.add(item.get_name())
 
-    return render_template('pantry/items.html', items=pantry_items, Foodaboutexpired=soon_to_expire, Foodexpired=expired)
+    min_calories = request.args.get('min_calories')
+    max_calories = request.args.get('max_calories')
+    not_expired_only = request.args.get('not_expired') == 'on'
+
+    filtered_items = pantry_items
+    if min_calories or max_calories or not_expired_only:
+        filtered_items = [item for item in pantry_items if
+                          (min_calories is None or item.calories >= int(min_calories)) and
+                          (max_calories is None or item.calories <= int(max_calories)) and
+                          (not not_expired_only or (not_expired_only and item.get_expiry() >= today))]
+
+    return render_template('pantry/items.html', items=pantry_items, Foodaboutexpired=soon_to_expire, Foodexpired=expired, filtered_items=filtered_items)
 
 
 @pantry_blueprint.route('/create_item', methods=['GET', 'POST'])

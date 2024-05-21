@@ -16,3 +16,6 @@ Flask-Talisman
 requests
 bs4
 flask_paginate
+pydub
+pyzbar
+opencv-python

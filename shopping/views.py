@@ -161,6 +161,8 @@ def complete_list(list_id):
         expiry_duration = get_storage_duration(qfood.fooditem.name, storage_info)
         expiry_date = datetime.utcnow() + expiry_duration
 
+        print(f"Adding to pantry: {qfood.fooditem.name}, Expiry Date: {expiry_date}")
+
         pantry_item = PantryItem(
             user_id=current_user.id,
             qfood_id=item.qfood_id,

@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 def fetch_wikipedia_description(food_name):
     url = f"https://en.wikipedia.org/wiki/{food_name.replace(' ', '_')}"
     try:
@@ -12,7 +13,6 @@ def fetch_wikipedia_description(food_name):
     soup = BeautifulSoup(response.content, 'html.parser')
     description = ""
 
-    # 获取页面第一个段落
     for paragraph in soup.find_all('p'):
         if paragraph.text.strip():
             description = paragraph.text.strip()
@@ -36,7 +36,7 @@ def fetch_food_storage_info():
     sections = soup.find_all('div', class_='field-item even')
     for section in sections:
         heading = section.find('h2')
-        if heading and "Room temperature" in heading.text:
+        if heading and "Refrigerator at 40°F or below" in heading.text:
             items = section.find_all('tr')
             for item in items:
                 columns = item.find_all('td')

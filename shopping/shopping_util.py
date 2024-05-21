@@ -84,7 +84,7 @@ def create_list_from_recipe_and_pantry(user_id: int, recipe_id: int) -> Shopping
 
 
 def get_storage_duration(food_name, storage_info):
-    default_duration = timedelta(days=1)
+    default_duration = timedelta(days=1)  # 默认保存周期为1天
     storage_duration_str = storage_info.get(food_name, "not safe")
 
     if "not safe" in storage_duration_str.lower():
@@ -102,4 +102,7 @@ def get_storage_duration(food_name, storage_info):
             months = int(part.split()[0])
             max_days = max(max_days, months * 30)
 
-    return timedelta(days=max_days)
+    duration = timedelta(days=max_days)
+    print(f"Food: {food_name}, Duration: {duration}")
+    return duration
+

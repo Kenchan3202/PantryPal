@@ -67,23 +67,7 @@ def shopping_list_detail(list_id):
         quantity = form.itemQuantity.data
         units = form.itemUnits.data
 
-        food = FoodItem.query.filter_by(name=food_item_name).first()
-        if not food:
-            # 如果食物项目不存在，则创建新的食物项目
-            food = FoodItem(food_item_name)
-            db.session.add(food)
-            db.session.commit()
-            flash(f"Food item '{food_item_name}' not found in DB, created a new one.", "info")
-
-        # 添加 QuantifiedFoodItem
-        new_qfi = QuantifiedFoodItem(food_id=food.id, quantity=quantity, units=units)
-        db.session.add(new_qfi)
-        db.session.commit()
-
-        # 添加到 ShoppingItem
-        new_shopping_item = ShoppingItem(list_id=shopping_list.id, qfood_id=new_qfi.id)
-        db.session.add(new_shopping_item)
-        db.session.commit()
+        create_shopping_item(list_id, food_item_name, quantity, units)
 
         flash("Item added to shopping list", "success")
         return redirect(url_for('shopping.shopping_list_detail', list_id=list_id))

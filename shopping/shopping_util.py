@@ -37,6 +37,14 @@ def remove_shopping_item(shoppingitem_id: int) -> None:
     db.session.delete(item)
     db.session.commit()
 
+# Method to delete a shopping list instance and all shopping item instances associated with it
+def delete_shopping_list(s_list: ShoppingList) -> None:
+    for item in s_list.shopping_items:
+        db.session.delete(item)
+
+    db.session.delete(s_list)
+    db.session.commit()
+
 
 # Method to take all shopping items in a shopping list and transfer them to a user's pantry.
 # The shopping list with the given id is then deleted along with its corresponding shopping items.

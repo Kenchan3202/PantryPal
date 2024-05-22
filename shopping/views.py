@@ -8,7 +8,8 @@ from app import db, today
 from crawler import fetch_food_storage_info
 from models import ShoppingList, QuantifiedFoodItem, FoodItem, ShoppingItem, PantryItem
 from shopping.forms import AddItemForm, CreateListForm
-from shopping.shopping_util import get_storage_duration, create_shopping_list_util,create_shopping_item,remove_shopping_item,mark_shopping_list_as_complete
+from shopping.shopping_util import get_storage_duration, create_shopping_list_util, create_shopping_item, \
+    remove_shopping_item, delete_shopping_list, mark_shopping_list_as_complete
 
 shopping_blueprint = Blueprint('shopping', __name__, template_folder='templates')
 
@@ -77,7 +78,7 @@ def shopping_list_detail(list_id):
 
     return render_template('shopping/shopping_list_detail.html', form=form, shopping_list=shopping_list)
 
-
+# View function to delete a shopping list in its entirety
 @shopping_blueprint.route('/delete_list/<int:list_id>', methods=['POST'])
 @login_required
 def delete_list(list_id):
@@ -86,11 +87,7 @@ def delete_list(list_id):
         flash('Unauthorized', 'error')
         return redirect(url_for('shopping.shopping_list'))
 
-    for item in shopping_list.shopping_items:
-        db.session.delete(item)
-
-    db.session.delete(shopping_list)
-    db.session.commit()
+    delete_shopping_list(shopping_list)
     flash('Shopping list deleted', 'success')
     return redirect(url_for('shopping.shopping_list'))
 

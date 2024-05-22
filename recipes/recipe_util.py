@@ -27,6 +27,41 @@ def add_ingredient(ingredient, quantity, unit, recipe_id):
     db.session.commit()
 
 
+def get_pantry_dict(user_pantry):
+    """
+    Utility function to create a dictionary of pantry items with their quantities from My Pantry.
+    """
+    pantry_dict = {}
+    for item in user_pantry:
+        qfi = QuantifiedFoodItem.query.get(item.qfood_id)
+        if qfi.fooditem.name not in pantry_dict:
+            pantry_dict[qfi.fooditem.name] = 0
+        pantry_dict[qfi.fooditem.name] += qfi.quantity
+    return pantry_dict
+
+
+def check_recipe_ingredients(ingredients, pantry_dict):
+    """
+    Utility function to check if the user can make a recipe with their pantry items and identify missing ingredients.
+    """
+    can_make_recipe = True
+    missing_ingredients = []
+    for ingredient in ingredients:
+        qfi_ingredient = QuantifiedFoodItem.query.get(ingredient.qfood_id)
+        ingredient_name = qfi_ingredient.fooditem.name
+        ingredient_quantity = qfi_ingredient.quantity
+
+        if ingredient_name not in pantry_dict or pantry_dict[ingredient_name] < ingredient_quantity:
+            can_make_recipe = False
+            missing_quantity = ingredient_quantity - pantry_dict.get(ingredient_name, 0)
+            missing_ingredients.append({
+                'name': ingredient_name,
+                'quantity': missing_quantity,
+                'units': qfi_ingredient.units
+            })
+    return can_make_recipe, missing_ingredients
+
+
 def update_recipe_rating(recipe_id):
 
     ratings = Rating.query.filter_by(recipe_id=recipe_id).all()

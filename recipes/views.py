@@ -7,7 +7,7 @@ from sqlalchemy import func
 from recipes.forms import RecipeForm
 from recipes.recipe_util import (create_recipe, create_or_get_food_item, create_and_get_qfid,
                                  delete_recipe_instance, update_recipe_rating, create_shopping_list_from_recipe,
-                                 save_rating, complete_and_rate_recipe)
+                                 save_rating, complete_and_rate_recipe, get_pantry_dict, check_recipe_ingredients)
 
 recipes_blueprint = Blueprint('recipes', __name__, template_folder='templates')
 
@@ -100,32 +100,24 @@ def your_recipes():
 @recipes_blueprint.route('/recipes_detail/<int:recipe_id>')
 @login_required
 def recipes_detail(recipe_id):
+    """
+    This function provides the details of a recipe, checks if the user can make it with their pantry items, and
+    identifies any missing ingredients
+    """
+    # Retrieve the recipe by ID
     recipe = Recipe.query.get(recipe_id)
+
+    # Retrieve all ingredients for the recipe
     ingredients = Ingredient.query.filter_by(recipe_id=recipe_id).all()
 
+    # Retrieve the user's pantry items
     user_pantry = PantryItem.query.filter_by(user_id=current_user.id).all()
-    pantry_dict = {}
-    for item in user_pantry:
-        qfi = QuantifiedFoodItem.query.get(item.qfood_id)
-        if qfi.fooditem.name not in pantry_dict:
-            pantry_dict[qfi.fooditem.name] = 0
-        pantry_dict[qfi.fooditem.name] += qfi.quantity
 
-    can_make_recipe = True
-    missing_ingredients = []
-    for ingredient in ingredients:
-        qfi_ingredient = QuantifiedFoodItem.query.get(ingredient.qfood_id)
-        ingredient_name = qfi_ingredient.fooditem.name
-        ingredient_quantity = qfi_ingredient.quantity
+    # Convert pantry items to a dictionary format for easy read
+    pantry_dict = get_pantry_dict(user_pantry)
 
-        if ingredient_name not in pantry_dict or pantry_dict[ingredient_name] < ingredient_quantity:
-            can_make_recipe = False
-            missing_quantity = ingredient_quantity - pantry_dict.get(ingredient_name, 0)
-            missing_ingredients.append({
-                'name': ingredient_name,
-                'quantity': missing_quantity,
-                'units': qfi_ingredient.units
-            })
+    # Check if the user can make the recipe with their pantry items and identify any missing ingredients
+    can_make_recipe, missing_ingredients = check_recipe_ingredients(ingredients, pantry_dict)
 
     return render_template('recipes/recipes_detail.html', recipe=recipe, ingredients=ingredients,
                            can_make_recipe=can_make_recipe, missing_ingredients=missing_ingredients)

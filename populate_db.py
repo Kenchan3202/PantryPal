@@ -3,11 +3,6 @@
 
 # File to add sample data to database instance for testing.
 
-# Authored by: Joe Hare & Keirav Shah
-# latest edition: 16/05/2024
-
-# File to add sample data to database instance for testing.
-
 import random
 import models
 

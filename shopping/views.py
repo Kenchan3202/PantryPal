@@ -100,8 +100,7 @@ def delete_item(item_id):
     if shopping_list.user_id != current_user.id:
         flash('Unauthorized', 'error')
         return redirect(url_for('shopping.shopping_list_detail', list_id=shopping_item.list_id))
-    db.session.delete(shopping_item)
-    db.session.commit()
+    remove_shopping_item(item_id)
     flash('Item deleted from shopping list', 'success')
     print(shopping_item.list_id)
     return redirect(url_for('shopping.shopping_list_detail', list_id=shopping_item.list_id))

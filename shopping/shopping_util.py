@@ -2,6 +2,8 @@ from datetime import timedelta
 from typing import List
 
 from app import db
+from datetime import datetime
+from crawler import fetch_food_storage_info
 from models import (ShoppingList, ShoppingItem, QuantifiedFoodItem, FoodItem, User,
                     Recipe, create_and_get_qfid, create_or_get_food_item, PantryItem)
 
@@ -40,14 +42,19 @@ def remove_shopping_item(shoppingitem_id: int) -> None:
 # The shopping list with the given id is then deleted along with its corresponding shopping items.
 # NOTE: The quantified food item associated with each shopping item is not deleted but reused
 # to create the new corresponding pantry item. Only the ingredient objects are deleted.
-def mark_shopping_list_as_complete(list_id: int) -> None:
-    s_list = ShoppingList.query.filter_by(id=list_id)
+def mark_shopping_list_as_complete(s_list: ShoppingList) -> None:
     user_id = s_list.user_id
     shopping_items = s_list.shopping_items
+    storage_info = fetch_food_storage_info()
 
     # Loop through each shopping item, create new pantryitem, delete shopping item.
     for shopping_item in shopping_items:
         new_pantry_item = PantryItem(user_id=user_id, qfood_id=shopping_item.qfood_id, expiry="", calories=100)
+
+        expiry_duration = get_storage_duration(shopping_item.qfood_id, storage_info)
+        expiry_date = datetime.utcnow() + expiry_duration
+        new_pantry_item.expiry = expiry_date.strftime("%Y-%m-%d")
+
         db.session.add(new_pantry_item)
         db.session.delete(shopping_item)
     db.session.delete(s_list)

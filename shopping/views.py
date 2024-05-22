@@ -1,3 +1,6 @@
+# View functions for the shopping HTML template
+# Authored by Jacob Norman and Yat Nam Chan
+
 from flask import render_template, flash, redirect, url_for, Blueprint, request
 from flask_login import current_user, login_required
 from datetime import datetime
@@ -105,7 +108,7 @@ def delete_item(item_id):
     print(shopping_item.list_id)
     return redirect(url_for('shopping.shopping_list_detail', list_id=shopping_item.list_id))
 
-
+# view function that deletes a shopping list then moves all of its contents into the user's pantry
 @shopping_blueprint.route('/complete_list/<int:list_id>', methods=['POST'])
 @login_required
 def complete_list(list_id):
@@ -113,29 +116,6 @@ def complete_list(list_id):
     if shopping_list.user_id != current_user.id:
         flash('Unauthorized', 'error')
         return redirect(url_for('shopping.shopping_list'))
-
-    storage_info = fetch_food_storage_info()
-
-    for item in shopping_list.shopping_items:
-        qfood = QuantifiedFoodItem.query.get(item.qfood_id)
-        if not qfood:
-            continue
-
-        expiry_duration = get_storage_duration(qfood.fooditem.name, storage_info)
-        expiry_date = datetime.utcnow() + expiry_duration
-
-        print(f"Adding to pantry: {qfood.fooditem.name}, Expiry Date: {expiry_date}")
-
-        pantry_item = PantryItem(
-            user_id=current_user.id,
-            qfood_id=item.qfood_id,
-            expiry=expiry_date.strftime("%Y-%m-%d"),
-            calories=0
-        )
-        db.session.add(pantry_item)
-        db.session.delete(item)
-
-    db.session.delete(shopping_list)
-    db.session.commit()
+    mark_shopping_list_as_complete(shopping_list)
     flash('Shopping list completed and items moved to pantry', 'success')
     return redirect(url_for('shopping.shopping_list'))

@@ -3,12 +3,10 @@
 
 from flask import render_template, flash, redirect, url_for, Blueprint, request
 from flask_login import current_user, login_required
-from datetime import datetime
-from app import db, today
-from crawler import fetch_food_storage_info
-from models import ShoppingList, QuantifiedFoodItem, FoodItem, ShoppingItem, PantryItem
+
+from models import ShoppingList, ShoppingItem
 from shopping.forms import AddItemForm, CreateListForm
-from shopping.shopping_util import get_storage_duration, create_shopping_list_util, create_shopping_item, \
+from shopping.shopping_util import create_shopping_list_util, create_shopping_item, \
     remove_shopping_item, delete_shopping_list, mark_shopping_list_as_complete
 
 shopping_blueprint = Blueprint('shopping', __name__, template_folder='templates')
@@ -57,6 +55,7 @@ def add_items_to_list(list_id):
                            items=shopping_items, list_id=list_id)
 '''
 
+
 # View function that renders an already existing shopping lists they have and allows user to modify them
 @shopping_blueprint.route('/shopping_list_detail/<int:list_id>', methods=['GET', 'POST'])
 @login_required
@@ -88,6 +87,7 @@ def delete_list(list_id):
     delete_shopping_list(s_list)
     flash('Shopping list deleted', 'success')
     return redirect(url_for('shopping.shopping_list'))
+
 
 # View function for deleting a food item from a shopping list
 @shopping_blueprint.route('/delete_item/<int:item_id>', methods=['POST'])

@@ -5,7 +5,7 @@ from app import db, today
 from crawler import fetch_food_storage_info
 from models import ShoppingList, QuantifiedFoodItem, FoodItem, ShoppingItem, PantryItem
 from shopping.forms import AddItemForm, CreateListForm
-from shopping.shopping_util import get_storage_duration
+from shopping.shopping_util import get_storage_duration, create_shopping_list_util,create_shopping_item,remove_shopping_item,mark_shopping_list_as_complete
 
 shopping_blueprint = Blueprint('shopping', __name__, template_folder='templates')
 
@@ -16,16 +16,14 @@ def shopping_list():
     user_shopping_lists = ShoppingList.query.filter_by(user_id=current_user.id).all()
     return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
 
-
+# takes user input of a new list name, creates that list then redirects user to a page to add first items to the list
 @shopping_blueprint.route('/create_shopping_list', methods=['GET', 'POST'])
 @login_required
 def create_shopping_list():
     form = CreateListForm()
     if request.method == 'POST' and form.validate_on_submit():
         list_name = form.listName.data
-        shopping_list = ShoppingList(user_id=current_user.id, list_name=list_name)
-        db.session.add(shopping_list)
-        db.session.commit()
+        shopping_list = create_shopping_list_util(current_user.id, list_name)
         flash("Shopping list created", "success")
         return redirect(url_for('shopping.add_items_to_list', list_id=shopping_list.id))
     return render_template('shopping/create_shopping_list.html', form=form)

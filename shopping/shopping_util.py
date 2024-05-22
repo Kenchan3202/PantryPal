@@ -19,7 +19,7 @@ def create_shopping_list_util(user_id: int, list_name: str) -> ShoppingList:
 # Returns an instance of a newly created ShoppingItem with the given attributes.
 def create_shopping_item(list_id: int, food: str, quantity, units) -> ShoppingItem:
     # shopping_list = ShoppingList.query.filter_by(id=list_id).first()
-    food_id = create_or_get_food_item(food_name=food)
+    food_id = create_or_get_food_item(food_name=food).id
     qfood_id = create_and_get_qfid(food_id=food_id, quantity=quantity, units=units)
     shopping_item = ShoppingItem(list_id=list_id, qfood_id=qfood_id)
     db.session.add(shopping_item)

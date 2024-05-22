@@ -28,7 +28,7 @@ def create_shopping_list():
         return redirect(url_for('shopping.add_items_to_list', list_id=shopping_list.id))
     return render_template('shopping/create_shopping_list.html', form=form)
 
-
+# view function to add new items to a list when a list is first created
 @shopping_blueprint.route('/add_items_to_list/<int:list_id>', methods=['GET', 'POST'])
 @login_required
 def add_items_to_list(list_id):
@@ -40,24 +40,7 @@ def add_items_to_list(list_id):
         quantity = form.itemQuantity.data
         units = form.itemUnits.data
 
-        food = FoodItem.query.filter_by(name=food_item_name).first()
-        if not food:
-            # 如果食物项目不存在，则创建新的食物项目
-            food = FoodItem(food_item_name)  # 你可以根据需要更新描述
-            db.session.add(food)
-            db.session.commit()
-            flash(f"Food item '{food_item_name}' not found in DB, created a new one.", "info")
-
-        # 添加 QuantifiedFoodItem
-        new_qfi = QuantifiedFoodItem(food_id=food.id, quantity=quantity, units=units)
-        db.session.add(new_qfi)
-        db.session.commit()
-
-        # 添加到 ShoppingItem
-        new_shopping_item = ShoppingItem(list_id=shopping_list.id, qfood_id=new_qfi.id)
-        db.session.add(new_shopping_item)
-        db.session.commit()
-
+        create_shopping_item(list_id,food_item_name,quantity,units)
         flash("Item added to shopping list", "success")
         return redirect(url_for('shopping.add_items_to_list', list_id=list_id))
 

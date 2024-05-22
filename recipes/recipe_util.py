@@ -2,7 +2,7 @@ from flask_login import current_user
 
 from app import db
 from models import Recipe, Ingredient, QuantifiedFoodItem, FoodItem, Rating, create_and_get_qfid, \
-    create_or_get_food_item, PantryItem, ShoppingList, ShoppingItem
+    create_or_get_food_item, PantryItem, ShoppingList, ShoppingItem, InUseRecipe
 
 
 def create_recipe(name, method, serving_size, calories, ingredients):
@@ -79,6 +79,30 @@ def get_in_use_recipes(user_id):
     # This function should return a list of recipes in use by the user
     # For demonstration purposes, let's assume we return all recipes
     return Recipe.query.filter_by(user_id=user_id).all()
+
+
+def complete_and_rate_recipe(recipe_id, user_id, rating_value):
+    """
+    Utility function which handles user completing a recipe and rating it. Once user has used recipe, the function
+    will delete the recipe from the "recipe in-use list" for the user. The rating provided by user is saved and updates
+    the overall recipe rating.
+    """
+    # Query to find the in-use recipe for the user
+    in_use_recipe = InUseRecipe.query.filter_by(user_id=user_id, recipe_id=recipe_id).first()
+    if not in_use_recipe:
+        return {'error': 'In-use recipe not found'}
+
+    # Delete the in-use recipe
+    db.session.delete(in_use_recipe)
+
+    # If a rating value is provided, save it
+    if rating_value:
+        save_rating(user_id, recipe_id, int(rating_value))
+
+    db.session.commit()
+    update_recipe_rating(recipe_id)
+
+    return {'success': 'Recipe completed and rated successfully!'}
 
 
 def create_shopping_list_from_recipe(recipe_id, user_id):

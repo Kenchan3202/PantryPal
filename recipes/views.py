@@ -7,7 +7,7 @@ from sqlalchemy import func
 from recipes.forms import RecipeForm
 from recipes.recipe_util import (create_recipe, create_or_get_food_item, create_and_get_qfid,
                                  delete_recipe_instance, update_recipe_rating, create_shopping_list_from_recipe,
-                                 save_rating)
+                                 save_rating, complete_and_rate_recipe)
 
 recipes_blueprint = Blueprint('recipes', __name__, template_folder='templates')
 
@@ -284,29 +284,22 @@ def in_use_recipes():
     return render_template('recipes/in_use_recipes.html', recipes=recipes)
 
 
-# Complete recipe
 @recipes_blueprint.route('/recipes/complete_recipe/<int:recipe_id>', methods=['POST'])
 @login_required
 def complete_recipe(recipe_id):
-    in_use_recipe = InUseRecipe.query.filter_by(user_id=current_user.id, recipe_id=recipe_id).first()
-    if not in_use_recipe:
-        return jsonify({'error': 'In-use recipe not found'}), 404
+    """
+    This function routes user to complete a recipe after used and provide a rating. Calls the complete_and_rate_recipe
+    utility function from recipe_util.py to handle this logic.
+    """
+    # Call the utility function to complete and rate the recipe
+    response = complete_and_rate_recipe(recipe_id, current_user.id, request.form.get('rating'))
 
-    db.session.delete(in_use_recipe)
+    # Check for errors in the response
+    if 'error' in response:
+        flash(response['error'], 'danger')
+        return redirect(url_for('recipes.in_use_recipes'))
 
-    rating_value = request.form.get('rating')
-    if rating_value:
-        rating = Rating.query.filter_by(user_id=current_user.id, recipe_id=recipe_id).first()
-        if rating:
-            rating.set_rating(int(rating_value))
-        else:
-            new_rating = Rating(user_id=current_user.id, recipe_id=recipe_id, rating=int(rating_value))
-            db.session.add(new_rating)
-        db.session.commit()
-
-        # Update recipe rating
-        update_recipe_rating(recipe_id)
-
+    # Flash success message if no errors
     flash('Recipe completed and rated successfully!', 'success')
     return redirect(url_for('recipes.in_use_recipes'))
 

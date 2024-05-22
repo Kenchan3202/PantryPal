@@ -1,20 +1,18 @@
 from app import db
-from models import Recipe, Ingredient, QuantifiedFoodItem, Rating, PantryItem, InUseRecipe, FoodItem, ShoppingItem, \
-    ShoppingList
+from models import Recipe, Ingredient, QuantifiedFoodItem, Rating, PantryItem, InUseRecipe, FoodItem, ShoppingItem, ShoppingList
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
 from sqlalchemy import func
 
 from recipes.forms import RecipeForm
 from recipes.recipe_util import (create_recipe, create_or_get_food_item, create_and_get_qfid,
-                                 delete_recipe_instance, update_recipe_rating)
+                                 delete_recipe_instance, update_recipe_rating, create_shopping_list_from_recipe)
 
 recipes_blueprint = Blueprint('recipes', __name__, template_folder='templates')
 
 print("Template folder:", recipes_blueprint.template_folder)
 
-
-# filter system to sort recipes based on name, calories, rating, etc.
+# Filter system to sort recipes based on name, calories, rating, etc.
 @recipes_blueprint.route('/recipes', methods=['GET'])
 @login_required
 def recipes():
@@ -36,26 +34,26 @@ def recipes():
 
     query = Recipe.query
 
-    # filter calories
+    # Filter calories
     if min_calories is not None:
         query = query.filter(Recipe.calories >= min_calories)
     if max_calories is not None:
         query = query.filter(Recipe.calories <= max_calories)
 
-    # filter rate
+    # Filter rating
     if min_rating is not None:
         query = query.filter(Recipe.rating >= min_rating)
 
-    # filter ingredients
+    # Filter ingredients
     if ingredient_filter:
         query = query.join(Recipe.ingredients).join(Ingredient.qfooditem).join(FoodItem).filter(
             FoodItem.name.ilike(f"%{ingredient_filter}%"))
 
-    # filter serve for
+    # Filter servings
     if serves_filter:
         query = query.filter(Recipe.serves == serves_filter)
 
-    # sorting
+    # Sorting
     if sort_by == 'calories':
         query = query.order_by(Recipe.calories)
     elif sort_by == 'rating':
@@ -63,10 +61,10 @@ def recipes():
     else:
         query = query.order_by(Recipe.name)
 
-    # do the search
+    # Execute the search
     recipes = query.all()
 
-    # consider which uer can do the recipe
+    # Consider which user can make the recipe
     if can_make_recipe_filter:
         filtered_recipes = []
         for recipe in recipes:
@@ -89,7 +87,7 @@ def recipes():
     return render_template('recipes/recipes.html', recipes=recipes)
 
 
-# view own recipe
+# View own recipes
 @recipes_blueprint.route('/your_recipes')
 @login_required
 def your_recipes():
@@ -132,13 +130,12 @@ def recipes_detail(recipe_id):
                            can_make_recipe=can_make_recipe, missing_ingredients=missing_ingredients)
 
 
-
-# add recipe
+# Add recipe
 @recipes_blueprint.route('/add_recipes', methods=['GET', 'POST'])
 @login_required
 def add_recipes():
     if request.method == 'POST':
-        # 获取表单数据
+        # Get form data
         name = request.form['name']
         method = request.form['method']
         serves = request.form['serves']
@@ -153,12 +150,12 @@ def add_recipes():
             })
 
         create_recipe(name, method, serves, calories, ingredients)
-        return redirect(url_for('recipes.recipes'))  # 确保这个重定向到正确的视图
+        return redirect(url_for('recipes.recipes'))  # Ensure this redirects to the correct view
     else:
         return render_template('recipes/add_recipes.html')
 
 
-# edit own recipe
+# Edit own recipe
 @recipes_blueprint.route('/edit_recipes/<int:recipe_id>', methods=['GET', 'POST'])
 @login_required
 def edit_recipes(recipe_id):
@@ -169,13 +166,11 @@ def edit_recipes(recipe_id):
         recipe.serves = request.form['serves']
         recipe.calories = request.form['calories']
 
-        # 清除现有的配料
+        # Clear existing ingredients
         Ingredient.query.filter_by(recipe_id=recipe_id).delete()
 
-        # 添加新的配料
-        ingredients = zip(request.form.getlist('ingredient[]'),
-                          request.form.getlist('quantity[]'),
-                          request.form.getlist('unit[]'))
+        # Add new ingredients
+        ingredients = zip(request.form.getlist('ingredient[]'), request.form.getlist('quantity[]'), request.form.getlist('unit[]'))
         for food, quantity, unit in ingredients:
             food_item = create_or_get_food_item(food)
             qfi = create_and_get_qfid(food_item.id, quantity, unit)
@@ -190,7 +185,7 @@ def edit_recipes(recipe_id):
         return render_template('recipes/edit_recipes.html', recipe=recipe, ingredients=ingredients)
 
 
-# delete own recipe
+# Delete own recipe
 @recipes_blueprint.route('/delete_recipe/<int:recipe_id>')
 @login_required
 def delete_recipe(recipe_id):
@@ -287,11 +282,6 @@ def use_recipe(recipe_id):
     print("Committed changes to the database")
     return jsonify({'success': 'Recipe is now in use'})
 
-
-
-
-
-
 # Viewing in-use recipes
 @recipes_blueprint.route('/in_use_recipes')
 @login_required
@@ -327,40 +317,13 @@ def complete_recipe(recipe_id):
     flash('Recipe completed and rated successfully!', 'success')
     return redirect(url_for('recipes.in_use_recipes'))
 
+
+# Create shopping list from a recipe
 @recipes_blueprint.route('/create_shopping_list/<int:recipe_id>', methods=['POST'])
 @login_required
 def create_shopping_list(recipe_id):
-    recipe = Recipe.query.get(recipe_id)
-    if not recipe:
-        return jsonify({'error': 'Recipe not found'}), 404
-
-    user_pantry = PantryItem.query.filter_by(user_id=current_user.id).all()
-    pantry_dict = {item.qfooditem.fooditem.name: item for item in user_pantry}
-
-    shopping_list = ShoppingList.query.filter_by(user_id=current_user.id, list_name=recipe.name).first()
-    if not shopping_list:
-        shopping_list = ShoppingList(user_id=current_user.id, list_name=recipe.name)
-        db.session.add(shopping_list)
-        db.session.commit()
-
-    for ingredient in recipe.ingredients:
-        qfi_ingredient = QuantifiedFoodItem.query.get(ingredient.qfood_id)
-        if qfi_ingredient:
-            ingredient_name = qfi_ingredient.fooditem.name
-            ingredient_quantity = qfi_ingredient.quantity
-
-            pantry_item = pantry_dict.get(ingredient_name)
-            if not pantry_item or pantry_item.qfooditem.quantity < ingredient_quantity:
-                missing_quantity = ingredient_quantity - pantry_dict.get(ingredient_name, 0)
-                newQFI = QuantifiedFoodItem(food_id=qfi_ingredient.food_id, quantity=missing_quantity, units=qfi_ingredient.units)
-                db.session.add(newQFI)
-                db.session.commit()
-
-                new_shopping_item = ShoppingItem(list_id=shopping_list.id, qfood_id=newQFI.id)
-                db.session.add(new_shopping_item)
-                db.session.commit()
-
+    response = create_shopping_list_from_recipe(recipe_id, current_user.id)
+    if 'error' in response:
+        return jsonify(response), 400
     flash("Shopping list created based on recipe", "success")
-    return jsonify({'success': 'Shopping list created'})
-
-
+    return jsonify(response)

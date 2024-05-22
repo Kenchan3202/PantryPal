@@ -1,7 +1,8 @@
 from flask_login import current_user
 
 from app import db
-from models import Recipe, Ingredient, QuantifiedFoodItem, FoodItem, Rating, create_and_get_qfid, create_or_get_food_item
+from models import Recipe, Ingredient, QuantifiedFoodItem, FoodItem, Rating, create_and_get_qfid, \
+    create_or_get_food_item, PantryItem, ShoppingList, ShoppingItem
 
 
 # user_id = 1
@@ -86,29 +87,36 @@ def get_in_use_recipes(user_id):
     # For demonstration purposes, let's assume we return all recipes
     return Recipe.query.filter_by(user_id=user_id).all()
 
-# def test_create_recipe():
-#     name = "improved scrambled eggs again 2"
-#     method = (
-#         "1. mix egg. and add cornstarch with some water 2. high heat with butter while constant stir 3. take out of "
-#         "pan just before done")
-#     serving_size = 2
-#     calories = 120
-#     ingredients = [{
-#         "food": "Eggs",
-#         "quantity": 4,
-#         "unit": "#"
-#     },
-#         {
-#             "food": "Butter",
-#             "quantity": 20,
-#             "unit": "g"
-#         },
-#         {
-#             "food": "Corn starch",
-#             "quantity": 5,
-#             "unit": "g"
-#         }
-#     ]
-#     with app.app_context():
-#         create_recipe(name, method, serving_size, calories, ingredients)
-#         db.session.commit()
+
+def create_shopping_list_from_recipe(recipe_id, user_id):
+    recipe = Recipe.query.get(recipe_id)
+    if not recipe:
+        return {'error': 'Recipe not found'}
+
+    user_pantry = PantryItem.query.filter_by(user_id=user_id).all()
+    pantry_dict = {item.qfooditem.fooditem.name: item for item in user_pantry}
+
+    shopping_list = ShoppingList.query.filter_by(user_id=user_id, list_name=recipe.name).first()
+    if not shopping_list:
+        shopping_list = ShoppingList(user_id=user_id, list_name=recipe.name)
+        db.session.add(shopping_list)
+        db.session.commit()
+
+    for ingredient in recipe.ingredients:
+        qfi_ingredient = QuantifiedFoodItem.query.get(ingredient.qfood_id)
+        if qfi_ingredient:
+            ingredient_name = qfi_ingredient.fooditem.name
+            ingredient_quantity = qfi_ingredient.quantity
+
+            pantry_item = pantry_dict.get(ingredient_name)
+            if not pantry_item or pantry_item.qfooditem.quantity < ingredient_quantity:
+                missing_quantity = ingredient_quantity - pantry_dict.get(ingredient_name, 0)
+                newQFI = QuantifiedFoodItem(food_id=qfi_ingredient.food_id, quantity=missing_quantity, units=qfi_ingredient.units)
+                db.session.add(newQFI)
+                db.session.commit()
+
+                new_shopping_item = ShoppingItem(list_id=shopping_list.id, qfood_id=newQFI.id)
+                db.session.add(new_shopping_item)
+                db.session.commit()
+
+    return {'success': 'Shopping list created'}

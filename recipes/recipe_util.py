@@ -5,13 +5,6 @@ from models import Recipe, Ingredient, QuantifiedFoodItem, FoodItem, Rating, cre
     create_or_get_food_item, PantryItem, ShoppingList, ShoppingItem
 
 
-# user_id = 1
-
-
-# ingredients is a list of dictionaries in the format
-# "food": "<food>"
-# "quantity": <quantity>
-# "unit": "<unit>"
 def create_recipe(name, method, serving_size, calories, ingredients):
     new_recipe = Recipe(user_id=current_user.id,
                         recipe_name=name,
@@ -35,13 +28,13 @@ def add_ingredient(ingredient, quantity, unit, recipe_id):
 
 
 def update_recipe_rating(recipe_id):
-    # 获取所有对该食谱的评分
+
     ratings = Rating.query.filter_by(recipe_id=recipe_id).all()
     if ratings:
-        # 计算平均评分
+
         total_rating = sum([rate.rating for rate in ratings])
         average_rating = total_rating / len(ratings)
-        # 找到对应的食谱并更新其评分
+
         recipe = Recipe.query.get(recipe_id)
         if recipe:
             recipe.rating = average_rating

@@ -6,7 +6,8 @@ from sqlalchemy import func
 
 from recipes.forms import RecipeForm
 from recipes.recipe_util import (create_recipe, create_or_get_food_item, create_and_get_qfid,
-                                 delete_recipe_instance, update_recipe_rating, create_shopping_list_from_recipe)
+                                 delete_recipe_instance, update_recipe_rating, create_shopping_list_from_recipe,
+                                 save_rating)
 
 recipes_blueprint = Blueprint('recipes', __name__, template_folder='templates')
 
@@ -203,19 +204,11 @@ def rate_recipe(recipe_id):
         flash('Please select a rating.', 'error')
         return redirect(url_for('recipes.recipes', recipe_id=recipe_id))
 
-    # Find existing rating or create a new one
-    rating = Rating.query.filter_by(user_id=current_user.id, recipe_id=recipe_id).first()
-    if rating:
-        rating.set_rating(int(rating_value))
-        flash('Your rating has been updated!', 'info')
-    else:
-        new_rating = Rating(user_id=current_user.id, recipe_id=recipe_id, rating=int(rating_value))
-        db.session.add(new_rating)
-        flash('Thank you for rating!', 'success')
+    # Use the utility function to save the rating
+    save_rating(current_user.id, recipe_id, int(rating_value))
+    flash('Thank you for rating!', 'success')
 
-    db.session.commit()
-
-    # Update recipe rating
+    # Update recipe rating using the utility function
     update_recipe_rating(recipe_id)
 
     return redirect(url_for('recipes.recipes', recipe_id=recipe_id))

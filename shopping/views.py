@@ -1,24 +1,21 @@
-# View functions for the shopping HTML template
-# Authored by Jacob Norman and Yat Nam Chan
-
 from flask import render_template, flash, redirect, url_for, Blueprint, request
 from flask_login import current_user, login_required
-
-from models import ShoppingList, ShoppingItem
+from datetime import datetime
+from app import db, today
+from crawler import fetch_food_storage_info
+from models import ShoppingList, QuantifiedFoodItem, FoodItem, ShoppingItem, PantryItem
 from shopping.forms import AddItemForm, CreateListForm
-from shopping.shopping_util import create_shopping_list_util, create_shopping_item, \
-    remove_shopping_item, delete_shopping_list, mark_shopping_list_as_complete
+from shopping.shopping_util import get_storage_duration, create_shopping_list_util, create_shopping_item, \
+    remove_shopping_item, mark_shopping_list_as_complete, fetch_calories_from_file
 
 shopping_blueprint = Blueprint('shopping', __name__, template_folder='templates')
 
 
-# Base view function that initially renders shopping list page
 @shopping_blueprint.route('/shopping_list', methods=['GET'])
 @login_required
 def shopping_list():
     user_shopping_lists = ShoppingList.query.filter_by(user_id=current_user.id).all()
     return render_template('shopping/shopping_list.html', shopping_lists=user_shopping_lists)
-
 
 # takes user input of a new list name, creates that list then redirects user to a page to add first items to the list
 @shopping_blueprint.route('/create_shopping_list', methods=['GET', 'POST'])
@@ -27,91 +24,139 @@ def create_shopping_list():
     form = CreateListForm()
     if request.method == 'POST' and form.validate_on_submit():
         list_name = form.listName.data
-        s_list = create_shopping_list_util(current_user.id, list_name)
+        shopping_list = create_shopping_list_util(current_user.id, list_name)
         flash("Shopping list created", "success")
-        return redirect(url_for('shopping.shopping_list_detail', list_id=s_list.id))
+        return redirect(url_for('shopping.add_items_to_list', list_id=shopping_list.id))
     return render_template('shopping/create_shopping_list.html', form=form)
 
-
-'''
 # view function to add new items to a list when a list is first created
 @shopping_blueprint.route('/add_items_to_list/<int:list_id>', methods=['GET', 'POST'])
 @login_required
 def add_items_to_list(list_id):
     form = AddItemForm()
-    s_list = ShoppingList.query.get_or_404(list_id)
+    shopping_list = ShoppingList.query.get_or_404(list_id)
 
     if request.method == 'POST' and form.validate_on_submit():
         food_item_name = form.newItem.data
         quantity = form.itemQuantity.data
         units = form.itemUnits.data
 
-        create_shopping_item(list_id, food_item_name, quantity, units)
+        create_shopping_item(list_id,food_item_name,quantity,units)
         flash("Item added to shopping list", "success")
         return redirect(url_for('shopping.add_items_to_list', list_id=list_id))
 
     shopping_items = ShoppingItem.query.filter_by(list_id=list_id).all()
-    return render_template('shopping/add_items_to_list.html', form=form, list_name=s_list.list_name,
+    return render_template('shopping/add_items_to_list.html', form=form, list_name=shopping_list.list_name,
                            items=shopping_items, list_id=list_id)
-'''
 
 
-# View function that renders an already existing shopping lists they have and allows user to modify them
+@shopping_blueprint.route('/submit_shopping_list', methods=['POST'])
+@login_required
+def submit_shopping_list():
+    # This function might not be necessary anymore since items are added directly in add_items_to_list view.
+    flash("Shopping list submitted successfully", "success")
+    return redirect(url_for('shopping.shopping_list'))
+
+
 @shopping_blueprint.route('/shopping_list_detail/<int:list_id>', methods=['GET', 'POST'])
 @login_required
 def shopping_list_detail(list_id):
-    s_list = ShoppingList.query.get_or_404(list_id)
+    shopping_list = ShoppingList.query.get_or_404(list_id)
     form = AddItemForm()
     if request.method == 'POST' and form.validate_on_submit():
         food_item_name = form.newItem.data
         quantity = form.itemQuantity.data
         units = form.itemUnits.data
 
-        create_shopping_item(list_id, food_item_name, quantity, units)
+        food = FoodItem.query.filter_by(name=food_item_name).first()
+        if not food:
+            # 如果食物项目不存在，则创建新的食物项目
+            food = FoodItem(food_item_name)
+            db.session.add(food)
+            db.session.commit()
+            flash(f"Food item '{food_item_name}' not found in DB, created a new one.", "info")
+
+        # 添加 QuantifiedFoodItem
+        new_qfi = QuantifiedFoodItem(food_id=food.id, quantity=quantity, units=units)
+        db.session.add(new_qfi)
+        db.session.commit()
+
+        # 添加到 ShoppingItem
+        new_shopping_item = ShoppingItem(list_id=shopping_list.id, qfood_id=new_qfi.id)
+        db.session.add(new_shopping_item)
+        db.session.commit()
 
         flash("Item added to shopping list", "success")
         return redirect(url_for('shopping.shopping_list_detail', list_id=list_id))
 
-    return render_template('shopping/shopping_list_detail.html', form=form, shopping_list=s_list)
+    return render_template('shopping/shopping_list_detail.html', form=form, shopping_list=shopping_list)
 
 
-# View function to delete a shopping list in its entirety
 @shopping_blueprint.route('/delete_list/<int:list_id>', methods=['POST'])
 @login_required
 def delete_list(list_id):
-    s_list = ShoppingList.query.get_or_404(list_id)
-    if s_list.user_id != current_user.id:
+    shopping_list = ShoppingList.query.get_or_404(list_id)
+    if shopping_list.user_id != current_user.id:
         flash('Unauthorized', 'error')
         return redirect(url_for('shopping.shopping_list'))
 
-    delete_shopping_list(s_list)
+    for item in shopping_list.shopping_items:
+        db.session.delete(item)
+
+    db.session.delete(shopping_list)
+    db.session.commit()
     flash('Shopping list deleted', 'success')
     return redirect(url_for('shopping.shopping_list'))
 
 
-# View function for deleting a food item from a shopping list
 @shopping_blueprint.route('/delete_item/<int:item_id>', methods=['POST'])
 @login_required
 def delete_item(item_id):
     shopping_item = ShoppingItem.query.get_or_404(item_id)
-    s_list = ShoppingList.query.get_or_404(shopping_item.list_id)
-    if s_list.user_id != current_user.id:
+    shopping_list = ShoppingList.query.get_or_404(shopping_item.list_id)
+    if shopping_list.user_id != current_user.id:
         flash('Unauthorized', 'error')
         return redirect(url_for('shopping.shopping_list_detail', list_id=shopping_item.list_id))
-    remove_shopping_item(item_id)
+    db.session.delete(shopping_item)
+    db.session.commit()
     flash('Item deleted from shopping list', 'success')
     print(shopping_item.list_id)
     return redirect(url_for('shopping.shopping_list_detail', list_id=shopping_item.list_id))
 
 
-# view function that deletes a shopping list then moves all of its contents into the user's pantry
 @shopping_blueprint.route('/complete_list/<int:list_id>', methods=['POST'])
 @login_required
 def complete_list(list_id):
-    s_list = ShoppingList.query.get_or_404(list_id)
-    if s_list.user_id != current_user.id:
+    shopping_list = ShoppingList.query.get_or_404(list_id)
+    if shopping_list.user_id != current_user.id:
         flash('Unauthorized', 'error')
         return redirect(url_for('shopping.shopping_list'))
-    mark_shopping_list_as_complete(s_list)
+
+    storage_info = fetch_food_storage_info()
+
+    for item in shopping_list.shopping_items:
+        qfood = QuantifiedFoodItem.query.get(item.qfood_id)
+        if not qfood:
+            continue
+
+        expiry_duration = get_storage_duration(qfood.fooditem.name, storage_info)
+        expiry_date = datetime.utcnow() + expiry_duration
+
+        grams, calories = fetch_calories_from_file(qfood.fooditem.name)
+        total_calories = (qfood.quantity / grams) * calories if grams else 0
+
+        print(f"Adding to pantry: {qfood.fooditem.name}, Expiry Date: {expiry_date}")
+
+        pantry_item = PantryItem(
+            user_id=current_user.id,
+            qfood_id=item.qfood_id,
+            expiry=expiry_date.strftime("%Y-%m-%d"),
+            calories=total_calories
+        )
+        db.session.add(pantry_item)
+        db.session.delete(item)
+
+    db.session.delete(shopping_list)
+    db.session.commit()
     flash('Shopping list completed and items moved to pantry', 'success')
     return redirect(url_for('shopping.shopping_list'))

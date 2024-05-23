@@ -121,3 +121,14 @@ def get_storage_duration(food_name, storage_info):
     print(f"Food: {food_name}, Duration: {duration}")
     return duration
 
+def fetch_calories_from_file(food_name):
+    with open('calories.txt', 'r') as f:
+        for line in f:
+            elements = line.strip().split(',')
+            if len(elements) != 3:
+                continue
+            name, grams, calories = elements
+            if name.lower() == food_name.lower():
+                return float(grams), float(calories)
+    return None, 0
+

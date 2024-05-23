@@ -110,16 +110,17 @@ def list_to_pantry(item_id):
     shopping_item = ShoppingItem.query.get_or_404(item_id)
     return redirect((url_for('shopping.shopping_list_detail', list_id=shopping_item.list_id)))
 
-
-# view function that deletes a shopping list then moves all of its contents into the user's pantry
+# Example usage in the route
 @shopping_blueprint.route('/complete_list/<int:list_id>', methods=['POST'])
 @login_required
 def complete_list(list_id):
-    s_list = ShoppingList.query.get_or_404(list_id)
-    if s_list.user_id != current_user.id:
+    shopping_list = ShoppingList.query.get_or_404(list_id)
+    if shopping_list.user_id != current_user.id:
         flash('Unauthorized', 'error')
         return redirect(url_for('shopping.shopping_list'))
-    mark_shopping_list_as_complete(s_list)
+
+    mark_shopping_list_as_complete(shopping_list)
+
     flash('Shopping list completed and items moved to pantry', 'success')
     return redirect(url_for('shopping.shopping_list'))
 

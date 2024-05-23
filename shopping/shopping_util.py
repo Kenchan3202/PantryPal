@@ -57,14 +57,27 @@ def mark_shopping_list_as_complete(s_list: ShoppingList) -> None:
 
     # Loop through each shopping item, create new pantryitem, delete shopping item.
     for shopping_item in shopping_items:
-        new_pantry_item = PantryItem(user_id=user_id, qfood_id=shopping_item.qfood_id, expiry="", calories=100)
+        qfood = QuantifiedFoodItem.query.get(shopping_item.qfood_id)
+        if not qfood:
+            continue
 
-        expiry_duration = get_storage_duration(shopping_item.qfood_id, storage_info)
+        grams, calories = fetch_calories_from_file(qfood.fooditem.name)
+        total_calories = (qfood.quantity / grams) * calories if grams else 0
+
+        new_pantry_item = PantryItem(
+            user_id=user_id,
+            qfood_id=shopping_item.qfood_id,
+            expiry="",
+            calories=total_calories
+        )
+
+        expiry_duration = get_storage_duration(qfood.fooditem.name, storage_info)
         expiry_date = datetime.utcnow() + expiry_duration
         new_pantry_item.expiry = expiry_date.strftime("%Y-%m-%d")
 
         db.session.add(new_pantry_item)
         db.session.delete(shopping_item)
+
     db.session.delete(s_list)
     db.session.commit()
 

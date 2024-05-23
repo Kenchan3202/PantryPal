@@ -90,8 +90,7 @@ def create_app():
             try:
                 expiry_date = datetime.datetime.strptime(item.get_expiry(), "%Y-%m-%d").date()
             except ValueError:
-                continue  # 处理错误日期格式
-
+                continue
             if today <= expiry_date <= seven_days_later:
                 soon_to_expire_seven.append(item)
             if expiry_date <= today:

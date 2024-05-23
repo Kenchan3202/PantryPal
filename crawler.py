@@ -1,5 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from bs4 import BeautifulSoup
 
 
 def fetch_wikipedia_description(food_name):
@@ -23,30 +28,25 @@ def fetch_wikipedia_description(food_name):
 
     return description
 
-
 def fetch_food_storage_info():
-    url = "https://food.unl.edu/free-resource/food-storage#fruit"
+    url = "https://www.foodsafety.gov/keep-food-safe/foodkeeper-app"
     response = requests.get(url)
     response.raise_for_status()
 
     soup = BeautifulSoup(response.text, 'html.parser')
     food_storage_info = {}
 
-    # finding
-    sections = soup.find_all('div', class_='field-item even')
-    for section in sections:
-        heading = section.find('h2')
-        if heading and "Refrigerator at 40°F or below" in heading.text:
-            items = section.find_all('tr')
+    categories = soup.find_all('div', class_='field-item even')
+
+    for category in categories:
+        category_heading = category.find('h2')
+        if category_heading:
+            items = category.find_all('tr')
             for item in items:
                 columns = item.find_all('td')
                 if len(columns) >= 2:
                     food_name = columns[0].text.strip()
-                    storage_time = columns[1].text.strip()
+                    storage_time = columns[1].text.strip() if columns[1].text.strip() else "not safe"
                     food_storage_info[food_name] = storage_time
 
     return food_storage_info
-
-
-food_storage_info = fetch_food_storage_info()
-print(food_storage_info)

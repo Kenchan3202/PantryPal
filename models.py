@@ -1,5 +1,4 @@
 from flask_login import UserMixin
-from sqlalchemy.orm import backref
 from app import db
 from datetime import datetime
 import bcrypt
@@ -85,6 +84,22 @@ class User(db.Model, UserMixin):
                                                               in enumerate(self.shopping_lists)])
         return output
 
+    def print_pantry(self) -> None:
+        print(f"USER {self.id} PANTRY")
+        pantry = "\n".join([item.__str__() for item in self.get_pantry()])
+        print(pantry)
+
+    def get_qfoods_pantry(self):  # -> List[QuantifiedFoodItem]
+        return [pantryitem.qfooditem for pantryitem in self.get_pantry()]
+
+    def is_admin(self) -> bool:
+        return self.role == 'admin'
+
+    # def pantry_contain(self, other):
+    #     pantry = self.get_pantry()
+    #     if other in pantry return
+
+
 class Recipe(db.Model):
     __tablename__ = 'recipes'
 
@@ -153,6 +168,9 @@ class Recipe(db.Model):
         self.rating = round(avg_rating * 2) / 2         # Round to nearest 0.5
         db.session.commit()
 
+    def get_qfoods_ingredients(self):     # -> List[QuantifiedFoodItem]
+        return [ingredient.qfooditem for ingredient in self.get_ingredients()]
+
 
 class Rating(db.Model):
     __tablename__ = 'ratings'
@@ -171,7 +189,6 @@ class Rating(db.Model):
     def set_rating(self, rating: int) -> None:
         self.rating = rating
         db.session.commit()
-
 
 class ShoppingList(db.Model):
     __tablename__ = 'shoppinglists'
@@ -213,7 +230,7 @@ class FoodItem(db.Model):
         # 转换名称为首字母大写，其余小写，保留单个空格
         formatted_name = ' '.join(word.capitalize() for word in food_name.strip().split())
         self.name = formatted_name
-        self.description = fetch_wikipedia_description(formatted_name)
+        self.description = ""   # fetch_wikipedia_description(formatted_name)
 
     def get_name(self) -> str:
         return self.name
@@ -246,7 +263,13 @@ class QuantifiedFoodItem(db.Model):
         return f'{self.fooditem.get_name()}, {self.quantity}{self.units}'
 
     def __eq__(self, other):
-        return self.food_id == other.food_id
+        return self.food_id == other.food_id and self.quantity == other.quantity
+
+    def __lt__(self, other):
+        return self.food_id == other.food_id and self.quantity < other.quantity
+
+    def __gt__(self, other):
+        return self.food_id == other.food_id and self.quantity > other.quantity
 
     # Method to return the difference in amounts compared to another qfooditem
     def compare_amounts(self, other) -> float:
@@ -315,6 +338,15 @@ class Ingredient(db.Model):
     def __repr__(self) -> str:
         return f'<Ingredient(id: {self.id}<Qfooditem({self.qfooditem.__str__()}>>'
 
+    def __eq__(self, other) -> bool:
+        return self.qfooditem == other.qfooditem
+
+    def __lt__(self, other):
+        return self.qfooditem.__lt__(other.qfooditem)
+
+    def __gt__(self, other):
+        return self.qfooditem > other.qfooditem
+
     def get_quantity(self) -> float:
         return self.qfooditem.get_quantity()
 
@@ -330,12 +362,13 @@ class Ingredient(db.Model):
     def get_name(self) -> str:
         return self.qfooditem.get_name()
 
+
 class PantryItem(db.Model):
     __tablename__ = 'pantryitems'
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
-    qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id), nullable=False)
+    qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id, ondelete='CASCADE'), nullable=False)
     expiry = db.Column(db.String(10), nullable=True)
     calories = db.Column(db.Integer, nullable=True)
 
@@ -345,8 +378,17 @@ class PantryItem(db.Model):
         self.expiry = expiry
         self.calories = calories
 
-    def __repr__(self) -> str:
-        return f'<{self.qfooditem.fooditem.name}, {self.qfooditem.quantity}{self.qfooditem.units}, {self.expiry}, {self.calories} cal>'
+    def __str__(self) -> str:
+        return f'<{self.qfooditem.__str__()}, {self.expiry}>'
+
+    def __eq__(self, other) -> bool:
+        return self.qfooditem == other.qfooditem
+
+    def __lt__(self, other):
+        return self.qfooditem < other.qfooditem
+
+    def __gt__(self, other):
+        return self.qfooditem > other.qfooditem
 
     def get_expiry(self) -> str:
         return self.expiry
@@ -372,6 +414,10 @@ class PantryItem(db.Model):
 
     def get_calories(self) -> int:
         return self.calories
+
+    def get_food_id(self) -> int:
+        return self.qfooditem.food_id
+
 
 class WastedFood(db.Model):
     __tablename__ = 'wastedfood'
@@ -446,7 +492,7 @@ class InUseRecipe(db.Model):
         self.recipe_id = recipe_id
 
 
-def create_and_get_qfid(food_id, quantity, units):
+def create_and_get_qfid(food_id, quantity, units) -> int:
     qfi = QuantifiedFoodItem(food_id=food_id,
                              quantity=quantity,
                              units=units)
@@ -455,7 +501,7 @@ def create_and_get_qfid(food_id, quantity, units):
     return qfi.id
 
 
-def create_or_get_food_item(food_name):
+def create_or_get_food_item(food_name) -> FoodItem:
     food = FoodItem.query.filter_by(name=food_name).first()
     if food is None:  # Add a new food_item to the database if queried food doesn't already exist
         food = FoodItem(food_name=food_name)

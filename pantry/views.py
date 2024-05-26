@@ -6,7 +6,7 @@ from flask_login import login_required, current_user
 
 from app import db
 from models import PantryItem, QuantifiedFoodItem, FoodItem
-
+from pantry_util import create_pantry_item, delete_pantry_item
 # Initialize pantry blueprint
 pantry_blueprint = Blueprint('pantry', __name__, template_folder='templates')
 
@@ -17,10 +17,8 @@ print("Template folder:", pantry_blueprint.template_folder)
 @pantry_blueprint.route('/items', methods=['GET', 'POST'])
 @login_required
 def items_view():
-    user_id = current_user.id
-
-    # Query all pantry items for the current user
-    pantry_items = PantryItem.query.filter_by(user_id=user_id).all()
+    # Get user's pantry
+    pantry_items = current_user.get_pantry()
 
     # Calculate today's date and a date seven days in the future
     today = datetime.date.today()
@@ -73,29 +71,32 @@ def create_item():
         quantity = request.form['quantity']
         calories = request.form['calories']
 
-        # Check if the food item already exists in the database
-        food_item = FoodItem.query.filter_by(name=item_name).first()
-        if not food_item:
-            # If the food item does not exist, create a new FoodItem entry
-            food_item = FoodItem(food_name=item_name)
-            db.session.add(food_item)
-            db.session.flush()
+        # Create Pantry Item
+        create_pantry_item(user_id=current_user.id, food_name=item_name, quantity=quantity,
+                           calories=calories, expiry=expiry_date)
 
-        # Create a QuantifiedFoodItem entry for the food item with the given quantity and units
-        q_food_item = QuantifiedFoodItem(food_id=food_item.id, quantity=quantity, units="g")
-        db.session.add(q_food_item)
-        db.session.flush()
-
-        # Create a PantryItem entry linking the user to the quantified food item with expiry date and calories
-        pantry_item = PantryItem(user_id=current_user.id, qfood_id=q_food_item.id, expiry=expiry_date,
-                                 calories=calories)
-        db.session.add(pantry_item)
-
-        db.session.commit()  # Commits all changes to the database
+        # # Check if the food item already exists in the database
+        # food_item = FoodItem.query.filter_by(name=item_name).first()
+        # if not food_item:
+        #     # If the food item does not exist, create a new FoodItem entry
+        #     food_item = FoodItem(food_name=item_name)
+        #     db.session.add(food_item)
+        #     db.session.flush()
+        #
+        # # Create a QuantifiedFoodItem entry for the food item with the given quantity and units
+        # q_food_item = QuantifiedFoodItem(food_id=food_item.id, quantity=quantity, units="g")
+        # db.session.add(q_food_item)
+        # db.session.flush()
+        #
+        # # Create a PantryItem entry linking the user to the quantified food item with expiry date and calories
+        # pantry_item = PantryItem(user_id=current_user.id, qfood_id=q_food_item.id, expiry=expiry_date,
+        #                          calories=calories)
+        # db.session.add(pantry_item)
+        #
+        # db.session.commit()  # Commits all changes to the database
 
         flash('Item successfully added to pantry!', 'success')
         return redirect(url_for('pantry.items_view'))
-
     return render_template('pantry/add_food.html')
 
 
@@ -115,20 +116,18 @@ def search():
     return render_template('pantry/search.html', items=items)  # Pass the result directly to the template
 
 
-
 @pantry_blueprint.route('/delete_item/<int:item_id>', methods=['POST'])
 @login_required
 def delete_item(item_id):
     # Retrieve the pantry item by its ID or return a 404 error if not found
     item = PantryItem.query.get_or_404(item_id)
 
-    # Check if the current user is the owner of the item
-    if item.user_id != current_user.id:
+    # Check if the current user is the owner of the item (or admin)
+    if not current_user.is_admin() and item.user_id != current_user.id:
         # If not, flash an error message and redirect to the pantry items view
         flash('You do not have permission to delete this item.', 'danger')
         return redirect(url_for('pantry.items_view'))
 
-    db.session.delete(item)  # Delete item from the database
-    db.session.commit()
+    delete_pantry_item(item_id)
     flash('Item successfully deleted!', 'success')
     return redirect(url_for('pantry.items_view'))

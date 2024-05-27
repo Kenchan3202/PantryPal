@@ -80,8 +80,9 @@ class User(db.Model, UserMixin):
     # Method to get a string representation of all the uesr's shopping lists
     def get_shopping_lists_str(self):
         numlists = len(self.shopping_lists)
-        output = f'Number of lists {numlists}\n' + '\n'.join([f'list ({i+1}/{numlists})\n{slist.__str__()}' for i, slist
-                                                              in enumerate(self.shopping_lists)])
+        output = f'Number of lists {numlists}\n' + '\n'.join(
+            [f'list ({i + 1}/{numlists})\n{slist.__str__()}' for i, slist
+             in enumerate(self.shopping_lists)])
         return output
 
     def print_pantry(self) -> None:
@@ -132,7 +133,7 @@ class Recipe(db.Model):
         return output
 
     def get_ingredients_str(self):
-        ingredient_block = 'Ingredients: \n' + f'\n'.join([f'{i+1}) {ingredient.__str__()}\n' for i, ingredient in
+        ingredient_block = 'Ingredients: \n' + f'\n'.join([f'{i + 1}) {ingredient.__str__()}\n' for i, ingredient in
                                                            enumerate(self.ingredients)])
         return ingredient_block
 
@@ -165,10 +166,10 @@ class Recipe(db.Model):
     def update_rating(self):
         ratings = self.ratings
         avg_rating = sum([rating.get_rating() for rating in ratings]) / len(ratings)
-        self.rating = round(avg_rating * 2) / 2         # Round to nearest 0.5
+        self.rating = round(avg_rating * 2) / 2  # Round to nearest 0.5
         db.session.commit()
 
-    def get_qfoods_ingredients(self):     # -> List[QuantifiedFoodItem]
+    def get_qfoods_ingredients(self):  # -> List[QuantifiedFoodItem]
         return [ingredient.qfooditem for ingredient in self.get_ingredients()]
 
 
@@ -176,7 +177,7 @@ class Rating(db.Model):
     __tablename__ = 'ratings'
     user_id = db.Column(db.Integer, db.ForeignKey(User.id, ondelete='CASCADE'), primary_key=True, nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey(Recipe.id), primary_key=True, nullable=False)
-    rating = db.Column(db.Integer)              # Need to validate that incoming value is between 0 & 5
+    rating = db.Column(db.Integer)  # Need to validate that incoming value is between 0 & 5
 
     def __init__(self, user_id: int, recipe_id: int, rating: int):
         self.user_id = user_id
@@ -444,16 +445,28 @@ class WastedFood(db.Model):
     def get_units(self) -> str:
         return self.qfooditem.get_units()
 
+
 class Barcode(db.Model):
     __tablename__ = 'barcodes'
 
     id = db.Column(db.Integer, primary_key=True)
-    qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id), nullable=False)  # Establish link to food table
+    qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id),
+                         nullable=False)  # Establish link to food table
     barcode = db.Column(db.String(15), nullable=False)
 
     def __init__(self, qfood_id, barcode):
         self.qfood_id = qfood_id
         self.barcode = barcode
+
+    def get_name(self) -> str:
+        return self.qfooditem.get_name()
+
+    def get_quantity(self) -> float:
+        return self.qfooditem.get_quantity()
+
+    def get_units(self) -> str:
+        return self.qfooditem.get_units()
+
 
 class Diet(db.Model):
     __tablename__ = 'diet'
@@ -467,6 +480,7 @@ class Diet(db.Model):
     def __init__(self, description):
         self.description = description
 
+
 class CompatibleDiet(db.Model):
     __tablename__ = 'compatiblediet'
     id = db.Column(db.Integer, primary_key=True)
@@ -476,6 +490,7 @@ class CompatibleDiet(db.Model):
     def __init__(self, diet_id, recipe_id):
         self.diet_id = diet_id
         self.recipe_id = recipe_id
+
 
 class InUseRecipe(db.Model):
     __tablename__ = 'in_use_recipes'

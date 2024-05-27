@@ -1,12 +1,13 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 
 import datetime
 
 from flask_login import login_required, current_user
 
 from app import db
-from models import PantryItem, QuantifiedFoodItem, FoodItem
+from models import PantryItem, QuantifiedFoodItem, FoodItem, Barcode
 from pantry.pantry_util import create_pantry_item, delete_pantry_item
+from barcode_scanning import scan_barcode_file, scan_barcode_webcam
 
 # Initialize pantry blueprint
 pantry_blueprint = Blueprint('pantry', __name__, template_folder='templates')
@@ -55,7 +56,8 @@ def items_view():
         filtered_items = [item for item in pantry_items if
                           (min_calories is None or item.calories >= int(min_calories)) and
                           (max_calories is None or item.calories <= int(max_calories)) and
-                          (not not_expired_only or (not_expired_only and datetime.datetime.strptime(item.expiry, "%Y-%m-%d").date() >= today))]
+                          (not not_expired_only or (not_expired_only and datetime.datetime.strptime(item.expiry,
+                                                                                                    "%Y-%m-%d").date() >= today))]
 
     # Render the template with all items, categorized items, and filtered items (if any)
     return render_template('pantry/items.html', items=pantry_items, Foodaboutexpired=soon_to_expire,
@@ -100,6 +102,26 @@ def create_item():
         return redirect(url_for('pantry.items_view'))
     return render_template('pantry/add_food.html')
 
+
+@pantry_blueprint.route('/get-barcode-data', methods=['GET'])
+@login_required
+def get_barcode_data():
+    filepath = request.args.get('filepath')
+    print(f"Optional parameter: {filepath}")
+    if filepath == "":
+        scan = scan_barcode_webcam(timeout_length=10)
+    else:
+        scan = scan_barcode_file(filepath)
+    barcode = Barcode.query.filter(Barcode.barcode == scan).first()
+    if barcode is None:
+        return None
+
+    data = {
+        'name': barcode.get_name(),
+        'quantity': barcode.get_quantity(),
+        'units': barcode.get_units(),
+    }
+    return jsonify(data)
 
 @pantry_blueprint.route('/search', methods=['GET', 'POST'])
 @login_required

@@ -3,6 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Food</title>
+    <script>
+        function fillForm() {
+            const filepathFieldValue = document.getElementById('filepath').value;
+            fetch(`/pantry/get-barcode-data?filepath=${encodeURIComponent(filepathFieldValue)}`)
+            .then(response => response.json())
+                .then(data => {
+                    document.getElementById('name').value = data.name;
+                    document.getElementById('quantity').value = data.quantity;
+                    document.getElementById('units').value = data.units;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,6 +40,19 @@
             margin-top: 5px;
             border: 1px solid #ddd;
             border-radius: 4px;
+        }
+        .barcode-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;  /* Green color for the fill form button */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .barcode-btn:hover {
+            background-color: #218838; /* Darker green on hover */
         }
         .actionbtn {
             width: 100%;
@@ -121,7 +147,8 @@
 
             <label for="calories">Calories:</label>
             <input type="number" id="calories" name="calories" required>
-
+            <button type="button" class="barcode-btn"onclick="fillForm()">Scan a Barcode to Auto-Complete Form</button>
+            <input type="text" id="filepath" name="filepath" placeholder="Optionally, enter an image's filepath to scan a barcode from it">
             <button type="submit" class="actionbtn">Add Food to Pantry List</button>
         </form>
     </div>
@@ -137,4 +164,3 @@
     </script>
 </body>
 </html>
-

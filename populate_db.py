@@ -4,6 +4,8 @@
 # File to add sample data to database instance for testing.
 
 import random
+from typing import Dict
+
 import models
 
 
@@ -105,8 +107,15 @@ foodItemObjects = []
 recipes = [
     {
         'name': 'Caprese Salad',
-        'ingredients': ['Tomatoes', 'Fresh Mozzarella', 'Fresh Basil Leaves', 'Extra Virgin Olive Oil',
-                        'Balsamic Vinegar', 'Salt', 'Pepper'],
+        'ingredients': [
+            {'ingredient': 'Tomatoes', 'quantity': 3, 'units': ''},
+            {'ingredient': 'Fresh Mozzarella', 'quantity': 100, 'units': 'g'},
+            {'ingredient': 'Fresh Basil Leaves', 'quantity': 10, 'units': 'g'},
+            {'ingredient': 'Extra Virgin Olive Oil', 'quantity': 1, 'units': 'tbsp'},
+            {'ingredient': 'Balsamic Vinegar', 'quantity': 1, 'units': 'tbsp'},
+            {'ingredient': 'Salt', 'quantity': 2, 'units': 'tspn'},
+            {'ingredient': 'Pepper', 'quantity': 2, 'units': 'tspn'}
+        ],
         'method': 'Slice tomatoes and fresh mozzarella. Arrange them on a plate, '
                   'alternating slices. Tuck fresh basil leaves in between. Drizzle '
                   'with extra virgin olive oil and balsamic vinegar. Season with salt '
@@ -114,20 +123,33 @@ recipes = [
     },
     {
         'name': 'Peanut Butter Banana Smoothie',
-        'ingredients': ['Banana', 'Peanut Butter', 'Milk'],
+        'ingredients': [
+            {'ingredient': 'Banana', 'quantity': 2, 'units': ''},
+            {'ingredient': 'Peanut Butter', 'quantity': 1, 'units': 'tbsp'},
+            {'ingredient': 'Milk', 'quantity': 100, 'units': 'ml'}
+        ],
         'method': 'Peel and slice banana. Put banana slices, peanut butter, and '
                   'milk into a blender. Add honey if desired. Blend until smooth.'
     },
     {
         'name': 'Scrambled Eggs',
-        'ingredients': ['Eggs', 'Butter', 'Salt', 'Pepper'],
+        'ingredients': [
+            {'ingredient': 'Eggs', 'quantity': 2, 'units': ''},
+            {'ingredient': 'Butter', 'quantity': 20, 'units': 'g'},
+            {'ingredient': 'Salt', 'quantity': 1, 'units': 'tspn'},
+            {'ingredient': 'Pepper', 'quantity': 2, 'units': 'tspn'}
+        ],
         'method': 'Crack eggs into a bowl and beat them until yolks and whites are combined. '
                   'Melt butter in a non-stick skillet over medium heat. Pour in beaten eggs. '
                   'Stir occasionally until eggs are set. Season with salt and pepper.'
     },
     {
         'name': 'Guacamole',
-        'ingredients': ['Avocado', 'Lime', 'Salt'],
+        'ingredients': [
+            {'ingredient': 'Avocado', 'quantity': 3, 'units': ''},
+            {'ingredient': 'Lime', 'quantity': 1, 'units': ''},
+            {'ingredient': 'Salt', 'quantity': 2, 'units': 'tspn'}
+        ],
         'method': 'Cut avocado in half, remove pit, and scoop out flesh into a bowl. '
                   'Mash avocado with a fork. Squeeze lime juice over mashed avocado '
                   'and mix well. Add salt to taste.'
@@ -172,21 +194,36 @@ def create_quantified_food_item(food_item_id: int, quantity=0) -> models.Quantif
     return q_fooditem
 
 
-def create_pantry_item(user_id: int) -> models.PantryItem:
+def create_and_get_qfid(food_id, quantity, units):
+    qfi = models.QuantifiedFoodItem(food_id=food_id,
+                                    quantity=quantity,
+                                    units=units)
+    db.session.add(qfi)
+    db.session.commit()
+    return qfi.id
+
+
+def create_pantry_item(user_id: int, rand: bool, qfood_id: int = -1) -> models.PantryItem:
     expiries = ('2024-05-08', '2024-10-11', '2024-08-18', '2024-04-02', '2025-01-01', '2025-03-28', '2024-09-19')
     qfood_item = create_quantified_food_item(random.choice(foodItemObjects).id)
     calories = random.randint(50, 500)
-    pantry_item = models.PantryItem(user_id=user_id, qfood_id=qfood_item.id, expiry=random.choice(expiries), calories=calories)
-    db.session.add(pantry_item)
+    if rand:
+        pantry_item = models.PantryItem(user_id=user_id, qfood_id=qfood_item.id, expiry=random.choice(expiries),
+                                        calories=calories)
+        db.session.add(pantry_item)
+    else:
+        pantry_item = models.PantryItem(user_id=user_id, qfood_id=qfood_id, expiry=random.choice(expiries),
+                                        calories=calories)
+        db.session.add(pantry_item)
     db.session.commit()
     return pantry_item
 
 
 def create_pantries() -> None:
     for user in userObjects:
-        num_items = random.choice((0, 3, 8, 6, 4, 8))
+        num_items = random.choice((3, 6, 4, 2))
         for i in range(num_items):
-            create_pantry_item(user_id=user.id)
+            create_pantry_item(user_id=user.id, rand=True)
 
 
 def create_ingredient(recipe_id: int, qfood_id: int) -> models.Ingredient:
@@ -196,7 +233,7 @@ def create_ingredient(recipe_id: int, qfood_id: int) -> models.Ingredient:
     return ingredient
 
 
-def create_recipe_object(user_id: int, recipe) -> models.Recipe:
+def create_recipe_object(user_id: int, recipe, add_ingts_to_pantry: Dict[str, int] = None) -> models.Recipe:
     new_recipe = models.Recipe(user_id=user_id,
                                recipe_name=recipe['name'],
                                cooking_method=recipe['method'],
@@ -209,17 +246,21 @@ def create_recipe_object(user_id: int, recipe) -> models.Recipe:
     recipeObjects.append(new_recipe)
 
     for ingredient in recipe['ingredients']:
-        foodItem = models.FoodItem.query.filter_by(name=ingredient).first()
-        qfoodItem = create_quantified_food_item(foodItem.id)
-        create_ingredient(recipe_id=new_recipe.id, qfood_id=qfoodItem.id)
+        foodItem = models.create_or_get_food_item(ingredient['ingredient'])
+        qfoodItem_id = models.create_and_get_qfid(food_id=foodItem.id, quantity=ingredient['quantity'], units=ingredient['units'])
+        create_ingredient(recipe_id=new_recipe.id, qfood_id=qfoodItem_id)
+        if add_ingts_to_pantry:
+            if new_recipe.id == add_ingts_to_pantry['recipe_id']:
+                new_qfood_id = models.create_and_get_qfid(food_id=foodItem.id, quantity=ingredient['quantity'], units=ingredient['units'])
+                create_pantry_item(user_id=add_ingts_to_pantry['user_id'], rand=False, qfood_id=new_qfood_id)
     db.session.commit()
     return new_recipe
 
 
 def create_recipes() -> None:
     for recipe in recipes:
-        user_id = random.choice(userObjects).id
-        create_recipe_object(user_id=user_id, recipe=recipe)
+        user_id = 1
+        create_recipe_object(user_id=user_id, recipe=recipe, add_ingts_to_pantry={'user_id': 2, "recipe_id": 4})
 
 
 def create_shopping_items(list_id: int) -> models.ShoppingItem:

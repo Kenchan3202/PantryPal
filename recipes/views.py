@@ -25,10 +25,10 @@ def recipes():
     ingredient_filter = request.args.get('ingredient')
     serves_filter = request.args.get('serves', type=int)
 
-    user_pantry = PantryItem.query.filter_by(user_id=current_user.id).all()
+    user_pantry = current_user.get_pantry()
     pantry_dict = {}
     for item in user_pantry:
-        qfi = QuantifiedFoodItem.query.get(item.qfood_id)
+        qfi = item.qfooditem
         if qfi.fooditem.name not in pantry_dict:
             pantry_dict[qfi.fooditem.name] = 0
         pantry_dict[qfi.fooditem.name] += qfi.quantity

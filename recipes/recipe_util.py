@@ -63,19 +63,9 @@ def check_recipe_ingredients(ingredients, pantry_dict):
 
 
 def update_recipe_rating(recipe_id):
-
-    ratings = Rating.query.filter_by(recipe_id=recipe_id).all()
-    if ratings:
-
-        total_rating = sum([rate.rating for rate in ratings])
-        average_rating = total_rating / len(ratings)
-
-        recipe = Recipe.query.get(recipe_id)
-        if recipe:
-            recipe.rating = average_rating
-            db.session.commit()
-            return average_rating
-    return None
+    recipe: Recipe = Recipe.query.filter_by(id=recipe_id).first()
+    if recipe:
+        recipe.update_rating()
 
 
 # Method to rate a recipe. Takes user, recipe and numeric value of rating as parameters.
@@ -92,9 +82,8 @@ def create_recipe_rating(user_id: int, recipe_id: int, rating: int) -> None:
 # All ingredients and ratings which are related to the given recipe are deleted automatically db cascading.
 # Takes recipe object to be deleted as parameter.
 def delete_recipe_instance(recipe: Recipe) -> None:
-    qfoodids = [ingredient.qfood_id for ingredient in recipe.ingredients]
-    for qfood_id in qfoodids:
-        qfood = QuantifiedFoodItem.query.filter_by(id=qfood_id).first()
+    qfoods = [ingredient.qfooditem for ingredient in recipe.ingredients]
+    for qfood in qfoods:
         db.session.delete(qfood)
     db.session.delete(recipe)
     db.session.commit()

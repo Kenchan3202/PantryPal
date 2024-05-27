@@ -14,6 +14,7 @@ def create_shopping_list_util(user_id: int, list_name: str) -> ShoppingList:
     new_list = ShoppingList(user_id=user_id, list_name=list_name)
     db.session.add(new_list)
     db.session.commit()
+    db.session.refresh(new_list)
     return new_list
 
 
@@ -26,6 +27,7 @@ def create_shopping_item(list_id: int, food: str, quantity, units) -> ShoppingIt
     shopping_item = ShoppingItem(list_id=list_id, qfood_id=qfood_id)
     db.session.add(shopping_item)
     db.session.commit()
+    db.session.refresh(shopping_item)
     return shopping_item
 
 
@@ -37,11 +39,14 @@ def remove_shopping_item(shoppingitem_id: int) -> None:
     db.session.delete(item)
     db.session.commit()
 
+
 # Method to delete a shopping list instance and all shopping item instances associated with it
 def delete_shopping_list(s_list: ShoppingList) -> None:
+    # First delete qfooditems related with shopping item.
     for item in s_list.shopping_items:
-        db.session.delete(item)
+        db.session.delete(item.qfooditem)
 
+    # Shoppingitem instances are deleted by cascading relationship to shopping list.
     db.session.delete(s_list)
     db.session.commit()
 
@@ -133,6 +138,7 @@ def get_storage_duration(food_name, storage_info):
     duration = timedelta(days=max_days)
     print(f"Food: {food_name}, Duration: {duration}")
     return duration
+
 
 def fetch_calories_from_file(food_name):
     with open('calories.txt', 'r') as f:

@@ -13,6 +13,7 @@ login_manager = LoginManager()
 
 today = datetime.date.today()
 
+
 def create_app():
     load_dotenv()
 
@@ -41,6 +42,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Initialize database
+    # db = SQLAlchemy(app)
     db.init_app(app)
 
     with app.app_context():
@@ -101,6 +103,8 @@ def create_app():
 
     return app
 
+
 if __name__ == '__main__':
     app = create_app()
+    db = SQLAlchemy(app)
     app.run(debug=True, host='0.0.0.0')

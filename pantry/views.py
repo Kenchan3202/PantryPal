@@ -6,7 +6,8 @@ from flask_login import login_required, current_user
 
 from app import db
 from models import PantryItem, QuantifiedFoodItem, FoodItem
-from pantry_util import create_pantry_item, delete_pantry_item
+from pantry.pantry_util import create_pantry_item, delete_pantry_item
+
 # Initialize pantry blueprint
 pantry_blueprint = Blueprint('pantry', __name__, template_folder='templates')
 

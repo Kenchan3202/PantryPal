@@ -23,6 +23,8 @@ def scan_barcode_webcam(timeout_length):
         if not detected_barcode:
             # Exit function if no barcode detected within specified time
             if (datetime.datetime.now()-start_time).total_seconds() >= timeout_length:
+                capture.release()
+                cv2.destroyAllWindows()
                 return None
         else:
             for barcode in detected_barcode:
@@ -32,10 +34,14 @@ def scan_barcode_webcam(timeout_length):
                     if len(barcodes) >= 3:
                         if barcodes[-1] == barcodes[-2] and barcodes[-2] == barcodes[-3]:
                             capture.release()
+                            cv2.destroyAllWindows()
                             return barcode.data.decode()
         cv2.imshow("barcode capture", frame)
         if cv2.waitKey(1) == ord('e'):
             break
+    capture.release()
+    cv2.destroyAllWindows()
+    return None
 
 
 def scan_barcode_file(filepath):

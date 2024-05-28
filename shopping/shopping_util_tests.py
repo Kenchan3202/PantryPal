@@ -2,7 +2,7 @@ import unittest
 import models
 from app import create_app, db
 from populate_db import add_sample_users, create_recipes, add_food_items
-import shopping_util as su
+import shopping.shopping_util as su
 
 
 class TestShoppingUtils(unittest.TestCase):

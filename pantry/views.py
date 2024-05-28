@@ -7,7 +7,7 @@ from flask_login import login_required, current_user
 from app import db
 from models import PantryItem, QuantifiedFoodItem, FoodItem, Barcode
 from pantry.pantry_util import create_pantry_item, delete_pantry_item
-from barcode_scanning import scan_barcode_file, scan_barcode_webcam
+from barcodes.barcode_util import scan_barcode_file, scan_barcode_webcam
 
 # Initialize pantry blueprint
 pantry_blueprint = Blueprint('pantry', __name__, template_folder='templates')
@@ -107,7 +107,6 @@ def create_item():
 @login_required
 def get_barcode_data():
     filepath = request.args.get('filepath')
-    print(f"Optional parameter: {filepath}")
     if filepath == "":
         scan = scan_barcode_webcam(timeout_length=10)
     else:

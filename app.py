@@ -53,12 +53,14 @@ def create_app():
     from shopping.views import shopping_blueprint
     from recipes.views import recipes_blueprint
     from admin.views import admin_blueprint
+    from barcodes.views import barcodes_blueprint
 
     app.register_blueprint(users_blueprint, url_prefix='/user')
     app.register_blueprint(pantry_blueprint, url_prefix='/pantry')
     app.register_blueprint(shopping_blueprint, url_prefix='/shopping')
     app.register_blueprint(recipes_blueprint, url_prefix='/recipes')
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
+    app.register_blueprint(barcodes_blueprint, url_prefix='/barcodes')
 
     @login_manager.user_loader
     def load_user(user_id):

@@ -75,6 +75,10 @@ def create_app():
     def base():
         return render_template('base.html')
 
+    @app.route('/aboutus')
+    def aboutus():
+        return render_template('aboutus.html')
+
     @app.route('/main-menu')
     @login_required
     def baseLogin():

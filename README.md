@@ -1,23 +1,61 @@
-First edition by c2065153, 2024.05.09
-[finished kitchen, main, shopping list, user and app.py]
-[no database yet]
+# PantryPal
 
-2024.05.09
-c2065153: edit kitchen, main, user file in template
-upgrade baseLogin page
+PantryPal is a grocery web app tracker designed to help users manage their pantry inventory, create shopping lists, and organize recipes efficiently. This README file provides instructions on how to run the system, install dependencies, and initialize the database.
 
-2024.5.10
-c2065153: create sql code, team44.sqlite, create tables
+## Repository URL
+GitHub Repository: [https://github.com/newcastleuniversity-computing/CSC2033_Team44_23-24/tree/Try1](https://github.com/newcastleuniversity-computing/CSC2033_Team44_23-24/tree/Try1)
 
-2024.5.13
-c2065153: upgrade base.html
+## Getting Started
 
-2024.5.13
-c206153: upgrade baseLogin.html, upgrade items.html, finished pantry file and shopping file
+### Prerequisites
+Make sure you have the following installed on your machine:
+- Python 3.7 or higher
+- Git
 
-2024.5.14
-c206153: html changes
+### Installation
 
+1. **Clone the Repository:**
 
-For the database, number of items, the foreign key from food item >> identify what kind of food(name).
-calories
+   ```sh
+   git clone https://github.com/newcastleuniversity-computing/CSC2033_Team44_23-24.git
+   cd CSC2033_Team44_23-24
+
+2. **Checkout to Try1 Branch**
+- Run this command in the terminal
+   ```sh
+   -git checkout Try1
+
+3. **Install Dependencies**
+- Run this command in the terminal
+   ```sh
+   -pip install -r requirements.txt
+
+### Database Initialization
+
+1. **Initialize the Database**
+- Open a python console and run the following commands:
+   ```sh
+  from app import db
+  from models import init_db
+  init_db()
+
+2. Populate the Database (Optional)
+- To populate the database with sample data, run the following command in the terminal:
+   ```sh
+  python populate_db.py
+
+### Running Application
+To run the application execute the following command:
+```sh
+python app.py
+```
+
+### Additional Information
+1. Admin Access:
+- To access the admin page, use the following credentials:
+  Email: admin@email.com
+  Password: Admin1!
+
+2. Documentation:
+- To view the documentation for GUI, team coding, and testing, refer to the documentation folder in the repository.
+

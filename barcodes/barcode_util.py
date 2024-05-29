@@ -1,6 +1,8 @@
 import cv2
 from pyzbar.pyzbar import decode
 import datetime
+from app import db
+from models import Barcode, QuantifiedFoodItem, create_or_get_food_item, create_and_get_qfid
 
 
 def scan_barcode_webcam(timeout_length):
@@ -21,6 +23,8 @@ def scan_barcode_webcam(timeout_length):
         if not detected_barcode:
             # Exit function if no barcode detected within specified time
             if (datetime.datetime.now()-start_time).total_seconds() >= timeout_length:
+                capture.release()
+                cv2.destroyAllWindows()
                 return None
         else:
             for barcode in detected_barcode:
@@ -30,10 +34,14 @@ def scan_barcode_webcam(timeout_length):
                     if len(barcodes) >= 3:
                         if barcodes[-1] == barcodes[-2] and barcodes[-2] == barcodes[-3]:
                             capture.release()
+                            cv2.destroyAllWindows()
                             return barcode.data.decode()
         cv2.imshow("barcode capture", frame)
         if cv2.waitKey(1) == ord('e'):
             break
+    capture.release()
+    cv2.destroyAllWindows()
+    return None
 
 
 def scan_barcode_file(filepath):
@@ -48,3 +56,11 @@ def scan_barcode_file(filepath):
         for barcode in detected_barcode:
             if barcode.data != "":
                 return barcode.data.decode()
+
+
+def create_barcode(barcode, food_name, quantity, units):
+    food_item = create_or_get_food_item(food_name)
+    qfood_id = create_and_get_qfid(food_id=food_item.id, quantity=float(quantity), units=units)
+    barcode_item = Barcode(qfood_id, barcode)
+    db.session.add(barcode_item)
+    db.session.commit()

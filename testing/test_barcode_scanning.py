@@ -1,11 +1,11 @@
-import barcode_scanning
+from barcodes import barcode_util
 
 
 def test_scan_barcode_file_with_code_present():
-    code_list = [barcode_scanning.scan_barcode_file("C:/files/barcode_sample_1.png"),
-                 barcode_scanning.scan_barcode_file("C:/files/barcode_sample_2.jpeg"),
-                 barcode_scanning.scan_barcode_file("C:/files/barcode_sample_3.jpg"),
-                 barcode_scanning.scan_barcode_file("C:/files/barcode_sample_4.webp")]
+    code_list = [barcode_util.scan_barcode_file("C:/files/barcode_sample_1.png"),
+                 barcode_util.scan_barcode_file("C:/files/barcode_sample_2.jpeg"),
+                 barcode_util.scan_barcode_file("C:/files/barcode_sample_3.jpg"),
+                 barcode_util.scan_barcode_file("C:/files/barcode_sample_4.webp")]
     if code_list == ["0512345000107", "0896222001044", "5000171010025", "9300633929169"]:
         return "pass"
     else:
@@ -13,14 +13,14 @@ def test_scan_barcode_file_with_code_present():
 
 
 def test_scan_barcode_file_with_code_absent():
-    if barcode_scanning.scan_barcode_file("C:/files/absent_barcode_sample.jpg") is None:
+    if barcode_util.scan_barcode_file("C:/files/absent_barcode_sample.jpg") is None:
         return "pass"
     else:
         return "fail"
 
 
 def test_scan_barcode_webcam_timeout():
-    if barcode_scanning.scan_barcode_webcam(0.1) is None:
+    if barcode_util.scan_barcode_webcam(0.1) is None:
         return "pass"
     else:
         return "fail"

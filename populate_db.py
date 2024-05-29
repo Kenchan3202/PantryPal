@@ -158,6 +158,14 @@ recipes = [
 ]
 recipeObjects = []
 
+barcodes = [
+    {'code': '0512345000107', 'food': 'Olive Oil', 'quantity': '300', 'units': 'ml'},
+    {'code': '9300633929169', 'food': 'Minced Pork', 'quantity': '500', 'units': 'g'},
+    {'code': '23987234987', 'food': 'Banana', 'quantity': '5', 'units': '#'},
+    {'code': '5022032139942', 'food': 'Jasmine Rice', 'quantity': '2', 'units': 'kg'},
+    {'code': '6971958734962', 'food': 'White Miso', 'quantity': '100', 'units': 'g'},
+]
+
 
 def add_sample_users():
     for user in users:
@@ -303,6 +311,16 @@ def create_ratings() -> None:
         recipe.update_rating()
 
 
+def create_barcodes() -> None:
+    for barcode in barcodes:
+        food_item = models.create_or_get_food_item(barcode['food'])
+        qfood_id = models.create_and_get_qfid(food_id=food_item.id, quantity=float(barcode['quantity']),
+                                              units=barcode['units'])
+        barcode_item = models.Barcode(qfood_id, barcode['code'])
+        db.session.add(barcode_item)
+        db.session.commit()
+
+
 def main():
     # add sample users
     add_sample_users()
@@ -322,6 +340,9 @@ def main():
     # create shopping lists
     create_shopping_lists()
 
+    # create barcodes
+    create_barcodes()
+
 
 if __name__ == '__main__':
     app = create_app()
@@ -329,4 +350,3 @@ if __name__ == '__main__':
         models.init_db()
         main()
         db.session.commit()
-

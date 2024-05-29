@@ -302,7 +302,7 @@ class ShoppingItem(db.Model):
     __tablename__ = 'shoppingitems'
 
     id = db.Column(db.Integer, primary_key=True)
-    list_id = db.Column(db.Integer, db.ForeignKey(ShoppingList.id, ondelete='CASCADE'), nullable=False)
+    list_id = db.Column(db.Integer, db.ForeignKey(ShoppingList.id, ondelete='CASCADE'), nullable=True)
     qfood_id = db.Column(db.String(50), db.ForeignKey(QuantifiedFoodItem.id), nullable=True)
 
     def __init__(self, list_id, qfood_id):

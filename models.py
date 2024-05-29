@@ -198,7 +198,7 @@ class ShoppingList(db.Model):
     list_name = db.Column(db.String(50), nullable=False)
 
     # Declaring relationship shopping item table
-    shopping_items = db.relationship('ShoppingItem')
+    shopping_items = db.relationship('ShoppingItem', cascade="all, delete", backref="slist")
 
     def __init__(self, user_id, list_name):
         self.user_id = user_id

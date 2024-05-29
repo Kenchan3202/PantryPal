@@ -43,7 +43,7 @@ def remove_shopping_item(shoppingitem_id: int) -> None:
 # Method to delete a shopping list instance and all shopping item instances associated with it
 def delete_shopping_list(s_list: ShoppingList) -> None:
     # First delete qfooditems related with shopping item.
-    for item in s_list.shopping_items:
+    for item in s_list.get_items():
         db.session.delete(item.qfooditem)
 
     # Shoppingitem instances are deleted by cascading relationship to shopping list.

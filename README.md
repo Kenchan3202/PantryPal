@@ -21,26 +21,34 @@ Make sure you have the following installed on your machine:
    cd CSC2033_Team44_23-24
 
 2. **Checkout to Try1 Branch**
-- Run -git checkout Try1 in the terminal
+- Run this command in the terminal
+   ```sh
+   -git checkout Try1
 
 3. **Install Dependencies**
-- Run -pip install -r requirements.txt
+- Run this command in the terminal
+   ```sh
+   -pip install -r requirements.txt
 
 ### Database Initialization
 
 1. **Initialize the Database**
 - Open a python console and run the following commands:
+   ```sh
   from app import db
   from models import init_db
   init_db()
 
 2. Populate the Database (Optional)
 - To populate the database with sample data, run the following command in the terminal:
+   ```sh
   python populate_db.py
 
 ### Running Application
 To run the application execute the following command:
+```sh
 python app.py
+```
 
 ### Additional Information
 1. Admin Access:

@@ -1,6 +1,6 @@
 from flask_login import current_user
 
-from app import db
+from extensions import db
 from models import Recipe, Ingredient, Rating, create_and_get_qfid, \
     create_or_get_food_item, ShoppingList, InUseRecipe, User
 from shopping.shopping_util import create_shopping_item, create_shopping_list_util

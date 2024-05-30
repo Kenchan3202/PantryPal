@@ -4,7 +4,7 @@ import datetime
 
 from flask_login import login_required, current_user
 
-from app import db
+from extensions import db
 from models import PantryItem, QuantifiedFoodItem, FoodItem, Barcode
 from pantry.pantry_util import create_pantry_item, delete_pantry_item
 from barcodes.barcode_util import scan_barcode_file, scan_barcode_webcam

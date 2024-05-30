@@ -2,7 +2,7 @@ from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from users.forms import RegisterForm, LoginForm, ChangePasswordForm
 from flask_login import login_user, logout_user, login_required, current_user
-from app import db
+from extensions import db
 from models import User
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')

@@ -39,7 +39,7 @@ Make sure you have the following installed on your machine:
   from models import init_db
   init_db()
 
-2. Populate the Database (Optional)
+2. Populate the Database
 - To populate the database with sample data, run the following command in the terminal:
    ```sh
   python populate_db.py
@@ -51,11 +51,17 @@ python app.py
 ```
 
 ### Additional Information
-1. Admin Access:
-- To access the admin page, use the following credentials:
-  Email: admin@email.com
-  Password: Admin1!
+1. Sample User Login Details (after running populate_db.py):
 
-2. Documentation:
+Email: gathelstan0@npr.org  
+Password: pO6>#*9hV
+
+2. Admin Access:
+- To access the admin page, use the following credentials:
+
+Email: admin@email.com  
+Password: Admin1!
+ 
+3. Documentation:
 - To view the documentation for GUI, team coding, and testing, refer to the documentation folder in the repository.
 

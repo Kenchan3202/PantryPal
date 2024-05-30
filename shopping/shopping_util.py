@@ -32,7 +32,7 @@ def create_shopping_item(list_id: int, food: str, quantity, units) -> ShoppingIt
 
 
 # Method to delete a shopping item instance and its associated quantified food item.
-def remove_shopping_item(shoppingitem_id: int) -> None:
+def delete_shopping_item(shoppingitem_id: int) -> None:
     item = ShoppingItem.query.filter_by(id=shoppingitem_id).first()
     associated_qfood = item.qfooditem
     db.session.delete(associated_qfood)
@@ -57,12 +57,12 @@ def delete_shopping_list(s_list: ShoppingList) -> None:
 # to create the new corresponding pantry item. Only the ingredient objects are deleted.
 def mark_shopping_list_as_complete(s_list: ShoppingList) -> None:
     user_id = s_list.user_id
-    shopping_items = s_list.shopping_items
+    shopping_items = s_list.get_items()
     storage_info = fetch_food_storage_info()
 
     # Loop through each shopping item, create new pantryitem, delete shopping item.
     for shopping_item in shopping_items:
-        qfood = QuantifiedFoodItem.query.get(shopping_item.qfood_id)
+        qfood = shopping_item.qfooditem
         if not qfood:
             continue
 

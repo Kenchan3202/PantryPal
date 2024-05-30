@@ -95,10 +95,6 @@ class User(db.Model, UserMixin):
     def is_admin(self) -> bool:
         return self.role == 'admin'
 
-    # def pantry_contain(self, other):
-    #     pantry = self.get_pantry()
-    #     if other in pantry return
-
 
 class Recipe(db.Model):
     __tablename__ = 'recipes'
@@ -254,7 +250,7 @@ class QuantifiedFoodItem(db.Model):
     # References to other tables
     shopping = db.relationship('ShoppingItem', backref="qfooditem")
     ingredients = db.relationship('Ingredient', backref="qfooditem")
-    pantries = db.relationship('PantryItem', backref="qfooditem")
+    pantries = db.relationship('PantryItem', cascade="all, delete", backref="qfooditem")
     wasted = db.relationship('WastedFood', backref="qfooditem")
     barcodes = db.relationship('Barcode', backref="qfooditem")
 
@@ -372,7 +368,7 @@ class PantryItem(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
-    qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id, ondelete='CASCADE'), nullable=False)
+    qfood_id = db.Column(db.Integer, db.ForeignKey(QuantifiedFoodItem.id, ondelete='CASCADE'), nullable=True)
     expiry = db.Column(db.String(10), nullable=True)
     calories = db.Column(db.Integer, nullable=True)
 

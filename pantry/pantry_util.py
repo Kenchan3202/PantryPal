@@ -1,7 +1,5 @@
-from typing import List
-
+from models import PantryItem, create_and_get_qfid, create_or_get_food_item
 from app import db
-from models import PantryItem, QuantifiedFoodItem, User, create_and_get_qfid, create_or_get_food_item
 
 
 # This method adds a new item to a users pantry by creating a new pantryitem linked to the user.

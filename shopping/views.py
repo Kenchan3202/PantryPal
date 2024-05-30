@@ -33,29 +33,6 @@ def create_shopping_list():
     return render_template('shopping/create_shopping_list.html', form=form)
 
 
-'''
-# view function to add new items to a list when a list is first created
-@shopping_blueprint.route('/add_items_to_list/<int:list_id>', methods=['GET', 'POST'])
-@login_required
-def add_items_to_list(list_id):
-    form = AddItemForm()
-    s_list = ShoppingList.query.get_or_404(list_id)
-
-    if request.method == 'POST' and form.validate_on_submit():
-        food_item_name = form.newItem.data
-        quantity = form.itemQuantity.data
-        units = form.itemUnits.data
-
-        create_shopping_item(list_id, food_item_name, quantity, units)
-        flash("Item added to shopping list", "success")
-        return redirect(url_for('shopping.add_items_to_list', list_id=list_id))
-
-    shopping_items = ShoppingItem.query.filter_by(list_id=list_id).all()
-    return render_template('shopping/add_items_to_list.html', form=form, list_name=s_list.list_name,
-                           items=shopping_items, list_id=list_id)
-'''
-
-
 # View function that renders an already existing shopping lists they have and allows user to modify them
 @shopping_blueprint.route('/shopping_list_detail/<int:list_id>', methods=['GET', 'POST'])
 @login_required

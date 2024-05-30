@@ -36,7 +36,7 @@ def get_pantry_dict(user_pantry):
     for item in user_pantry:
         if item.get_name() not in pantry_dict:
             pantry_dict[item.get_name()] = 0
-        pantry_dict[item.get_name] += item.get_quantity()
+        pantry_dict[item.get_name()] += item.get_quantity()
     return pantry_dict
 
 
@@ -146,11 +146,15 @@ def create_shopping_list_from_recipe(recipe_id, user_id):
         if qfi_ingredient:
             ingredient_name = ingredient.get_name()
             ingredient_quantity = ingredient.get_quantity()
-
             pantry_item = pantry_dict.get(ingredient_name)
-            if not pantry_item or pantry_item.get_quantity() < ingredient_quantity:
-                missing_quantity = ingredient_quantity - pantry_dict.get(ingredient_name, 0)
-                create_shopping_item(list_id=shopping_list.id, food=ingredient_name, quantity=missing_quantity,
+
+            if pantry_item:     # Item is already in pantry. Need to check if quantity is sufficient
+                amount = ingredient_quantity - pantry_item.get_quantity()
+                if amount:          # If amount is positive (not enough of the ingredient in pantry)
+                    create_shopping_item(list_id=shopping_list.id, food=ingredient_name, quantity=amount,
+                                         units=ingredient.get_units())
+            else:               # Item is not present in pantry hence add item with required quantity
+                create_shopping_item(list_id=shopping_list.id, food=ingredient_name, quantity=ingredient_quantity,
                                      units=ingredient.get_units())
 
                 db.session.commit()

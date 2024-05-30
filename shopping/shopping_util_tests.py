@@ -1,7 +1,9 @@
+# Test file for shopping_util.py
+
 import unittest
 import models
 from app import create_app, db
-from populate_db import add_sample_users, create_recipes, add_food_items
+from populate_db import add_sample_users, add_food_items
 import shopping.shopping_util as su
 
 

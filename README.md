@@ -3,7 +3,7 @@
 PantryPal is a grocery web app tracker designed to help users manage their pantry inventory, create shopping lists, and organize recipes efficiently. This README file provides instructions on how to run the system, install dependencies, and initialize the database.
 
 ## Repository URL
-GitHub Repository: [https://github.com/newcastleuniversity-computing/CSC2033_Team44_23-24/tree/Try1](https://github.com/newcastleuniversity-computing/CSC2033_Team44_23-24/tree/Try1)
+GitHub Repository: [[https://github.com/newcastleuniversity-computing/CSC2033_Team44_23-24/tree/master](https://github.com/newcastleuniversity-computing/CSC2033_Team44_23-24/tree/master)](https://github.com/newcastleuniversity-computing/CSC2033_Team44_23-24/tree/Try1)
 
 ## Getting Started
 

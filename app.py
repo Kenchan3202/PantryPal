@@ -5,7 +5,7 @@ import logging
 from flask import Flask, render_template, redirect, url_for, flash
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import login_user, logout_user, login_required, current_user, LoginManager
+from flask_login import login_required, current_user, LoginManager
 
 # Initialize extensions
 db = SQLAlchemy()
@@ -75,9 +75,9 @@ def create_app():
     def base():
         return render_template('base.html')
 
-    @app.route('/aboutus')
+    @app.route('/about_us')
     def aboutus():
-        return render_template('aboutus.html')
+        return render_template('about_us.html')
 
     @app.route('/main-menu')
     @login_required

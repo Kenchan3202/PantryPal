@@ -1,8 +1,9 @@
 from flask_login import current_user
 
 from app import db
-from models import Recipe, Ingredient, QuantifiedFoodItem, FoodItem, Rating, create_and_get_qfid, \
-    create_or_get_food_item, PantryItem, ShoppingList, ShoppingItem, InUseRecipe
+from models import Recipe, Ingredient, Rating, create_and_get_qfid, \
+    create_or_get_food_item, ShoppingList, InUseRecipe, User
+from shopping.shopping_util import create_shopping_item, create_shopping_list_util
 
 
 def create_recipe(name, method, serving_size, calories, ingredients):
@@ -33,10 +34,9 @@ def get_pantry_dict(user_pantry):
     """
     pantry_dict = {}
     for item in user_pantry:
-        qfi = QuantifiedFoodItem.query.get(item.qfood_id)
-        if qfi.fooditem.name not in pantry_dict:
-            pantry_dict[qfi.fooditem.name] = 0
-        pantry_dict[qfi.fooditem.name] += qfi.quantity
+        if item.get_name() not in pantry_dict:
+            pantry_dict[item.get_name()] = 0
+        pantry_dict[item.get_name] += item.get_quantity()
     return pantry_dict
 
 
@@ -47,9 +47,9 @@ def check_recipe_ingredients(ingredients, pantry_dict):
     can_make_recipe = True
     missing_ingredients = []
     for ingredient in ingredients:
-        qfi_ingredient = QuantifiedFoodItem.query.get(ingredient.qfood_id)
-        ingredient_name = qfi_ingredient.fooditem.name
-        ingredient_quantity = qfi_ingredient.quantity
+        qfi_ingredient = ingredient.qfooditem
+        ingredient_name = ingredient.get_name()
+        ingredient_quantity = ingredient.get_quantity()
 
         if ingredient_name not in pantry_dict or pantry_dict[ingredient_name] < ingredient_quantity:
             can_make_recipe = False
@@ -90,12 +90,13 @@ def delete_recipe_instance(recipe: Recipe) -> None:
 
 
 def save_rating(user_id, recipe_id, rating):
+    recipe: Recipe = Recipe.query.filter_by(id=recipe_id).first()
     existing_rating = Rating.query.filter_by(user_id=user_id, recipe_id=recipe_id).first()
     if existing_rating:
         existing_rating.set_rating(rating)
+        recipe.update_rating()
     else:
-        new_rating = Rating(user_id=user_id, recipe_id=recipe_id, rating=rating)
-        db.session.add(new_rating)
+        create_recipe_rating(user_id=user_id, recipe_id=recipe_id, rating=rating)
     db.session.commit()
 
 
@@ -124,40 +125,34 @@ def complete_and_rate_recipe(recipe_id, user_id, rating_value):
         save_rating(user_id, recipe_id, int(rating_value))
 
     db.session.commit()
-    update_recipe_rating(recipe_id)
-
     return {'success': 'Recipe completed and rated successfully!'}
 
 
 def create_shopping_list_from_recipe(recipe_id, user_id):
-    recipe = Recipe.query.get(recipe_id)
+    user: User = User.query.filter_by(id=user_id).first()
+    recipe: Recipe = Recipe.query.get(recipe_id)
     if not recipe:
         return {'error': 'Recipe not found'}
 
-    user_pantry = PantryItem.query.filter_by(user_id=user_id).all()
-    pantry_dict = {item.qfooditem.fooditem.name: item for item in user_pantry}
+    user_pantry = user.get_pantry()
+    pantry_dict = {item.get_name(): item for item in user_pantry}
 
     shopping_list = ShoppingList.query.filter_by(user_id=user_id, list_name=recipe.name).first()
     if not shopping_list:
-        shopping_list = ShoppingList(user_id=user_id, list_name=recipe.name)
-        db.session.add(shopping_list)
-        db.session.commit()
+        shopping_list = create_shopping_list_util(user_id=user_id, list_name=f"Ingredients needed for {recipe.get_name()}")
 
     for ingredient in recipe.ingredients:
-        qfi_ingredient = QuantifiedFoodItem.query.get(ingredient.qfood_id)
+        qfi_ingredient = ingredient.qfooditem
         if qfi_ingredient:
-            ingredient_name = qfi_ingredient.fooditem.name
-            ingredient_quantity = qfi_ingredient.quantity
+            ingredient_name = ingredient.get_name()
+            ingredient_quantity = ingredient.get_quantity()
 
             pantry_item = pantry_dict.get(ingredient_name)
-            if not pantry_item or pantry_item.qfooditem.quantity < ingredient_quantity:
+            if not pantry_item or pantry_item.get_quantity() < ingredient_quantity:
                 missing_quantity = ingredient_quantity - pantry_dict.get(ingredient_name, 0)
-                newQFI = QuantifiedFoodItem(food_id=qfi_ingredient.food_id, quantity=missing_quantity, units=qfi_ingredient.units)
-                db.session.add(newQFI)
-                db.session.commit()
+                create_shopping_item(list_id=shopping_list.id, food=ingredient_name, quantity=missing_quantity,
+                                     units=ingredient.get_units())
 
-                new_shopping_item = ShoppingItem(list_id=shopping_list.id, qfood_id=newQFI.id)
-                db.session.add(new_shopping_item)
                 db.session.commit()
 
     return {'success': 'Shopping list created'}

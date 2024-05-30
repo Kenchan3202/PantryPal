@@ -455,6 +455,15 @@ class Barcode(db.Model):
         self.qfood_id = qfood_id
         self.barcode = barcode
 
+    def get_name(self) -> str:
+        return self.qfooditem.get_name()
+
+    def get_quantity(self) -> float:
+        return self.qfooditem.get_quantity()
+
+    def get_units(self) -> str:
+        return self.qfooditem.get_units()
+
 class Diet(db.Model):
     __tablename__ = 'diet'
 

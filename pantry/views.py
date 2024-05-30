@@ -78,26 +78,6 @@ def create_item():
         create_pantry_item(user_id=current_user.id, food_name=item_name, quantity=quantity,
                            calories=calories, expiry=expiry_date)
 
-        # # Check if the food item already exists in the database
-        # food_item = FoodItem.query.filter_by(name=item_name).first()
-        # if not food_item:
-        #     # If the food item does not exist, create a new FoodItem entry
-        #     food_item = FoodItem(food_name=item_name)
-        #     db.session.add(food_item)
-        #     db.session.flush()
-        #
-        # # Create a QuantifiedFoodItem entry for the food item with the given quantity and units
-        # q_food_item = QuantifiedFoodItem(food_id=food_item.id, quantity=quantity, units="g")
-        # db.session.add(q_food_item)
-        # db.session.flush()
-        #
-        # # Create a PantryItem entry linking the user to the quantified food item with expiry date and calories
-        # pantry_item = PantryItem(user_id=current_user.id, qfood_id=q_food_item.id, expiry=expiry_date,
-        #                          calories=calories)
-        # db.session.add(pantry_item)
-        #
-        # db.session.commit()  # Commits all changes to the database
-
         flash('Item successfully added to pantry!', 'success')
         return redirect(url_for('pantry.items_view'))
     return render_template('pantry/add_food.html')

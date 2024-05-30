@@ -36,7 +36,7 @@ def scan_barcode_webcam(timeout_length):
                             capture.release()
                             cv2.destroyAllWindows()
                             return barcode.data.decode()
-        cv2.imshow("barcode capture", frame)
+        cv2.imshow("barcode capture - press 'e' to exit", frame)
         if cv2.waitKey(1) == ord('e'):
             break
     capture.release()
@@ -47,6 +47,8 @@ def scan_barcode_webcam(timeout_length):
 def scan_barcode_file(filepath):
     # read image from specified filepath
     frame = cv2.imread(filepath)
+    if frame is None:
+        return None
     # get barcode from image
     detected_barcode = decode(frame)
     if not detected_barcode:

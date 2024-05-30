@@ -46,7 +46,7 @@ Make sure you have the following installed on your machine:
   python populate_db.py
 
 ### Running Application
-There are two ways to run the application
+There are two ways to run the application:
 
 #### Method 1: Run Locally
 

@@ -1,8 +1,11 @@
+# Utility functions for pantry/views.py. Contains methods to query database.
+# Authored by Keirav Shah
+
 from models import PantryItem, create_and_get_qfid, create_or_get_food_item
 from app import db
 
 
-# This method adds a new item to a users pantry by creating a new pantryitem linked to the user.
+# Method to add a new item to a users pantry by creating a new pantryitem linked to the user.
 def create_pantry_item(user_id: int, food_name: str, quantity: str, calories: str, expiry: str) -> PantryItem:
     food_item = create_or_get_food_item(food_name)
     qfood_id = create_and_get_qfid(food_id=food_item.id, quantity=float(quantity), units='g')

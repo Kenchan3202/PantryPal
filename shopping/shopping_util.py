@@ -1,3 +1,6 @@
+# Utility functions for shopping/views.py. Contains methods to query database.
+# Authored by Keirav Shah and Yat Nam Chan
+
 from datetime import timedelta
 from typing import List
 

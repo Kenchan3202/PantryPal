@@ -305,6 +305,9 @@ class ShoppingItem(db.Model):
         self.list_id = list_id
         self.qfood_id = qfood_id
 
+    def get_slist(self) -> ShoppingList:
+        return self.slist
+
     def get_quantity(self) -> float:
         return self.qfooditem.get_quantity()
 
@@ -486,6 +489,7 @@ class CompatibleDiet(db.Model):
         self.diet_id = diet_id
         self.recipe_id = recipe_id
 
+
 class InUseRecipe(db.Model):
     __tablename__ = 'in_use_recipes'
 
@@ -501,15 +505,21 @@ class InUseRecipe(db.Model):
         self.recipe_id = recipe_id
 
 
+# Method to create a new QuantifiedFoodItem.
+# Returns the id of the newly created qfooditem.
 def create_and_get_qfid(food_id, quantity, units) -> int:
     qfi = QuantifiedFoodItem(food_id=food_id,
                              quantity=quantity,
                              units=units)
     db.session.add(qfi)
     db.session.commit()
+    db.session.refresh(qfi)
     return qfi.id
 
 
+# Method to either retrieve a food item with matching food_name from db.
+# If no food item with the name exists, a new instance is created with the name
+# and returned.
 def create_or_get_food_item(food_name) -> FoodItem:
     food = FoodItem.query.filter_by(name=food_name).first()
     if food is None:  # Add a new food_item to the database if queried food doesn't already exist

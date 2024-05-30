@@ -2,7 +2,7 @@
 
 import unittest
 import models
-from app import create_app, db
+from app import create_app
 from populate_db import add_sample_users, add_food_items
 import shopping.shopping_util as su
 

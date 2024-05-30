@@ -1,5 +1,5 @@
 from flask_login import UserMixin
-from app import db
+from extensions import db
 from datetime import datetime
 import bcrypt
 from crawler import fetch_wikipedia_description
@@ -527,6 +527,9 @@ def create_or_get_food_item(food_name) -> FoodItem:
         db.session.add(food)
         db.session.commit()
     return food
+
+
+from models import User
 
 
 def init_db():

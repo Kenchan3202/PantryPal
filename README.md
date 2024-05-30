@@ -66,4 +66,13 @@ Password: Admin1!
 - To view the documentation for GUI, team coding, and testing, refer to the documentation folder in the repository.
 
 ###
+docker
+store project in home/user/
+run cd /path/to/your/project/
+run docker run -d -p 5000:5000 theimagenamewithlowercase
+run docker-compose up
+
+
+
+
 

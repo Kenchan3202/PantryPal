@@ -4,7 +4,7 @@
 from datetime import timedelta
 from typing import List
 
-from app import db
+from extensions import db
 from datetime import datetime
 from crawler import fetch_food_storage_info
 from models import (ShoppingList, ShoppingItem, QuantifiedFoodItem, FoodItem, User,

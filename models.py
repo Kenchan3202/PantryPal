@@ -230,7 +230,7 @@ class FoodItem(db.Model):
         # 转换名称为首字母大写，其余小写，保留单个空格
         formatted_name = ' '.join(word.capitalize() for word in food_name.strip().split())
         self.name = formatted_name
-        self.description = ""   # fetch_wikipedia_description(formatted_name)
+        self.description = fetch_wikipedia_description(formatted_name)
 
     def get_name(self) -> str:
         return self.name

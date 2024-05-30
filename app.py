@@ -76,7 +76,7 @@ def create_app():
         return render_template('base.html')
 
     @app.route('/about_us')
-    def aboutus():
+    def about_us():
         return render_template('about_us.html')
 
     @app.route('/main-menu')
@@ -112,5 +112,4 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    db = SQLAlchemy(app)
     app.run(debug=True, host='0.0.0.0')

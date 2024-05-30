@@ -7,7 +7,7 @@ from flask_login import current_user, login_required
 from models import ShoppingList, ShoppingItem
 from shopping.forms import AddItemForm, CreateListForm
 from shopping.shopping_util import create_shopping_list_util, create_shopping_item, \
-    remove_shopping_item, delete_shopping_list, mark_shopping_list_as_complete
+    delete_shopping_item, delete_shopping_list, mark_shopping_list_as_complete
 
 shopping_blueprint = Blueprint('shopping', __name__, template_folder='templates')
 
@@ -31,6 +31,29 @@ def create_shopping_list():
         flash("Shopping list created", "success")
         return redirect(url_for('shopping.shopping_list_detail', list_id=s_list.id))
     return render_template('shopping/create_shopping_list.html', form=form)
+
+
+'''
+# view function to add new items to a list when a list is first created
+@shopping_blueprint.route('/add_items_to_list/<int:list_id>', methods=['GET', 'POST'])
+@login_required
+def add_items_to_list(list_id):
+    form = AddItemForm()
+    s_list = ShoppingList.query.get_or_404(list_id)
+
+    if request.method == 'POST' and form.validate_on_submit():
+        food_item_name = form.newItem.data
+        quantity = form.itemQuantity.data
+        units = form.itemUnits.data
+
+        create_shopping_item(list_id, food_item_name, quantity, units)
+        flash("Item added to shopping list", "success")
+        return redirect(url_for('shopping.add_items_to_list', list_id=list_id))
+
+    shopping_items = ShoppingItem.query.filter_by(list_id=list_id).all()
+    return render_template('shopping/add_items_to_list.html', form=form, list_name=s_list.list_name,
+                           items=shopping_items, list_id=list_id)
+'''
 
 
 # View function that renders an already existing shopping lists they have and allows user to modify them
@@ -71,16 +94,24 @@ def delete_list(list_id):
 @login_required
 def delete_item(item_id):
     shopping_item = ShoppingItem.query.get_or_404(item_id)
-    s_list = ShoppingList.query.get_or_404(shopping_item.list_id)
+    s_list = shopping_item.get_slist()
     if s_list.user_id != current_user.id:
         flash('Unauthorized', 'error')
         return redirect(url_for('shopping.shopping_list_detail', list_id=shopping_item.list_id))
-    remove_shopping_item(item_id)
+
+    delete_shopping_item(item_id)
     flash('Item deleted from shopping list', 'success')
     return redirect(url_for('shopping.shopping_list_detail', list_id=shopping_item.list_id))
 
 
-# View function to delete a shopping list and add all of its contents to the pantry
+# View function to move a single item from shopping list to pantry
+@shopping_blueprint.route('/list_to_pantry/<int:item_id>', methods=['POST'])
+@login_required
+def list_to_pantry(item_id):
+    shopping_item = ShoppingItem.query.get_or_404(item_id)
+    return redirect((url_for('shopping.shopping_list_detail', list_id=shopping_item.list_id)))
+
+# Example usage in the route
 @shopping_blueprint.route('/complete_list/<int:list_id>', methods=['POST'])
 @login_required
 def complete_list(list_id):
@@ -93,3 +124,5 @@ def complete_list(list_id):
 
     flash('Shopping list completed and items moved to pantry', 'success')
     return redirect(url_for('shopping.shopping_list'))
+
+

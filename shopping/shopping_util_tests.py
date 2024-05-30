@@ -26,6 +26,17 @@ class TestShoppingUtils(unittest.TestCase):
 
         self.assertTrue(equiv, msg="Create Shopping Item Failed")
 
+    def test_delete_shopping_item(self) -> None:
+        new_list = su.create_shopping_list_util(user_id=3, list_name="Test List 3")
+        shopping_item = su.create_shopping_item(list_id=new_list.id, food="Butter", quantity=10, units='g')
+        associated_qfood_id = shopping_item.qfooditem.id
+
+        su.delete_shopping_item(shopping_item.id)
+        shopping_item = models.ShoppingItem.query.filter_by(id=shopping_item.id).first()
+        qfooditem = models.QuantifiedFoodItem.query.filter_by(id=associated_qfood_id).first()
+        result = shopping_item or qfooditem         # Should evaluate to False
+        self.assertFalse(result, msg="Delete Shopping Item Failed")
+
 
 if __name__ == '__main__':
     app = create_app()

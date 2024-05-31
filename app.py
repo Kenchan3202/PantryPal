@@ -87,7 +87,6 @@ def create_app():
 
         seven_days_later = today + datetime.timedelta(days=7)
 
-        # 获取所有当前用户的 PantryItem
         pantry_items = PantryItem.query.filter_by(user_id=user_id).all()
 
         soon_to_expire_seven = []

@@ -20,6 +20,9 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN python -c "from models import init_db; init_db()"
+RUN python populate_db.py
+
 
 EXPOSE 5000
 

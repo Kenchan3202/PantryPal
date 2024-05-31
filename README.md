@@ -16,10 +16,15 @@ Make sure you have the following installed on your machine:
 ### Installation
 
 1. **Clone the Repository:**
-
+    On GitHub:
    ```sh
    git clone https://github.com/newcastleuniversity-computing/CSC2033_Team44_23-24.git
    cd CSC2033_Team44_23-24
+   ```
+    On Docker:
+   ```sh
+    docker pull kenchan3202/csc2033-team44_web:latest
+    ```
 
 2. **Check Current Branch**
 - Ensure you are on the `master` branch by running the following command in the terminal:

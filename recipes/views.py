@@ -71,13 +71,12 @@ def recipes():
         for recipe in recipes:
             can_make_recipe = True
             for ingredient in recipe.ingredients:
-                qfi_ingredient = QuantifiedFoodItem.query.get(ingredient.qfood_id)
-                ingredient_name = qfi_ingredient.fooditem.name
+                ingredient_name = ingredient.get_name()
                 if ingredient_name not in pantry_dict:
                     can_make_recipe = False
                     print(f"Missing ingredient: {ingredient_name}")
                     break
-                if pantry_dict[ingredient_name] < qfi_ingredient.quantity:
+                if pantry_dict[ingredient_name] < ingredient.get_quantity():
                     can_make_recipe = False
                     print(f"Not enough quantity for ingredient: {ingredient_name}")
                     break

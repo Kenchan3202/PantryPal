@@ -1,3 +1,5 @@
+# Authored by: Joe
+# This file contains tests for barcode_util.py
 import cv2
 
 from barcodes import barcode_util

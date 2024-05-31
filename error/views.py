@@ -1,3 +1,5 @@
+# Authored by: Yat Nam
+# This function routes user to relevant error pages
 from flask import render_template
 
 from app import create_app

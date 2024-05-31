@@ -1,3 +1,5 @@
+# Authored by: Faris, Joe, Yat Nam, Keirav
+# utility functions for recipe management
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, TextAreaField, FieldList, FormField, SubmitField
 from wtforms.validators import DataRequired

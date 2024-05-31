@@ -1,3 +1,5 @@
+# Authored by: Yat Nam, Faris
+# forms for registering as a user and changing password
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.fields import EmailField

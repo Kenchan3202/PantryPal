@@ -1,3 +1,5 @@
+# Authored by: Yat Nam
+# This file handles how the admin web page functions
 from flask import Blueprint, render_template, flash, abort, redirect, url_for
 from flask_login import login_required, current_user
 

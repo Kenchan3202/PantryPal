@@ -1,3 +1,5 @@
+# Authored by: Yat Nam, Jacob, Keirav, Joe, Jawaher, Faris
+# file to run the main web app
 import datetime
 import os
 from logging.handlers import RotatingFileHandler

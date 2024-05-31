@@ -1,3 +1,5 @@
+# Authored by: Yan Nam, Joe, Faris
+# View functions for pantry pages
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 
 import datetime

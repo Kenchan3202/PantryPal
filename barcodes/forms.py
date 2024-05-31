@@ -1,3 +1,5 @@
+# Authored by: Joe
+# This file contains the form to input a barcode
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, TextAreaField, FieldList, FormField, SubmitField
 from wtforms.validators import DataRequired

@@ -1,3 +1,5 @@
+# Authored by: Joe, Keirav, Yat Nam
+# Create classes to model database
 from flask_login import UserMixin
 from extensions import db
 from datetime import datetime

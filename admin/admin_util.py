@@ -1,3 +1,5 @@
+# Authored by: Yat Nam
+# This file handles functionality related to admin users
 from models import Recipe, ShoppingList, Rating, PantryItem, WastedFood, Ingredient, ShoppingItem, Barcode, \
     QuantifiedFoodItem, User
 from app import db

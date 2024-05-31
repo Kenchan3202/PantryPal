@@ -1,3 +1,5 @@
+# Authored by: Yat Nam
+# view functions for user pages
 from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from users.forms import RegisterForm, LoginForm, ChangePasswordForm

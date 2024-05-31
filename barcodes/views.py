@@ -1,3 +1,5 @@
+# Authored by: Joe
+# This file handles the functionality for the barcode form and auto filling barcode values
 from flask import Blueprint, render_template, request, jsonify
 from flask_login import login_required
 from barcodes.forms import BarcodeForm

@@ -1,5 +1,5 @@
+# Authored by: Faris, Keirav
 # Test file for pantry_util.py
-# Authored by Faris Zahid
 
 import unittest
 import models

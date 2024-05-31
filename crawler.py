@@ -1,3 +1,5 @@
+# Authored by: Yat Nam
+# get food item info from the web
 import requests
 from bs4 import BeautifulSoup
 

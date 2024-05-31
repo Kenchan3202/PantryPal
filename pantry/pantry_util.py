@@ -1,5 +1,5 @@
+# Authored by: Faris, Jawaher, Jacob, Ken, Keirav
 # Utility functions for pantry/views.py. Contains methods to query database.
-# Authored by Keirav Shah
 
 from models import PantryItem, create_and_get_qfid, create_or_get_food_item
 from extensions import db

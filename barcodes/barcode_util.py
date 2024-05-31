@@ -1,3 +1,5 @@
+# Authored by: Joe
+# This file contains functions to read and write barcodes
 import cv2
 from pyzbar.pyzbar import decode
 import datetime

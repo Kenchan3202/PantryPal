@@ -1,3 +1,5 @@
+# Authored by: Faris, Joe, Yat Nam, Keirav
+# utility functions for recipe management
 from flask_login import current_user
 
 from extensions import db

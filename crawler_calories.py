@@ -1,3 +1,5 @@
+# Authored by: Yat Nam
+# Get calorie info from food items from the web
 import re
 import requests
 from bs4 import BeautifulSoup

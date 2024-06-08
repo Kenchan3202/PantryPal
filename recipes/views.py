@@ -1,12 +1,9 @@
 # Authored by: Keirav, Yat Nam, Joe, Jawaher, Faris
 # View functions for recipe pages
 from extensions import db
-from models import Recipe, Ingredient, QuantifiedFoodItem, Rating, PantryItem, InUseRecipe, FoodItem, ShoppingItem, ShoppingList
+from models import Recipe, Ingredient, QuantifiedFoodItem, Rating, PantryItem, InUseRecipe, FoodItem
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
-from sqlalchemy import func
-
-from recipes.forms import RecipeForm
 from recipes.recipe_util import (create_recipe, create_or_get_food_item, create_and_get_qfid,
                                  delete_recipe_instance, update_recipe_rating, create_shopping_list_from_recipe,
                                  save_rating, complete_and_rate_recipe, get_pantry_dict, check_recipe_ingredients)

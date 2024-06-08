@@ -1,7 +1,6 @@
 # Authored by: Faris, Joe, Yat Nam, Keirav
 # utility functions for recipe management
 from flask_login import current_user
-
 from extensions import db
 from models import Recipe, Ingredient, Rating, create_and_get_qfid, \
     create_or_get_food_item, ShoppingList, InUseRecipe, User
@@ -150,13 +149,9 @@ def create_shopping_list_from_recipe(recipe_id, user_id):
             ingredient_quantity = ingredient.get_quantity()
             pantry_item = pantry_dict.get(ingredient_name)
 
-            if pantry_item:     # Item is already in pantry. Need to check if quantity is sufficient
-                amount = ingredient_quantity - pantry_item.get_quantity()
-                if amount:          # If amount is positive (not enough of the ingredient in pantry)
-                    create_shopping_item(list_id=shopping_list.id, food=ingredient_name, quantity=amount,
-                                         units=ingredient.get_units())
-            else:               # Item is not present in pantry hence add item with required quantity
-                create_shopping_item(list_id=shopping_list.id, food=ingredient_name, quantity=ingredient_quantity,
+            if not pantry_item or pantry_item.get_quantity() < ingredient_quantity:
+                missing_quantity = ingredient_quantity - pantry_dict.get(ingredient_name, 0)
+                create_shopping_item(list_id=shopping_list.id, food=ingredient_name, quantity=missing_quantity,
                                      units=ingredient.get_units())
 
                 db.session.commit()
